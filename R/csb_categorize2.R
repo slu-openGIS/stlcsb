@@ -32,7 +32,7 @@ csb_categorize <- function(.data){
            PROBLEMCODE %in% Road ~ "Road",
            PROBLEMCODE %in% Sewer ~ "Sewer",
            PROBLEMCODE %in% Traffic ~ "Traffic",
-           PROBLEMCODE %in% Waste ~ "Waste"))
+           PROBLEMCODE %in% Waste ~ "Waste")) -> .data
 
 
 
