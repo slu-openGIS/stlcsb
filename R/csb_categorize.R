@@ -19,7 +19,22 @@ csb_categorize <- function(.data, ...){
 
   z <- c(...)
 
-  if (Admin %in% z) {pm <- dplyr::mutate(.data, cat1) }
+  if (Admin %in% z) {pm <- dplyr::mutate(.data, Category = Admin) }
+  if (Animal %in% z) {pm <- dplyr::mutate(.data, Category = Animal) }
+  if (Construction %in% z) {pm <- dplyr::mutate(.data, Category = Construction) }
+  if (Debris %in% z) {pm <- dplyr::mutate(.data, Category = Debris) }
+  if (Degrade %in% z) {pm <- dplyr::mutate(.data, Category = Degrade) }
+  if (Disturbance %in% z) {pm <- dplyr::mutate(.data, Category = Disturbance) }
+  if (Event %in% z) {pm <- dplyr::mutate(.data, Category = Event) }
+  if (Health %in% z) {pm <- dplyr::mutate(.data, Category = Health) }
+  if (Landscape %in% z) {pm <- dplyr::mutate(.data, Category = Landscape) }
+  if (Law %in% z) {pm <- dplyr::mutate(.data, Category = Law) }
+  if (Maintinence %in% z) {pm <- dplyr::mutate(.data, Category = Maintinence) }
+  if (Nature %in% z) {pm <- dplyr::mutate(.data, Category = Nature) }
+  if (Road %in% z) {pm <- dplyr::mutate(.data, Category = Road) }
+  if (Sewer %in% z) {pm <- dplyr::mutate(.data, Category = Sewer) }
+  if (Traffic %in% z) {pm <- dplyr::mutate(.data, Category = Traffic) }
+  if (Waste %in% z) {pm <- dplyr::mutate(.data, Category = Waste) }
 
   # Then we use a mutate function to assign categories
 
