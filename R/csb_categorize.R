@@ -24,6 +24,25 @@ csb_categorize <- function(.data, code = NULL){
 
   if (is.null(code)){code = "PROBLEMCODE"}
 
+  #in order for mutate to function, we must have our data in vectors
+
+  Admin <- unlist(Admin)
+  Animal <- unlist(Animal)
+  Construction <- unlist(Construction)
+  Debris <- unlist(Debris)
+  Degrade <- unlist(Degrade)
+  Disturbance <- unlist(Disturbance)
+  Event <- unlist(Event)
+  Health <- unlist(Health)
+  Landscape <- unlist(Landscape)
+  Law <- unlist(Law)
+  Maintinence <- unlist(Maintenance)
+  Nature <- unlist(Nature)
+  Road <- unlist(Road)
+  Sewer <- unlist(Sewer)
+  Traffic <- unlist(Traffic)
+  Waste <- unlist(Waste)
+
   # Then we use a mutate function to assign categories
 
   mutate(.data,
@@ -43,7 +62,7 @@ csb_categorize <- function(.data, code = NULL){
            code %in% Road ~ "Road",
            code %in% Sewer ~ "Sewer",
            code %in% Traffic ~ "Traffic",
-           code %in% Waste ~ "Waste")) ->pm
+           code %in% Waste ~ "Waste")) -> pm
 
   # remove definitons from the Data frame
 
