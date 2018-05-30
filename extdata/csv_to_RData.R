@@ -24,4 +24,5 @@ Waste <- read_csv(here("extdata/Waste.csv"), col_names = FALSE)
 
 # then to save as Rdata
 
-save(Admin, Animal, Construction, Debris, Degrade, Disturbance, Event, Health, Landscape, Law, Maintenance, Nature, Road, Sewer, Traffic, Waste, file = here("data/defintions.RData"))
+save(Admin, Animal, Construction, Debris, Degrade, Disturbance, Event, Health, Landscape, Law, Maintenance, Nature, Road, Sewer, Traffic, Waste, file = here("data/definitions.RData"))
+

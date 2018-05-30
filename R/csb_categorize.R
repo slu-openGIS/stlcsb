@@ -1,67 +1,55 @@
 #' Categorize Raw CSB Data
 #'
-#' \code{csb_categorize} provides inteligible categories for the CSB data based on problem code.
+#' @description \code{csb_categorize} provides inteligible categories for the CSB data based on problem code.
 #'
-#' @usage csb_categorize()
+#' @usage csb_categorize(.data, code)
 #'
-#' @return \code{csb_categorize} returns data with an additional variable for an inteligible category for CSB requests.Depending on the second argument, the function will return only categories specified Default is all.
+#' @param .data A tbl
+#' @param code Name of variable used to define categories
 #'
+#' @return \code{csb_categorize} returns data with an additional variable for an inteligible category for CSB requests.
 #'
+#' @importFrom here here
+#' @importFrom dplyr mutate
+#' @importFrom dplyr case_when
 #'
 #' @export
-csb_categorize <- function(.data, ...){
+csb_categorize <- function(.data, code = NULL){
 
   # First we have to import the category defintions.
 
-  load("Definitions.RData")
+  load(here("data/definitions.RData"))
 
-  # Then we decide what categories we are interested in, and give our second argument. By default, this argument is all.
+  # Then we determine if the problemcode was changed from default.
 
-  z <- c(...)
-
-  if (Admin %in% z) {pm <- dplyr::mutate(.data, Category = Admin) }
-  if (Animal %in% z) {pm <- dplyr::mutate(.data, Category = Animal) }
-  if (Construction %in% z) {pm <- dplyr::mutate(.data, Category = Construction) }
-  if (Debris %in% z) {pm <- dplyr::mutate(.data, Category = Debris) }
-  if (Degrade %in% z) {pm <- dplyr::mutate(.data, Category = Degrade) }
-  if (Disturbance %in% z) {pm <- dplyr::mutate(.data, Category = Disturbance) }
-  if (Event %in% z) {pm <- dplyr::mutate(.data, Category = Event) }
-  if (Health %in% z) {pm <- dplyr::mutate(.data, Category = Health) }
-  if (Landscape %in% z) {pm <- dplyr::mutate(.data, Category = Landscape) }
-  if (Law %in% z) {pm <- dplyr::mutate(.data, Category = Law) }
-  if (Maintinence %in% z) {pm <- dplyr::mutate(.data, Category = Maintinence) }
-  if (Nature %in% z) {pm <- dplyr::mutate(.data, Category = Nature) }
-  if (Road %in% z) {pm <- dplyr::mutate(.data, Category = Road) }
-  if (Sewer %in% z) {pm <- dplyr::mutate(.data, Category = Sewer) }
-  if (Traffic %in% z) {pm <- dplyr::mutate(.data, Category = Traffic) }
-  if (Waste %in% z) {pm <- dplyr::mutate(.data, Category = Waste) }
+  if (is.null(code)){code = "PROBLEMCODE"}
 
   # Then we use a mutate function to assign categories
 
-  else if (is.null(z)) {pm <-
-    dplyr::mutate(.data,
+  mutate(.data,
          Category = case_when(
-           PROBLEMCODE %in% Admin ~ "Admin",
-           PROBLEMCODE %in% Animal ~ "Animal",
-           PROBLEMCODE %in% Construction ~ "Construction",
-           PROBLEMCODE %in% Debris ~ "Debris",
-           PROBLEMCODE %in% Degrade ~ "Degrade",
-           PROBLEMCODE %in% Disturbance ~ "Disturbance",
-           PROBLEMCODE %in% Event ~ "Event",
-           PROBLEMCODE %in% Health ~ "Health",
-           PROBLEMCODE %in% Landscape ~ "Landscape",
-           PROBLEMCODE %in% Law ~ "Law",
-           PROBLEMCODE %in% Maintinence ~ "Maintinence",
-           PROBLEMCODE %in% Nature ~ "Nature",
-           PROBLEMCODE %in% Road ~ "Road",
-           PROBLEMCODE %in% Sewer ~ "Sewer",
-           PROBLEMCODE %in% Traffic ~ "Traffic",
-           PROBLEMCODE %in% Waste ~ "Waste")) }
+           code %in% Admin ~ "Admin",
+           code %in% Animal ~ "Animal",
+           code %in% Construction ~ "Construction",
+           code %in% Debris ~ "Debris",
+           code %in% Degrade ~ "Degrade",
+           code %in% Disturbance ~ "Disturbance",
+           code %in% Event ~ "Event",
+           code %in% Health ~ "Health",
+           code %in% Landscape ~ "Landscape",
+           code %in% Law ~ "Law",
+           code %in% Maintenance ~ "Maintenance",
+           code %in% Nature ~ "Nature",
+           code %in% Road ~ "Road",
+           code %in% Sewer ~ "Sewer",
+           code %in% Traffic ~ "Traffic",
+           code %in% Waste ~ "Waste")) ->pm
 
+  # remove definitons from the Data frame
 
+  rm(Admin, Animal, Construction, Debris, Degrade, Disturbance, Event, Health, Landscape, Law, Maintenance, Nature, Road, Sewer, Traffic, Waste)
 
   # return the data again with categories
-
 
   return(pm)
 
