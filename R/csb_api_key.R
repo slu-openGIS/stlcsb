@@ -29,26 +29,26 @@ csb_api_key <- function(key, overwrite = FALSE, install = FALSE){
       if(isTRUE(overwrite)){
         message("Your original .Renviron will be backed up and stored in your R HOME directory if needed.")
         oldenv=read.table(renv, stringsAsFactors = FALSE)
-        newenv <- oldenv[-grep("CENSUS_API_KEY", oldenv),]
+        newenv <- oldenv[-grep("CSB_API_KEY", oldenv),]
         write.table(newenv, renv, quote = FALSE, sep = "\n",
                     col.names = FALSE, row.names = FALSE)
       }
       else{
         tv <- readLines(renv)
-        if(any(grepl("CENSUS_API_KEY",tv))){
-          stop("A CENSUS_API_KEY already exists. You can overwrite it with the argument overwrite=TRUE", call.=FALSE)
+        if(any(grepl("CSB_API_KEY",tv))){
+          stop("A CSB_API_KEY already exists. You can overwrite it with the argument overwrite=TRUE", call.=FALSE)
         }
       }
     }
 
-    keyconcat <- paste0("CENSUS_API_KEY='", key, "'")
+    keyconcat <- paste0("CSB_API_KEY='", key, "'")
     # Append API key to .Renviron file
     write(keyconcat, renv, sep = "\n", append = TRUE)
-    message('Your API key has been stored in your .Renviron and can be accessed by Sys.getenv("CENSUS_API_KEY"). \nTo use now, restart R or run `readRenviron("~/.Renviron")`')
+    message('Your API key has been stored in your .Renviron and can be accessed by Sys.getenv("CSB_API_KEY"). \nTo use now, restart R or run `readRenviron("~/.Renviron")`')
     return(key)
   } else {
     message("To install your API key for use in future sessions, run this function with `install = TRUE`.")
-    Sys.setenv(CENSUS_API_KEY = key)
+    Sys.setenv(CSB_API_KEY = key)
   }
 
 }
