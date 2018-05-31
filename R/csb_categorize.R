@@ -30,22 +30,22 @@ csb_categorize <- function(.data, code = NULL){
 
   mutate(.data,
          Category = case_when(
-           paste0( "$", code) %in% Admin ~ "Admin",
-           paste0(.data, "$", code) %in% Animal ~ "Animal",
-           paste0(.data, "$", code) %in% Construction ~ "Construction",
-           paste0(.data, "$", code) %in% Debris ~ "Debris",
-           paste0(.data, "$", code) %in% Degrade ~ "Degrade",
-           paste0(.data, "$", code) %in% Disturbance ~ "Disturbance",
-           paste0(.data, "$", code) %in% Event ~ "Event",
-           paste0(.data, "$", code) %in% Health ~ "Health",
-           paste0(.data, "$", code) %in% Landscape ~ "Landscape",
-           paste0(.data, "$", code) %in% Law ~ "Law",
-           paste0(.data, "$", code) %in% Maintenance ~ "Maintenance",
-           paste0(.data, "$", code) %in% Nature ~ "Nature",
-           paste0(.data, "$", code) %in% Road ~ "Road",
-           paste0(.data, "$", code) %in% Sewer ~ "Sewer",
-           paste0(.data, "$", code) %in% Traffic ~ "Traffic",
-           paste0(.data, "$", code) %in% Waste ~ "Waste")) -> pm
+           .data[[code]] %in% Admin ~ "Admin",
+           .data[[code]] %in% Animal ~ "Animal",
+           .data[[code]] %in% Construction ~ "Construction",
+           .data[[code]] %in% Debris ~ "Debris",
+           .data[[code]] %in% Degrade ~ "Degrade",
+           .data[[code]] %in% Disturbance ~ "Disturbance",
+           .data[[code]] %in% Event ~ "Event",
+           .data[[code]] %in% Health ~ "Health",
+           .data[[code]] %in% Landscape ~ "Landscape",
+           .data[[code]] %in% Law ~ "Law",
+           .data[[code]] %in% Maintenance ~ "Maintenance",
+           .data[[code]] %in% Nature ~ "Nature",
+           .data[[code]] %in% Road ~ "Road",
+           .data[[code]] %in% Sewer ~ "Sewer",
+           .data[[code]] %in% Traffic ~ "Traffic",
+           .data[[code]] %in% Waste ~ "Waste")) -> pm
 
   # return the data again with categories
 
