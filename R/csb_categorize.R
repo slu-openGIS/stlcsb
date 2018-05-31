@@ -30,22 +30,22 @@ csb_categorize <- function(.data, code = NULL){
 
   mutate(.data,
          Category = case_when(
-           code %in% Admin ~ "Admin",
-           code %in% Animal ~ "Animal",
-           code %in% Construction ~ "Construction",
-           code %in% Debris ~ "Debris",
-           code %in% Degrade ~ "Degrade",
-           code %in% Disturbance ~ "Disturbance",
-           code %in% Event ~ "Event",
-           code %in% Health ~ "Health",
-           code %in% Landscape ~ "Landscape",
-           code %in% Law ~ "Law",
-           code %in% Maintenance ~ "Maintenance",
-           code %in% Nature ~ "Nature",
-           code %in% Road ~ "Road",
-           code %in% Sewer ~ "Sewer",
-           code %in% Traffic ~ "Traffic",
-           code %in% Waste ~ "Waste")) -> pm
+           paste0( "$", code) %in% Admin ~ "Admin",
+           paste0(.data, "$", code) %in% Animal ~ "Animal",
+           paste0(.data, "$", code) %in% Construction ~ "Construction",
+           paste0(.data, "$", code) %in% Debris ~ "Debris",
+           paste0(.data, "$", code) %in% Degrade ~ "Degrade",
+           paste0(.data, "$", code) %in% Disturbance ~ "Disturbance",
+           paste0(.data, "$", code) %in% Event ~ "Event",
+           paste0(.data, "$", code) %in% Health ~ "Health",
+           paste0(.data, "$", code) %in% Landscape ~ "Landscape",
+           paste0(.data, "$", code) %in% Law ~ "Law",
+           paste0(.data, "$", code) %in% Maintenance ~ "Maintenance",
+           paste0(.data, "$", code) %in% Nature ~ "Nature",
+           paste0(.data, "$", code) %in% Road ~ "Road",
+           paste0(.data, "$", code) %in% Sewer ~ "Sewer",
+           paste0(.data, "$", code) %in% Traffic ~ "Traffic",
+           paste0(.data, "$", code) %in% Waste ~ "Waste")) -> pm
 
   # return the data again with categories
 

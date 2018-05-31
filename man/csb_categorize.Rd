@@ -7,7 +7,7 @@
 csb_categorize(.data, code)
 }
 \arguments{
-\item{.data}{A tbl}
+\item{.data}{A tibble with raw CSB data}
 
 \item{code}{Name of variable used to define categories}
 }
