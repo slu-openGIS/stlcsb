@@ -22,6 +22,25 @@ Sewer <- read_csv(here("extdata/Sewer.csv"), col_names = FALSE)
 Traffic <- read_csv(here("extdata/Traffic.csv"), col_names = FALSE)
 Waste <- read_csv(here("extdata/Waste.csv"), col_names = FALSE)
 
+# we then want to unlist our data, meaning that it will be vectorized. This is neccessary for the later use of dplyr mutate.
+
+Admin <- unlist(Admin)
+Animal <- unlist(Animal)
+Construction <- unlist(Construction)
+Debris <- unlist(Debris)
+Degrade <- unlist(Degrade)
+Disturbance <- unlist(Disturbance)
+Event <- unlist(Event)
+Health <- unlist(Health)
+Landscape <- unlist(Landscape)
+Law <- unlist(Law)
+Maintenance <- unlist(Maintenance)
+Nature <- unlist(Nature)
+Road <- unlist(Road)
+Sewer <- unlist(Sewer)
+Traffic <- unlist(Traffic)
+Waste <- unlist(Waste)
+
 # then to save as Rdata
 
 save(Admin, Animal, Construction, Debris, Degrade, Disturbance, Event, Health, Landscape, Law, Maintenance, Nature, Road, Sewer, Traffic, Waste, file = here("data/definitions.RData"))
