@@ -1,22 +1,38 @@
 #' Categorize Raw CSB Data
 #'
-#' @description \code{csb_categorize} provides inteligible categories for the CSB data based on problem code.
+#' @description \code{csb_categorize} provides intelligible categories for the CSB data based on problem code.
 #'
 #' @usage csb_categorize(.data, code)
 #'
 #' @param .data A tibble with raw CSB data
 #' @param code Name of variable used to define categories
 #'
-#' @return \code{csb_categorize} returns data with an additional variable for an inteligible category for CSB requests.
+#' @return \code{csb_categorize} returns data with an additional variable for an intelligible category for CSB requests.
 #'
 #' @importFrom here here
 #' @importFrom dplyr mutate
 #' @importFrom dplyr case_when
+#' @importFrom rlang :=
+#' @importFrom rlang quo
+#' @importFrom rlang enquo
+#' @importFrom rlang sym
 #'
 #' @export
 csb_categorize <- function(.data, code = NULL){
 
-  # First we have to import the category defintions.
+  # save parameters to list
+  paramList <- as.list(match.call())
+
+  #quote input variables (NOT DEBUGGED!)
+  ## dont run if (!is.character(paramList$code)) {
+  ##  code <- rlang::enquo(code)
+ ## } else if (is.character(paramList$code)) {
+  ##   code <- rlang::quo(!! rlang::sym(code))
+  ## }
+
+ ## code <- rlang::quo_name(rlang::enquo(code))
+
+  # First we have to import the category defintions located in the package directory "data"
 
   load(here("data/definitions.RData"))
 

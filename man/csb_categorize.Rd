@@ -12,8 +12,8 @@ csb_categorize(.data, code)
 \item{code}{Name of variable used to define categories}
 }
 \value{
-\code{csb_categorize} returns data with an additional variable for an inteligible category for CSB requests.
+\code{csb_categorize} returns data with an additional variable for an intelligible category for CSB requests.
 }
 \description{
-\code{csb_categorize} provides inteligible categories for the CSB data based on problem code.
+\code{csb_categorize} provides intelligible categories for the CSB data based on problem code.
 }
