@@ -45,6 +45,11 @@ The download is quite large - it currently includes *n* = 1,072,382
 observations - so it will take a short bit of time depending on your
 internet connection.
 
+
+## Notes on the CSB API
+
+Early development of the package contained functions intended to make working with the API easier. However, at the moment the API has been deemed of low priority. Although we do not beleive it to offer any significant advantages at the moment, it may be revisited in the future.
+
 ## Contributor Code of Conduct
 
 Please note that this project is released with a [Contributor Code of
