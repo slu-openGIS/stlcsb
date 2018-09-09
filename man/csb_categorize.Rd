@@ -4,12 +4,14 @@
 \alias{csb_categorize}
 \title{Categorize Raw CSB Data}
 \usage{
-csb_categorize(.data, code)
+csb_categorize(.data, var, newVar)
 }
 \arguments{
 \item{.data}{A tibble with raw CSB data}
 
-\item{code}{Name of variable used to define categories}
+\item{var}{Name of orginial variable containing problem code}
+
+\item{newVar}{Name of output variable to be created with category name}
 }
 \value{
 \code{csb_categorize} returns data with an additional variable for an intelligible category for CSB requests.

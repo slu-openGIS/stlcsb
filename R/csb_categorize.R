@@ -2,66 +2,72 @@
 #'
 #' @description \code{csb_categorize} provides intelligible categories for the CSB data based on problem code.
 #'
-#' @usage csb_categorize(.data, code)
+#' @usage csb_categorize(.data, var, newVar)
 #'
 #' @param .data A tibble with raw CSB data
-#' @param code Name of variable used to define categories
+#' @param var Name of orginial variable containing problem code
+#' @param newVar Name of output variable to be created with category name
+#'
 #'
 #' @return \code{csb_categorize} returns data with an additional variable for an intelligible category for CSB requests.
 #'
+#' @import dplyr
 #' @importFrom here here
-#' @importFrom dplyr mutate
-#' @importFrom dplyr case_when
 #' @importFrom rlang :=
 #' @importFrom rlang quo
 #' @importFrom rlang enquo
 #' @importFrom rlang sym
 #'
 #' @export
-csb_categorize <- function(.data, code = NULL){
+csb_categorize <- function(.data, var = NULL, newVar = NULL){
 
-  # save parameters to list
+  # check for defaults
+
+  if (is.null(var)){
+    var <- "PROBLEMCODE"
+    message("`var` defaulted to PROBLEMCODE")
+  }
+  if (is.null(newVar)){
+    newVar <- "Category"
+    message("`newVar` defaulted to Category")
+  }
+
+  # then save parameters to list
   paramList <- as.list(match.call())
 
-  #quote input variables (NOT DEBUGGED!)
-  ## dont run if (!is.character(paramList$code)) {
-  ##  code <- rlang::enquo(code)
- ## } else if (is.character(paramList$code)) {
-  ##   code <- rlang::quo(!! rlang::sym(code))
-  ## }
+  # and quote input variables
+  if (!is.character(paramList$var)) {
+  var <- rlang::enquo(var)
+  }
+  else if (is.character(paramList$var)) {
+  var <- rlang::quo(!! rlang::sym(var))
+  }
 
- ## code <- rlang::quo_name(rlang::enquo(code))
+  newVarN <- rlang::quo_name(rlang::enquo(newVar))
 
   # First we have to import the category defintions located in the package directory "data"
 
-  load(here("data/definitions.RData"))
-
-  # Then we determine if the problemcode was changed from default.
-
-  if (is.null(code)){
-    code <- "PROBLEMCODE"
-    message("`code` defaulted to PROBLEMCODE")}
+  load(here::here("data/definitions.RData"))
 
   # Then we use a mutate function to assign categories
-
-  mutate(.data,
-         Category = case_when(
-           .data[[code]] %in% Admin ~ "Admin",
-           .data[[code]] %in% Animal ~ "Animal",
-           .data[[code]] %in% Construction ~ "Construction",
-           .data[[code]] %in% Debris ~ "Debris",
-           .data[[code]] %in% Degrade ~ "Degrade",
-           .data[[code]] %in% Disturbance ~ "Disturbance",
-           .data[[code]] %in% Event ~ "Event",
-           .data[[code]] %in% Health ~ "Health",
-           .data[[code]] %in% Landscape ~ "Landscape",
-           .data[[code]] %in% Law ~ "Law",
-           .data[[code]] %in% Maintenance ~ "Maintenance",
-           .data[[code]] %in% Nature ~ "Nature",
-           .data[[code]] %in% Road ~ "Road",
-           .data[[code]] %in% Sewer ~ "Sewer",
-           .data[[code]] %in% Traffic ~ "Traffic",
-           .data[[code]] %in% Waste ~ "Waste")) -> pm
+.data %>%
+  dplyr::mutate(newVarN = dplyr::case_when(
+           var %in% as.vector(Admin) ~ "Admin",
+           var %in% as.vector(Animal) ~ "Animal",
+           var %in% as.vector(Construction) ~ "Construction",
+           var %in% as.vector(Debris) ~ "Debris",
+           var %in% as.vector(Degrade) ~ "Degrade",
+           var %in% as.vector(Disturbance) ~ "Disturbance",
+           var %in% as.vector(Event) ~ "Event",
+           var %in% as.vector(Health) ~ "Health",
+           var %in% as.vector(Landscape) ~ "Landscape",
+           var %in% as.vector(Law) ~ "Law",
+           var %in% as.vector(Maintenance) ~ "Maintenance",
+           var %in% as.vector(Nature) ~ "Nature",
+           var %in% as.vector(Road) ~ "Road",
+           var %in% as.vector(Sewer) ~ "Sewer",
+           var %in% as.vector(Traffic) ~ "Traffic",
+           var %in% as.vector(Waste) ~ "Waste")) -> pm
 
   # return the data again with categories
 
