@@ -2,9 +2,7 @@
 
 export(csb_categorize)
 export(csb_get_data)
-importFrom(dplyr,"%>%")
-importFrom(dplyr,case_when)
-importFrom(dplyr,mutate)
+import(dplyr)
 importFrom(here,here)
 importFrom(rlang,":=")
 importFrom(rlang,enquo)

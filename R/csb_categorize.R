@@ -50,24 +50,24 @@ csb_categorize <- function(.data, var = NULL, newVar = NULL){
   load(here::here("data/definitions.RData"))
 
   # Then we use a mutate function to assign categories
-.data %>%
+  .data %>%
   dplyr::mutate(newVarN = dplyr::case_when(
-           var %in% as.vector(Admin) ~ "Admin",
-           var %in% as.vector(Animal) ~ "Animal",
-           var %in% as.vector(Construction) ~ "Construction",
-           var %in% as.vector(Debris) ~ "Debris",
-           var %in% as.vector(Degrade) ~ "Degrade",
-           var %in% as.vector(Disturbance) ~ "Disturbance",
-           var %in% as.vector(Event) ~ "Event",
-           var %in% as.vector(Health) ~ "Health",
-           var %in% as.vector(Landscape) ~ "Landscape",
-           var %in% as.vector(Law) ~ "Law",
-           var %in% as.vector(Maintenance) ~ "Maintenance",
-           var %in% as.vector(Nature) ~ "Nature",
-           var %in% as.vector(Road) ~ "Road",
-           var %in% as.vector(Sewer) ~ "Sewer",
-           var %in% as.vector(Traffic) ~ "Traffic",
-           var %in% as.vector(Waste) ~ "Waste")) -> pm
+           var %in% Admin ~ "Admin",
+           var %in% Animal ~ "Animal",
+           var %in% Construction ~ "Construction",
+           var %in% Debris ~ "Debris",
+           var %in% Degrade ~ "Degrade",
+           var %in% Disturbance ~ "Disturbance",
+           var %in% Event ~ "Event",
+           var %in% Health ~ "Health",
+           var %in% Landscape ~ "Landscape",
+           var %in% Law ~ "Law",
+           var %in% Maintenance ~ "Maintenance",
+           var %in% Nature ~ "Nature",
+           var %in% Road ~ "Road",
+           var %in% Sewer ~ "Sewer",
+           var %in% Traffic ~ "Traffic",
+           var %in% Waste ~ "Waste")) -> pm
 
   # return the data again with categories
 
