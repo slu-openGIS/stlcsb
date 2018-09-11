@@ -26,7 +26,7 @@ csb_categorize <- function(.data, var = NULL, newVar = NULL){
   # check for defaults
 
   if (is.null(var)){
-    var <- "PROBLEMCODE"
+    varX <- "PROBLEMCODE"
     message("`var` defaulted to PROBLEMCODE")
   }
   if (is.null(newVar)){
