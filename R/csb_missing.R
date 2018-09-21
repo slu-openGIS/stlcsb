@@ -20,4 +20,7 @@
 #' @export
 csb_missing <- function(.data, varX, varY){
 
+  if (nchar(as.numeric(varX)) != 6){return(TRUE)}
+  if (nchar(as.numeric(varY)) != 6){return(TRUE)}
+
 }

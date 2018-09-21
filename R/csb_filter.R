@@ -5,7 +5,7 @@
 #' @usage csb_filter(.data, ...)
 #'
 #' @param .data A tibble with raw CSB data
-#' @param ... values of the categories for the function to return
+#' @param var values of the categories for the function to return. A list of these categories can be
 #'
 #' @return \code{csb_filter} returns data with an additional variable for an intelligible category for CSB requests.
 #'
@@ -17,5 +17,9 @@
 #' @importFrom rlang sym
 #'
 #' @export
-csb_filter <- function(.data, code, ...){
+csb_filter <- function(.data, var, newVar = NULL){
+
+  # load the categories used for comparison
+
+  load(here::here("data/definitions.RData"))
 }

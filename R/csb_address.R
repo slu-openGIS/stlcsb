@@ -20,4 +20,7 @@
 #' @export
 csb_address <- function(.data, var, newVar){
 
+  .data %>%
+    mutate(newVar = #postmastr function
+    )
 }
