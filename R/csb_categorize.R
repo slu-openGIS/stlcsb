@@ -21,18 +21,7 @@
 #' @importFrom rlang sym
 #'
 #' @export
-csb_categorize <- function(.data, var = NULL, newVar = NULL){
-
-  # check for defaults
-
-  if (is.null(var)){
-    varX <- "PROBLEMCODE"
-    message("`var` defaulted to PROBLEMCODE")
-  }
-  if (is.null(newVar)){
-    newVar <- "Category"
-    message("`newVar` defaulted to Category")
-  }
+csb_categorize <- function(.data, var, newVar){
 
   # then save parameters to list
   paramList <- as.list(match.call())
@@ -49,7 +38,7 @@ csb_categorize <- function(.data, var = NULL, newVar = NULL){
 
   # First we have to import the category defintions located in the package directory "data"
 
-  load(here::here("data/definitions.RData"))
+  load("data/definitions.RData")
 
   # Then we use a mutate function to assign categories
   .data %>%
