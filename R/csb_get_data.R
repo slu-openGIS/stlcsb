@@ -14,14 +14,14 @@ csb_get_data <- function(){
   STL_CSB_RawRequests = NULL
 
   # specify download path
-  url <- "https://github.com/slu-openGIS/STL_CSB_RawRequests/archive/master.zip"
-  path <- "/STL_CSB_RawRequests-master/data/STL_CSB_RawRequests.rda"
+  ## Note on URL, both "blob" and "raw" URLs work, but I have no idea which one to use or why...
+  url <- "https://github.com/slu-openGIS/STL_CSB_RawRequests/raw/master/data/STL_CSB_RawRequests.rda"
 
   # download and extract data to temp dir
+
   tmpdir <- tempdir()
-  utils::download.file(url, paste0(tmpdir,"master.zip"))
-  utils::unzip(paste0(tmpdir,"master.zip"), exdir = tmpdir)
-  data <- paste0(tmpdir,path)
+  utils::download.file(url, paste0(tmpdir,"RawRequests.rda"))
+  data <- paste0(tmpdir,"RawRequests.rda")
 
   # import the data and return tibble
   load(data)
