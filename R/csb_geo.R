@@ -27,5 +27,6 @@ csb_geo <- function(.data, varX, varY, replace = TRUE, crs = NULL){
 
   st_transform()
 
-  if (is.true(replace)){dplyr::select(-varX, - varY)}
+  if (is.true(replace)){mutate(varX =)
+  mutate 
 }

@@ -26,3 +26,6 @@ csb_date <- function(.data, var, newVar, overwrite = FALSE){
   mutate(.data, newVar =
            as.POSIXct(var))
 }
+
+# What should this function do?
+# Month, year filtering?

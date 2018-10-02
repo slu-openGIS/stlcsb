@@ -10,7 +10,7 @@
 #'
 #' @return \code{csb_address} returns data with an additional variable for a more tidy address.
 #'
-#' @import dplyr
+#' @import postmastr
 #' @importFrom here here
 #' @importFrom rlang :=
 #' @importFrom rlang quo
