@@ -23,10 +23,10 @@
 #' @export
 csb_geo <- function(.data, varX, varY, replace = TRUE, crs = NULL){
 
-  st_as_sf(.data, coords = (x = varX, y = varY))
+ # st_as_sf(.data, coords = (x = varX, y = varY))
 
-  st_transform()
+ # st_transform()
 
-  if (is.true(replace)){mutate(varX =)
-  mutate 
+ # if (is.true(replace)){mutate(varX =)
+ # mutate
 }
