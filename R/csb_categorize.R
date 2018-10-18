@@ -23,6 +23,9 @@
 #' @export
 csb_categorize <- function(.data, var, newVar){
 
+  ## NOTES FOR FUTURE WORK
+  # Add error checking, remember that NULL checking broke NSE the first time, try other methods.
+
   # then save parameters to list
   paramList <- as.list(match.call())
 

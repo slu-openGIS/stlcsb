@@ -12,10 +12,12 @@
 #' @param filter if true, the function will filter data based on specified values rather than parse it
 #' @param delete if true, deletes the original column with unparsed data
 #'
-#' @return \code{csb_date} returns a new column with date in the POSIX format.
+#' @return \code{csb_date} can either return new columns with parsed date or return a filtered dataset
 #'
-#' @import dplyr
-#' @import lubridate
+#' @importFrom dplyr mutate
+#' @importFrom lubridate day
+#' @importFrom lubridate month
+#' @importFrom lubridate year
 #' @importFrom dplyr %>%
 #' @importFrom rlang :=
 #' @importFrom rlang quo
@@ -25,7 +27,7 @@
 #' @export
 csb_date <- function(.data, var, day = NULL, month = NULL, year = NULL, filter = FALSE, delete = FALSE){
 
-  ## Check that at least one argument is specified
+  ## Check that at least one argument is specified (This may break NSE!!)
   if(is.null(day)&&is.null(month)&&is.null(year)){
     stop("At least one argument must be specified for day, month or year.")
     }

@@ -10,7 +10,7 @@
 
 #' @return \code{csb_filter} returns data with an additional variable for an intelligible category for CSB requests.
 #'
-#' @import dplyr filter
+#' @importFrom dplyr filter
 #' @importFrom here here
 #' @importFrom rlang :=
 #' @importFrom rlang quo
@@ -38,7 +38,7 @@ else {
 
 }
 
-## Example input 
+## Example input
 # csb_filter(data, c("Degrade", "Waste"))
 # ## Note, all lower case category names!?
 # Mutate AND filter
