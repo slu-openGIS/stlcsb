@@ -2,7 +2,7 @@
 % Please edit documentation in R/csb_get_data.R
 \name{csb_get_data}
 \alias{csb_get_data}
-\title{Download Processed CSB Data}
+\title{Download CSB Data}
 \usage{
 csb_get_data()
 }
@@ -11,5 +11,5 @@ csb_get_data()
     contained in our version of the CSB's data release.
 }
 \description{
-\code{csb_get_data} provides access to our lightly cleaned and compiled version of the CSB's data release.
+\code{csb_get_data} provides direct access to a compiled version of the CSB's data release.
 }

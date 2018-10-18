@@ -9,7 +9,9 @@ csb_filter(.data, ...)
 \arguments{
 \item{.data}{A tibble with raw CSB data}
 
-\item{...}{values of the categories for the function to return}
+\item{var}{values of the categories for the function to return. A list of these categories can be}
+
+\item{newVar}{name of column containing categories. NULL by default, but if specified will produce a new column.}
 }
 \value{
 \code{csb_filter} returns data with an additional variable for an intelligible category for CSB requests.
