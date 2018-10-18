@@ -1,12 +1,12 @@
 #' CSB Calls in St. Louis, January 2018
 #'
-#' A data set containing CSB calls in St. Louis, Missouri during January 2018.
+#' An example data set containing CSB calls in St. Louis, Missouri during the first week of January, 2018.
 #'
 #' @docType data
 #'
 #' @usage data(january_2018)
 #'
-#' @format A tibble with 8812 rows and 19 variables:
+#' @format A tibble with 1688 rows and 19 variables:
 #' \describe{
 #'   \item{REQUESTID}{system generated unique request identifier}
 #'   \item{PROBLEMCODE}{type of report}
