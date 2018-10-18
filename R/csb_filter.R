@@ -22,7 +22,7 @@ csb_filter <- function(.data, var, newVar = NULL){
 
   # load the categories used for comparison
 
-  load(("data/definitions.RData"))
+  load("data/definitions.RData")
 
 
 if (is.null(newVar)){message("No argument set for `newVar` If you would like to append a category variable, please set an argument for `newVar`")
