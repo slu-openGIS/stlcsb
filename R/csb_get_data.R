@@ -7,6 +7,10 @@
 #' @return \code{csb_get_data} returns a tibble with all of the CSB requests
 #'     contained in our version of the CSB's data release.
 #'
+#' @importFrom dplyr as_tibble
+#' @importFrom dplyr bind_rows
+#' @importFrom readr read_csv
+#'
 #' @export
 csb_get_data <- function(){
 
@@ -17,10 +21,6 @@ csb_get_data <- function(){
 
   # no visible binding for global variable note
   STL_CSB_RawRequests = NULL
-
-  # Dependencies
-  library(dplyr)
-  library(readr)
 
   # set source variables
   # This will need to be updated on an annual basis, if the city continues using the same format
@@ -206,7 +206,7 @@ csb_get_data <- function(){
   rm(path1, path2, path3, path4, path5, path6, path7, path8, path9, path10, path11, url)
 
   # combine data frames
-  STL_CSB_RawRequests <- as_tibble(bind_rows(y2008, y2009, y2010, y2011, y2012, y2013, y2014, y2015, y2016, y2017, y2018))
+  STL_CSB_RawRequests <- dplyr::as_tibble(dplyr::bind_rows(y2008, y2009, y2010, y2011, y2012, y2013, y2014, y2015, y2016, y2017, y2018))
 
   return(STL_CSB_RawRequests)
 
