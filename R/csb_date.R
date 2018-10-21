@@ -27,7 +27,7 @@
 #' @export
 csb_date <- function(.data, var, day = NULL, month = NULL, year = NULL, filter = FALSE, delete = FALSE){
 
-  ## Check that at least one argument is specified (This may break NSE!!)
+  ## Check that at least one argument is specified (This may [WILL] break NSE!!)
   if(is.null(day)&&is.null(month)&&is.null(year)){
     stop("At least one argument must be specified for day, month or year.")
     }
@@ -35,22 +35,26 @@ csb_date <- function(.data, var, day = NULL, month = NULL, year = NULL, filter =
 ## Parsing Function
   if(filter == FALSE){
 
+### test for NULL or Charcater??
+    ## !!var
+
   ## Mutate for day
     if(!is.null(day)){.data %>%
-        mutate(day = day(!!var))}
+        mutate(day = lubridate::day(var))} -> .data
   ## Mutate for month
     if(!is.null(month)){.data %>%
-        mutate(month = month(var))}
+        mutate(month = lubridate::month(var))} -> .data
   ## Mutate for year
-    if(!is.null(year)){.data %>%
-        mutate(year = year(var))}
+    if(is.character(year)){.data %>%
+        mutate(year = lubridate::year(var))} -> .data
   }
 ## Filter Function
+  ### Will need the same if structure as above, can't test for NULL ==
   else if(filter == TRUE){
     .data %>%
-      filter(year == year(var)) %>%
-      filter(month == month(var)) %>%
-      filter(day == day(var)) -> f_out
+      filter(year == lubridate::year(var)) %>%
+      filter(month == lubridate::month(var)) %>%
+      filter(day == lubridate::day(var)) -> f_out
 
   ## Filter based on specified arguments
 

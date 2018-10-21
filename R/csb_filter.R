@@ -39,12 +39,13 @@ else {
 }
 
 ## Example input
-# csb_filter(data, c("Degrade", "Waste"))
+# csb_filter(data, c("Degrade", "Waste")) BE Able to use for multiple codes..
 # ## Note, all lower case category names!?
 # Mutate AND filter
 # need to return a data frame for category names
 #
 #
+# Need a Data output for the defined categories. Vacancy included.
 #
-#
+## NewVar is false, but if true creates an appropriate category label
 #
