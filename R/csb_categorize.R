@@ -19,6 +19,7 @@
 #' @importFrom rlang quo
 #' @importFrom rlang enquo
 #' @importFrom rlang sym
+#' @importFrom ralng .data
 #'
 #' @export
 csb_categorize <- function(.data, var, newVar){
@@ -39,29 +40,31 @@ csb_categorize <- function(.data, var, newVar){
 
   newVarN <- rlang::quo_name(rlang::enquo(newVar))
 
+  ## Might be able to add error checking at this point...
+
   # First we have to import the category defintions located in the package directory "data"
 
-  load("data/definitions.RData")
+  load("data/definitions.rda")
 
   # Then we use a mutate function to assign categories
   .data %>%
     dplyr::mutate(!!newVarN := dplyr::case_when(
-             !!varX %in% Admin ~ "Admin",
-             !!varX %in% Animal ~ "Animal",
-             !!varX %in% Construction ~ "Construction",
-             !!varX %in% Debris ~ "Debris",
-             !!varX %in% Degrade ~ "Degrade",
-             !!varX %in% Disturbance ~ "Disturbance",
-             !!varX %in% Event ~ "Event",
-             !!varX %in% Health ~ "Health",
-             !!varX %in% Landscape ~ "Landscape",
-             !!varX %in% Law ~ "Law",
-             !!varX %in% Maintenance ~ "Maintenance",
-             !!varX %in% Nature ~ "Nature",
-             !!varX %in% Road ~ "Road",
-             !!varX %in% Sewer ~ "Sewer",
-             !!varX %in% Traffic ~ "Traffic",
-             !!varX %in% Waste ~ "Waste")) -> pm
+             !!varX %in% admin ~ "Admin",
+             !!varX %in% animal ~ "Animal",
+             !!varX %in% construction ~ "Construction",
+             !!varX %in% debris ~ "Debris",
+             !!varX %in% degrade ~ "Degrade",
+             !!varX %in% disturbance ~ "Disturbance",
+             !!varX %in% event ~ "Event",
+             !!varX %in% health ~ "Health",
+             !!varX %in% landscape ~ "Landscape",
+             !!varX %in% law ~ "Law",
+             !!varX %in% maintenance ~ "Maintenance",
+             !!varX %in% nature ~ "Nature",
+             !!varX %in% road ~ "Road",
+             !!varX %in% sewer ~ "Sewer",
+             !!varX %in% traffic ~ "Traffic",
+             !!varX %in% waste ~ "Waste")) -> pm
 
   # return the data again with categories
 
