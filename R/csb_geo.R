@@ -12,8 +12,8 @@
 #'
 #' @return \code{csb_geo} returns a `latitude` and `longitude` column with properly formatted spatial data in an SF format
 #'
-#' @import dplyr
-#' @import sf
+#' @importFrom dplyr mutate
+#' @importFrom sf st_as_sf
 #' @importFrom here here
 #' @importFrom rlang :=
 #' @importFrom rlang quo
@@ -29,4 +29,8 @@ csb_geo <- function(.data, varX, varY, replace = TRUE, crs = NULL){
 
  # if (is.true(replace)){mutate(varX =)
  # mutate
+
+
+  ## Stateplane meters, project into a Projected
+  #Geographic >>> Proejcted
 }

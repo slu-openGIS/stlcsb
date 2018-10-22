@@ -19,7 +19,7 @@
 #' @importFrom rlang quo
 #' @importFrom rlang enquo
 #' @importFrom rlang sym
-#' @importFrom ralng .data
+#' @importFrom rlang .data
 #'
 #' @export
 csb_categorize <- function(.data, var, newVar){
