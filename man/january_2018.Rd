@@ -4,7 +4,7 @@
 \name{january_2018}
 \alias{january_2018}
 \title{CSB Calls in St. Louis, January 2018}
-\format{A tibble with 8812 rows and 19 variables:
+\format{A tibble with 1688 rows and 19 variables:
 \describe{
   \item{REQUESTID}{system generated unique request identifier}
   \item{PROBLEMCODE}{type of report}
@@ -33,7 +33,7 @@
 data(january_2018)
 }
 \description{
-An example data set containing CSB calls in St. Louis, Missouri during January 1-7, 2018.
+An example data set containing CSB calls in St. Louis, Missouri during the first week of January, 2018.
 }
 \examples{
 str(january_2018)

@@ -10,6 +10,10 @@
 #' @importFrom dplyr as_tibble
 #' @importFrom dplyr bind_rows
 #' @importFrom readr read_csv
+#' @importFrom readr cols
+#' @importFrom readr col_integer
+#' @importFrom readr col_character
+#' @importFrom readr col_double
 #'
 #' @export
 csb_get_data <- function(){
