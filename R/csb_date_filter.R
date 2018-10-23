@@ -56,16 +56,16 @@ csb_date_filter <- function(.data, var, day = NULL, month = NULL, year = NULL, d
   }
   # filter for month
   if(is.numeric(month)){.data %>%
-      filter(lubridate::month(!!varN) == year) -> .data
+      filter(lubridate::month(!!varN) == month) -> .data
   }
   # filter for day
   if(is.numeric(day)){.data %>%
-      filter(lubridate::day(!!varN) == year) -> .data
+      filter(lubridate::day(!!varN) == day) -> .data
   }
 
   ## Delete the original var
   if (delete == TRUE){
-    select(.data, -var) -> .data
+    select(.data, -!!varN) -> .data
   }
 
   return(.data)
