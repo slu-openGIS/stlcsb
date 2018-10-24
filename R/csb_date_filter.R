@@ -40,7 +40,41 @@ csb_date_filter <- function(.data, var, day = NULL, month = NULL, year = NULL, d
     varN <- rlang::quo(!! rlang::sym(var))
   }
 
+  #if(is.numeric(paramList$day)&&length()){}
+  #if(!is.numeric(paramList$month)&&!is.character(paramList$month)){
+ #   dayN <- rlang::enquo(month)
+ # }
 
+
+  if(nchar(paramList$year == 2)){year <- 2000 + year}
+  else if(nchar(paramList$year == 1)){year <- 2010 + year}
+  # vectors for alternative entry formats
+  jan <- c('January', 'january', 'Jan', 'jan')
+  feb <- c('February', 'february', 'Feb', 'feb')
+  mar <- c('March', 'march', 'Mar', 'mar')
+  apr <- c('April', 'april', 'Apr', 'apr')
+  may <- c('May', 'may')
+  jun <- c('June', 'june', 'Jun', 'jun')
+  jul <- c('July', 'july', 'Jul', 'jul')
+  aug <- c('August', 'august', 'Aug', 'aug')
+  sep <- c('September', 'september', 'Sep', 'sep')
+  oct <- c('October', 'october', 'Oct', 'oct')
+  nov <- c('November', 'november', 'Nov', 'nov')
+  dec <- c('December', 'december', 'Dec', 'dec')
+
+
+  if(month %in% jan){month = 1}
+  else if(month %in% feb){month = 2}
+  else if(month %in% mar){month = 3}
+  else if(month %in% apr){month = 4}
+  else if(month %in% may){month = 5}
+  else if(month %in% jun){month = 6}
+  else if(month %in% jul){month = 7}
+  else if(month %in% aug){month = 8}
+  else if(month %in% sep){month = 9}
+  else if(month %in% oct){month = 10}
+  else if(month %in% nov){month = 11}
+  else if(month %in% dec){month = 12}
   ## Somewhere Here will be the conversion function from character to numeric arugments. and from numeric
   ## arguments to lubridate accepted arguments
 
