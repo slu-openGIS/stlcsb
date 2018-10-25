@@ -39,7 +39,8 @@ csb_date_filter <- function(.data, var, day = NULL, month = NULL, year = NULL, d
   else if (is.character(paramList$var)) {
     varN <- rlang::quo(!! rlang::sym(var))
   }
-  #need to add function for entries of greater than length 1
+  # need to add function for entries of greater than length 1
+  # for now we will return an error
 
   if(length(paramList$year) > 1){stop("This function does not yet support arguments greater than length 1")}
   if(length(paramList$month) > 1){stop("This function does not yet support arguments greater than length 1")}
@@ -47,12 +48,12 @@ csb_date_filter <- function(.data, var, day = NULL, month = NULL, year = NULL, d
 
   ## Correction and checking for year
   # correct too short of a year entry
-  if(is.numeric(paramList$year)&&nchar(paramList$year == 2)){year <- 2000 + year}
-  else if(is.numeric(paramList$year)&&nchar(paramList$year == 1)){year <- 2010 + year}
+  if(is.numeric(paramList$year)&&nchar(paramList$year) < 4){year <- 2000 + year}
 
   #check that year entry is valid for csb data, warn for entry of 2008.
-  if(!(year %in% c(2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018))){stop("The year variable is an invalid argument")}
-  if(year == 2008){message("2008 only contains traffic requests")} #this only works if 2008 is the first number in the vector, which I assume it will always be
+  if(!is.null(year)&&!(year %in% c(2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018))){stop("The year variable is an invalid argument")}
+  if(!is.null(year)&&year == 2008){message("2008 only contains traffic requests")} #this only works if 2008 is the first number in the vector, which I assume it will always be
+
 
   ## correction and checking for month
   # vectors for alternative month entry formats
@@ -70,18 +71,18 @@ csb_date_filter <- function(.data, var, day = NULL, month = NULL, year = NULL, d
   dec <- c('December', 'december', 'Dec', 'dec')
 
 
-  if(month %in% jan){month = 1}
-  else if(month %in% feb){month = 2}
-  else if(month %in% mar){month = 3}
-  else if(month %in% apr){month = 4}
-  else if(month %in% may){month = 5}
-  else if(month %in% jun){month = 6}
-  else if(month %in% jul){month = 7}
-  else if(month %in% aug){month = 8}
-  else if(month %in% sep){month = 9}
-  else if(month %in% oct){month = 10}
-  else if(month %in% nov){month = 11}
-  else if(month %in% dec){month = 12}
+  if(!is.null(month)&&month %in% jan){month = 1}
+  else if(!is.null(month)&&month %in% feb){month = 2}
+  else if(!is.null(month)&&month %in% mar){month = 3}
+  else if(!is.null(month)&&month %in% apr){month = 4}
+  else if(!is.null(month)&&month %in% may){month = 5}
+  else if(!is.null(month)&&month %in% jun){month = 6}
+  else if(!is.null(month)&&month %in% jul){month = 7}
+  else if(!is.null(month)&&month %in% aug){month = 8}
+  else if(!is.null(month)&&month %in% sep){month = 9}
+  else if(!is.null(month)&&month %in% oct){month = 10}
+  else if(!is.null(month)&&month %in% nov){month = 11}
+  else if(!is.null(month)&&month %in% dec){month = 12}
 
   ## Somewhere Here will be the conversion function from character to numeric arugments. and from numeric
   ## arguments to lubridate accepted arguments
