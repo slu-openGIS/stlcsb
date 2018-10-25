@@ -7,7 +7,7 @@
 #' @param .data A tibble with raw CSB data
 #' @param var name of column containing date data
 #' @param day numeric representation of day(s) to include (leading zero or not will be accepted)
-#' @param month numeric representation of month(s) to include (leading zero or not will be accepted)
+#' @param month numeric/character representation of month(s) to include
 #' @param year numeric representation of years(s) to include (4 digit or 2 digit accepted)
 #' @param delete if true, deletes the original column containing dates
 #'
@@ -49,6 +49,9 @@ csb_date_filter <- function(.data, var, day = NULL, month = NULL, year = NULL, d
   ## Correction and checking for year
   # correct too short of a year entry
   if(is.numeric(paramList$year)&&nchar(paramList$year) < 4){year <- 2000 + year}
+
+  # will need a loop for multiple year arguments.
+  #if(length(year) >1: for(i in year) year <- append(year, 2000 + year)
 
   #check that year entry is valid for csb data, warn for entry of 2008.
   if(!is.null(year)&&!(year %in% c(2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018))){stop("The year variable is an invalid argument")}
