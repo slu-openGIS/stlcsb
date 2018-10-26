@@ -24,23 +24,21 @@
 #' @export
 csb_categorize <- function(.data, var, newVar){
 
-  ## NOTES FOR FUTURE WORK
-  # Add error checking, remember that NULL checking broke NSE the first time, try other methods.
-
   # then save parameters to list
   paramList <- as.list(match.call())
 
   # and quote input variables
   if (!is.character(paramList$var)) {
-    varX <- rlang::enquo(var)
+    varN <- rlang::enquo(var)
   }
   else if (is.character(paramList$var)) {
-    varX <- rlang::quo(!! rlang::sym(var))
+    varN <- rlang::quo(!! rlang::sym(var))
   }
 
   newVarN <- rlang::quo_name(rlang::enquo(newVar))
 
-  ## Might be able to add error checking at this point...
+  # Error checking for newVar
+  if(newVarN == ""){stop("Please supply an argument for newVar")}
 
   # First we have to import the category defintions located in the package directory "data"
 
@@ -49,22 +47,22 @@ csb_categorize <- function(.data, var, newVar){
   # Then we use a mutate function to assign categories
   .data %>%
     dplyr::mutate(!!newVarN := dplyr::case_when(
-             !!varX %in% admin ~ "Admin",
-             !!varX %in% animal ~ "Animal",
-             !!varX %in% construction ~ "Construction",
-             !!varX %in% debris ~ "Debris",
-             !!varX %in% degrade ~ "Degrade",
-             !!varX %in% disturbance ~ "Disturbance",
-             !!varX %in% event ~ "Event",
-             !!varX %in% health ~ "Health",
-             !!varX %in% landscape ~ "Landscape",
-             !!varX %in% law ~ "Law",
-             !!varX %in% maintenance ~ "Maintenance",
-             !!varX %in% nature ~ "Nature",
-             !!varX %in% road ~ "Road",
-             !!varX %in% sewer ~ "Sewer",
-             !!varX %in% traffic ~ "Traffic",
-             !!varX %in% waste ~ "Waste")) -> pm
+             !!varN %in% admin ~ "Admin",
+             !!varN %in% animal ~ "Animal",
+             !!varN %in% construction ~ "Construction",
+             !!varN %in% debris ~ "Debris",
+             !!varN %in% degrade ~ "Degrade",
+             !!varN %in% disturbance ~ "Disturbance",
+             !!varN %in% event ~ "Event",
+             !!varN %in% health ~ "Health",
+             !!varN %in% landscape ~ "Landscape",
+             !!varN %in% law ~ "Law",
+             !!varN %in% maintenance ~ "Maintenance",
+             !!varN %in% nature ~ "Nature",
+             !!varN %in% road ~ "Road",
+             !!varN %in% sewer ~ "Sewer",
+             !!varN %in% traffic ~ "Traffic",
+             !!varN %in% waste ~ "Waste")) -> pm
 
   # return the data again with categories
 
