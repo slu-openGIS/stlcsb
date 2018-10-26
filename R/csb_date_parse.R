@@ -17,7 +17,7 @@
 #' @importFrom lubridate day
 #' @importFrom lubridate month
 #' @importFrom lubridate year
-#' @importFrom dplyr %>%
+#' @importFrom magrittr %>%
 #' @importFrom rlang :=
 #' @importFrom rlang quo
 #' @importFrom rlang enquo
@@ -27,6 +27,10 @@
 #'
 #' @export
 csb_date_parse <- function(.data, var, day, month, year, delete = FALSE){
+
+
+  ### WHY DOES THIS NOT RETURN AN ERROR FOR UNAMED ARGUMENTS?
+  # Had to set nulls in the date_filter...
 
   ### NSE Setup
   # save parameters to list
@@ -51,13 +55,13 @@ csb_date_parse <- function(.data, var, day, month, year, delete = FALSE){
 
   ## Mutate for day
     if(dayN != ""){.data %>%
-        mutate(!!dayN := lubridate::day(!!varN))} -> .data
+        dplyr::mutate(!!dayN := lubridate::day(!!varN))} -> .data
   ## Mutate for month
     if(monthN != ""){.data %>%
-        mutate(!!monthN := lubridate::month(!!varN))} -> .data
+        dplyr::mutate(!!monthN := lubridate::month(!!varN))} -> .data
   ## Mutate for year
     if(yearN != ""){.data %>%
-        mutate(!!yearN := lubridate::year(!!varN))} -> .data
+        dplyr::mutate(!!yearN := lubridate::year(!!varN))} -> .data
 
 
 ## Delete the original var
