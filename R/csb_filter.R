@@ -5,8 +5,9 @@
 #' @usage csb_filter(.data, ...)
 #'
 #' @param .data A tibble with raw CSB data
-#' @param var values of the categories for the function to return. A list of these categories can be
+#' @param var where the original problem code is located in the data
 #' @param newVar name of column containing categories. NULL by default, but if specified will produce a new column.
+#' @param category name(s) of the category(s) for the function to return. A list of these categories can be
 
 #' @return \code{csb_filter} returns data with an additional variable for an intelligible category for CSB requests.
 #'
@@ -18,8 +19,21 @@
 #' @importFrom rlang sym
 #'
 #' @export
-csb_filter <- function(.data, var, newVar = NULL){
+csb_filter <- function(.data, var, newVar, category = c("admin","animal","construction","debris","degrade","disturbance","event","health","landscape","law","maintenance","nature","road","sewer","traffic","vacant","waste")){
 
+  ### NSE SETUP
+  paramList <- as.list(match.call())
+
+  if (!is.character(paramList$var)) {
+    varN <- rlang::enquo(var)
+  }
+  else if (is.character(paramList$var)) {
+    varN <- rlang::quo(!! rlang::sym(var))
+  }
+
+  newVarN <- rlang::quo_name(rlang::enquo(newVar))
+  # this function will contain the vacant category for filtering
+  # be able to filter for multiple categories
   # load the categories used for comparison
 
   load("data/definitions.RData")
@@ -37,6 +51,10 @@ else {
   }
 
 }
+
+
+## error checking for length > 1 for var, and newVar NULL
+if(length(!!varN)>1&&newVar == ""){message("You specified multiple categories but did not create a new variable, you may not be able to differentiate.")}
 
 ## Example input
 # csb_filter(data, c("Degrade", "Waste")) BE Able to use for multiple codes..
