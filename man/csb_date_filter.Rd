@@ -13,14 +13,14 @@ csb_date_filter(.data, var, day, month, year, delete = FALSE)
 
 \item{day}{numeric representation of day(s) to include (leading zero or not will be accepted)}
 
-\item{month}{numeric representation of month(s) to include (leading zero or not will be accepted)}
+\item{month}{numeric/character representation of month(s) to include}
 
 \item{year}{numeric representation of years(s) to include (4 digit or 2 digit accepted)}
 
 \item{delete}{if true, deletes the original column containing dates}
 }
 \value{
-\code{csb_date} can either return new columns with parsed date or return a filtered dataset
+\code{csb_date_filter}returns a filtered version of the input data based on specified arguments
 }
 \description{
 \code{csb_date_filter}Filters dates to return only the specified date elements

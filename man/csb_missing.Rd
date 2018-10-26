@@ -4,7 +4,7 @@
 \alias{csb_missing}
 \title{Missing CSB data}
 \usage{
-csb_missing(.data, varX, varY)
+csb_missing(.data, varX, varY, newVar, filter = FALSE)
 }
 \arguments{
 \item{.data}{A tibble with raw CSB data}
@@ -12,9 +12,13 @@ csb_missing(.data, varX, varY)
 \item{varX}{name of column containing SRX data}
 
 \item{varY}{name of column containing  SRY data}
+
+\item{newVar}{if named, produces a new column with a logical indicator of incomplete spatial data (For x OR y)}
+
+\item{filter}{if true, returns a filtered version of the data with only observations with complete spatial data}
 }
 \value{
-\code{csb_missing} returns a logical vector indicating `TRUE` if an observation has incomplete spatial data.
+\code{csb_missing} returns a logical vector indicating `TRUE` if an observation has incomplete spatial data, or a filtered version of the input data
 }
 \description{
 \code{csb_missing} retuns a logical vector indicating `TRUE` if an observation is missing SRX or SRY data.
