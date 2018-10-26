@@ -36,18 +36,38 @@ csb_filter <- function(.data, var, newVar, category = c("admin","animal","constr
   # be able to filter for multiple categories
   # load the categories used for comparison
 
-  load("data/definitions.RData")
+  load("data/definitions.rda")
+  load("data/vacant")
 
 
-if (is.null(newVar)){message("No argument set for `newVar` If you would like to append a category variable, please set an argument for `newVar`")
+if (newVarN == ""){message("No argument set for `newVar` If you would like to append a category variable, please set an argument for `newVar`")
 .data %>%
   filter()
 
 
 }
-else {
-  .data %>%
-  mutate()
+else if(newVarN != ""){
+  .data %>%     ### It is going to be super innefficient to label and then filter
+  mutate(!!newVarN := case_when(
+    !!varN %in% admin ~ "Admin",
+    !!varN %in% animal ~ "Animal",
+    !!varN %in% construction ~ "Construction",
+    !!varN %in% debris ~ "Debris",
+    !!varN %in% degrade ~ "Degrade",
+    !!varN %in% disturbance ~ "Disturbance",
+    !!varN %in% event ~ "Event",
+    !!varN %in% health ~ "Health",
+    !!varN %in% landscape ~ "Landscape",
+    !!varN %in% law ~ "Law",
+    !!varN %in% maintenance ~ "Maintenance",
+    !!varN %in% nature ~ "Nature",
+    !!varN %in% road ~ "Road",
+    !!varN %in% sewer ~ "Sewer",
+    !!varN %in% traffic ~ "Traffic",
+    !!varN %in% waste ~ "Waste"
+    !!varN %in% vacant ### What to do with vacant categories??
+  )
+  )
   }
 
 }
