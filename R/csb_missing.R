@@ -42,13 +42,19 @@ csb_missing <- function(.data, varX, varY, newVar, filter = FALSE){
 
   newVarN <- rlang::quo_name(rlang::enquo(newVar))
 
+  options(scipen = 8) #this changes print behavior so that X00000 remains X00000 rather than Xe+05
+
+  #Error checking for arguments
+  if(newVarN == ""&&isFALSE(filter)){stop("Please supply an argument for newVar or filter")}
+
   ### METHODS: Is it fair to assume that nchar() < 6 is invalid???
   ## Found some edge cases that need to be accounted for... for example srx = -10050058.4
 
   ## if newVar is named
   # mutate function
   if(newVarN != ""){.data %>%
-      dplyr::mutate(!!newVarN := dplyr::if_else((nchar(!!varXN) >= 6), FALSE, TRUE)) -> out #this is the test, if SRX and SRY are not both >=6, return TRUE for 'missing'
+      dplyr::mutate(!!newVarN := dplyr::if_else((nchar(!!varXN) >= 6), FALSE, TRUE)) %>% #this is the test, if SRX and SRY are not both >=6, return TRUE for 'missing'
+      dplyr::mutate(!!newVarN := dplyr::if_else((nchar(!!varYN) >= 6), FALSE, TRUE))
     # need addition to check for SRY, but not to ever replace a TRUE with FALSE...
   #&&(nchar(!!varYN) >= 6)
 
