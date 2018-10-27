@@ -1,6 +1,6 @@
 #' Filter CSB Data
 #'
-#' @description \code{csb_filter} retuns observations that match one of 16 predefined categories.
+#' @description \code{csb_filter} retuns observations that match one of 17 predefined categories.
 #'
 #' @usage csb_filter(.data, ...)
 #'
@@ -49,23 +49,23 @@ if (newVarN == ""){message("No argument set for `newVar` If you would like to ap
 else if(newVarN != ""){
   .data %>%     ### It is going to be super innefficient to label and then filter
   mutate(!!newVarN := case_when(
-    !!varN %in% admin ~ "Admin",
-    !!varN %in% animal ~ "Animal",
-    !!varN %in% construction ~ "Construction",
-    !!varN %in% debris ~ "Debris",
-    !!varN %in% degrade ~ "Degrade",
-    !!varN %in% disturbance ~ "Disturbance",
-    !!varN %in% event ~ "Event",
-    !!varN %in% health ~ "Health",
-    !!varN %in% landscape ~ "Landscape",
-    !!varN %in% law ~ "Law",
-    !!varN %in% maintenance ~ "Maintenance",
-    !!varN %in% nature ~ "Nature",
-    !!varN %in% road ~ "Road",
-    !!varN %in% sewer ~ "Sewer",
-    !!varN %in% traffic ~ "Traffic",
-    !!varN %in% waste ~ "Waste"
-    !!varN %in% vacant ### What to do with vacant categories??
+    #  #  !!varN %in% admin ~ "Admin",
+    #  #  !!varN %in% animal ~ "Animal",
+    #  #  !!varN %in% construction ~ "Construction",
+    #  !!varN %in% debris ~ "Debris",
+    #  !!varN %in% degrade ~ "Degrade",
+    #  !!varN %in% disturbance ~ "Disturbance",
+    #  !!varN %in% event ~ "Event",
+    #  !!varN %in% health ~ "Health",
+    #  !!varN %in% landscape ~ "Landscape",
+    #  !!varN %in% law ~ "Law",
+    #  !!varN %in% maintenance ~ "Maintenance",
+    #  !!varN %in% nature ~ "Nature",
+    #  !!varN %in% road ~ "Road",
+    #  !!varN %in% sewer ~ "Sewer",
+    #  !!varN %in% traffic ~ "Traffic",
+    #  !!varN %in% waste ~ "Waste"
+    #  !!varN %in% vacant ~ "Vacant"### What to do with vacant categories??
   )
   )
   }
@@ -74,7 +74,7 @@ else if(newVarN != ""){
 
 
 ## error checking for length > 1 for var, and newVar NULL
-if(length(!!varN)>1&&newVar == ""){message("You specified multiple categories but did not create a new variable, you may not be able to differentiate.")}
+# if(length(!!varN)>1&&newVar == ""){message("You specified multiple categories but did not create a new variable, you may not be able to differentiate.")}
 
 ## Example input
 # csb_filter(data, c("Degrade", "Waste")) BE Able to use for multiple codes..
