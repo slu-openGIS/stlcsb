@@ -53,18 +53,17 @@ csb_missing <- function(.data, varX, varY, newVar, filter = FALSE){
   ## if newVar is named
   # mutate function
   if(newVarN != ""){.data %>%
-      dplyr::mutate(!!newVarN := dplyr::if_else((nchar(!!varXN) >= 6), FALSE, TRUE)) %>% #this is the test, if SRX and SRY are not both >=6, return TRUE for 'missing'
-      dplyr::mutate(!!newVarN := dplyr::if_else((nchar(!!varYN) >= 6), FALSE, TRUE))
-    # need addition to check for SRY, but not to ever replace a TRUE with FALSE...
-  #&&(nchar(!!varYN) >= 6)
+      dplyr::mutate(!!newVarN := case_when(
+        nchar(!!varXN) >= 6 ~ FALSE,
+        nchar(!!varYN) >= 6 ~ FALSE,
+        nchar(!!varXN) < 6 ~ TRUE,
+        nchar(!!varYN) < 6 ~ TRUE
+      )) -> out
+    ## this method is kind of slow, but I believe it to be most accurate
+    #edge cases appear to be solved
 
-    # edge case, showing false 900000,
-    # need to quote before checking length '900000' is 6 char
-    #cause of the issue is that more than 4 zeros produces sci notation
 
   }
-  #if (nchar(as.numeric(!!varXN)) < 6){mutate(.data, newVar = TRUE)}
-  #if (nchar(as.numeric(!!varYN)) < 6){return(TRUE)}
 
   ## if filter is true
   # The filter function
