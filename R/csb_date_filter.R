@@ -28,6 +28,9 @@
 #' @export
 csb_date_filter <- function(.data, var, day = NULL, month = NULL, year = NULL, delete = FALSE){
 
+  ## Considering making the filter a %in% function, but this will break current implementation of NSE.
+  # need to resolve mehtods for iterating quosure over a list of elements.
+
   ### NSE Setup
   # save parameters to list
   paramList <- as.list(match.call())
