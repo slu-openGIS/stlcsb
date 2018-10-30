@@ -21,6 +21,8 @@
 #' @export
 csb_filter <- function(.data, var, newVar, category = c("admin","animal","construction","debris","degrade","disturbance","event","health","landscape","law","maintenance","nature","road","sewer","traffic","vacant","waste")){
 
+  # FUNCTION DOES NOT CURRENTLY WORK. IN PROGRESS
+
   ### NSE SETUP
   paramList <- as.list(match.call())
 

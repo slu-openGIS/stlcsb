@@ -9,13 +9,15 @@ csb_filter(.data, ...)
 \arguments{
 \item{.data}{A tibble with raw CSB data}
 
-\item{var}{values of the categories for the function to return. A list of these categories can be}
+\item{var}{where the original problem code is located in the data}
 
 \item{newVar}{name of column containing categories. NULL by default, but if specified will produce a new column.}
+
+\item{category}{name(s) of the category(s) for the function to return. A list of these categories can be}
 }
 \value{
 \code{csb_filter} returns data with an additional variable for an intelligible category for CSB requests.
 }
 \description{
-\code{csb_filter} retuns observations that match one of 16 predefined categories.
+\code{csb_filter} retuns observations that match one of 17 predefined categories.
 }
