@@ -14,7 +14,7 @@
 #'
 #' @importFrom dplyr mutate
 #' @importFrom sf st_as_sf
-#' @importFrom here here
+#' @importFrom sf st_transform
 #' @importFrom rlang :=
 #' @importFrom rlang quo
 #' @importFrom rlang enquo
@@ -23,14 +23,29 @@
 #' @export
 csb_geo <- function(.data, varX, varY, replace = TRUE, crs = NULL){
 
- # st_as_sf(.data, coords = (x = varX, y = varY))
+  ## Still need to write bit for replace function. CRS reprojects based on specified crs
+  # Clean dependencies
 
- # st_transform()
+  # I have determined that NSE likely is not supported by the SF package. So I will return an error
+  # message for unquoted input (At least for now)
+  # save parameters to list
+  paramList <- as.list(match.call())
+
+  if(!is.character(paramList$varX)){stop("Please provide a quoted argument for varX")}
+  if(!is.character(paramList$varY)){stop("Please provide a quoted argument for varY")}
+
+
+# based on testing, I believe the CSB data to include US Survey feets coordinates by default
+# Which is EPSG = 102696
+
+  st_as_sf(.data, coords = c(x = varX, y = varY), crs = 102696) -> sfobj
+
+# Reproject
+
+ if(!is.null(crs)){st_transform(sfobj, crs = crs) -> sfobj}
 
  # if (is.true(replace)){mutate(varX =)
  # mutate
 
-
-  ## Stateplane meters, project into a Projected
-  #Geographic >>> Proejcted
+  return(sfobj)
 }
