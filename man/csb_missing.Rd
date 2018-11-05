@@ -21,5 +21,5 @@ csb_missing(.data, varX, varY, newVar, filter = FALSE)
 \code{csb_missing} returns a logical vector indicating `TRUE` if an observation has incomplete spatial data, or a filtered version of the input data
 }
 \description{
-\code{csb_missing} retuns a logical vector indicating `TRUE` if an observation is missing SRX or SRY data.
+\code{csb_missing} returns a logical vector indicating `TRUE` if an observation is missing SRX or SRY data.
 }

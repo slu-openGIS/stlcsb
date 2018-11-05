@@ -13,7 +13,7 @@ csb_filter(.data, ...)
 
 \item{newVar}{name of column containing categories. NULL by default, but if specified will produce a new column.}
 
-\item{category}{name(s) of the category(s) for the function to return. A list of these categories can be}
+\item{category}{name(s) of the category(s) for the function to return. A list of these categories can be found in the documentation}
 }
 \value{
 \code{csb_filter} returns data with an additional variable for an intelligible category for CSB requests.
