@@ -1,6 +1,6 @@
 #' Missing CSB data
 #'
-#' @description \code{csb_missing} retuns a logical vector indicating `TRUE` if an observation is missing SRX or SRY data.
+#' @description \code{csb_missing} returns a logical vector indicating `TRUE` if an observation is missing SRX or SRY data.
 #'
 #' @usage csb_missing(.data, varX, varY, newVar, filter = FALSE)
 #'
@@ -11,6 +11,7 @@
 #' @param filter if true, returns a filtered version of the data with only observations with complete spatial data
 #'
 #' @return \code{csb_missing} returns a logical vector indicating `TRUE` if an observation has incomplete spatial data, or a filtered version of the input data
+#'
 #'
 #' @importFrom dplyr mutate
 #' @importFrom dplyr filter
@@ -46,7 +47,7 @@ csb_missing <- function(.data, varX, varY, newVar, filter = FALSE){
 
   #Error checking for arguments
   if(newVarN == ""&&isFALSE(filter)){stop("Please supply an argument for newVar or filter")}
-
+  if(newVarN != ""&&isTRUE(filter)){warning("newVar is unused if filter is TRUE")}
   ### METHODS: Is it fair to assume that nchar() < 6 is invalid???
   ## Found some edge cases that need to be accounted for... for example srx = -10050058.4
 
@@ -73,9 +74,10 @@ csb_missing <- function(.data, varX, varY, newVar, filter = FALSE){
   }
 
   ## return based on filter argument
-  if(isTRUE(filter)){return(filtered)}
+  if(isTRUE(filter)){n <- (nrow(.data) - nrow(filtered))
+    message(paste0(n," observations were filtered out"))
+    return(filtered)}
   else if(isFALSE(filter)&&newVarN != ""){return(out)} ##is.charcater may not work because of NSE here
 
-  ## would like to return a message with the count of observations removed.
 }
 
