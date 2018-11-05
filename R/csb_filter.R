@@ -7,7 +7,7 @@
 #' @param .data A tibble with raw CSB data
 #' @param var where the original problem code is located in the data
 #' @param newVar name of column containing categories. NULL by default, but if specified will produce a new column.
-#' @param category name(s) of the category(s) for the function to return. A list of these categories can be
+#' @param category name(s) of the category(s) for the function to return. A list of these categories can be found in the documentation
 
 #' @return \code{csb_filter} returns data with an additional variable for an intelligible category for CSB requests.
 #'
@@ -39,13 +39,17 @@ csb_filter <- function(.data, var, newVar, category = c("admin","animal","constr
   # load the categories used for comparison
 
   load("data/definitions.rda")
-  load("data/vacant")
+  load("data/vacant.rda")
 
 
 if (newVarN == ""){message("No argument set for `newVar` If you would like to append a category variable, please set an argument for `newVar`")
 .data %>%
   filter()
 
+if ("vacant" %in% args){message("specifying vacant will supersede ")}
+#if(length(category) >1){ USE METHODS FOR ITERATIION
+## error checking for length > 1 for var, and newVar NULL
+# if(length(!!varN)>1&&newVar == ""){message("You specified multiple categories but did not create a new variable, these data will be ambiguous")}
 
 }
 else if(newVarN != ""){
@@ -74,9 +78,6 @@ else if(newVarN != ""){
 
 }
 
-
-## error checking for length > 1 for var, and newVar NULL
-# if(length(!!varN)>1&&newVar == ""){message("You specified multiple categories but did not create a new variable, you may not be able to differentiate.")}
 
 ## Example input
 # csb_filter(data, c("Degrade", "Waste")) BE Able to use for multiple codes..
