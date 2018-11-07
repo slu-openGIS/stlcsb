@@ -49,7 +49,7 @@ csb_missing <- function(.data, varX, varY, newVar, filter = FALSE){
   if(newVarN == ""&&isFALSE(filter)){stop("Please supply an argument for newVar or filter")}
   if(newVarN != ""&&isTRUE(filter)){warning("newVar is unused if filter is TRUE")}
   ### METHODS: Is it fair to assume that nchar() < 6 is invalid???
-  ## Found some edge cases that need to be accounted for... for example srx = -10050058.4
+
 
   ## if newVar is named
   # mutate function
@@ -77,7 +77,7 @@ csb_missing <- function(.data, varX, varY, newVar, filter = FALSE){
   if(isTRUE(filter)){n <- (nrow(.data) - nrow(filtered))
     message(paste0(n," observations were filtered out"))
     return(filtered)}
-  else if(isFALSE(filter)&&newVarN != ""){return(out)} ##is.charcater may not work because of NSE here
+  else if(isFALSE(filter)&&newVarN != ""){return(out)}
 
 }
 
