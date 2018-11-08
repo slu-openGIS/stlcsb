@@ -7,7 +7,8 @@
 #' @return \code{csb_get_data} returns a tibble with all of the CSB requests
 #'     contained in our version of the CSB's data release.
 #'
-#' @importFrom dplyr as_tibble bind_rows
+#' @importFrom dplyr bind_rows
+#' @importFrom tibble as_tibble
 #' @importFrom readr read_csv cols col_integer col_character col_double
 #'
 #' @export
