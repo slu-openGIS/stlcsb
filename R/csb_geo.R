@@ -18,7 +18,8 @@
 #' @export
 csb_geo <- function(.data, varX, varY, crs = NULL){
 
-  ### Check input and Non-Standard evaluation
+
+### Check input and Non-Standard evaluation
   ## check for missing parameters of required arguments
   if (missing(.data)) {
     stop('Please provide an argument for .data')
@@ -29,29 +30,23 @@ csb_geo <- function(.data, varX, varY, crs = NULL){
   if (missing(varY)) {
     stop('Please provide an argument for varY')
   }
+  ## NSE setup
+  varXN <- rlang::quo_name(rlang::enquo(varX))
+  varYN <- rlang::quo_name(rlang::enquo(varY))
 
+  ## Check for invalid spatial data, which will error in the sf function
+  if(anyNA(.data[,varXN])){stop('Please use the csb_missing with filter = TRUE to remove invalid spatial data before using this function.')}
 
-  # I have determined that NSE likely is not supported by the SF package. So I will return an error
-  # message for unquoted input (At least for now)
-  # save parameters to list
-  paramList <- as.list(match.call())
+  # based on testing, I believe the CSB data to include US Survey feets coordinates by default
+  # Which is EPSG = 102696
 
-  if(!is.character(paramList$varX)){stop("Please provide a quoted argument for varX")}
-  if(!is.character(paramList$varY)){stop("Please provide a quoted argument for varY")}
+  st_as_sf(.data, coords = c(x = varXN, y = varYN), crs = 102696) -> sfobj
 
-  print(.data[[varX]])
-# based on testing, I believe the CSB data to include US Survey feets coordinates by default
-# Which is EPSG = 102696
-
-  if(is.na(.data[[varX]])){stop('Please use the csb_missing with filter = TRUE to remove invalid spatial data before using this function.')}
-  st_as_sf(.data, coords = c(x = varX, y = varY), crs = 102696) -> sfobj
-
-# Reproject
+ # Reproject
 
  if(!is.null(crs)){st_transform(sfobj, crs = crs) -> sfobj}
 
- # if (is.true(replace)){mutate(varX =)
- # mutate
+ # return the sf object
 
   return(sfobj)
 }
