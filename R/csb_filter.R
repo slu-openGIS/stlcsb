@@ -18,6 +18,8 @@
 #' @export
 csb_filter <- function(.data, var, newVar, category = c("admin","animal","construction","debris","degrade","disturbance","event","health","landscape","law","maintenance","nature","road","sewer","traffic","vacant","waste")){
 
+  # FUNCTION DOES NOT CURRENTLY WORK. IN PROGRESS
+
   ### Check input and Non-Standard evaluation
   ## check for missing parameters
   if (missing(.data)) {
@@ -26,10 +28,9 @@ csb_filter <- function(.data, var, newVar, category = c("admin","animal","constr
   if (missing(var)) {
     stop('Please provide an argument for var')
   }
-  if (missing(newVar)) {
-    stop('Please provide an argument for newVar')
-  }
-  # FUNCTION DOES NOT CURRENTLY WORK. IN PROGRESS
+  if (missing(newVar)){
+    message("No argument set for `newVar` If you would like to append a category variable, please set an argument for `newVar`")
+
 
   ### NSE SETUP
   paramList <- as.list(match.call())
@@ -50,7 +51,6 @@ csb_filter <- function(.data, var, newVar, category = c("admin","animal","constr
   load("data/vacant.rda")
 
 
-if (newVarN == ""){message("No argument set for `newVar` If you would like to append a category variable, please set an argument for `newVar`")
 .data %>%
   filter()
 
