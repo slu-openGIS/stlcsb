@@ -13,7 +13,7 @@ csb_missing(.data, varX, varY, newVar, filter = FALSE)
 
 \item{varY}{name of column containing  SRY data}
 
-\item{newVar}{if named, produces a new column with a logical indicator of incomplete spatial data (For x OR y)}
+\item{newVar}{if named, produces a new column with a logical indicator of incomplete spatial data}
 
 \item{filter}{if true, returns a filtered version of the data with only observations with complete spatial data}
 }
