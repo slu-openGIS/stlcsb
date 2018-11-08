@@ -19,6 +19,8 @@
 #' @export
 csb_missing <- function(.data, varX, varY, newVar, filter = FALSE){
 
+  ## FIX 8 EDGE CASES AND DONE
+
   ### Check input and Non-Standard evaluation
   ## check for missing parameters
   if (missing(.data)) {
@@ -62,12 +64,11 @@ csb_missing <- function(.data, varX, varY, newVar, filter = FALSE){
   if(newVarN != ""){.data %>%
       dplyr::mutate(!!newVarN := case_when(
         nchar(!!varXN) >= 6 ~ FALSE,
-        nchar(!!varYN) >= 6 ~ FALSE)) %>%
-      dplyr::mutate(!!newVarN := case_when(
+        nchar(!!varYN) >= 6 ~ FALSE,
         nchar(!!varXN) < 6 ~ TRUE,
         nchar(!!varYN) < 6 ~ TRUE
       )) -> out
-    ## this method is kind of slow, but I believe it to be most accurate. We also make the assumption <6 chars is invalid (8 edge cases to solve).
+    ## this method is kind of slow, but I believe it to be most accurate. We also make the assumption <6 chars is invalid. (8 Edge cases)
 
   }
 
