@@ -13,17 +13,25 @@
 #'
 #' @return \code{csb_date_parse}returns new columns with specified names containing parsed date information
 #'
-#' @importFrom dplyr mutate %>%
+#' @importFrom dplyr mutate
 #' @importFrom lubridate day month year
 #' @importFrom rlang quo enquo sym .data
+#' @importFrom magrittr %>%
 #'
 #' @export
 csb_date_parse <- function(.data, var, day, month, year, delete = FALSE){
 
-
-  ### WHY DOES THIS NOT RETURN AN ERROR FOR UNAMED ARGUMENTS?
-  # Had to set nulls in the date_filter...
-
+  ### Check input and Non-Standard evaluation
+  ## check for missing parameters
+  if (missing(.data)) {
+    stop('Please provide an argument for .data')
+  }
+  if (missing(var)) {
+    stop('Please provide an argument for var')
+  }
+  if(missing(day)&&missing(month)&&missing(year)){
+    stop('Please provide an argument for day AND/OR month AND/OR year')
+  }
   ### NSE Setup
   # save parameters to list
   paramList <- as.list(match.call())
