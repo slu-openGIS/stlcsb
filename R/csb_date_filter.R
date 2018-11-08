@@ -13,16 +13,27 @@
 #'
 #' @return \code{csb_date_filter}returns a filtered version of the input data based on specified arguments
 #'
-#' @importFrom dplyr mutate filter %>%
+#' @importFrom dplyr mutate filter
 #' @importFrom lubridate day month year
 #' @importFrom rlang quo enquo sym .data
+#' @importFrom magrittr %>%
 #'
 #' @export
 csb_date_filter <- function(.data, var, day = NULL, month = NULL, year = NULL, delete = FALSE){
 
+  ### Check input and Non-Standard evaluation
+  ## check for missing parameters
+  if (missing(.data)) {
+    stop('Please provide an argument for .data')
+  }
+  if (missing(var)) {
+    stop('Please provide an argument for var')
+  }
+
   ## Considering making the filter a %in% function, but this will break current implementation of NSE.
   # need to resolve mehtods for iterating quosure over a list of elements.
 
+  ## Non Standard Evaluation AND ERROR CHECKING
   ### NSE Setup
   # save parameters to list
   paramList <- as.list(match.call())
@@ -85,29 +96,26 @@ csb_date_filter <- function(.data, var, day = NULL, month = NULL, year = NULL, d
   ## Somewhere Here will be the conversion function from character to numeric arugments. and from numeric
   ## arguments to lubridate accepted arguments
 
-  ## Check that at least one argument is specified (This may need to be changed/removed later)
-  if(!is.numeric(day)&&!is.numeric(month)&&!is.numeric(year)){
-    stop("At least one argument must be specified for day, month or year.")
-  }
 
   ##Filter is conducted in the most efficient order for large data
   # filter for year
   if(is.numeric(year)){.data %>%
-      filter(lubridate::year(!!varN) == year) -> .data
+      filter(lubridate::year(!!varN) %in% year) -> .data
   }
   # filter for month
   if(is.numeric(month)){.data %>%
-      filter(lubridate::month(!!varN) == month) -> .data
+      filter(lubridate::month(!!varN) %in% month) -> .data
   }
   # filter for day
   if(is.numeric(day)){.data %>%
-      filter(lubridate::day(!!varN) == day) -> .data
+      filter(lubridate::day(!!varN) %in% day) -> .data
   }
 
   ## Delete the original var
   if (delete == TRUE){
-    select(.data, -!!varN) -> .data
+    dplyr::select(.data, -!!varN) -> .data
   }
 
+  # return processed data
   return(.data)
 }
