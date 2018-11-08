@@ -10,17 +10,26 @@
 #' @param replace If true, the original spatial data columns will be dropped
 #' @param crs coordinate reference system for the data to be projected into
 #'
-#' @return \code{csb_geo} returns a `latitude` and `longitude` column with properly formatted spatial data in an SF format
+#' @return \code{csb_geo} returns a sf object of the input data, specifying a new crs will reproject the data.
 #'
-#' @importFrom dplyr mutate
 #' @importFrom sf st_as_sf st_transform
 #' @importFrom rlang quo enquo sym :=
 #'
 #' @export
-csb_geo <- function(.data, varX, varY, replace = TRUE, crs = NULL){
+csb_geo <- function(.data, varX, varY, crs = NULL){
 
-  ## Still need to write bit for replace function. CRS reprojects based on specified crs
-  # Clean dependencies
+  ### Check input and Non-Standard evaluation
+  ## check for missing parameters of required arguments
+  if (missing(.data)) {
+    stop('Please provide an argument for .data')
+  }
+  if (missing(varX)) {
+    stop('Please provide an argument for varX')
+  }
+  if (missing(varY)) {
+    stop('Please provide an argument for varY')
+  }
+
 
   # I have determined that NSE likely is not supported by the SF package. So I will return an error
   # message for unquoted input (At least for now)
@@ -30,10 +39,11 @@ csb_geo <- function(.data, varX, varY, replace = TRUE, crs = NULL){
   if(!is.character(paramList$varX)){stop("Please provide a quoted argument for varX")}
   if(!is.character(paramList$varY)){stop("Please provide a quoted argument for varY")}
 
-
+  print(.data[[varX]])
 # based on testing, I believe the CSB data to include US Survey feets coordinates by default
 # Which is EPSG = 102696
 
+  if(is.na(.data[[varX]])){stop('Please use the csb_missing with filter = TRUE to remove invalid spatial data before using this function.')}
   st_as_sf(.data, coords = c(x = varX, y = varY), crs = 102696) -> sfobj
 
 # Reproject

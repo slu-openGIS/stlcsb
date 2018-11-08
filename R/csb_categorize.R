@@ -13,11 +13,22 @@
 #'
 #' @importFrom dplyr %>% case_when mutate
 #' @importFrom rlang quo enquo sym .data
+#' @importFrom magrittr %>%
 #'
 #' @export
 csb_categorize <- function(.data, var, newVar){
-
-  # then save parameters to list
+### Check input and Non-Standard evaluation
+  ## check for missing parameters
+  if (missing(.data)) {
+    stop('Please provide an argument for .data')
+  }
+  if (missing(var)) {
+    stop('Please provide an argument for var')
+  }
+  if (missing(newVar)) {
+    stop('Please provide an argument for newVar')
+  }
+  # save parameters to list for quoting
   paramList <- as.list(match.call())
 
   # and quote input variables

@@ -13,10 +13,22 @@
 #'
 #' @importFrom dplyr filter
 #' @importFrom rlang quo enquo sym :=
+#' @importFrom magrittr %>%
 #'
 #' @export
 csb_filter <- function(.data, var, newVar, category = c("admin","animal","construction","debris","degrade","disturbance","event","health","landscape","law","maintenance","nature","road","sewer","traffic","vacant","waste")){
 
+  ### Check input and Non-Standard evaluation
+  ## check for missing parameters
+  if (missing(.data)) {
+    stop('Please provide an argument for .data')
+  }
+  if (missing(var)) {
+    stop('Please provide an argument for var')
+  }
+  if (missing(newVar)) {
+    stop('Please provide an argument for newVar')
+  }
   # FUNCTION DOES NOT CURRENTLY WORK. IN PROGRESS
 
   ### NSE SETUP
