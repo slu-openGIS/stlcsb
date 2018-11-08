@@ -58,7 +58,7 @@ csb_date_parse <- function(.data, var, day, month, year, delete = FALSE){
 
 ## Delete the original var
    if (delete == TRUE){
-      select(.data, -!!varN) -> .data
+      dplyr::select(.data, -!!varN) -> .data
   }
 
   return(.data)
