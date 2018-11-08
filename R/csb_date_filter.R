@@ -13,17 +13,9 @@
 #'
 #' @return \code{csb_date_filter}returns a filtered version of the input data based on specified arguments
 #'
-#' @importFrom dplyr mutate
-#' @importFrom dplyr filter
-#' @importFrom lubridate day
-#' @importFrom lubridate month
-#' @importFrom lubridate year
-#' @importFrom dplyr %>%
-#' @importFrom rlang :=
-#' @importFrom rlang quo
-#' @importFrom rlang enquo
-#' @importFrom rlang sym
-#' @importFrom rlang .data
+#' @importFrom dplyr mutate filter %>%
+#' @importFrom lubridate day month year
+#' @importFrom rlang quo enquo sym .data
 #'
 #' @export
 csb_date_filter <- function(.data, var, day = NULL, month = NULL, year = NULL, delete = FALSE){

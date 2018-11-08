@@ -13,12 +13,8 @@
 #' @return \code{csb_geo} returns a `latitude` and `longitude` column with properly formatted spatial data in an SF format
 #'
 #' @importFrom dplyr mutate
-#' @importFrom sf st_as_sf
-#' @importFrom sf st_transform
-#' @importFrom rlang :=
-#' @importFrom rlang quo
-#' @importFrom rlang enquo
-#' @importFrom rlang sym
+#' @importFrom sf st_as_sf st_transform
+#' @importFrom rlang quo enquo sym :=
 #'
 #' @export
 csb_geo <- function(.data, varX, varY, replace = TRUE, crs = NULL){

@@ -11,15 +11,8 @@
 #'
 #' @return \code{csb_categorize} returns data with an additional variable for an intelligible category for CSB requests.
 #'
-#' @importFrom dplyr %>%
-#' @importFrom dplyr case_when
-#' @importFrom dplyr mutate
-#' @importFrom here here
-#' @importFrom rlang :=
-#' @importFrom rlang quo
-#' @importFrom rlang enquo
-#' @importFrom rlang sym
-#' @importFrom rlang .data
+#' @importFrom dplyr %>% case_when mutate
+#' @importFrom rlang quo enquo sym .data
 #'
 #' @export
 csb_categorize <- function(.data, var, newVar){

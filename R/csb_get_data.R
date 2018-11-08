@@ -7,13 +7,8 @@
 #' @return \code{csb_get_data} returns a tibble with all of the CSB requests
 #'     contained in our version of the CSB's data release.
 #'
-#' @importFrom dplyr as_tibble
-#' @importFrom dplyr bind_rows
-#' @importFrom readr read_csv
-#' @importFrom readr cols
-#' @importFrom readr col_integer
-#' @importFrom readr col_character
-#' @importFrom readr col_double
+#' @importFrom dplyr as_tibble bind_rows
+#' @importFrom readr read_csv cols col_integer col_character col_double
 #'
 #' @export
 csb_get_data <- function(){

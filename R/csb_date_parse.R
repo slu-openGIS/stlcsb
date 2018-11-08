@@ -13,17 +13,9 @@
 #'
 #' @return \code{csb_date_parse}returns new columns with specified names containing parsed date information
 #'
-#' @importFrom dplyr mutate
-#' @importFrom lubridate day
-#' @importFrom lubridate month
-#' @importFrom lubridate year
-#' @importFrom magrittr %>%
-#' @importFrom rlang :=
-#' @importFrom rlang quo
-#' @importFrom rlang enquo
-#' @importFrom rlang sym
-#' @importFrom rlang .data
-#' @importFrom rlang !!
+#' @importFrom dplyr mutate %>%
+#' @importFrom lubridate day month year
+#' @importFrom rlang quo enquo sym .data
 #'
 #' @export
 csb_date_parse <- function(.data, var, day, month, year, delete = FALSE){

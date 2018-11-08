@@ -13,12 +13,8 @@
 #' @return \code{csb_missing} returns a logical vector indicating `TRUE` if an observation has incomplete spatial data, or a filtered version of the input data
 #'
 #'
-#' @importFrom dplyr mutate
-#' @importFrom dplyr filter
-#' @importFrom rlang :=
-#' @importFrom rlang quo
-#' @importFrom rlang enquo
-#' @importFrom rlang sym
+#' @importFrom dplyr mutate filter
+#' @importFrom rlang quo enquo sym :=
 #'
 #' @export
 csb_missing <- function(.data, varX, varY, newVar, filter = FALSE){

@@ -12,11 +12,7 @@
 #' @return \code{csb_filter} returns data with an additional variable for an intelligible category for CSB requests.
 #'
 #' @importFrom dplyr filter
-#' @importFrom here here
-#' @importFrom rlang :=
-#' @importFrom rlang quo
-#' @importFrom rlang enquo
-#' @importFrom rlang sym
+#' @importFrom rlang quo enquo sym :=
 #'
 #' @export
 csb_filter <- function(.data, var, newVar, category = c("admin","animal","construction","debris","degrade","disturbance","event","health","landscape","law","maintenance","nature","road","sewer","traffic","vacant","waste")){
