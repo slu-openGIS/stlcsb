@@ -22,16 +22,15 @@ csb_filter <- function(.data, var, newVar, category = c("admin","animal","constr
 
   ### Check input and Non-Standard evaluation
   ## check for missing parameters
-  if (missing(.data)) {
+  if (missing(.data)){
     stop('Please provide an argument for .data')
   }
-  if (missing(var)) {
+  if (missing(var)){
     stop('Please provide an argument for var')
   }
   if (missing(newVar)){
     message("No argument set for `newVar` If you would like to append a category variable, please set an argument for `newVar`")
-
-
+  }
   ### NSE SETUP
   paramList <- as.list(match.call())
 
@@ -43,7 +42,7 @@ csb_filter <- function(.data, var, newVar, category = c("admin","animal","constr
   }
 
   newVarN <- rlang::quo_name(rlang::enquo(newVar))
-  # this function will contain the vacant category for filtering
+
   # be able to filter for multiple categories
   # load the categories used for comparison
 
@@ -51,40 +50,28 @@ csb_filter <- function(.data, var, newVar, category = c("admin","animal","constr
   load("data/vacant.rda")
 
 
-.data %>%
-  filter()
+  if((length(category)) > 1){
+    categoryVector <- c()
+    for(i in category){categoryVector <- append(categoryVector, i)
+    }
+    print(categoryVector)
+  }
 
-if ("vacant" %in% args){message("specifying vacant will supersede ")}
+.data %>%
+  filter(!!varN %in% categoryVector) -> .data
+
+if ("vacant" %in% categoryVector){message("specifying vacant will supersede ")}
 #if(length(category) >1){ USE METHODS FOR ITERATIION
 ## error checking for length > 1 for var, and newVar NULL
 # if(length(!!varN)>1&&newVar == ""){message("You specified multiple categories but did not create a new variable, these data will be ambiguous")}
 
-}
-else if(newVarN != ""){
-  .data %>%     ### It is going to be super innefficient to label and then filter
-  mutate(!!newVarN := case_when(
-    #  #  !!varN %in% admin ~ "Admin",
-    #  #  !!varN %in% animal ~ "Animal",
-    #  #  !!varN %in% construction ~ "Construction",
-    #  !!varN %in% debris ~ "Debris",
-    #  !!varN %in% degrade ~ "Degrade",
-    #  !!varN %in% disturbance ~ "Disturbance",
-    #  !!varN %in% event ~ "Event",
-    #  !!varN %in% health ~ "Health",
-    #  !!varN %in% landscape ~ "Landscape",
-    #  !!varN %in% law ~ "Law",
-    #  !!varN %in% maintenance ~ "Maintenance",
-    #  !!varN %in% nature ~ "Nature",
-    #  !!varN %in% road ~ "Road",
-    #  !!varN %in% sewer ~ "Sewer",
-    #  !!varN %in% traffic ~ "Traffic",
-    #  !!varN %in% waste ~ "Waste"
-    #  !!varN %in% vacant ~ "Vacant"### What to do with vacant categories??
-  )
-  )
-  }
 
-}
+#if(newVarN != ""){
+ # .data %>%     ### It is going to be super innefficient to label and then filter
+
+    ## Run csb_categorize
+    ## run mutate for vacacnt (superseding categories as is)
+
 
 
 ## Example input
@@ -98,3 +85,5 @@ else if(newVarN != ""){
 #
 ## NewVar is false, but if true creates an appropriate category label
 #
+
+}
