@@ -30,7 +30,7 @@ csb_date_parse <- function(.data, var, day, month, year, delete = FALSE){
     stop('Please provide an argument for var')
   }
   if(missing(day)&&missing(month)&&missing(year)){
-    stop('Please provide an argument for day AND/OR month AND/OR year')
+    stop('Please provide an least one argument for day, month or year')
   }
   ### NSE Setup
   # save parameters to list

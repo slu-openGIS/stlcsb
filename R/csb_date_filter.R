@@ -19,9 +19,8 @@
 #' @importFrom magrittr %>%
 #'
 #' @export
-csb_date_filter <- function(.data, var, day = NULL, month = NULL, year = NULL, delete = FALSE){
+csb_date_filter <- function(.data, var, day, month, year, delete = FALSE){
 
-  ### Check input and Non-Standard evaluation
   ## check for missing parameters
   if (missing(.data)) {
     stop('Please provide an argument for .data')
@@ -29,9 +28,13 @@ csb_date_filter <- function(.data, var, day = NULL, month = NULL, year = NULL, d
   if (missing(var)) {
     stop('Please provide an argument for var')
   }
+  if(missing(day)&&missing(month)&&missing(year)){
+    stop('Please provide an least one argument for day, month or year')
+  }
 
   ## Considering making the filter a %in% function, but this will break current implementation of NSE.
   # need to resolve mehtods for iterating quosure over a list of elements.
+  # month is the only possible text entry
 
   ## Non Standard Evaluation AND ERROR CHECKING
   ### NSE Setup
@@ -60,8 +63,8 @@ csb_date_filter <- function(.data, var, day = NULL, month = NULL, year = NULL, d
   #if(length(year) >1: for(i in year) year <- append(year, 2000 + year)
 
   #check that year entry is valid for csb data, warn for entry of 2008.
-  if(!is.null(year)&&!(year %in% c(2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018))){stop("The year variable is an invalid argument")}
-  if(!is.null(year)&&year == 2008){message("2008 only contains traffic requests")} #this only works if 2008 is the first number in the vector, which I assume it will always be
+  if(!missing(year)&&!(year %in% c(2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018))){stop("The year variable is an invalid argument")}
+  if(!missing(year)&&year == 2008){message("2008 only contains traffic requests")} #this only works if 2008 is the first number in the vector, which I assume it will always be
 
 
   ## correction and checking for month
@@ -96,19 +99,19 @@ csb_date_filter <- function(.data, var, day = NULL, month = NULL, year = NULL, d
   ## Somewhere Here will be the conversion function from character to numeric arugments. and from numeric
   ## arguments to lubridate accepted arguments
 
-
+#-----------------------------------------------------------------------------------------------------------------------------
   ##Filter is conducted in the most efficient order for large data
   # filter for year
   if(is.numeric(year)){.data %>%
-      filter(lubridate::year(!!varN) %in% year) -> .data
+      dplyr::filter(lubridate::year(!!varN) %in% year) -> .data
   }
   # filter for month
   if(is.numeric(month)){.data %>%
-      filter(lubridate::month(!!varN) %in% month) -> .data
+      dplyr::filter(lubridate::month(!!varN) %in% month) -> .data
   }
   # filter for day
   if(is.numeric(day)){.data %>%
-      filter(lubridate::day(!!varN) %in% day) -> .data
+      dplyr::filter(lubridate::day(!!varN) %in% day) -> .data
   }
 
   ## Delete the original var
