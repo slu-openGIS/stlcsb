@@ -50,20 +50,11 @@ csb_filter <- function(.data, var, newVar, category = c(admin,animal,constructio
 
   #-------------------------------------------------------------------------------------------------------------
 
-  ## Checking for valid input of category argument
-  if(is.character(paramList$category)){}
-  print(length(paramList$category))
-  print(enquos(category))
-  enquos(category) -> testCat
- # print(head(eval(paramList$category))) # i will need this for checking that arguments are unquoted and that the arguments specified are in
-
 
   # initialize a list of valid category arguments
   validCategory = c(admin,animal,construction,debris,degrade,disturbance,event,health,landscape,law,maintenance,nature,road,sewer,traffic,vacant,waste)
   if(!all(category %in% validCategory)){stop("Category contains an invalid argument, please see `?csb_filter` for help")}
-#  if(all(eval(paramList$category) %in% validCategory))
 
-  #{stop("Category contains an invalid argument, please see `?csb_filter` for help")}
 
   #user inputs: c("admin","vacant","debris")
   # or c(admin, vacant, debris)
@@ -120,14 +111,16 @@ csb_filter <- function(.data, var, newVar, category = c(admin,animal,constructio
 ## categorize data
 if(!missing(newVar)){
   csb_categorize(.data, !!varN, !!newVarN) -> .data
-}
 
-if(all(vacant %in% category)){message("specifying vacant will supersede the original category")
-  .data %>% dplyr::mutate(!!newVarN := ifelse(!!varN %in% vacant,"Vacant", .data[[newVar]])) -> .data
+  if(all(vacant %in% category)){message("specifying vacant will supersede the original category")
+    .data %>% dplyr::mutate(!!newVarN := ifelse(!!varN %in% vacant,"Vacant", .data[[newVarN]])) -> .data
+  }
 }
-  # with current methods, vacant could provide an error, in the case that everything is specified which contains problemcodes for vacant...
+  # with current methods, vacant could provide an error, in the case that everything is specified which contains problemcodes for vacant, but vacant is not explicitly stated...
   # possible to isolate..
-
+  # so I tried this and you dont get an error, becasue the length of the vector is not continuous...
+  # yes!
+if(all(c(debris, degrade, landscape, sewer) %in% category)){message("You will get a vacant error")}
 # return the final data
 return(.data)
 }
