@@ -15,11 +15,12 @@
 #' @importFrom rlang quo enquo sym :=
 #' @importFrom magrittr %>%
 #'
+#'
 #' @export
-csb_filter <- function(.data, var, newVar, category = c("admin","animal","construction","debris","degrade","disturbance","event","health","landscape","law","maintenance","nature","road","sewer","traffic","vacant","waste")){
+csb_filter <- function(.data, var, newVar, category = c(admin,animal,construction,debris,degrade,disturbance,event,health,landscape,law,maintenance,nature,road,sewer,traffic,vacant,waste)){
 
   # FUNCTION DOES NOT CURRENTLY WORK. IN PROGRESS
-
+  #-------------------------------------------------------------------------------------------------------------
   ### Check input and Non-Standard evaluation
   ## check for missing parameters
   if (missing(.data)){
@@ -30,6 +31,9 @@ csb_filter <- function(.data, var, newVar, category = c("admin","animal","constr
   }
   if (missing(newVar)){
     message("No argument set for `newVar` If you would like to append a category variable, please set an argument for `newVar`")
+  }
+  if (missing(category)){
+    stop('Please provide an argument for category')
   }
   ### NSE SETUP
   paramList <- as.list(match.call())
@@ -43,7 +47,37 @@ csb_filter <- function(.data, var, newVar, category = c("admin","animal","constr
 
   newVarN <- rlang::quo_name(rlang::enquo(newVar))
 
-  # be able to filter for multiple categories
+
+  #-------------------------------------------------------------------------------------------------------------
+
+  ## Checking for valid input of category argument
+  if(is.character(paramList$category)){}
+  print(length(paramList$category))
+  print(enquos(category))
+  enquos(category) -> testCat
+ # print(head(eval(paramList$category))) # i will need this for checking that arguments are unquoted and that the arguments specified are in
+
+
+  # initialize a list of valid category arguments
+  validCategory = c(admin,animal,construction,debris,degrade,disturbance,event,health,landscape,law,maintenance,nature,road,sewer,traffic,vacant,waste)
+  if(!all(category %in% validCategory)){stop("Category contains an invalid argument, please see `?csb_filter` for help")}
+#  if(all(eval(paramList$category) %in% validCategory))
+
+  #{stop("Category contains an invalid argument, please see `?csb_filter` for help")}
+
+  #user inputs: c("admin","vacant","debris")
+  # or c(admin, vacant, debris)
+  # or admin
+  # or vacant
+
+  # check for length > 1 and if newVar is missing (ambiguous filter)
+
+  # check that all specified categoires are valid (in valid list)
+
+  # check that vacant is specified
+
+
+
   # load the categories used for comparison
 
   load("data/definitions.rda")
@@ -54,23 +88,20 @@ csb_filter <- function(.data, var, newVar, category = c("admin","animal","constr
     categoryVector <- c()
     for(i in category){categoryVector <- append(categoryVector, i)
     }
-    print(categoryVector)
+    ###print(categoryVector)
   }
-
+  #-------------------------------------------------------------------------------------------------------------
+  # Filter function
 .data %>%
   filter(!!varN %in% categoryVector) -> .data
 
-if ("vacant" %in% categoryVector){message("specifying vacant will supersede ")}
-#if(length(category) >1){ USE METHODS FOR ITERATIION
+
+# if (vacant %in% categoryVector){}
+
 ## error checking for length > 1 for var, and newVar NULL
 # if(length(!!varN)>1&&newVar == ""){message("You specified multiple categories but did not create a new variable, these data will be ambiguous")}
 
 
-#if(newVarN != ""){
- # .data %>%     ### It is going to be super innefficient to label and then filter
-
-    ## Run csb_categorize
-    ## run mutate for vacacnt (superseding categories as is)
 
 
 
@@ -83,7 +114,20 @@ if ("vacant" %in% categoryVector){message("specifying vacant will supersede ")}
 #
 # Need a Data output for the defined categories. Vacancy included.
 #
-## NewVar is false, but if true creates an appropriate category label
-#
+#-------------------------------------------------------------------------------------------------------------
+  # categorizing
 
+## categorize data
+if(!missing(newVar)){
+  csb_categorize(.data, !!varN, !!newVarN) -> .data
+}
+
+if(all(vacant %in% category)){message("specifying vacant will supersede the original category")
+  .data %>% dplyr::mutate(!!newVarN := ifelse(!!varN %in% vacant,"Vacant", .data[[newVar]])) -> .data
+}
+  # with current methods, vacant could provide an error, in the case that everything is specified which contains problemcodes for vacant...
+  # possible to isolate..
+
+# return the final data
+return(.data)
 }
