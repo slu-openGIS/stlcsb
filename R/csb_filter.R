@@ -7,8 +7,7 @@
 #' @param .data A tibble with raw CSB data
 #' @param var where the original problem code is located in the data
 #' @param newVar name of column containing categories. NULL by default, but if specified will produce a new column.
-#' @param category name(s) of the category(s) for the function to return. A list of these categories can be found in the documentation
-
+#' @param category a vector with the unquoted name(s) of the category(s) for the function to return. You can also explicitly state quoted PROBLEMCODEs. Valid categories are: (admin, animal, construction, debris, degrade, disturbance, event, health, landscape, law, maintenance, nature, road, sewer, traffic, vacant, waste)
 #' @return \code{csb_filter} returns data with an additional variable for an intelligible category for CSB requests.
 #'
 #' @importFrom dplyr filter
@@ -16,10 +15,10 @@
 #' @importFrom magrittr %>%
 #'
 #'
+#'
 #' @export
 csb_filter <- function(.data, var, newVar, category = c(admin,animal,construction,debris,degrade,disturbance,event,health,landscape,law,maintenance,nature,road,sewer,traffic,vacant,waste)){
 
-  # FUNCTION DOES NOT CURRENTLY WORK. IN PROGRESS
   #-------------------------------------------------------------------------------------------------------------
   ### Check input and Non-Standard evaluation
   ## check for missing parameters
@@ -53,58 +52,29 @@ csb_filter <- function(.data, var, newVar, category = c(admin,animal,constructio
 
   # initialize a list of valid category arguments
   validCategory = c(admin,animal,construction,debris,degrade,disturbance,event,health,landscape,law,maintenance,nature,road,sewer,traffic,vacant,waste)
+  # to check if category input is valid
   if(!all(category %in% validCategory)){stop("Category contains an invalid argument, please see `?csb_filter` for help")}
 
+  #argument must take unquoted and valid arguments... (Also works with quoted problemcodes)
+  # check for length > 1 (Hard to do with concatenated values) and if newVar is missing (ambiguous filter)
 
-  #user inputs: c("admin","vacant","debris")
-  # or c(admin, vacant, debris)
-  # or admin
-  # or vacant
-
-  # check for length > 1 and if newVar is missing (ambiguous filter)
-
-  # check that all specified categoires are valid (in valid list)
-
-  # check that vacant is specified
-
-
-
-  # load the categories used for comparison
+  # load the categories used for comparison (Do i need to do this within the function? I think they are already in func environment)
 
   load("data/definitions.rda")
   load("data/vacant.rda")
 
 
-  if((length(category)) > 1){
-    categoryVector <- c()
-    for(i in category){categoryVector <- append(categoryVector, i)
-    }
-    ###print(categoryVector)
-  }
   #-------------------------------------------------------------------------------------------------------------
   # Filter function
 .data %>%
-  filter(!!varN %in% categoryVector) -> .data
+  filter(!!varN %in% category) -> .data
 
-
-# if (vacant %in% categoryVector){}
 
 ## error checking for length > 1 for var, and newVar NULL
 # if(length(!!varN)>1&&newVar == ""){message("You specified multiple categories but did not create a new variable, these data will be ambiguous")}
+# error checking for invalid category object inputs
 
 
-
-
-
-## Example input
-# csb_filter(data, c("Degrade", "Waste")) BE Able to use for multiple codes..
-# ## Note, all lower case category names!?
-# Mutate AND filter
-# need to return a data frame for category names
-#
-#
-# Need a Data output for the defined categories. Vacancy included.
-#
 #-------------------------------------------------------------------------------------------------------------
   # categorizing
 
@@ -116,11 +86,7 @@ if(!missing(newVar)){
     .data %>% dplyr::mutate(!!newVarN := ifelse(!!varN %in% vacant,"Vacant", .data[[newVarN]])) -> .data
   }
 }
-  # with current methods, vacant could provide an error, in the case that everything is specified which contains problemcodes for vacant, but vacant is not explicitly stated...
-  # possible to isolate..
-  # so I tried this and you dont get an error, becasue the length of the vector is not continuous...
-  # yes!
-if(all(c(debris, degrade, landscape, sewer) %in% category)){message("You will get a vacant error")}
+
 # return the final data
 return(.data)
 }
