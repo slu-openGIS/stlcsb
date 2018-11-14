@@ -39,7 +39,7 @@ beyond that.
 data <- csb_get_data()
 ```
 
-The download is quite large - it currently includes *n* = 1,167,394
+The download is quite large - it currently includes *n* = 1,175,265
 observations - so it will take a short bit of time depending on your
 internet connection.
 
