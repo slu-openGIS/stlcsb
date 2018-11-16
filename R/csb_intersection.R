@@ -55,6 +55,8 @@ csb_intersection <- function(.data, var, newVar, filter = FALSE, remove = FALSE)
   dplyr::select_(.data, rlang::quo_name(varN)) -> matchV # select column explicitly
   unlist(matchV) -> matchV # coerce to vector
 
+  # we can remove the select dependency with this syntax, same as geo function --> .data[,quo_name(varN)]
+
   #append logical
   if(!missing(newVar)){dplyr::mutate(.data, !!newVarN :=
     stringr::str_detect(matchV, "@|&" )) -> .data
