@@ -11,7 +11,7 @@ csb_date_filter(.data, var, day, month, year, delete = FALSE)
 
 \item{var}{name of column containing date data}
 
-\item{day}{numeric representation of day(s) to include (leading zero or not will be accepted)}
+\item{day}{numeric representation of day(s) to include.}
 
 \item{month}{numeric/character representation of month(s) to include}
 

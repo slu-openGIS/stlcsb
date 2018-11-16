@@ -1,6 +1,6 @@
 #' Clean CSB geo to SF object
 #'
-#' @description \code{csb_geo} converts SRX and SRY data into a simple features object.
+#' @description \code{csb_geo} converts SRX and SRY data into a simple features object. You can write a shapefile directly from the output of this function using sf::st_write
 #'
 #' @usage csb_geo(.data, varX, varY, replace, crs)
 #'

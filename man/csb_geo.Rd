@@ -21,5 +21,5 @@ csb_geo(.data, varX, varY, replace, crs)
 \code{csb_geo} returns a sf object of the input data, specifying a new crs will reproject the data.
 }
 \description{
-\code{csb_geo} converts SRX and SRY data into a simple features object.
+\code{csb_geo} converts SRX and SRY data into a simple features object. You can write a shapefile directly from the output of this function using sf::st_write
 }
