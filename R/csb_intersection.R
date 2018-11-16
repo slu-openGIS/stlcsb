@@ -1,6 +1,6 @@
 #' CSB intersections
 #'
-#' @description \code{csb_intersection}returns a logical vector with TRUE for addresses that are intersections
+#' @description \code{csb_intersection}returns a logical vector with TRUE for addresses that are intersections, or filters or drops these observations
 #'
 #' @usage csb_intersection(.data, var, newVar, filter = FALSE, remove = FALSE)
 #'
@@ -12,7 +12,7 @@
 #'
 #' @return \code{csb_intersection}returns a logical vector for addresses that are intersections, or it filters intersections
 #'
-#' @importFrom dplyr mutate filter
+#' @importFrom dplyr mutate filter select_
 #' @importFrom rlang quo enquo sym .data
 #' @importFrom magrittr %>%
 #' @importFrom stringr str_detect
@@ -27,11 +27,15 @@ csb_intersection <- function(.data, var, newVar, filter = FALSE, remove = FALSE)
     stop('Please provide an argument for var')
   }
   if (missing(newVar)){
-    stop('Please provide an argument for newVar')
+    message('No argument specified for newVar, no logical will be appended')
   }
   #invalid arguments
   if(isTRUE(filter)&&isTRUE(remove)){
     stop('Use filter to select only intersections, use remove to remove intersections from the data')
+  }
+
+  if(missing(newVar)&&isFALSE(filter)&&isFALSE(remove)){
+    stop('Please specify at least one argument for newVar, filter or remove')
   }
 
   #NSE setup
@@ -43,22 +47,32 @@ csb_intersection <- function(.data, var, newVar, filter = FALSE, remove = FALSE)
   else if (is.character(paramList$var)) {
     varN <- rlang::quo(!! rlang::sym(var))
   }
-  newVarN <- rlang::quo_name(rlang::enquo(newVar))
 
-  #Detect intersection based on @ character
-  #
-  csb %>% filter(str_detect(csb[["PROBADDRESS"]], "&")|str_detect(csb[["PROBADDRESS"]], "@")|str_detect(csb[["PROBADDRESS"]], "[:blank:]at[:blank:]")) -> at
-  #
-  mutate(.data, !!newVarN :=
-    stringr::str_detect(.data[[varN]], "@" )) -> .data
+  if(!missing(newVar)){newVarN <- rlang::quo_name(rlang::enquo(newVar))}
+
+  #Detect intersection based on @ and & characters, this is our best methodoloy now, may update with [:blank:]at[:blank:]
+
+  dplyr::select_(.data, rlang::quo_name(varN)) -> matchV # select column explicitly
+  unlist(matchV) -> matchV # coerce to vector
+
+  #append logical
+  if(!missing(newVar)){dplyr::mutate(.data, !!newVarN :=
+    stringr::str_detect(matchV, "@|&" )) -> .data
+  }
 
   #filter for only intersections
   if(isTRUE(filter)){
-    .data %>% filter(stringr::str_detect(.data[[varN]], "@" )) -> .data
+    before <- nrow(.data) # counting
+    .data %>% filter(stringr::str_detect(matchV, "@|&" )) -> .data
+    after <- nrow(.data) # counting
+    message(paste0(before-after, " observations were filtered out"))
   }
   #filter out intersections
   if(isTRUE(remove)){
-    .data %>% filter(!stringr::str_detect(.data[[varN]], "@" )) -> .data
+    before <- nrow(.data) # counting
+    .data %>% filter(!stringr::str_detect(matchV, "@|&" )) -> .data
+    after <- nrow(.data) # counting
+    message(paste0(before-after, " observations were removed"))
   }
   #Return the data
   return(.data)

@@ -21,5 +21,5 @@ csb_intersection(.data, var, newVar, filter = FALSE, remove = FALSE)
 \code{csb_intersection}returns a logical vector for addresses that are intersections, or it filters intersections
 }
 \description{
-\code{csb_intersection}returns a logical vector with TRUE for addresses that are intersections
+\code{csb_intersection}returns a logical vector with TRUE for addresses that are intersections, or filters or drops these observations
 }
