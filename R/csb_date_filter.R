@@ -28,13 +28,9 @@ csb_date_filter <- function(.data, var, day = NULL, month = NULL, year = NULL, d
   if (missing(var)) {
     stop('Please provide an argument for var')
   }
-  if(missing(day)&&missing(month)&&missing(year)){
+  if (missing(day)&&missing(month)&&missing(year)){
     stop('Please provide at least one argument for day, month or year')
   }
-
-  ## Considering making the filter a %in% function, but this will break current implementation of NSE.
-  # need to resolve mehtods for iterating quosure over a list of elements.
-  # month is the only possible text entry
 
   ## Non Standard Evaluation AND ERROR CHECKING
   ### NSE Setup
@@ -55,15 +51,10 @@ csb_date_filter <- function(.data, var, day = NULL, month = NULL, year = NULL, d
   else if (is.character(paramList$month)) {
     monthN <- rlang::quo(!! rlang::sym(month))
   }
-  # need to add function for entries of greater than length 1
-  # for now we will return an error
-
-  #if(length(paramList$month) > 1){stop("This function does not yet support arguments greater than length 1")}
 
   ## Correction and checking for year
   # correct too short of a year entry
   if(is.numeric(year)&&nchar(year) < 4){year <- 2000 + year}
- # if(length(paramList$year) > 1)){lapply(paramList$year, if(nchar(paramList$year) < 4){paramList$year <- 2000 + year})}
 
   #check that year entry is valid for csb data, warn for entry of 2008.
   if(!missing(year)&&!(year %in% c(2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018))){stop("The year variable is an invalid argument")}
@@ -88,22 +79,20 @@ csb_date_filter <- function(.data, var, day = NULL, month = NULL, year = NULL, d
 if(is.character(month)){
   monthF <- c()
   for(i in month){
-    if(month %in% jan){monthF <- append(monthF, 1)}
-    else if(month %in% feb){monthF <- append(monthF, 2)}
-    else if(month %in% mar){monthF <- append(monthF, 3)}
-    else if(month %in% apr){monthF <- append(monthF, 4)}
-    else if(month %in% may){monthF <- append(monthF, 5)}
-    else if(month %in% jun){monthF <- append(monthF, 6)}
-    else if(month %in% jul){monthF <- append(monthF, 7)}
-    else if(month %in% aug){monthF <- append(monthF, 8)}
-    else if(month %in% sep){monthF <- append(monthF, 9)}
-    else if(month %in% oct){monthF <- append(monthF, 10)}
-    else if(month %in% nov){monthF <- append(monthF, 11)}
-    else if(month %in% dec){monthF <- append(monthF, 12)}
+    if(i %in% jan){monthF <- append(monthF, 1)}
+    else if(i %in% feb){monthF <- append(monthF, 2)}
+    else if(i %in% mar){monthF <- append(monthF, 3)}
+    else if(i %in% apr){monthF <- append(monthF, 4)}
+    else if(i %in% may){monthF <- append(monthF, 5)}
+    else if(i %in% jun){monthF <- append(monthF, 6)}
+    else if(i %in% jul){monthF <- append(monthF, 7)}
+    else if(i %in% aug){monthF <- append(monthF, 8)}
+    else if(i %in% sep){monthF <- append(monthF, 9)}
+    else if(i %in% oct){monthF <- append(monthF, 10)}
+    else if(i %in% nov){monthF <- append(monthF, 11)}
+    else if(i %in% dec){monthF <- append(monthF, 12)}
   }
 }
-  ## Somewhere Here will be the conversion function from character to numeric arugments. and from numeric
-  ## arguments to lubridate accepted arguments
 
 #-----------------------------------------------------------------------------------------------------------------------------
   ##Filter is conducted in the most efficient order for large data
@@ -113,7 +102,7 @@ if(is.character(month)){
   }
   # filter for month
   if(!missing(month)){.data %>%
-      dplyr::filter(lubridate::month(!!varN) %in% month) -> .data
+      dplyr::filter(lubridate::month(!!varN) %in% monthF) -> .data
   }
   # filter for day
   if(!missing(day)){.data %>%
