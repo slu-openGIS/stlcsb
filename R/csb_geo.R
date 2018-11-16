@@ -40,11 +40,11 @@ csb_geo <- function(.data, varX, varY, crs = NULL){
   # based on testing, I believe the CSB data to include US Survey feets coordinates by default
   # Which is EPSG = 102696
 
-  st_as_sf(.data, coords = c(x = varXN, y = varYN), crs = 102696) -> sfobj
+  sf::st_as_sf(.data, coords = c(x = varXN, y = varYN), crs = 102696) -> sfobj
 
  # Reproject
 
- if(!is.null(crs)){st_transform(sfobj, crs = crs) -> sfobj}
+ if(!is.null(crs)){sf::st_transform(sfobj, crs = crs) -> sfobj}
 
  # return the sf object
 
