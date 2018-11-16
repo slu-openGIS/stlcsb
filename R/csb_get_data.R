@@ -10,6 +10,9 @@
 #' @importFrom dplyr bind_rows
 #' @importFrom tibble as_tibble
 #' @importFrom readr read_csv cols col_integer col_character col_double
+#' @importFrom xml2 read_html xml_text
+#' @importFrom stringr str_extract
+#' @importFrom rvest html_node
 #'
 #' @export
 csb_get_data <- function(){
@@ -17,7 +20,10 @@ csb_get_data <- function(){
   ## NOTES FOR FUNCTION IMPROVEMENT
   # Supress parsing output in console
   # Investigate parsing failure, I believe it may have to do with zipcode as integer
-
+  #Function for returning date data last modified as message
+  website <- xml2::read_html("https://www.stlouis-mo.gov/data/service-requests.cfm")
+  message <- rvest::html_node(website, xpath = '//*[@id="CS_CCF_627407_632762"]/ul/li[1]/span[1]')
+  messageRegex <- stringr::str_extract(xml2::xml_text(message), "\\d{1,2}/\\d{1,2}/\\d{2}")
 
   # no visible binding for global variable note
   STL_CSB_RawRequests = NULL
@@ -209,6 +215,6 @@ csb_get_data <- function(){
   STL_CSB_RawRequests <- dplyr::as_tibble(dplyr::bind_rows(y2008, y2009, y2010, y2011, y2012, y2013, y2014, y2015, y2016, y2017, y2018))
 
   return(STL_CSB_RawRequests)
-
+  message(paste0("Data Last Modified ", messageRegex))
 
 }
