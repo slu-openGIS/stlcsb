@@ -214,7 +214,7 @@ csb_get_data <- function(){
   # combine data frames
   STL_CSB_RawRequests <- dplyr::as_tibble(dplyr::bind_rows(y2008, y2009, y2010, y2011, y2012, y2013, y2014, y2015, y2016, y2017, y2018))
 
-  return(STL_CSB_RawRequests)
   message(paste0("Data Last Modified ", messageRegex))
+  return(STL_CSB_RawRequests)
 
 }
