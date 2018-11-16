@@ -6,14 +6,11 @@
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/stlcsb)](https://cran.r-project.org/package=stlcsb)
 
-The goal of `stlcsb` is to provide access to data from the City of
-St. Louis [Citizens’ Service
-Bureau](https://www.stlouis-mo.gov/government/departments/public-safety/neighborhood-stabilization-office/citizens-service-bureau/index.cfm)
-(CSB), which functions as a [3-1-1 like
-service](https://en.wikipedia.org/wiki/3-1-1). Residents can contact the
-number with non-emergecy service requests, and the CSB will forward
-these requests to the appropriate City agency. `stlcsb` also includes
-functions for cleaning and manipulating these data.
+The goal of `stlcsb` is to provide access to data from the City of St. Louis [Citizens’ Service Bureau](https://www.stlouis-mo.gov/government/departments/public-safety/neighborhood-stabilization-office/citizens-service-bureau/index.cfm) (CSB), the [3-1-1 service](https://en.wikipedia.org/wiki/3-1-1) for the City of Saint Louis.
+
+Residents can contact the number with non-emergency service requests, and the CSB will dispatch these requests to the appropriate City agency.
+
+`stlcsb` also includes functions for cleaning and manipulating these data.
 
 ## Installation
 
