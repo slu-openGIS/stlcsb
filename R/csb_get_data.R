@@ -17,9 +17,6 @@
 #' @export
 csb_get_data <- function(){
 
-  ## NOTES FOR FUNCTION IMPROVEMENT
-  # Supress parsing output in console
-  # Investigate parsing failure, I believe it may have to do with zipcode as integer
   #Function for returning date data last modified as message
   website <- xml2::read_html("https://www.stlouis-mo.gov/data/service-requests.cfm")
   message <- rvest::html_node(website, xpath = '//*[@id="CS_CCF_627407_632762"]/ul/li[1]/span[1]')
@@ -48,11 +45,12 @@ csb_get_data <- function(){
   utils::download.file(url, paste0(tmpdir,"csb.zip"))
   utils::unzip(paste0(tmpdir,"csb.zip"), exdir = tmpdir)
 
+
   # read in data
 
   # NOTE FOR DOCUMENTATION
   # 2008 Data is only for traffic and street requests. (From README file of download)
-  y2008 <- readr::read_csv(
+  suppressWarnings(y2008 <- readr::read_csv(
   paste0(tmpdir,path1),
   col_types = cols(
   PROBZIP = col_integer(),
@@ -65,8 +63,8 @@ csb_get_data <- function(){
   DATEINVTDONE = col_character(),
   NEIGHBORHOOD = col_integer(),
   WARD = col_integer()
-  ))
-  y2009 <- readr::read_csv(
+  )))
+  suppressWarnings(y2009 <- readr::read_csv(
   paste0(tmpdir,path2),
   col_types = cols(
   PROBZIP = col_integer(),
@@ -79,8 +77,8 @@ csb_get_data <- function(){
   DATEINVTDONE = col_character(),
   NEIGHBORHOOD = col_integer(),
   WARD = col_integer()
-  ))
-  y2010 <- readr::read_csv(
+  )))
+  suppressWarnings(y2010 <- readr::read_csv(
   paste0(tmpdir,path3),
   col_types = cols(
   PROBZIP = col_integer(),
@@ -93,8 +91,8 @@ csb_get_data <- function(){
   DATEINVTDONE = col_character(),
   NEIGHBORHOOD = col_integer(),
   WARD = col_integer()
-  ))
-  y2011 <- readr::read_csv(
+  )))
+  suppressWarnings(y2011 <- readr::read_csv(
   paste0(tmpdir,path4),
   col_types = cols(
   PROBZIP = col_integer(),
@@ -107,8 +105,8 @@ csb_get_data <- function(){
   DATEINVTDONE = col_character(),
   NEIGHBORHOOD = col_integer(),
   WARD = col_integer()
-  ))
-  y2012 <- readr::read_csv(
+  )))
+  suppressWarnings(y2012 <- readr::read_csv(
   paste0(tmpdir,path5),
   col_types = cols(
   PROBZIP = col_integer(),
@@ -121,8 +119,8 @@ csb_get_data <- function(){
   DATEINVTDONE = col_character(),
   NEIGHBORHOOD = col_integer(),
   WARD = col_integer()
-  ))
-  y2013 <- readr::read_csv(
+  )))
+  suppressWarnings(y2013 <- readr::read_csv(
   paste0(tmpdir,path6),
   col_types = cols(
   PROBZIP = col_integer(),
@@ -135,8 +133,8 @@ csb_get_data <- function(){
   DATEINVTDONE = col_character(),
   NEIGHBORHOOD = col_integer(),
   WARD = col_integer()
-  ))
-  y2014 <- readr::read_csv(
+  )))
+  suppressWarnings(y2014 <- readr::read_csv(
   paste0(tmpdir,path7),
   col_types = cols(
   PROBZIP = col_integer(),
@@ -149,8 +147,8 @@ csb_get_data <- function(){
   DATEINVTDONE = col_character(),
   NEIGHBORHOOD = col_integer(),
   WARD = col_integer()
-  ))
-  y2015 <- readr::read_csv(
+  )))
+  suppressWarnings(y2015 <- readr::read_csv(
   paste0(tmpdir,path8),
   col_types = cols(
   PROBZIP = col_integer(),
@@ -163,8 +161,8 @@ csb_get_data <- function(){
   DATEINVTDONE = col_character(),
   NEIGHBORHOOD = col_integer(),
   WARD = col_integer()
-  ))
-  y2016 <- readr::read_csv(
+  )))
+  suppressWarnings(y2016 <- readr::read_csv(
   paste0(tmpdir,path9),
   col_types = cols(
   PROBZIP = col_integer(),
@@ -177,8 +175,8 @@ csb_get_data <- function(){
   DATEINVTDONE = col_character(),
   NEIGHBORHOOD = col_integer(),
   WARD = col_integer()
-  ))
-  y2017 <- readr::read_csv(
+  )))
+  suppressWarnings(y2017 <- readr::read_csv(
   paste0(tmpdir,path10),
   col_types = cols(
   PROBZIP = col_integer(),
@@ -191,8 +189,8 @@ csb_get_data <- function(){
   DATEINVTDONE = col_character(),
   NEIGHBORHOOD = col_integer(),
   WARD = col_integer()
-  ))
-  y2018 <- readr::read_csv(
+  )))
+  suppressWarnings(y2018 <- readr::read_csv(
   paste0(tmpdir,path11),
   col_types = cols(
   PROBZIP = col_integer(),
@@ -205,7 +203,7 @@ csb_get_data <- function(){
   DATEINVTDONE = col_character(),
   NEIGHBORHOOD = col_integer(),
   WARD = col_integer()
-  ))
+  )))
 
   # remove temp directory and objects
   unlink(tmpdir)
