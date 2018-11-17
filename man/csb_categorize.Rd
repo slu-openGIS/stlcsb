@@ -9,7 +9,7 @@ csb_categorize(.data, var, newVar)
 \arguments{
 \item{.data}{A tibble with raw CSB data}
 
-\item{var}{Name of orginial variable containing problem code}
+\item{var}{Name of orginal variable containing problem code}
 
 \item{newVar}{Name of output variable to be created with category name}
 }

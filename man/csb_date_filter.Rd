@@ -11,11 +11,11 @@ csb_date_filter(.data, var, day, month, year, delete = FALSE)
 
 \item{var}{name of column containing date data}
 
-\item{day}{numeric representation of day(s) to include.}
+\item{day}{numeric vector of day(s) to include.}
 
-\item{month}{numeric/character representation of month(s) to include}
+\item{month}{numeric/character vector of month(s) to include}
 
-\item{year}{numeric representation of years(s) to include (4 digit or 2 digit accepted)}
+\item{year}{numeric vector of years(s) to include (2 or 4 digit)}
 
 \item{delete}{if true, deletes the original column containing dates}
 }

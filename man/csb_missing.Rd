@@ -11,7 +11,7 @@ csb_missing(.data, varX, varY, newVar, filter = FALSE)
 
 \item{varX}{name of column containing SRX data}
 
-\item{varY}{name of column containing  SRY data}
+\item{varY}{name of column containing SRY data}
 
 \item{newVar}{if named, produces a new column with a logical indicator of incomplete spatial data}
 

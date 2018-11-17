@@ -9,15 +9,15 @@ csb_filter(.data, var, newVar, category)
 \arguments{
 \item{.data}{A tibble with raw CSB data}
 
-\item{var}{where the original problem code is located in the data}
+\item{var}{name of the column containg original problem code data}
 
 \item{newVar}{name of column containing categories. NULL by default, but if specified will produce a new column.}
 
-\item{category}{a vector with the unquoted name(s) of the category(s) for the function to return. You can also explicitly state quoted PROBLEMCODEs. Valid categories are: (admin, animal, construction, debris, degrade, disturbance, event, health, landscape, law, maintenance, nature, road, sewer, traffic, vacant, waste)}
+\item{category}{a vector with the unquoted name(s) of the category(s) for the function to return. You can also explicitly state quoted PROBLEMCODE(s). Valid categories are: (admin, animal, construction, debris, degrade, disturbance, event, health, landscape, law, maintenance, nature, road, sewer, traffic, vacant, waste)}
 }
 \value{
 \code{csb_filter} returns data with an additional variable for an intelligible category for CSB requests.
 }
 \description{
-\code{csb_filter} retuns observations that match one of 17 predefined categories.
+\code{csb_filter} retuns observations that match any combination of 17 predefined categories.
 }
