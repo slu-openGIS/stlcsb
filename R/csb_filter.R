@@ -49,33 +49,17 @@ csb_filter <- function(.data, var, newVar, category){
 
   #-------------------------------------------------------------------------------------------------------------
 
-
   # initialize a list of valid category arguments
   validCategory = c(admin,animal,construction,debris,degrade,disturbance,event,health,landscape,law,maintenance,nature,road,sewer,traffic,vacant,waste)
   # to check if category input is valid
   if(!all(category %in% validCategory)){stop("Category contains an invalid argument, please see `?csb_filter` for help")}
-
-  #argument must take unquoted and valid arguments... (Also works with quoted problemcodes)
-  # check for length > 1 (Hard to do with concatenated values) and if newVar is missing (ambiguous filter)
-
-  # load the categories used for comparison (Do i need to do this within the function? I think they are already in func environment)
-
-  load("data/definitions.rda")
-  load("data/vacant.rda")
-
 
   #-------------------------------------------------------------------------------------------------------------
   # Filter function
 .data %>%
   filter(!!varN %in% category) -> .data
 
-
-## error checking for length > 1 for var, and newVar NULL
-# if(length(!!varN)>1&&newVar == ""){message("You specified multiple categories but did not create a new variable, these data will be ambiguous")}
-# error checking for invalid category object inputs
-
-
-#-------------------------------------------------------------------------------------------------------------
+  #-------------------------------------------------------------------------------------------------------------
   # categorizing
 
 ## categorize data
