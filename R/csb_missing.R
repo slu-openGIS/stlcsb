@@ -6,7 +6,7 @@
 #'
 #' @param .data A tibble with raw CSB data
 #' @param varX name of column containing SRX data
-#' @param varY name of column containing  SRY data
+#' @param varY name of column containing SRY data
 #' @param newVar if named, produces a new column with a logical indicator of incomplete spatial data
 #' @param filter if true, returns a filtered version of the data with only observations with complete spatial data
 #'
@@ -18,9 +18,6 @@
 #'
 #' @export
 csb_missing <- function(.data, varX, varY, newVar, filter = FALSE){
-
-  ## FIX 8 EDGE CASES AND DONE
-
   ### Check input and Non-Standard evaluation
   ## check for missing parameters
   if (missing(.data)) {
@@ -63,12 +60,12 @@ csb_missing <- function(.data, varX, varY, newVar, filter = FALSE){
   # mutate function
   if(newVarN != ""){.data %>%
       dplyr::mutate(!!newVarN := case_when(
-        nchar(!!varXN) >= 6 ~ FALSE,
-        nchar(!!varYN) >= 6 ~ FALSE,
+        is.na(!!varXN)|is.na(!!varYN) ~ TRUE,
         nchar(!!varXN) < 6 ~ TRUE,
-        nchar(!!varYN) < 6 ~ TRUE
+        nchar(!!varYN) < 6 ~ TRUE,
+        nchar(!!varXN) >= 6 ~ FALSE,
+        nchar(!!varYN) >= 6 ~ FALSE
       )) -> out
-    ## this method is kind of slow, but I believe it to be most accurate. We also make the assumption <6 chars is invalid. (8 Edge cases)
 
   }
 
