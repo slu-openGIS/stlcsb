@@ -39,7 +39,6 @@ csb_vacant <- function(.data, var, newVar, filter = FALSE){
   }
   newVarN <- rlang::quo_name(rlang::enquo(newVar))
 
-  load("R/sysdata.rda")
 
   #Append logical for vacant codes
   .data %>% dplyr::mutate(!!newVarN := ifelse(!!varN %in% vacant, TRUE, FALSE)) -> .data

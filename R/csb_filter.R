@@ -42,7 +42,6 @@ csb_filter <- function(.data, var, newVar, category){
 
   newVarN <- rlang::quo_name(rlang::enquo(newVar))
 
-  load("R/sysdata.rda")
 
   #-------------------------------------------------------------------------------------------------------------
 
