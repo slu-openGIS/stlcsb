@@ -2,7 +2,7 @@
 #'
 #' @description \code{csb_geo} converts SRX and SRY data into a simple features object. You can write a shapefile directly from the output of this function using sf::st_write
 #'
-#' @usage csb_geo(.data, varX, varY, replace, crs)
+#' @usage csb_geo(.data, varX, varY, crs = NULL)
 #'
 #' @param .data A tibble with raw CSB data
 #' @param varX name of column containing SRX data

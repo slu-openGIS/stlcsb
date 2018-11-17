@@ -2,7 +2,7 @@
 #'
 #' @description \code{csb_filter} retuns observations that match one of 17 predefined categories.
 #'
-#' @usage csb_filter(.data, ...)
+#' @usage csb_filter(.data, var, newVar, category)
 #'
 #' @param .data A tibble with raw CSB data
 #' @param var where the original problem code is located in the data
