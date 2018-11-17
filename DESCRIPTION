@@ -1,6 +1,6 @@
 Package: stlcsb
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Tidy Manipulation of CSB Data for St. Louis
 Version: 0.1.0
 Authors@R: c(
     person("Christopher", "Prener", ,"chris.prener@slu.edu", c("aut", "cre")),
