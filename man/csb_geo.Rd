@@ -14,8 +14,6 @@ csb_geo(.data, varX, varY, crs = NULL)
 \item{varY}{name of column containing SRY data}
 
 \item{crs}{coordinate reference system for the data to be projected into}
-
-\item{replace}{If true, the original spatial data columns will be dropped}
 }
 \value{
 \code{csb_geo} returns a sf object of the input data, specifying a new crs will reproject the data.
