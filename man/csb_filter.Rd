@@ -4,7 +4,7 @@
 \alias{csb_filter}
 \title{Filter CSB Data}
 \usage{
-csb_filter(.data, ...)
+csb_filter(.data, var, newVar, category)
 }
 \arguments{
 \item{.data}{A tibble with raw CSB data}

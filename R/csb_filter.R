@@ -17,7 +17,7 @@
 #'
 #'
 #' @export
-csb_filter <- function(.data, var, newVar, category = c(admin,animal,construction,debris,degrade,disturbance,event,health,landscape,law,maintenance,nature,road,sewer,traffic,vacant,waste)){
+csb_filter <- function(.data, var, newVar, category){
 
   #-------------------------------------------------------------------------------------------------------------
   ### Check input and Non-Standard evaluation

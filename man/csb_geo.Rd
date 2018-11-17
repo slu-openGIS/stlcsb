@@ -4,7 +4,7 @@
 \alias{csb_geo}
 \title{Clean CSB geo to SF object}
 \usage{
-csb_geo(.data, varX, varY, replace, crs)
+csb_geo(.data, varX, varY, crs = NULL)
 }
 \arguments{
 \item{.data}{A tibble with raw CSB data}

@@ -7,7 +7,6 @@
 #' @param .data A tibble with raw CSB data
 #' @param varX name of column containing SRX data
 #' @param varY name of column containing SRY data
-#' @param replace If true, the original spatial data columns will be dropped
 #' @param crs coordinate reference system for the data to be projected into
 #'
 #' @return \code{csb_geo} returns a sf object of the input data, specifying a new crs will reproject the data.
