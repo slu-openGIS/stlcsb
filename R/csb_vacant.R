@@ -41,11 +41,11 @@ csb_vacant <- function(.data, var, newVar, filter = FALSE){
 
 
   #Append logical for vacant codes
-  .data %>% dplyr::mutate(!!newVarN := ifelse(!!varN %in% vacant, TRUE, FALSE)) -> .data
+  .data %>% dplyr::mutate(!!newVarN := ifelse(!!varN %in% stlcsb::vacant, TRUE, FALSE)) -> .data
 
   #Filter if neccessary
   if(isTRUE(filter)){
-    .data %>% dplyr::filter(!!varN %in% vacant) -> .data
+    .data %>% dplyr::filter(!!varN %in% stlcsb::vacant) -> .data
   }
 
   #Return the data
