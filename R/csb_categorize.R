@@ -5,9 +5,8 @@
 #' @usage csb_categorize(.data, var, newVar)
 #'
 #' @param .data A tibble with raw CSB data
-#' @param var Name of orginial variable containing problem code
+#' @param var Name of orginal variable containing problem code
 #' @param newVar Name of output variable to be created with category name
-#'
 #'
 #' @return \code{csb_categorize} returns data with an additional variable for an intelligible category for CSB requests.
 #'
@@ -17,8 +16,7 @@
 #'
 #' @export
 csb_categorize <- function(.data, var, newVar){
-### Check input and Non-Standard evaluation
-  ## check for missing parameters
+#MISSING AND NSE SETUP
   if (missing(.data)) {
     stop('Please provide an argument for .data')
   }
@@ -40,11 +38,7 @@ csb_categorize <- function(.data, var, newVar){
   }
 
   newVarN <- rlang::quo_name(rlang::enquo(newVar))
-
-  # First we have to import the category defintions located in the package directory "data"
-
-  load("data/definitions.rda")
-
+#ASSIGN CATEGORIES
   # Then we use a mutate function to assign categories
   .data %>%
     dplyr::mutate(!!newVarN := dplyr::case_when(
@@ -66,7 +60,6 @@ csb_categorize <- function(.data, var, newVar){
              !!varN %in% waste ~ "Waste")) -> pm
 
   # return the data again with categories
-
   return(pm)
 
 }

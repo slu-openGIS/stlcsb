@@ -20,9 +20,7 @@
 #'
 #' @export
 csb_date_parse <- function(.data, var, day, month, year, delete = FALSE){
-
-  ### Check input and Non-Standard evaluation
-  ## check for missing parameters
+#MISSING AND NSE SETUP
   if (missing(.data)) {
     stop('Please provide an argument for .data')
   }
@@ -32,7 +30,7 @@ csb_date_parse <- function(.data, var, day, month, year, delete = FALSE){
   if(missing(day)&&missing(month)&&missing(year)){
     stop('Please provide an least one argument for day, month or year')
   }
-  ### NSE Setup
+
   # save parameters to list
   paramList <- as.list(match.call())
 
@@ -51,23 +49,22 @@ csb_date_parse <- function(.data, var, day, month, year, delete = FALSE){
 
   yearN <- rlang::quo_name(rlang::enquo(year))
 
-## Parsing Function
-
-  ## Mutate for day
+#PARSING FUNCTION
+  # Mutate for day
     if(dayN != ""){.data %>%
         dplyr::mutate(!!dayN := lubridate::day(!!varN))} -> .data
-  ## Mutate for month
+  # Mutate for month
     if(monthN != ""){.data %>%
         dplyr::mutate(!!monthN := lubridate::month(!!varN))} -> .data
-  ## Mutate for year
+  # Mutate for year
     if(yearN != ""){.data %>%
         dplyr::mutate(!!yearN := lubridate::year(!!varN))} -> .data
 
 
-## Delete the original var
+#Delete the original var
    if (delete == TRUE){
       dplyr::select(.data, -!!varN) -> .data
   }
-
+  # return the data
   return(.data)
 }

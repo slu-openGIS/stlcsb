@@ -6,9 +6,9 @@
 #'
 #' @param .data A tibble with raw CSB data
 #' @param var name of column containing date data
-#' @param day numeric representation of day(s) to include.
-#' @param month numeric/character representation of month(s) to include
-#' @param year numeric representation of years(s) to include (4 digit or 2 digit accepted)
+#' @param day numeric vector of day(s) to include.
+#' @param month numeric/character vector of month(s) to include
+#' @param year numeric vector of years(s) to include (2 or 4 digit)
 #' @param delete if true, deletes the original column containing dates
 #'
 #' @return \code{csb_date_filter}returns a filtered version of the input data based on specified arguments
@@ -18,10 +18,12 @@
 #' @importFrom rlang quo enquo sym .data
 #' @importFrom magrittr %>%
 #'
+#' @example
+#' csb_date_filter(january_2018, DATETIMEINIT, day = 1:2)
+#'
 #' @export
 csb_date_filter <- function(.data, var, day = NULL, month = NULL, year = NULL, delete = FALSE){
-
-  ## check for missing parameters
+#MISSING AND NSE SETUP
   if (missing(.data)) {
     stop('Please provide an argument for .data')
   }
@@ -32,8 +34,6 @@ csb_date_filter <- function(.data, var, day = NULL, month = NULL, year = NULL, d
     stop('Please provide at least one argument for day, month or year')
   }
 
-  ## Non Standard Evaluation AND ERROR CHECKING
-  ### NSE Setup
   # save parameters to list
   paramList <- as.list(match.call())
 
@@ -52,7 +52,7 @@ csb_date_filter <- function(.data, var, day = NULL, month = NULL, year = NULL, d
     monthN <- rlang::quo(!! rlang::sym(month))
   }
 
-  ## Correction and checking for year
+# Correction and checking for year
   # correct too short of a year entry
   if(is.numeric(year)&&nchar(year) < 4){year <- 2000 + year}
 
@@ -60,8 +60,7 @@ csb_date_filter <- function(.data, var, day = NULL, month = NULL, year = NULL, d
   if(!missing(year)&&!(year %in% c(2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018))){stop("The year variable is an invalid argument")}
   if(!missing(year)&&(2008 %in% year)){message("2008 only contains traffic requests")} #this only works if 2008 is the first number in the vector, which I assume it will always be
 
-
-  ## correction and checking for month
+# Correction and checking for month
   # vectors for alternative month entry formats
   jan <- c('January', 'january', 'Jan', 'jan')
   feb <- c('February', 'february', 'Feb', 'feb')

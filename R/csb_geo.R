@@ -16,8 +16,6 @@
 #'
 #' @export
 csb_geo <- function(.data, varX, varY, crs = NULL){
-
-
 ### Check input and Non-Standard evaluation
   ## check for missing parameters of required arguments
   if (missing(.data)) {

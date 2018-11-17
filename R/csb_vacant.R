@@ -1,6 +1,6 @@
 #' CSB vacant codes
 #'
-#' @description \code{csb_vacant}appends a logical vector with TRUE for vacancy related problem codes.
+#' @description \code{csb_vacant}appends a logical vector indicating `TRUE`` for vacancy related problem codes.
 #'
 #' @usage csb_vacant(.data, var, newVar, filter = FALSE)
 #'

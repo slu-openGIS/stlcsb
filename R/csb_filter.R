@@ -1,27 +1,23 @@
 #' Filter CSB Data
 #'
-#' @description \code{csb_filter} retuns observations that match one of 17 predefined categories.
+#' @description \code{csb_filter} retuns observations that match any combination of 17 predefined categories.
 #'
 #' @usage csb_filter(.data, var, newVar, category)
 #'
 #' @param .data A tibble with raw CSB data
-#' @param var where the original problem code is located in the data
+#' @param var name of the column containg original problem code data
 #' @param newVar name of column containing categories. NULL by default, but if specified will produce a new column.
-#' @param category a vector with the unquoted name(s) of the category(s) for the function to return. You can also explicitly state quoted PROBLEMCODEs. Valid categories are: (admin, animal, construction, debris, degrade, disturbance, event, health, landscape, law, maintenance, nature, road, sewer, traffic, vacant, waste)
+#' @param category a vector with the unquoted name(s) of the category(s) for the function to return. You can also explicitly state quoted PROBLEMCODE(s). Valid categories are: (admin, animal, construction, debris, degrade, disturbance, event, health, landscape, law, maintenance, nature, road, sewer, traffic, vacant, waste)
+#'
 #' @return \code{csb_filter} returns data with an additional variable for an intelligible category for CSB requests.
 #'
 #' @importFrom dplyr filter
 #' @importFrom rlang quo enquo sym :=
 #' @importFrom magrittr %>%
 #'
-#'
-#'
 #' @export
 csb_filter <- function(.data, var, newVar, category){
-
-  #-------------------------------------------------------------------------------------------------------------
-  ### Check input and Non-Standard evaluation
-  ## check for missing parameters
+#MISSING AND NSE SETUP
   if (missing(.data)){
     stop('Please provide an argument for .data')
   }
@@ -34,7 +30,7 @@ csb_filter <- function(.data, var, newVar, category){
   if (missing(category)){
     stop('Please provide an argument for category')
   }
-  ### NSE SETUP
+
   paramList <- as.list(match.call())
 
   if (!is.character(paramList$var)) {

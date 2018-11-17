@@ -1,14 +1,14 @@
 #' CSB intersections
 #'
-#' @description \code{csb_intersection}returns a logical vector with TRUE for addresses that are intersections, or filters or drops these observations
+#' @description \code{csb_intersection}returns a logical vector indicating `TRUE`` for addresses that are intersections. This function is also able to isolate or remove these data.
 #'
 #' @usage csb_intersection(.data, var, newVar, filter = FALSE, remove = FALSE)
 #'
 #' @param .data A tibble with raw CSB data
 #' @param var name of column containing address
 #' @param newVar Name of output variable to be created with logical
-#' @param filter If true, returns a filtered version of the input with only intersections
-#' @param remove If true, removes intersections from the input data frame
+#' @param filter If true, returns a filtered version of the input with only observations occuring at ntersections
+#' @param remove If true, retrurns a version of the input without observations occuring at intersections
 #'
 #' @return \code{csb_intersection}returns a logical vector for addresses that are intersections, or it filters intersections
 #'
