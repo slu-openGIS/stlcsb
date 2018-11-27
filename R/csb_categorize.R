@@ -5,7 +5,7 @@
 #' @usage csb_categorize(.data, var, newVar)
 #'
 #' @param .data A tibble with raw CSB data
-#' @param var Name of orginal variable containing problem code
+#' @param var Name of original variable containing problem code
 #' @param newVar Name of output variable to be created with category name
 #'
 #' @return \code{csb_categorize} returns data with an additional variable for an intelligible category for CSB requests.
