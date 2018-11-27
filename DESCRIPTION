@@ -10,6 +10,6 @@ Description: stlcsb is used for easily accessing data from the Citizens' Service
 License: GPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1
 Imports: dplyr, lubridate, magrittr, readr, rlang, rvest, sf, stringr, tibble, xml2
 Depends: R (>= 2.10)
