@@ -46,3 +46,4 @@ cat_vacant <- unlist(vacant)
 
 usethis::use_data(cat_admin, cat_animal, cat_construction, cat_debris, cat_degrade, cat_disturbance, cat_event, cat_health, cat_landscape, cat_law, cat_maintenance, cat_nature, cat_road, cat_sewer, cat_traffic, cat_waste, cat_vacant)
 
+## In the package, the files are condensed into a single .rda names "categories" now.
