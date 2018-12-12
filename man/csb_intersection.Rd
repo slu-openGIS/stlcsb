@@ -13,13 +13,13 @@ csb_intersection(.data, var, newVar, filter = FALSE, remove = FALSE)
 
 \item{newVar}{Name of output variable to be created with logical}
 
-\item{filter}{If true, returns a filtered version of the input with only observations occuring at ntersections}
+\item{filter}{If true, returns a filtered version of the input with only observations occurring at intersections}
 
-\item{remove}{If true, retrurns a version of the input without observations occuring at intersections}
+\item{remove}{If true, returns a version of the input without observations occuring at intersections}
 }
 \value{
 \code{csb_intersection}returns a logical vector for addresses that are intersections, or it filters intersections
 }
 \description{
-\code{csb_intersection}returns a logical vector indicating `TRUE`` for addresses that are intersections. This function is also able to isolate or remove these data.
+\code{csb_intersection}returns a logical vector indicating `TRUE` for addresses that are intersections. This function is also able to isolate or remove these data.
 }

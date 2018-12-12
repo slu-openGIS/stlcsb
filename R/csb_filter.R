@@ -42,11 +42,10 @@ csb_filter <- function(.data, var, newVar, category){
 
   newVarN <- rlang::quo_name(rlang::enquo(newVar))
 
-
   #-------------------------------------------------------------------------------------------------------------
 
   # initialize a list of valid category arguments
-  validCategory = c(stlcsb::admin,stlcsb::animal,stlcsb::construction,stlcsb::debris,stlcsb::degrade,stlcsb::disturbance,stlcsb::event,stlcsb::health,stlcsb::landscape,stlcsb::law,stlcsb::maintenance,stlcsb::nature,stlcsb::road,stlcsb::sewer,stlcsb::traffic,stlcsb::vacant,stlcsb::waste)
+  validCategory = c(stlcsb::cat_admin,stlcsb::cat_animal,stlcsb::cat_construction,stlcsb::cat_debris,stlcsb::cat_degrade,stlcsb::cat_disturbance,stlcsb::cat_event,stlcsb::cat_health,stlcsb::cat_landscape,stlcsb::cat_law,stlcsb::cat_maintenance,stlcsb::cat_nature,stlcsb::cat_road,stlcsb::cat_sewer,stlcsb::cat_traffic,stlcsb::cat_vacant,stlcsb::cat_waste)
   # to check if category input is valid
   if(!all(category %in% validCategory)){stop("Category contains an invalid argument, please see `?csb_filter` for help")}
 
@@ -62,8 +61,8 @@ csb_filter <- function(.data, var, newVar, category){
 if(!missing(newVar)){
   csb_categorize(.data, !!varN, !!newVarN) -> .data
 
-  if(all(stlcsb::vacant %in% category)){message("specifying vacant will supersede the original category")
-    .data %>% dplyr::mutate(!!newVarN := ifelse(!!varN %in% stlcsb::vacant,"Vacant", .data[[newVarN]])) -> .data
+  if(all(stlcsb::cat_vacant %in% category)){message("specifying vacant will supersede the original category")
+    .data %>% dplyr::mutate(!!newVarN := ifelse(!!varN %in% stlcsb::cat_vacant,"Vacant", .data[[newVarN]])) -> .data
   }
 }
 

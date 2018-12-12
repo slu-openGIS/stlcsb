@@ -19,5 +19,5 @@ csb_vacant(.data, var, newVar, filter = FALSE)
 \code{csb_vacant}returns a logical vector with TRUE for vacancy related problem codes, or a filtered version of the input data
 }
 \description{
-\code{csb_vacant}appends a logical vector indicating `TRUE`` for vacancy related problem codes.
+\code{csb_vacant}appends a logical vector indicating `TRUE` for vacancy related problem codes.
 }
