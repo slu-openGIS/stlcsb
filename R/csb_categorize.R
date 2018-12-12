@@ -42,22 +42,22 @@ csb_categorize <- function(.data, var, newVar){
   # Then we use a mutate function to assign categories
   .data %>%
     dplyr::mutate(!!newVarN := dplyr::case_when(
-             !!varN %in% cat_admin ~ "Admin",
-             !!varN %in% cat_animal ~ "Animal",
-             !!varN %in% cat_construction ~ "Construction",
-             !!varN %in% cat_debris ~ "Debris",
-             !!varN %in% cat_degrade ~ "Degrade",
-             !!varN %in% cat_disturbance ~ "Disturbance",
-             !!varN %in% cat_event ~ "Event",
-             !!varN %in% cat_health ~ "Health",
-             !!varN %in% cat_landscape ~ "Landscape",
-             !!varN %in% cat_law ~ "Law",
-             !!varN %in% cat_maintenance ~ "Maintenance",
-             !!varN %in% cat_nature ~ "Nature",
-             !!varN %in% cat_road ~ "Road",
-             !!varN %in% cat_sewer ~ "Sewer",
-             !!varN %in% cat_traffic ~ "Traffic",
-             !!varN %in% cat_waste ~ "Waste")) -> pm
+             !!varN %in% stlcsb::cat_admin ~ "Admin",
+             !!varN %in% stlcsb::cat_animal ~ "Animal",
+             !!varN %in% stlcsb::cat_construction ~ "Construction",
+             !!varN %in% stlcsb::cat_debris ~ "Debris",
+             !!varN %in% stlcsb::cat_degrade ~ "Degrade",
+             !!varN %in% stlcsb::cat_disturbance ~ "Disturbance",
+             !!varN %in% stlcsb::cat_event ~ "Event",
+             !!varN %in% stlcsb::cat_health ~ "Health",
+             !!varN %in% stlcsb::cat_landscape ~ "Landscape",
+             !!varN %in% stlcsb::cat_law ~ "Law",
+             !!varN %in% stlcsb::cat_maintenance ~ "Maintenance",
+             !!varN %in% stlcsb::cat_nature ~ "Nature",
+             !!varN %in% stlcsb::cat_road ~ "Road",
+             !!varN %in% stlcsb::cat_sewer ~ "Sewer",
+             !!varN %in% stlcsb::cat_traffic ~ "Traffic",
+             !!varN %in% stlcsb::cat_waste ~ "Waste")) -> pm
 
   # return the data again with categories
   return(pm)

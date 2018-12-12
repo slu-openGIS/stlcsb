@@ -40,11 +40,11 @@ csb_vacant <- function(.data, var, newVar, filter = FALSE){
   newVarN <- rlang::quo_name(rlang::enquo(newVar))
 
   #Append logical for vacant codes
-  .data %>% dplyr::mutate(!!newVarN := ifelse(!!varN %in% cat_vacant, TRUE, FALSE)) -> .data
+  .data %>% dplyr::mutate(!!newVarN := ifelse(!!varN %in% stlcsb::cat_vacant, TRUE, FALSE)) -> .data
 
   #Filter if neccessary
   if(isTRUE(filter)){
-    .data %>% dplyr::filter(!!varN %in% cat_vacant) -> .data
+    .data %>% dplyr::filter(!!varN %in% stlcsb::cat_vacant) -> .data
   }
 
   #Return the data
