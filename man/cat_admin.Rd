@@ -6,7 +6,7 @@
 \title{Lookup Tables Used for Categorization of Problem Codes}
 \format{An object of class \code{character} of length 78.}
 \usage{
-These should only be supplied as an argument for the csb_filter function.
+cat_admin
 }
 \description{
 Any data object from the stlcsb package that starts with \code{cat_} is a lookup table. These tables were hand-made,contact (foxbl@slu.edu) with questions or concerns. It is used internally in any function that categorizes by problem code. It is available to the user as a matter of convenience and transparency.
