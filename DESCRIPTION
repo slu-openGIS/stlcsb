@@ -13,3 +13,7 @@ LazyData: true
 RoxygenNote: 6.1.1
 Imports: dplyr, lubridate, magrittr, readr, rlang, rvest, sf, stringr, tibble, xml2
 Depends: R (>= 2.10)
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
