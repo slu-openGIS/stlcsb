@@ -1,6 +1,6 @@
 #' Filter CSB date
 #'
-#' @description \code{csb_date_filter}Filters dates to return only the specified date elements
+#' @description \code{csb_date_filter} Filters dates to return only the specified date elements
 #'
 #' @usage csb_date_filter(.data, var, day, month, year, delete = FALSE)
 #'
@@ -11,7 +11,7 @@
 #' @param year numeric vector of years(s) to include (2 or 4 digit)
 #' @param delete if true, deletes the original column containing dates
 #'
-#' @return \code{csb_date_filter}returns a filtered version of the input data based on specified arguments
+#' @return \code{csb_date_filter} returns a filtered version of the input data based on specified arguments
 #'
 #' @importFrom dplyr mutate filter
 #' @importFrom lubridate day month year
@@ -92,6 +92,7 @@ if(is.character(month)){
     else if(i %in% dec){monthF <- append(monthF, 12)}
   }
 }
+else if(is.numeric(month)){monthF <- month}
 
 #-----------------------------------------------------------------------------------------------------------------------------
   ##Filter is conducted in the most efficient order for large data

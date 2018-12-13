@@ -11,7 +11,7 @@
 #' @param year if specified, returns a named column with parsed year
 #' @param delete if true, deletes the original column with unparsed data
 #'
-#' @return \code{csb_date_parse}returns new columns with specified names containing parsed date information
+#' @return \code{csb_date_parse} returns new columns with specified names containing parsed date information
 #'
 #' @importFrom dplyr mutate
 #' @importFrom lubridate day month year
