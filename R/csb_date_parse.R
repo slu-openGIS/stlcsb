@@ -18,6 +18,13 @@
 #' @importFrom rlang quo enquo sym .data
 #' @importFrom magrittr %>%
 #'
+#' @examples
+#' csb_date_parse(january_2018, DATETIMEINIT, dayInit)
+#' csb_date_parse(january_2018, DATETIMEINIT, dayInit, monthInit)
+#' csb_date_parse(january_2018, DATETIMEINIT, month = monthInit)
+#' csb_date_parse(january_2018, DATETIMEINIT, month = monthInit, year = yearInit)
+#' csb_date_parse(january_2018, DATETIMEINIT, dayInit, monthInit, yearInit, delete = TRUE)
+#'
 #' @export
 csb_date_parse <- function(.data, var, day, month, year, delete = FALSE){
 #MISSING AND NSE SETUP

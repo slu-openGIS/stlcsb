@@ -25,3 +25,11 @@ csb_date_filter(.data, var, day, month, year, delete = FALSE)
 \description{
 \code{csb_date_filter} Filters dates to return only the specified date elements
 }
+\examples{
+csb_date_filter(january_2018, DATETIMEINIT, day = 1)
+csb_date_filter(january_2018, DATETIMEINIT, day = 1:15, month = 1)
+csb_date_filter(january_2018, DATETIMEINIT, month = "January", year = 09)
+csb_date_filter(january_2018, DATETIMEINIT, month = c("jan", "feb", "Mar", "Apr"), year = 2009)
+csb_date_filter(january_2018, DATETIMEINIT, day = 1:15, month = 1:6, year = 08:13, delete = TRUE)
+
+}

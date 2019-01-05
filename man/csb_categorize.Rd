@@ -19,3 +19,7 @@ csb_categorize(.data, var, newVar)
 \description{
 \code{csb_categorize} provides intelligible categories for the CSB data based on problem code.
 }
+\examples{
+csb_categorize(january_2018, PROBLEMCODE, Category)
+
+}

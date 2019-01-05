@@ -14,6 +14,9 @@
 #' @importFrom rlang quo enquo sym .data
 #' @importFrom magrittr %>%
 #'
+#' @examples
+#' csb_categorize(january_2018, PROBLEMCODE, Category)
+#'
 #' @export
 csb_categorize <- function(.data, var, newVar){
 #MISSING AND NSE SETUP

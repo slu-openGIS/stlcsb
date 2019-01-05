@@ -25,3 +25,11 @@ csb_date_parse(.data, var, day, month, year, delete = FALSE)
 \description{
 \code{csb_date_parse} is used to parse out dates into more intellgible formats
 }
+\examples{
+csb_date_parse(january_2018, DATETIMEINIT, dayInit)
+csb_date_parse(january_2018, DATETIMEINIT, dayInit, monthInit)
+csb_date_parse(january_2018, DATETIMEINIT, month = monthInit)
+csb_date_parse(january_2018, DATETIMEINIT, month = monthInit, year = yearInit)
+csb_date_parse(january_2018, DATETIMEINIT, dayInit, monthInit, yearInit, delete = TRUE)
+
+}

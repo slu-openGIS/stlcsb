@@ -16,6 +16,10 @@
 #' @importFrom dplyr mutate filter
 #' @importFrom rlang quo enquo sym :=
 #'
+#' @examples
+#' \dontrun{csb_missing(january_2018, SRX, SRY, missing_geo)}
+#' csb_missing(january_2018, SRX, SRY, filter = TRUE)
+#'
 #' @export
 csb_missing <- function(.data, varX, varY, newVar, filter = FALSE){
   ### Check input and Non-Standard evaluation

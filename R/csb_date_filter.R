@@ -18,6 +18,12 @@
 #' @importFrom rlang quo enquo sym .data
 #' @importFrom magrittr %>%
 #'
+#' @examples
+#' csb_date_filter(january_2018, DATETIMEINIT, day = 1)
+#' csb_date_filter(january_2018, DATETIMEINIT, day = 1:15, month = 1)
+#' csb_date_filter(january_2018, DATETIMEINIT, month = "January", year = 09)
+#' csb_date_filter(january_2018, DATETIMEINIT, month = c("jan", "feb", "Mar", "Apr"), year = 2009)
+#' csb_date_filter(january_2018, DATETIMEINIT, day = 1:15, month = 1:6, year = 08:13, delete = TRUE)
 #'
 #' @export
 csb_date_filter <- function(.data, var, day = NULL, month = NULL, year = NULL, delete = FALSE){
