@@ -20,8 +20,8 @@ csb_date_filter(.data, var, day, month, year, delete = FALSE)
 \item{delete}{if true, deletes the original column containing dates}
 }
 \value{
-\code{csb_date_filter}returns a filtered version of the input data based on specified arguments
+\code{csb_date_filter} returns a filtered version of the input data based on specified arguments
 }
 \description{
-\code{csb_date_filter}Filters dates to return only the specified date elements
+\code{csb_date_filter} Filters dates to return only the specified date elements
 }

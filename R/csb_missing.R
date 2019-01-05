@@ -61,10 +61,8 @@ csb_missing <- function(.data, varX, varY, newVar, filter = FALSE){
   if(newVarN != ""){.data %>%
       dplyr::mutate(!!newVarN := case_when(
         is.na(!!varXN)|is.na(!!varYN) ~ TRUE,
-        nchar(!!varXN) < 6 ~ TRUE,
-        nchar(!!varYN) < 6 ~ TRUE,
-        nchar(!!varXN) >= 6 ~ FALSE,
-        nchar(!!varYN) >= 6 ~ FALSE
+        nchar(!!varXN) < 6 | nchar(!!varYN) < 6 ~ TRUE,
+        nchar(!!varXN) >= 6 | nchar(!!varYN) >= 6 ~ FALSE
       )) -> out
 
   }

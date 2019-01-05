@@ -18,8 +18,6 @@
 #' @importFrom rlang quo enquo sym .data
 #' @importFrom magrittr %>%
 #'
-#' @example
-#' csb_date_filter(january_2018, DATETIMEINIT, day = 1:2)
 #'
 #' @export
 csb_date_filter <- function(.data, var, day = NULL, month = NULL, year = NULL, delete = FALSE){
@@ -58,7 +56,7 @@ csb_date_filter <- function(.data, var, day = NULL, month = NULL, year = NULL, d
 
   #check that year entry is valid for csb data, warn for entry of 2008.
   if(!missing(year)&&!(year %in% c(2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018))){stop("The year variable is an invalid argument")}
-  if(!missing(year)&&(2008 %in% year)){message("2008 only contains traffic requests")} #this only works if 2008 is the first number in the vector, which I assume it will always be
+  if(!missing(year)&&(2008 %in% year)){message("2008 only contains traffic requests")}
 
 # Correction and checking for month
   # vectors for alternative month entry formats
