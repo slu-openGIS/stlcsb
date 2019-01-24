@@ -23,3 +23,8 @@ csb_missing(.data, varX, varY, newVar, filter = FALSE)
 \description{
 \code{csb_missing} returns a logical vector indicating `TRUE` if an observation is missing SRX or SRY data.
 }
+\examples{
+\dontrun{csb_missing(january_2018, SRX, SRY, missing_geo)}
+csb_missing(january_2018, SRX, SRY, filter = TRUE)
+
+}

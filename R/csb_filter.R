@@ -15,6 +15,10 @@
 #' @importFrom rlang quo enquo sym :=
 #' @importFrom magrittr %>%
 #'
+#' @examples
+#' csb_filter(january_2018, PROBLEMCODE, Category, category = c(cat_waste, cat_debris))
+#' csb_filter(january_2018, PROBLEMCODE, category = cat_vacant)
+#'
 #' @export
 csb_filter <- function(.data, var, newVar, category){
 #MISSING AND NSE SETUP

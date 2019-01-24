@@ -97,7 +97,7 @@ csb_date_parse(csb, DATETIMEINIT, dayInit, monthInit, yearInit, delete = TRUE)
 
 ## Full Example: Mapping Potential Vacant Properties in Summer 2017
 
-The following is an example of a full workflow for importing the data, filtering for vacancy indicating problem codes, filtering by time, removing observations with missing spatial data, projecting it to an sf object, and finally plotting it.
+The following is an example of a full workflow for importing the data, filtering for vacancy indicating problem codes, filtering by time, removing observations with missing spatial data, projecting it to an sf object, and finally plotting it. Notice that the pipe operator `%>%` from magrittr is used. This passes the output of the prior function to the first argument of the next function, reducing typing and making code easier to read.
 ```{r full example, eval=FALSE}
 csb <- csb_get_data()
 

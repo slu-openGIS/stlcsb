@@ -20,8 +20,16 @@ csb_date_parse(.data, var, day, month, year, delete = FALSE)
 \item{delete}{if true, deletes the original column with unparsed data}
 }
 \value{
-\code{csb_date_parse}returns new columns with specified names containing parsed date information
+\code{csb_date_parse} returns new columns with specified names containing parsed date information
 }
 \description{
 \code{csb_date_parse} is used to parse out dates into more intellgible formats
+}
+\examples{
+csb_date_parse(january_2018, DATETIMEINIT, dayInit)
+csb_date_parse(january_2018, DATETIMEINIT, dayInit, monthInit)
+csb_date_parse(january_2018, DATETIMEINIT, month = monthInit)
+csb_date_parse(january_2018, DATETIMEINIT, month = monthInit, year = yearInit)
+csb_date_parse(january_2018, DATETIMEINIT, dayInit, monthInit, yearInit, delete = TRUE)
+
 }

@@ -17,6 +17,11 @@
 #' @importFrom magrittr %>%
 #' @importFrom stringr str_detect
 #'
+#' @examples
+#' \dontrun{csb_intersection(january_2018, PROBADDRESS, newVar = Intersection)}
+#' csb_intersection(january_2018, PROBADDRESS, filter = TRUE)
+#' csb_intersection(january_2018, PROBADDRESS, remove = TRUE)
+#'
 #' @export
 csb_intersection <- function(.data, var, newVar, filter = FALSE, remove = FALSE){
   #Check for missing parameters
