@@ -3,7 +3,7 @@
 
 # stlcsb
 
-[![lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable)
+[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/stlcsb)](https://cran.r-project.org/package=stlcsb)
 
 The goal of `stlcsb` is to provide access to data from the City of St. Louis [Citizens’ Service Bureau](https://www.stlouis-mo.gov/government/departments/public-safety/neighborhood-stabilization-office/citizens-service-bureau/index.cfm) (CSB), the [3-1-1 service](https://en.wikipedia.org/wiki/3-1-1) for the City of Saint Louis.
