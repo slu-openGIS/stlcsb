@@ -23,3 +23,9 @@ csb_intersection(.data, var, newVar, filter = FALSE, remove = FALSE)
 \description{
 \code{csb_intersection}returns a logical vector indicating `TRUE` for addresses that are intersections. This function is also able to isolate or remove these data.
 }
+\examples{
+\dontrun{csb_intersection(january_2018, PROBADDRESS, newVar = Intersection)}
+csb_intersection(january_2018, PROBADDRESS, filter = TRUE)
+csb_intersection(january_2018, PROBADDRESS, remove = TRUE)
+
+}

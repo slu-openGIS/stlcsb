@@ -15,6 +15,10 @@
 #' @importFrom rlang quo quo_name enquo sym .data
 #' @importFrom magrittr %>%
 #'
+#' @examples
+#' csb_vacant(january_2018, PROBLEMCODE, vacant)
+#' csb_vacant(january_2018, PROBLEMCODE, vacant, filter = TRUE)
+#'
 #' @export
 csb_vacant <- function(.data, var, newVar, filter = FALSE){
   #Check for missing parameters

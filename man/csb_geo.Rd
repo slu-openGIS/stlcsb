@@ -21,3 +21,10 @@ csb_geo(.data, varX, varY, crs = NULL)
 \description{
 \code{csb_geo} converts SRX and SRY data into a simple features object. You can write a shapefile directly from the output of this function using sf::st_write
 }
+\examples{
+#You MUST remove observations with missing coordinates before using this function
+csb <- csb_missing(january_2018, SRX, SRX, filter = TRUE)
+csb_geo(csb, SRX, SRY)
+csb_geo(csb, SRX, SRY, crs = 4269)
+
+}

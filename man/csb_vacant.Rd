@@ -21,3 +21,8 @@ csb_vacant(.data, var, newVar, filter = FALSE)
 \description{
 \code{csb_vacant}appends a logical vector indicating `TRUE` for vacancy related problem codes.
 }
+\examples{
+csb_vacant(january_2018, PROBLEMCODE, vacant)
+csb_vacant(january_2018, PROBLEMCODE, vacant, filter = TRUE)
+
+}

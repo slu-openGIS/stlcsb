@@ -14,6 +14,12 @@
 #' @importFrom sf st_as_sf st_transform
 #' @importFrom rlang quo enquo sym :=
 #'
+#' @examples
+#' #You MUST remove observations with missing coordinates before using this function
+#' csb <- csb_missing(january_2018, SRX, SRX, filter = TRUE)
+#' csb_geo(csb, SRX, SRY)
+#' csb_geo(csb, SRX, SRY, crs = 4269)
+#'
 #' @export
 csb_geo <- function(.data, varX, varY, crs = NULL){
 ### Check input and Non-Standard evaluation
