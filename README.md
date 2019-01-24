@@ -3,7 +3,7 @@
 
 # stlcsb
 
-[![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable)
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/stlcsb)](https://cran.r-project.org/package=stlcsb)
 
 The goal of `stlcsb` is to provide access to data from the City of St. Louis [Citizens’ Service Bureau](https://www.stlouis-mo.gov/government/departments/public-safety/neighborhood-stabilization-office/citizens-service-bureau/index.cfm) (CSB), the [3-1-1 service](https://en.wikipedia.org/wiki/3-1-1) for the City of Saint Louis.
@@ -36,10 +36,26 @@ beyond that.
 data <- csb_get_data()
 ```
 
-The download is quite large - it currently includes *n* = 1,175,265
+The download is quite large - (Approx. 60 MB) and currently includes > 1,100,000
 observations - so it will take a short bit of time depending on your
 internet connection.
 
+### Functions for Data Manipulation
+
+The functions in this package address 3 mains concerns with the raw data.
+
+1. The original data are hard to categorize.
+
+2. The spatial variables can be messy.
+
+3. There are several time and date variables.
+
+
+To learn everything this package has to offer, please see the vignette:
+
+```r
+vignette("stlcsb")
+```
 
 ## Notes on the CSB API
 
@@ -48,5 +64,5 @@ Early development of the package contained functions intended to make working wi
 ## Contributor Code of Conduct
 
 Please note that this project is released with a [Contributor Code of
-Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree
+Conduct](.github/CODE_OF_CONDUCT.md). By participating in this project you agree
 to abide by its terms.
