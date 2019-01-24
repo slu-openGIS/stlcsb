@@ -30,7 +30,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">stlcsb</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -75,7 +75,7 @@
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>You can install <code>stlcsb</code> from GitHub with:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages("devtools")</span>
-devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"slu-openGIS/stlcsb"</span>)</code></pre></div>
+devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"slu-openGIS/stlcsb"</span>)</code></pre></div>
 </div>
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
@@ -85,7 +85,19 @@ devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumen
 <a href="#downloading-data" class="anchor"></a>Downloading Data</h3>
 <p>The <code><a href="reference/csb_get_data.html">csb_get_data()</a></code> function can be used download a compiled version of the CSB data. We have ensured that the data are formatted in a uniform way and complied the data together into a single tibble, but have not modified the data beyond that.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data &lt;-<span class="st"> </span><span class="kw"><a href="reference/csb_get_data.html">csb_get_data</a></span>()</code></pre></div>
-<p>The download is quite large - it currently includes <em>n</em> = 1,175,265 observations - so it will take a short bit of time depending on your internet connection.</p>
+<p>The download is quite large - (Approx. 60 MB) and currently includes &gt; 1,100,000 observations - so it will take a short bit of time depending on your internet connection.</p>
+</div>
+<div id="functions-for-data-manipulation" class="section level3">
+<h3 class="hasAnchor">
+<a href="#functions-for-data-manipulation" class="anchor"></a>Functions for Data Manipulation</h3>
+<p>The functions in this package address 3 mains concerns with the raw data.</p>
+<ol>
+<li><p>The original data are hard to categorize.</p></li>
+<li><p>The spatial variables can be messy.</p></li>
+<li><p>There are several time and date variables.</p></li>
+</ol>
+<p>To learn everything this package has to offer, please see the vignette:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/vignette">vignette</a></span>(<span class="st">"stlcsb"</span>)</code></pre></div>
 </div>
 </div>
 <div id="notes-on-the-csb-api" class="section level2">
@@ -113,7 +125,7 @@ devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumen
 <div class="developers">
 <h2>Developers</h2>
 <ul class="list-unstyled">
-<li>Christopher Prener <br><small class="roles"> Author, maintainer </small>  </li>
+<li>Christopher Prener <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-4310-9888" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID" height="16"></a> </li>
 <li>Branson Fox <br><small class="roles"> Author </small>  </li>
 </ul>
 </div>
@@ -121,7 +133,7 @@ devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumen
   <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://www.tidyverse.org/lifecycle/#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="lifecycle"></a></li>
+<li><a href="https://www.tidyverse.org/lifecycle/#maturing"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="lifecycle"></a></li>
 <li><a href="https://cran.r-project.org/package=stlcsb"><img src="http://www.r-pkg.org/badges/version/stlcsb" alt="CRAN_Status_Badge"></a></li>
 </ul>
 </div>

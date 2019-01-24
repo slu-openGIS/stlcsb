@@ -111,4 +111,4 @@ plot(vacant_sf)
 ```
 ## Questions, Recommendations, Requests
 
-This package is maintained by Branson Fox. Please direct any correspondence to his email. (branson.fox@slu.edu)
+This package is maintained by Christopher Prener, PhD. Please direct any correspondence to his email. (chris.prener@slu.edu)
