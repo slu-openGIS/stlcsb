@@ -12,45 +12,43 @@ Status](https://ci.appveyor.com/api/projects/status/github/slu-openGIS/stlcsb?br
 status](https://codecov.io/gh/slu-openGIS/stlcsb/branch/master/graph/badge.svg)](https://codecov.io/github/slu-openGIS/stlcsb?branch=master)
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/stlcsb)](https://cran.r-project.org/package=stlcsb)
 
-The goal of stlcsb is to …
+The goal of `stlcsb` is to provide access to data from the City of
+St. Louis [Citizens’ Service
+Bureau](https://www.stlouis-mo.gov/government/departments/public-safety/neighborhood-stabilization-office/citizens-service-bureau/index.cfm)
+(CSB), the [3-1-1 service](https://en.wikipedia.org/wiki/3-1-1) for the
+City of Saint Louis. Residents can contact the number with non-emergency
+service requests, and the CSB will dispatch these requests to the
+appropriate City agency. `stlcsb` also includes functions for cleaning
+and manipulating these data.
 
 ## Installation
 
-You can install the released version of stlcsb from
-[CRAN](https://CRAN.R-project.org) with:
+### Installing Dependencies
+
+You should check the [`sf` package
+website](https://r-spatial.github.io/sf/) and the [`areal` package
+website](https://slu-openGIS.github.io/areal/) for the latest details on
+installing dependencies for that package. Instructions vary
+significantly by operating system. For best results, have `sf` installed
+before you install `areal`. Other dependencies, like `dplyr`, will be
+installed automatically with `areal` if they are not already present.
+
+### Installing stlcsb
+
+The development version of `stlcsb` can be accessed from GitHub with
+`remotes`:
 
 ``` r
-install.packages("stlcsb")
+# install.packages("remotes")
+remotes::install_github("slu-openGIS/stlcsb")
 ```
 
-## Example
+## Usage
 
-This is a basic example which shows you how to solve a common problem:
+…
 
-``` r
-## basic example code
-```
+## Contributor Code of Conduct
 
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
-
-``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
-```
-
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date.
-
-You can also embed plots, for example:
-
-<img src="man/figures/README-pressure-1.png" width="100%" />
-
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub\!
+Please note that this project is released with a [Contributor Code of
+Conduct](.github/CODE_OF_CONDUCT.md). By participating in this project
+you agree to abide by its terms.
