@@ -1,4 +1,15 @@
+^CRAN-RELEASE$
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^\.travis\.yml$
+^\.travis
+^appveyor\.yml$
+^codecov\.yml$
+^\.github
+^docs$
+^_pkgdown\.yml$
+^cran-comments\.md$
 ^README\.Rmd$
 ^README-.*\.png$
+^index\.Rmd$
+^LICENSE$

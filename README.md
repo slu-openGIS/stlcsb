@@ -3,50 +3,54 @@
 
 # stlcsb
 
-[![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+[![Travis-CI Build
+Status](https://travis-ci.org/slu-openGIS/stlcsb.svg?branch=master)](https://travis-ci.org/slu-openGIS/stlcsb)
+[![AppVeyor Build
+Status](https://ci.appveyor.com/api/projects/status/github/slu-openGIS/stlcsb?branch=master&svg=true)](https://ci.appveyor.com/project/chris-prener/stlcsb)
+[![Coverage
+status](https://codecov.io/gh/slu-openGIS/stlcsb/branch/master/graph/badge.svg)](https://codecov.io/github/slu-openGIS/stlcsb?branch=master)
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/stlcsb)](https://cran.r-project.org/package=stlcsb)
 
-The goal of `stlcsb` is to provide access to data from the City of St. Louis [Citizens’ Service Bureau](https://www.stlouis-mo.gov/government/departments/public-safety/neighborhood-stabilization-office/citizens-service-bureau/index.cfm) (CSB), the [3-1-1 service](https://en.wikipedia.org/wiki/3-1-1) for the City of Saint Louis.
-
-Residents can contact the number with non-emergency service requests, and the CSB will dispatch these requests to the appropriate City agency.
-
-`stlcsb` also includes functions for cleaning and manipulating these data.
+The goal of stlcsb is to …
 
 ## Installation
 
-You can install `stlcsb` from GitHub with:
+You can install the released version of stlcsb from
+[CRAN](https://CRAN.R-project.org) with:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("slu-openGIS/stlcsb")
+install.packages("stlcsb")
 ```
 
-## Usage
+## Example
 
-### Downloading Data
-
-The `csb_get_data()` function can be used download a
-compiled version of the
-CSB data. We have
-ensured that the data are formatted in a uniform way and complied the
-data together into a single tibble, but have not modified the data
-beyond that.
+This is a basic example which shows you how to solve a common problem:
 
 ``` r
-data <- csb_get_data()
+## basic example code
 ```
 
-The download is quite large - it currently includes *n* = 1,175,265
-observations - so it will take a short bit of time depending on your
-internet connection.
+What is special about using `README.Rmd` instead of just `README.md`?
+You can include R chunks like so:
 
+``` r
+summary(cars)
+#>      speed           dist       
+#>  Min.   : 4.0   Min.   :  2.00  
+#>  1st Qu.:12.0   1st Qu.: 26.00  
+#>  Median :15.0   Median : 36.00  
+#>  Mean   :15.4   Mean   : 42.98  
+#>  3rd Qu.:19.0   3rd Qu.: 56.00  
+#>  Max.   :25.0   Max.   :120.00
+```
 
-## Notes on the CSB API
+You’ll still need to render `README.Rmd` regularly, to keep `README.md`
+up-to-date.
 
-Early development of the package contained functions intended to make working with the API easier. However, at the moment the API has been deemed of low priority. Although we do not believe it to offer any significant advantages at the moment, it may be revisited in the future.
+You can also embed plots, for example:
 
-## Contributor Code of Conduct
+<img src="man/figures/README-pressure-1.png" width="100%" />
 
-Please note that this project is released with a [Contributor Code of
-Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree
-to abide by its terms.
+In that case, don’t forget to commit and push the resulting figure
+files, so they display on GitHub\!
