@@ -30,7 +30,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">stlcsb</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9000</span>
       </span>
     </div>
 
@@ -67,7 +67,7 @@
       <h1>Using The stlcsb Package</h1>
                         <h4 class="author">Branson Fox</h4>
             
-            <h4 class="date">2019-01-23</h4>
+            <h4 class="date">2019-01-26</h4>
       
       
       <div class="hidden name"><code>stlcsb.Rmd</code></div>
@@ -93,70 +93,70 @@
 <h2 class="hasAnchor">
 <a href="#data-acquisition" class="anchor"></a>Data Acquisition</h2>
 <p>Before using any of the other functions, you will need to acquire the CSB data. The <code>csb_get_data</code> function will download the most recent version of the data, and return a tibble. It will also return a message with the date the data were last modified.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">csb &lt;-<span class="st"> </span><span class="kw"><a href="../reference/csb_get_data.html">csb_get_data</a></span>()</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">csb &lt;-<span class="st"> </span><span class="kw">csb_get_data</span>()</a></code></pre></div>
 </div>
 <div id="categorization" class="section level2">
 <h2 class="hasAnchor">
 <a href="#categorization" class="anchor"></a>Categorization</h2>
 <p>The most important problem identified initially was the lack of intelligible categorization of Problem codes. These categories were created by personal observation. There are several functions available to represent data categorically.</p>
-<p><code><a href="../reference/csb_categorize.html">csb_categorize()</a></code> can be used to categorize data based on its Problem code.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/csb_categorize.html">csb_categorize</a></span>(csb, PROBLEMCODE, Category)</code></pre></div>
-<p><code><a href="../reference/csb_filter.html">csb_filter()</a></code> can be used to filter the data based on these same categories. These categories will automatically populate by typing “cat_” if using RStudio. Category takes single or vector arguments.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/csb_filter.html">csb_filter</a></span>(csb, PROBLEMCODE, <span class="dt">category =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(cat_construction, cat_debris))</code></pre></div>
-<p><code><a href="../reference/csb_vacant.html">csb_vacant()</a></code> is a special function used for appending a logical vector or a filtered version of the data. It is important to know that vacant exists inclusive of other categories, or in other words, a problem code may be vacancy related in addition to its core category.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/csb_vacant.html">csb_vacant</a></span>(csb, PROBLEMCODE, vacant)
-<span class="kw"><a href="../reference/csb_vacant.html">csb_vacant</a></span>(csb, PROBLEMCODE, vacant, <span class="dt">filter =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<p><code>csb_categorize()</code> can be used to categorize data based on its Problem code.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">csb_categorize</span>(csb, PROBLEMCODE, Category)</a></code></pre></div>
+<p><code>csb_filter()</code> can be used to filter the data based on these same categories. These categories will automatically populate by typing “cat_” if using RStudio. Category takes single or vector arguments.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">csb_filter</span>(csb, PROBLEMCODE, <span class="dt">category =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(cat_construction, cat_debris))</a></code></pre></div>
+<p><code>csb_vacant()</code> is a special function used for appending a logical vector or a filtered version of the data. It is important to know that vacant exists inclusive of other categories, or in other words, a problem code may be vacancy related in addition to its core category.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">csb_vacant</span>(csb, PROBLEMCODE, vacant)</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw">csb_vacant</span>(csb, PROBLEMCODE, vacant, <span class="dt">filter =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 </div>
 <div id="spatial-features" class="section level2">
 <h2 class="hasAnchor">
 <a href="#spatial-features" class="anchor"></a>Spatial Features</h2>
 <p>The <code>stlcsb</code> package also provides helpful functions for dealing with spatial data.</p>
 <p><code>csb_missing</code> is used to remove observations with incomplete or invalid spatial data.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">csb_no_missing &lt;-<span class="st"> </span><span class="kw"><a href="../reference/csb_missing.html">csb_missing</a></span>(csb, SRX, SRY)</code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">csb_no_missing &lt;-<span class="st"> </span><span class="kw">csb_missing</span>(csb, SRX, SRY)</a></code></pre></div>
 <p><code>csb_geo</code> is used to create a simple features object, which can then be manipulated spatially. It is mandatory that <code>csb_missing</code> is used prior. The coordinate reference system can be re-projected by specifying a numeric epsg code or a proj4 character string</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">csb_sf &lt;-<span class="st"> </span><span class="kw"><a href="../reference/csb_geo.html">csb_geo</a></span>(csb_no_missing, SRX, SRY)</code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">csb_sf &lt;-<span class="st"> </span><span class="kw">csb_geo</span>(csb_no_missing, SRX, SRY)</a></code></pre></div>
 <p><code>csb_intersection</code> is used to label, isolate, or remove observations that appear to occur at intersections. This is useful if you are only interested in residential properties for example.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/csb_intersection.html">csb_intersection</a></span>(csb, PROBADDRESS, intersection)
-<span class="kw"><a href="../reference/csb_intersection.html">csb_intersection</a></span>(csb, PROBADDRESS, <span class="dt">filter =</span> <span class="ot">TRUE</span>)
-<span class="kw"><a href="../reference/csb_intersection.html">csb_intersection</a></span>(csb, PROBADDRESS, <span class="dt">remove =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">csb_intersection</span>(csb, PROBADDRESS, intersection)</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw">csb_intersection</span>(csb, PROBADDRESS, <span class="dt">filter =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="kw">csb_intersection</span>(csb, PROBADDRESS, <span class="dt">remove =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p>If you prefer to work with these data in a traditional GIS program (QGIS, ArcGIS, etc.) the best way to export the data is using the <code>st_write()</code> function of the <code>sf</code> package.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">st_write</span>(csb_sf, <span class="st">"users/data/csb_calls.shp"</span>)</code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">st_write</span>(csb_sf, <span class="st">"users/data/csb_calls.shp"</span>)</a></code></pre></div>
 </div>
 <div id="time-and-date" class="section level2">
 <h2 class="hasAnchor">
 <a href="#time-and-date" class="anchor"></a>Time and Date</h2>
 <p>The package offers two functions for handling time and date.</p>
 <p><code>csb_date_filter</code> is used to filter observation for a specified time period. It is flexible in syntax and offers an argument to delete the original date variable.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/csb_date_filter.html">csb_date_filter</a></span>(csb, DATETIMEINIT, <span class="dt">day =</span> <span class="dv">1</span>)
-<span class="kw"><a href="../reference/csb_date_filter.html">csb_date_filter</a></span>(csb, DATETIMEINIT, <span class="dt">day =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">15</span>, <span class="dt">month =</span> <span class="dv">1</span>)
-<span class="kw"><a href="../reference/csb_date_filter.html">csb_date_filter</a></span>(csb, DATETIMEINIT, <span class="dt">month =</span> <span class="st">"January"</span>, <span class="dt">year =</span> <span class="dv">09</span>)
-<span class="kw"><a href="../reference/csb_date_filter.html">csb_date_filter</a></span>(csb, DATETIMEINIT, <span class="dt">month =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"jan"</span>, <span class="st">"feb"</span>, <span class="st">"Mar"</span>, <span class="st">"Apr"</span>), <span class="dt">year =</span> <span class="dv">2009</span>)
-<span class="kw"><a href="../reference/csb_date_filter.html">csb_date_filter</a></span>(csb, DATETIMEINIT, <span class="dt">day =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">15</span>, <span class="dt">month =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">6</span>, <span class="dt">year =</span> <span class="dv">08</span><span class="op">:</span><span class="dv">13</span>, <span class="dt">delete =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">csb_date_filter</span>(csb, DATETIMEINIT, <span class="dt">day =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="kw">csb_date_filter</span>(csb, DATETIMEINIT, <span class="dt">day =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">15</span>, <span class="dt">month =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="kw">csb_date_filter</span>(csb, DATETIMEINIT, <span class="dt">month =</span> <span class="st">"January"</span>, <span class="dt">year =</span> <span class="dv">09</span>)</a>
+<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="kw">csb_date_filter</span>(csb, DATETIMEINIT, <span class="dt">month =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"jan"</span>, <span class="st">"feb"</span>, <span class="st">"Mar"</span>, <span class="st">"Apr"</span>), <span class="dt">year =</span> <span class="dv">2009</span>)</a>
+<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="kw">csb_date_filter</span>(csb, DATETIMEINIT, <span class="dt">day =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">15</span>, <span class="dt">month =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">6</span>, <span class="dt">year =</span> <span class="dv">08</span><span class="op">:</span><span class="dv">13</span>, <span class="dt">delete =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p><code>csb_date_parse</code> is used to parse part of, or whole dates from observations. It too can delete the original date variable. Arguments are the names of the variables to be appended to the data.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/csb_date_parse.html">csb_date_parse</a></span>(csb, DATETIMEINIT, dayInit)
-<span class="kw"><a href="../reference/csb_date_parse.html">csb_date_parse</a></span>(csb, DATETIMEINIT, dayInit, monthInit)
-<span class="kw"><a href="../reference/csb_date_parse.html">csb_date_parse</a></span>(csb, DATETIMEINIT, <span class="dt">month =</span> monthInit)
-<span class="kw"><a href="../reference/csb_date_parse.html">csb_date_parse</a></span>(csb, DATETIMEINIT, <span class="dt">month =</span> monthInit, <span class="dt">year =</span> yearInit)
-<span class="kw"><a href="../reference/csb_date_parse.html">csb_date_parse</a></span>(csb, DATETIMEINIT, dayInit, monthInit, yearInit, <span class="dt">delete =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">csb_date_parse</span>(csb, DATETIMEINIT, dayInit)</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="kw">csb_date_parse</span>(csb, DATETIMEINIT, dayInit, monthInit)</a>
+<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="kw">csb_date_parse</span>(csb, DATETIMEINIT, <span class="dt">month =</span> monthInit)</a>
+<a class="sourceLine" id="cb10-4" data-line-number="4"><span class="kw">csb_date_parse</span>(csb, DATETIMEINIT, <span class="dt">month =</span> monthInit, <span class="dt">year =</span> yearInit)</a>
+<a class="sourceLine" id="cb10-5" data-line-number="5"><span class="kw">csb_date_parse</span>(csb, DATETIMEINIT, dayInit, monthInit, yearInit, <span class="dt">delete =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 </div>
 <div id="full-example-mapping-potential-vacant-properties-in-summer-2017" class="section level2">
 <h2 class="hasAnchor">
 <a href="#full-example-mapping-potential-vacant-properties-in-summer-2017" class="anchor"></a>Full Example: Mapping Potential Vacant Properties in Summer 2017</h2>
 <p>The following is an example of a full workflow for importing the data, filtering for vacancy indicating problem codes, filtering by time, removing observations with missing spatial data, projecting it to an sf object, and finally plotting it. Notice that the pipe operator <code>%&gt;%</code> from magrittr is used. This passes the output of the prior function to the first argument of the next function, reducing typing and making code easier to read.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">csb &lt;-<span class="st"> </span><span class="kw"><a href="../reference/csb_get_data.html">csb_get_data</a></span>()
-
-<span class="kw"><a href="../reference/csb_vacant.html">csb_vacant</a></span>(csb, PROBLEMCODE, vacant, <span class="dt">filter =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="../reference/csb_date_filter.html">csb_date_filter</a></span>(DATETIMEINIT, <span class="dt">month =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"June"</span>, <span class="st">"July"</span>, <span class="st">"Aug"</span>), <span class="dt">year =</span> <span class="dv">2017</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="../reference/csb_missing.html">csb_missing</a></span>(SRX, SRY, <span class="dt">filter =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="../reference/csb_intersection.html">csb_intersection</a></span>(PROBADDRESS, intersection, <span class="dt">remove =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="../reference/csb_geo.html">csb_geo</a></span>(SRX, SRY) -&gt;<span class="st"> </span>vacant_sf
-
-<span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(vacant_sf)</code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">csb &lt;-<span class="st"> </span><span class="kw">csb_get_data</span>()</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="kw">csb_vacant</span>(csb, PROBLEMCODE, vacant, <span class="dt">filter =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb11-4" data-line-number="4"><span class="st">  </span><span class="kw">csb_date_filter</span>(DATETIMEINIT, <span class="dt">month =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"June"</span>, <span class="st">"July"</span>, <span class="st">"Aug"</span>), <span class="dt">year =</span> <span class="dv">2017</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb11-5" data-line-number="5"><span class="st">  </span><span class="kw">csb_missing</span>(SRX, SRY, <span class="dt">filter =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb11-6" data-line-number="6"><span class="st">  </span><span class="kw">csb_intersection</span>(PROBADDRESS, intersection, <span class="dt">remove =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb11-7" data-line-number="7"><span class="st">  </span><span class="kw">csb_geo</span>(SRX, SRY) -&gt;<span class="st"> </span>vacant_sf</a>
+<a class="sourceLine" id="cb11-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb11-9" data-line-number="9"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(vacant_sf)</a></code></pre></div>
 </div>
 <div id="questions-recommendations-requests" class="section level2">
 <h2 class="hasAnchor">
 <a href="#questions-recommendations-requests" class="anchor"></a>Questions, Recommendations, Requests</h2>
-<p>This package is maintained by Christopher Prener, PhD. Please direct any correspondence to his email. (<a href="mailto:chris.prener@slu.edu">chris.prener@slu.edu</a>)</p>
+<p>This package is maintained by Christopher Prener, PhD. Please direct any correspondence to his email. (<a href="mailto:chris.prener@slu.edu" class="email">chris.prener@slu.edu</a>)</p>
 </div>
   </div>
 
@@ -180,7 +180,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Christopher Prener, Branson Fox.</p>
+  <p>Developed by <a href="https://chris-prener.github.io">Christopher Prener</a>, Branson Fox.</p>
 </div>
 
 <div class="pkgdown">
