@@ -57,8 +57,8 @@ csb_missingXY <- function(.data, varX, varY, newVar, filter = FALSE){
   options(scipen = 8) #this changes print behavior so that X00000 remains X00000 rather than Xe+05
 
   #Error checking for arguments
-  if(newVarN == ""&&isFALSE(filter)){stop("Please supply an argument for newVar OR filter")}
-  if(newVarN != ""&&isTRUE(filter)){warning("A logical is not appended if filter is TRUE")}
+  if(newVarN == ""&filter == FALSE){stop("Please supply an argument for newVar OR filter")}
+  if(newVarN != ""&filter == TRUE){warning("A logical is not appended if filter is TRUE")}
 
   ## if newVar is named
   # mutate function
@@ -72,17 +72,17 @@ csb_missingXY <- function(.data, varX, varY, newVar, filter = FALSE){
   }
 
   # The filter function
-  if (isTRUE(filter)){.data %>%
+  if (filter == TRUE){.data %>%
   dplyr::filter(nchar(!!varXN) >=6) %>%
   dplyr::filter(nchar(!!varYN) >=6) -> filtered
   }
 
   ## return based on filter argument
-  if(isTRUE(filter)){n <- (nrow(.data) - nrow(filtered))
+  if(filter == TRUE){n <- (nrow(.data) - nrow(filtered))
     message(paste0(n," observations were filtered out"))
     return(filtered)
     }
-  else if(isFALSE(filter)){return(out)}
+  else if(filter == FALSE){return(out)}
 
 }
 

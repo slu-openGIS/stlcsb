@@ -47,7 +47,7 @@ csb_vacant <- function(.data, var, newVar, filter = FALSE){
   .data %>% dplyr::mutate(!!newVarN := ifelse(!!varN %in% stlcsb::cat_vacant, TRUE, FALSE)) -> .data
 
   #Filter if neccessary
-  if(isTRUE(filter)){
+  if(filter==TRUE){
     .data %>% dplyr::filter(!!varN %in% stlcsb::cat_vacant) -> .data
   }
 

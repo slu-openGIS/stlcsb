@@ -35,11 +35,11 @@ csb_intersection <- function(.data, var, newVar, filter = FALSE, remove = FALSE)
     message('No argument specified for newVar, no logical will be appended')
   }
   #invalid arguments
-  if(isTRUE(filter)&&isTRUE(remove)){
+  if(filter == TRUE&remove == TRUE){
     stop('Use filter to select only intersections, use remove to remove intersections from the data')
   }
 
-  if(missing(newVar)&&isFALSE(filter)&&isFALSE(remove)){
+  if(missing(newVar)&filter == FALSE&remove == FALSE){
     stop('Please specify at least one argument for newVar, filter or remove')
   }
 
@@ -68,14 +68,14 @@ csb_intersection <- function(.data, var, newVar, filter = FALSE, remove = FALSE)
   }
 
   #filter for only intersections
-  if(isTRUE(filter)){
+  if(filter == TRUE){
     before <- nrow(.data) # counting
     .data %>% filter(stringr::str_detect(matchV, "@|&" )) -> .data
     after <- nrow(.data) # counting
     message(paste0(before-after, " observations were filtered out"))
   }
   #filter out intersections
-  if(isTRUE(remove)){
+  if(remove == TRUE){
     before <- nrow(.data) # counting
     .data %>% filter(!stringr::str_detect(matchV, "@|&" )) -> .data
     after <- nrow(.data) # counting
