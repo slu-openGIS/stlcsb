@@ -1,15 +1,15 @@
 #' Clean CSB geo to SF object
 #'
-#' @description \code{csb_geo} converts SRX and SRY data into a simple features object. You can write a shapefile directly from the output of this function using sf::st_write
+#' @description \code{csb_projectXY} converts SRX and SRY data into a simple features object. You can write a shapefile directly from the output of this function using sf::st_write
 #'
-#' @usage csb_geo(.data, varX, varY, crs = NULL)
+#' @usage csb_projectXY(.data, varX, varY, crs = NULL)
 #'
 #' @param .data A tibble with raw CSB data
 #' @param varX name of column containing SRX data
 #' @param varY name of column containing SRY data
 #' @param crs coordinate reference system for the data to be projected into
 #'
-#' @return \code{csb_geo} returns a sf object of the input data, specifying a new crs will reproject the data.
+#' @return \code{csb_projectXY} returns a sf object of the input data, specifying a new crs will reproject the data.
 #'
 #' @importFrom sf st_as_sf st_transform
 #' @importFrom rlang quo enquo sym :=
@@ -17,11 +17,11 @@
 #' @examples
 #' #You MUST remove observations with missing coordinates before using this function
 #' csb <- csb_missing(january_2018, SRX, SRX, filter = TRUE)
-#' csb_geo(csb, SRX, SRY)
-#' csb_geo(csb, SRX, SRY, crs = 4269)
+#' csb_projectXY(csb, SRX, SRY)
+#' csb_projectXY(csb, SRX, SRY, crs = 4269)
 #'
 #' @export
-csb_geo <- function(.data, varX, varY, crs = NULL){
+csb_projectXY <- function(.data, varX, varY, crs = NULL){
 ### Check input and Non-Standard evaluation
   ## check for missing parameters of required arguments
   if (missing(.data)) {

@@ -1,8 +1,8 @@
-#' Missing CSB data
+#' Missing spatial CSB data
 #'
-#' @description \code{csb_missing} returns a logical vector indicating `TRUE` if an observation is missing SRX or SRY data.
+#' @description \code{csb_missingXY} returns a logical vector indicating `TRUE` if an observation is missing SRX or SRY data.
 #'
-#' @usage csb_missing(.data, varX, varY, newVar, filter = FALSE)
+#' @usage csb_missingXY(.data, varX, varY, newVar, filter = FALSE)
 #'
 #' @param .data A tibble with raw CSB data
 #' @param varX name of column containing SRX data
@@ -10,18 +10,18 @@
 #' @param newVar if named, produces a new column with a logical indicator of incomplete spatial data
 #' @param filter if true, returns a filtered version of the data with only observations with complete spatial data
 #'
-#' @return \code{csb_missing} returns a logical vector indicating `TRUE` if an observation has incomplete spatial data, or a filtered version of the input data
+#' @return \code{csb_missingXY} returns a logical vector indicating `TRUE` if an observation has incomplete spatial data, or a filtered version of the input data
 #'
 #'
 #' @importFrom dplyr mutate filter
 #' @importFrom rlang quo enquo sym :=
 #'
 #' @examples
-#' \dontrun{csb_missing(january_2018, SRX, SRY, missing_geo)}
-#' csb_missing(january_2018, SRX, SRY, filter = TRUE)
+#' \dontrun{csb_missingXY(january_2018, SRX, SRY, missing_geo)}
+#' csb_missingXY(january_2018, SRX, SRY, filter = TRUE)
 #'
 #' @export
-csb_missing <- function(.data, varX, varY, newVar, filter = FALSE){
+csb_missingXY <- function(.data, varX, varY, newVar, filter = FALSE){
   ### Check input and Non-Standard evaluation
   ## check for missing parameters
   if (missing(.data)) {

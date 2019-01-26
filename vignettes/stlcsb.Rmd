@@ -52,14 +52,14 @@ csb_vacant(csb, PROBLEMCODE, vacant, filter = TRUE)
 
 The `stlcsb` package also provides helpful functions for dealing with spatial data.
 
-`csb_missing` is used to remove observations with incomplete or invalid spatial data.
+`csb_missingXY` is used to remove observations with incomplete or invalid spatial data.
 ```{r missing, eval=FALSE}
-csb_no_missing <- csb_missing(csb, SRX, SRY)
+csb_no_missing <- csb_missingXY(csb, SRX, SRY)
 ```
 
-`csb_geo` is used to create a simple features object, which can then be manipulated spatially. It is mandatory that `csb_missing` is used prior. The coordinate reference system can be re-projected by specifying a numeric epsg code or a proj4 character string 
+`csb_projectXY` is used to create a simple features object, which can then be manipulated spatially. It is mandatory that `csb_missingXY` is used prior. The coordinate reference system can be re-projected by specifying a numeric epsg code or a proj4 character string 
 ```{r geo, eval=FALSE}
-csb_sf <- csb_geo(csb_no_missing, SRX, SRY)
+csb_sf <- csb_projectXY(csb_no_missing, SRX, SRY)
 ```
 
 `csb_intersection` is used to label, isolate, or remove observations that appear to occur at intersections. This is useful if you are only interested in residential properties for example.
@@ -103,9 +103,9 @@ csb <- csb_get_data()
 
 csb_vacant(csb, PROBLEMCODE, vacant, filter = TRUE) %>%
   csb_date_filter(DATETIMEINIT, month = c("June", "July", "Aug"), year = 2017) %>%
-  csb_missing(SRX, SRY, filter = TRUE) %>%
+  csb_missingXY(SRX, SRY, filter = TRUE) %>%
   csb_intersection(PROBADDRESS, intersection, remove = TRUE) %>%
-  csb_geo(SRX, SRY) -> vacant_sf
+  csb_projectXY(SRX, SRY) -> vacant_sf
 
 plot(vacant_sf)
 ```
