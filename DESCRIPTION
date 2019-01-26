@@ -1,9 +1,10 @@
 Package: stlcsb
 Type: Package
 Title: Tidy Manipulation of CSB Data for St. Louis
-Version: 0.1.0
+Version: 1.0.0
 Authors@R: c(
-    person("Christopher", "Prener", ,"chris.prener@slu.edu", c("aut", "cre")),
+    person("Christopher", "Prener", ,"chris.prener@slu.edu", c("aut", "cre"),
+    comment = c(ORCID = "0000-0002-4310-9888")),
     person("Branson", "Fox", ,"branson.fox@slu.edu", c("aut"))
     )
 Description: stlcsb is used for easily accessing data from the Citizens' Service Bureau of the City of St. Louis. It provides useful functions for the categorization of problem requests, as well as functions for filtering and projecting the data spatially.
