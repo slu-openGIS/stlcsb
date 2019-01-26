@@ -39,6 +39,7 @@ csb_get_data <- function(){
   path9 <- "/2016.csv"
   path10 <- "/2017.csv"
   path11 <- "/2018.csv"
+  path12 <- "/2019.csv"
 
   # create temporary directory, download and unzip data
   tmpdir <- tempdir()
@@ -204,13 +205,27 @@ csb_get_data <- function(){
   NEIGHBORHOOD = col_integer(),
   WARD = col_integer()
   )))
+  suppressWarnings(y2019 <- readr::read_csv(
+    paste0(tmpdir,path12),
+    col_types = cols(
+      PROBZIP = col_integer(),
+      DATETIMEINIT = col_character(),
+      DATETIMECLOSED = col_character(),
+      SRX = col_double(),
+      SRY = col_double(),
+      PRJCOMPLETEDATE = col_character(),
+      DATECANCELLED = col_character(),
+      DATEINVTDONE = col_character(),
+      NEIGHBORHOOD = col_integer(),
+      WARD = col_integer()
+    )))
 
   # remove temp directory and objects
   unlink(tmpdir)
-  rm(path1, path2, path3, path4, path5, path6, path7, path8, path9, path10, path11, url)
+  rm(path1, path2, path3, path4, path5, path6, path7, path8, path9, path10, path11, path12, url)
 
   # combine data frames
-  STL_CSB_RawRequests <- dplyr::as_tibble(dplyr::bind_rows(y2008, y2009, y2010, y2011, y2012, y2013, y2014, y2015, y2016, y2017, y2018))
+  STL_CSB_RawRequests <- dplyr::as_tibble(dplyr::bind_rows(y2008, y2009, y2010, y2011, y2012, y2013, y2014, y2015, y2016, y2017, y2018, y2019))
 
   message(paste0("Data Last Modified ", messageRegex))
   return(STL_CSB_RawRequests)
