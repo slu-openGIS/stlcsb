@@ -3,7 +3,7 @@
 #' @description \code{csb_projectXY} converts SRX and SRY data into a simple features object.
 #'     You can write a shapefile directly from the output of this function using \link{sf::st_write}.
 #'
-#' @usage csb_projectXY(.data, varX, varY, crs = NULL)
+#' @usage csb_projectXY(.data, varX, varY, crs)
 #'
 #' @param .data A tibble with raw CSB data
 #' @param varX Name of column containing SRX data

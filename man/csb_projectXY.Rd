@@ -4,22 +4,24 @@
 \alias{csb_projectXY}
 \title{Clean CSB geo to SF object}
 \usage{
-csb_projectXY(.data, varX, varY, crs = NULL)
+csb_projectXY(.data, varX, varY, crs)
 }
 \arguments{
 \item{.data}{A tibble with raw CSB data}
 
-\item{varX}{name of column containing SRX data}
+\item{varX}{Name of column containing SRX data}
 
-\item{varY}{name of column containing SRY data}
+\item{varY}{Name of column containing SRY data}
 
-\item{crs}{coordinate reference system for the data to be projected into}
+\item{crs}{Optional; coordinate reference system for the data to be projected into}
 }
 \value{
-\code{csb_projectXY} returns a sf object of the input data, specifying a new crs will reproject the data.
+\code{csb_projectXY} returns a sf object of the input data, specifying a new crs will
+    reproject the data.
 }
 \description{
-\code{csb_projectXY} converts SRX and SRY data into a simple features object. You can write a shapefile directly from the output of this function using sf::st_write
+\code{csb_projectXY} converts SRX and SRY data into a simple features object.
+    You can write a shapefile directly from the output of this function using \link{sf::st_write}.
 }
 \examples{
 #You MUST remove observations with missing coordinates before using this function
