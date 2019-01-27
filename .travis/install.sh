@@ -32,7 +32,7 @@ if [[ $TRAVIS_OS_NAME == 'linux' ]]; then
   createdb postgis
   psql -d postgis -c "CREATE EXTENSION postgis;"
   psql -d postgis -c "GRANT CREATE ON DATABASE postgis TO travis"
-  psql -d postgis -f statePlane.sql
+  # psql -d postgis -f statePlane.sql
   createdb empty
   psql -d empty -c "CREATE EXTENSION postgis;"
 
