@@ -21,7 +21,7 @@ csb_projectXY(.data, varX, varY, crs)
 }
 \description{
 \code{csb_projectXY} converts SRX and SRY data into a simple features object.
-    You can write a shapefile directly from the output of this function using \link{sf::st_write}.
+    You can write a shapefile directly from the output of this function using \code{sf::st_write}.
 }
 \examples{
 #You MUST remove observations with missing coordinates before using this function

@@ -1,7 +1,7 @@
 #' Clean CSB geo to SF object
 #'
 #' @description \code{csb_projectXY} converts SRX and SRY data into a simple features object.
-#'     You can write a shapefile directly from the output of this function using \link{sf::st_write}.
+#'     You can write a shapefile directly from the output of this function using \code{sf::st_write}.
 #'
 #' @usage csb_projectXY(.data, varX, varY, crs)
 #'
@@ -51,7 +51,7 @@ csb_projectXY <- function(.data, varX, varY, crs){
   out <- sf::st_as_sf(.data, coords = c(x = varXN, y = varYN), crs = 102696)
 
   # optionally reproject
-  if(!is.null(crs)){
+  if(!missing(crs)){
 
     out <- sf::st_transform(out, crs = crs)
 
