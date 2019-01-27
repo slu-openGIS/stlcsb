@@ -35,6 +35,5 @@ if [[ $TRAVIS_OS_NAME == 'linux' ]]; then
   psql -d postgis -f statePlane.sql
   createdb empty
   psql -d empty -c "CREATE EXTENSION postgis;"
-  psql -d empty -f statePlane.sql
 
 fi
