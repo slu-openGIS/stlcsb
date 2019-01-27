@@ -30,3 +30,10 @@ test_that("Proper function of parsing", {
   expect_equal(tstmonth, expmonth)
   expect_equal(tstyear, expyear)
 })
+
+# test deleting ---------------------------------
+tstdel <- csb_date_parse(test_data, "DATETIMEINIT", day = DAYINIT, delete = TRUE)
+
+test_that("Deleting the Original Variable works", {
+  expect_length(tstdel, 19)
+})

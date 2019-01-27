@@ -32,3 +32,10 @@ Routput <- unlist(csb_intersection(test_data, PROBADDRESS, remove = T)[1])
 test_that("Removing works properly", {
   expect_length(Routput, 6)
 })
+
+# test appending logical ------------------------
+logicTst <- csb_intersection(test_data, "PROBADDRESS", newVar = intersection)
+
+test_that("Appending a logical for intersection works", {
+  expect_length(logicTst, 20)
+})

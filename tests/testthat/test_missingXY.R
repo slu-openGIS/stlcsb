@@ -34,3 +34,8 @@ Foutput <- unlist(csb_missingXY(test_data, SRX, SRY, filter = T)[1])
 test_that("Filtering works", {
   expect_length(Foutput, 6)
 })
+
+# check character input --------------------------
+test_that("Character input works", {
+  expect_length(csb_missingXY(test_data, "SRX", "SRY", newVar = missing), 20)
+})

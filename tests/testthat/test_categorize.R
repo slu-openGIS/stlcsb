@@ -12,7 +12,7 @@ test_that("Missing input errors triggered", {
 })
 
 # test categorization ---------------------------
-output <- unlist(csb_categorize(test_data, PROBLEMCODE, Category)["Category"])
+output <- unlist(csb_categorize(test_data, "PROBLEMCODE", Category)["Category"])
 names(output) <- NULL
 expected <- c("Traffic", "Debris", "Waste", "Debris", "Waste", "Degrade", "Landscape")
 

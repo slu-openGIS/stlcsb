@@ -12,3 +12,11 @@ test_that("Missing input errors triggered", {
   expect_error(csb_projectXY(test_data, SRX), "Please provide an argument for varY")
   expect_error(csb_projectXY(test_data, SRX, SRY), "Please use the csb_missing with filter = TRUE to remove invalid spatial data before using this function.", fixed = TRUE)
 })
+
+# test projection to sf object ------------------
+valid <- csb_missingXY(test_data, SRX, SRY, filter = TRUE)
+sfOut <- csb_projectXY(valid, SRX, SRY, crs = 4326)
+
+test_that("Projection to sf works", {
+  expect_equal(class(sfOut)[1], "sf")
+})

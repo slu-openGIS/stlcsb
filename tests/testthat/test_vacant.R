@@ -20,7 +20,7 @@ test_that("Logical appending works", {
 })
 
 # test filtering --------------------------------
-Foutput <- unlist(csb_vacant(test_data, PROBLEMCODE, vacant, filter = T)[1])
+Foutput <- unlist(csb_vacant(test_data, "PROBLEMCODE", vacant, filter = T)[1])
 
 test_that("Filtering works", {
   expect_length(Foutput, 2)

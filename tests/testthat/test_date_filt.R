@@ -9,6 +9,7 @@ test_that("Missing input errors triggered", {
   expect_error(csb_date_filter(), "Please provide an argument for .data")
   expect_error(csb_date_filter(test_data), "Please provide an argument for var")
   expect_error(csb_date_filter(test_data, DATETIMEINIT), "Please provide at least one argument for day, month or year")
+  expect_error(csb_date_filter(test_data, DATETIMEINIT, year = 2007), "The year variable is an invalid argument")
 })
 
 # test messaging -------------------------------
@@ -37,4 +38,18 @@ test_that("Filtering for year", {
 
 test_that("Filtering for all arguments", {
   expect_length(tstall, 1)
+})
+
+# test alternate forms of entry-------------------
+tstaltMonth <- unlist(csb_date_filter(test_data, "DATETIMEINIT", month = c("jan", "feb", "mar", "may","jun","jul","aug","sep","oct","nov","dec"))["DATETIMEINIT"])
+
+test_that("Month alternate entry works", {
+  expect_length(tstaltMonth, 5)
+})
+
+# test deleting ---------------------------------
+tstdel <- csb_date_filter(test_data, DATETIMEINIT, day = 8, delete = TRUE)
+
+test_that("Deleting the Original Variable works", {
+  expect_length(tstdel, 18)
 })

@@ -20,7 +20,7 @@ test_that("Messaging works properly", {
 })
 
 # test filtering ----------------------------------
-output <- unlist(csb_filter(test_data, PROBLEMCODE, category = cat_waste)[1])
+output <- unlist(csb_filter(test_data, "PROBLEMCODE", category = cat_waste)[1])
 
 test_that("Filtering works properly", {
   expect_length(output, 2)
