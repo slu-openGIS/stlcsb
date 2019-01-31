@@ -22,33 +22,33 @@
 #'
 #' @export
 csb_missingXY <- function(.data, varX, varY, newVar, filter = FALSE){
-  ### Check input and Non-Standard evaluation
-  ## check for missing parameters
+
+  # check for missing parameters
   if (missing(.data)) {
     stop('Please provide an argument for .data')
   }
+
   if (missing(varX)) {
     stop('Please provide an argument for varX')
   }
+
   if (missing(varY)) {
     stop('Please provide an argument for varY')
   }
 
-  ## NSE Setup
   # save parameters to list
   paramList <- as.list(match.call())
 
   # quote input variables
   if (!is.character(paramList$varX)) {
     varXN <- rlang::enquo(varX)
-  }
-  else if (is.character(paramList$varX)) {
+  } else if (is.character(paramList$varX)) {
     varXN <- rlang::quo(!! rlang::sym(varX))
   }
+
   if (!is.character(paramList$varY)) {
     varYN <- rlang::enquo(varY)
-  }
-  else if (is.character(paramList$varY)) {
+  } else if (is.character(paramList$varY)) {
     varYN <- rlang::quo(!! rlang::sym(varY))
   }
 
@@ -57,12 +57,18 @@ csb_missingXY <- function(.data, varX, varY, newVar, filter = FALSE){
   options(scipen = 8) #this changes print behavior so that X00000 remains X00000 rather than Xe+05
 
   #Error checking for arguments
-  if(newVarN == ""&filter == FALSE){stop("Please supply an argument for newVar OR filter")}
-  if(newVarN != ""&filter == TRUE){warning("A logical is not appended if filter is TRUE")}
+  if(newVarN == "" & filter == FALSE){
+    stop("Please supply an argument for newVar OR filter")
+  }
 
-  ## if newVar is named
-  # mutate function
-  if(newVarN != ""){.data %>%
+  if(newVarN != "" & filter == TRUE){
+    warning("A logical is not appended if filter is TRUE")
+  }
+
+  # if newVar is named
+  if(newVarN != ""){
+
+    .data %>%
       dplyr::mutate(!!newVarN := case_when(
         is.na(!!varXN)|is.na(!!varYN) ~ TRUE,
         nchar(!!varXN) < 6 | nchar(!!varYN) < 6 ~ TRUE,
@@ -71,18 +77,25 @@ csb_missingXY <- function(.data, varX, varY, newVar, filter = FALSE){
 
   }
 
-  # The filter function
-  if (filter == TRUE){.data %>%
-  dplyr::filter(nchar(!!varXN) >=6) %>%
-  dplyr::filter(nchar(!!varYN) >=6) -> filtered
+  # if filter
+  if (filter == TRUE){
+
+    .data %>%
+      dplyr::filter(nchar(!!varXN) >=6) %>%
+      dplyr::filter(nchar(!!varYN) >=6) -> filtered
+
   }
 
   ## return based on filter argument
-  if(filter == TRUE){n <- (nrow(.data) - nrow(filtered))
+  if(filter == TRUE){
+    n <- (nrow(.data) - nrow(filtered))
+
     message(paste0(n," observations were filtered out"))
+
     return(filtered)
-    }
-  else if(filter == FALSE){return(out)}
+
+  } else if(filter == FALSE){
+    return(out)
+  }
 
 }
-
