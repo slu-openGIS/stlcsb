@@ -4,16 +4,17 @@
 \alias{csb_filter}
 \title{Filter CSB Data}
 \usage{
-csb_filter(.data, var, newVar, category)
+csb_filter(.data, var, category)
 }
 \arguments{
 \item{.data}{A tibble with raw CSB data}
 
 \item{var}{name of the column containg original problem code data}
 
-\item{newVar}{name of column containing categories. NULL by default, but if specified will produce a new column.}
-
-\item{category}{a vector with the unquoted name(s) of the category(s) for the function to return. You can also explicitly state quoted PROBLEMCODE(s). Valid categories are: (admin, animal, construction, debris, degrade, disturbance, event, health, landscape, law, maintenance, nature, road, sewer, traffic, vacant, waste)}
+\item{category}{a vector with the unquoted name(s) of the category(s) for the function to return.
+You can also explicitly state quoted PROBLEMCODE(s). Valid categories are: admin, animal,
+construction, debris, degrade, disturbance, event, health, landscape, law, maintenance, nature,
+road, sewer, traffic, vacant, and waste.}
 }
 \value{
 \code{csb_filter} returns data with an additional variable for an intelligible category for CSB requests.
@@ -22,7 +23,7 @@ csb_filter(.data, var, newVar, category)
 \code{csb_filter} retuns observations that match any combination of 17 predefined categories.
 }
 \examples{
-csb_filter(january_2018, PROBLEMCODE, Category, category = c(cat_waste, cat_debris))
-csb_filter(january_2018, PROBLEMCODE, category = cat_vacant)
+csb_filter(january_2018, var = PROBLEMCODE, category = c(cat_waste, cat_debris))
+csb_filter(january_2018, var = PROBLEMCODE, category = cat_vacant)
 
 }

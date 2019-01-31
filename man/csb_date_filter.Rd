@@ -23,7 +23,7 @@ csb_date_filter(.data, var, day, month, year, delete = FALSE)
 \code{csb_date_filter} returns a filtered version of the input data based on specified arguments
 }
 \description{
-\code{csb_date_filter} Filters dates to return only the specified date elements
+\code{csb_date_filter} filters dates to return only the specified date elements
 }
 \examples{
 csb_date_filter(january_2018, DATETIMEINIT, day = 1)

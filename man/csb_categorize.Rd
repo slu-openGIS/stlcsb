@@ -17,7 +17,7 @@ csb_categorize(.data, var, newVar)
 \code{csb_categorize} returns data with an additional variable for an intelligible category for CSB requests.
 }
 \description{
-\code{csb_categorize} provides intelligible categories for the CSB data based on problem code.
+\code{csb_categorize} provides general categories for the CSB data based on problem code.
 }
 \examples{
 csb_categorize(january_2018, PROBLEMCODE, Category)
