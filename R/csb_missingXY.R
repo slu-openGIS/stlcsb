@@ -1,17 +1,18 @@
 #' Missing spatial CSB data
 #'
-#' @description \code{csb_missingXY} returns a logical vector indicating `TRUE` if an observation is missing SRX or SRY data.
+#' @description \code{csb_missingXY} returns a logical vector indicating if an
+#'     observation is missing in either of the coordinate columns that come
+#'     with the CSB data.
 #'
-#' @usage csb_missingXY(.data, varX, varY, newVar, filter = FALSE)
+#' @usage csb_missingXY(.data, varX, varY, newVar)
 #'
-#' @param .data A tibble with raw CSB data
+#' @param .data A tbl
 #' @param varX name of column containing SRX data
 #' @param varY name of column containing SRY data
-#' @param newVar if named, produces a new column with a logical indicator of incomplete spatial data
-#' @param filter if true, returns a filtered version of the data with only observations with complete spatial data
+#' @param newVar name of new column that is \code{TRUE} if coordinate data are
+#'     missing and \code{FALSE} otherwise.
 #'
-#' @return \code{csb_missingXY} returns a logical vector indicating `TRUE` if an observation has incomplete spatial data, or a filtered version of the input data
-#'
+#' @return \code{csb_missingXY} A tbl with a logical vector appended to it.
 #'
 #' @importFrom dplyr filter
 #' @importFrom dplyr mutate
@@ -22,11 +23,13 @@
 #' @importFrom rlang sym
 #'
 #' @examples
-#' \dontrun{csb_missingXY(january_2018, SRX, SRY, missing_geo)}
-#' csb_missingXY(january_2018, SRX, SRY, filter = TRUE)
+#' csb_missingXY(january_2018, SRX, SRY, newVar = "missingXY")
 #'
 #' @export
-csb_missingXY <- function(.data, varX, varY, newVar, filter = FALSE){
+csb_missingXY <- function(.data, varX, varY, newVar){
+
+  # global variables
+  ...missingXY = NULL
 
   # check for missing parameters
   if (missing(.data)) {
@@ -34,11 +37,15 @@ csb_missingXY <- function(.data, varX, varY, newVar, filter = FALSE){
   }
 
   if (missing(varX)) {
-    stop('Please provide an argument for varX')
+    stop('Please provide an argument for varY with the variable name for the column with x coordinate data.')
   }
 
   if (missing(varY)) {
-    stop('Please provide an argument for varY')
+    stop('Please provide an argument for varY with the variable name for the column with y coordinate data.')
+  }
+
+  if (missing(newVar)) {
+    stop('Please provide an argument for newVar with a new variable name.')
   }
 
   # save parameters to list
@@ -57,50 +64,19 @@ csb_missingXY <- function(.data, varX, varY, newVar, filter = FALSE){
     varYN <- rlang::quo(!! rlang::sym(varY))
   }
 
-  newVarN <- rlang::quo_name(rlang::enquo(newVar))
+  newVarNQ <- rlang::quo_name(rlang::enquo(newVar))
 
-  options(scipen = 8) #this changes print behavior so that X00000 remains X00000 rather than Xe+05
+  # create column
+  .data %>%
+    dplyr::mutate(...missingXY := case_when(
+      is.na(!!varXN) | is.na(!!varYN) ~ TRUE,
+      !!varXN == 0 | !!varYN == 0 ~ TRUE,
+      !!varXN == 1 | !!varYN == 1 ~ TRUE
+    )) %>%
+    dplyr::mutate(...missingXY := ifelse(is.na(...missingXY) == TRUE, FALSE, ...missingXY)) %>%
+    dplyr::rename(!!newVarNQ := ...missingXY) -> out
 
-  #Error checking for arguments
-  if(newVarN == "" & filter == FALSE){
-    stop("Please supply an argument for newVar OR filter")
-  }
-
-  if(newVarN != "" & filter == TRUE){
-    warning("A logical is not appended if filter is TRUE")
-  }
-
-  # if newVar is named
-  if(newVarN != ""){
-
-    .data %>%
-      dplyr::mutate(!!newVarN := case_when(
-        is.na(!!varXN)|is.na(!!varYN) ~ TRUE,
-        nchar(!!varXN) < 6 | nchar(!!varYN) < 6 ~ TRUE,
-        nchar(!!varXN) >= 6 | nchar(!!varYN) >= 6 ~ FALSE
-      )) -> out
-
-  }
-
-  # if filter
-  if (filter == TRUE){
-
-    .data %>%
-      dplyr::filter(nchar(!!varXN) >=6) %>%
-      dplyr::filter(nchar(!!varYN) >=6) -> filtered
-
-  }
-
-  ## return based on filter argument
-  if(filter == TRUE){
-    n <- (nrow(.data) - nrow(filtered))
-
-    message(paste0(n," observations were filtered out"))
-
-    return(filtered)
-
-  } else if(filter == FALSE){
-    return(out)
-  }
+  ## return output
+  return(out)
 
 }

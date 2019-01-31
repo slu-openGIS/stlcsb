@@ -4,27 +4,27 @@
 \alias{csb_missingXY}
 \title{Missing spatial CSB data}
 \usage{
-csb_missingXY(.data, varX, varY, newVar, filter = FALSE)
+csb_missingXY(.data, varX, varY, newVar)
 }
 \arguments{
-\item{.data}{A tibble with raw CSB data}
+\item{.data}{A tbl}
 
 \item{varX}{name of column containing SRX data}
 
 \item{varY}{name of column containing SRY data}
 
-\item{newVar}{if named, produces a new column with a logical indicator of incomplete spatial data}
-
-\item{filter}{if true, returns a filtered version of the data with only observations with complete spatial data}
+\item{newVar}{name of new column that is \code{TRUE} if coordinate data are
+missing and \code{FALSE} otherwise.}
 }
 \value{
-\code{csb_missingXY} returns a logical vector indicating `TRUE` if an observation has incomplete spatial data, or a filtered version of the input data
+\code{csb_missingXY} A tbl with a logical vector appended to it.
 }
 \description{
-\code{csb_missingXY} returns a logical vector indicating `TRUE` if an observation is missing SRX or SRY data.
+\code{csb_missingXY} returns a logical vector indicating if an
+    observation is missing in either of the coordinate columns that come
+    with the CSB data.
 }
 \examples{
-\dontrun{csb_missingXY(january_2018, SRX, SRY, missing_geo)}
-csb_missingXY(january_2018, SRX, SRY, filter = TRUE)
+csb_missingXY(january_2018, SRX, SRY, newVar = "missingXY")
 
 }

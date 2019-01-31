@@ -14,7 +14,8 @@ test_that("Missing input errors triggered", {
 })
 
 # test projection to sf object ------------------
-valid <- csb_missingXY(test_data, SRX, SRY, filter = TRUE)
+valid <- csb_missingXY(test_data, SRX, SRY, newVar = missing)
+valid <- dplyr::filter(valid, missing == FALSE)
 sfOut <- csb_projectXY(valid, SRX, SRY, crs = 4326)
 
 test_that("Projection to sf works", {

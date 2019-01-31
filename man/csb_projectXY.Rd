@@ -25,7 +25,8 @@ csb_projectXY(.data, varX, varY, crs)
 }
 \examples{
 #You MUST remove observations with missing coordinates before using this function
-csb <- csb_missingXY(january_2018, SRX, SRX, filter = TRUE)
+csb <- csb_missingXY(january_2018, SRX, SRX, newVar = missing)
+csb <- dplyr::filter(csb, missing == FALSE)
 csb_projectXY(csb, SRX, SRY)
 csb_projectXY(csb, SRX, SRY, crs = 4269)
 
