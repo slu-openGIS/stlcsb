@@ -7,7 +7,7 @@
 csb_categorize(.data, var, newVar)
 }
 \arguments{
-\item{.data}{A tibble with raw CSB data}
+\item{.data}{A tbl}
 
 \item{var}{Name of orginal variable containing problem code}
 

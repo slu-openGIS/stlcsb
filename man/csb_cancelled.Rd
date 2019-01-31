@@ -24,5 +24,6 @@ Subsets data to remove any call with a date and time cancelled.
 }
 \examples{
 csb_cancelled(january_2018, var = "DATECANCELLED")
+csb_cancelled(january_2018, var = "DATECANCELLED", drop = FALSE)
 
 }

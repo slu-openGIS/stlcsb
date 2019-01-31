@@ -4,7 +4,7 @@
 #'
 #' @usage csb_date_filter(.data, var, day, month, year, delete = FALSE)
 #'
-#' @param .data A tibble with raw CSB data
+#' @param .data A tbl
 #' @param var name of column containing date data
 #' @param day numeric vector of day(s) to include.
 #' @param month numeric/character vector of month(s) to include

@@ -4,7 +4,7 @@
 #'
 #' @usage csb_date_parse(.data, var, day, month, year, delete = FALSE)
 #'
-#' @param .data A tibble with raw CSB data
+#' @param .data A tbl
 #' @param var name of column containing date data
 #' @param day if specified, returns a named column with parsed day
 #' @param month if specified, returns a named column with parsed month

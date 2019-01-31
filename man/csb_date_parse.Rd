@@ -7,7 +7,7 @@
 csb_date_parse(.data, var, day, month, year, delete = FALSE)
 }
 \arguments{
-\item{.data}{A tibble with raw CSB data}
+\item{.data}{A tbl}
 
 \item{var}{name of column containing date data}
 

@@ -5,7 +5,7 @@
 #'
 #' @usage csb_projectXY(.data, varX, varY, crs)
 #'
-#' @param .data A tibble with raw CSB data
+#' @param .data A tbl
 #' @param varX Name of column containing SRX data
 #' @param varY Name of column containing SRY data
 #' @param crs Optional; coordinate reference system for the data to be projected into

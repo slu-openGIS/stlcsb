@@ -4,7 +4,7 @@
 #'
 #' @usage csb_vacant(.data, var, newVar, filter = FALSE)
 #'
-#' @param .data A tibble with raw CSB data
+#' @param .data A tbl
 #' @param var name of column containing problem codes
 #' @param newVar name of output variable to be created with vacant logical
 #' @param filter If true, returns a filtered version of the input with only vacancy related problem codes

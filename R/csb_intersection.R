@@ -4,7 +4,7 @@
 #'
 #' @usage csb_intersection(.data, var, newVar, filter = FALSE, remove = FALSE)
 #'
-#' @param .data A tibble with raw CSB data
+#' @param .data A tbl
 #' @param var name of column containing address
 #' @param newVar Name of output variable to be created with logical
 #' @param filter If true, returns a filtered version of the input with only observations occurring at intersections

@@ -7,7 +7,7 @@
 csb_projectXY(.data, varX, varY, crs)
 }
 \arguments{
-\item{.data}{A tibble with raw CSB data}
+\item{.data}{A tbl}
 
 \item{varX}{Name of column containing SRX data}
 

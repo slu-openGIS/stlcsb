@@ -7,7 +7,7 @@
 csb_vacant(.data, var, newVar, filter = FALSE)
 }
 \arguments{
-\item{.data}{A tibble with raw CSB data}
+\item{.data}{A tbl}
 
 \item{var}{name of column containing problem codes}
 
