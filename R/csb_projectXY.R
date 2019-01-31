@@ -29,14 +29,16 @@ csb_projectXY <- function(.data, varX, varY, crs){
   if (missing(.data)) {
     stop('Please provide an argument for .data')
   }
+
   if (missing(varX)) {
     stop('Please provide an argument for varX')
   }
+
   if (missing(varY)) {
     stop('Please provide an argument for varY')
   }
 
-  # NSE setup
+  # quote inputs
   varXN <- rlang::quo_name(rlang::enquo(varX))
   varYN <- rlang::quo_name(rlang::enquo(varY))
 
