@@ -9,7 +9,7 @@ test_that("Missing input errors triggered", {
   expect_error(csb_date_filter(), "Please provide an argument for .data")
   expect_error(csb_date_filter(test_data), "Please provide an argument for var")
   expect_error(csb_date_filter(test_data, DATETIMEINIT), "Please provide at least one argument for day, month or year")
-  expect_error(csb_date_filter(test_data, DATETIMEINIT, year = 2007), "The year variable is an invalid argument")
+  expect_error(csb_date_filter(test_data, DATETIMEINIT, year = 2007), "The year given is not valid for these data.")
 })
 
 # test messaging -------------------------------

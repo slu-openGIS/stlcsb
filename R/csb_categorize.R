@@ -1,6 +1,6 @@
 #' Categorize Raw CSB Data
 #'
-#' @description \code{csb_categorize} provides intelligible categories for the CSB data based on problem code.
+#' @description \code{csb_categorize} provides general categories for the CSB data based on problem code.
 #'
 #' @usage csb_categorize(.data, var, newVar)
 #'
@@ -19,7 +19,8 @@
 #'
 #' @export
 csb_categorize <- function(.data, var, newVar){
-#MISSING AND NSE SETUP
+
+  # check for missing parameters
   if (missing(.data)) {
     stop('Please provide an argument for .data')
   }
@@ -29,20 +30,20 @@ csb_categorize <- function(.data, var, newVar){
   if (missing(newVar)) {
     stop('Please provide an argument for newVar')
   }
+
   # save parameters to list for quoting
   paramList <- as.list(match.call())
 
-  # and quote input variables
+  # quote input variables
   if (!is.character(paramList$var)) {
     varN <- rlang::enquo(var)
-  }
-  else if (is.character(paramList$var)) {
+  } else if (is.character(paramList$var)) {
     varN <- rlang::quo(!! rlang::sym(var))
   }
 
   newVarN <- rlang::quo_name(rlang::enquo(newVar))
-#ASSIGN CATEGORIES
-  # Then we use a mutate function to assign categories
+
+  # assign categories
   .data %>%
     dplyr::mutate(!!newVarN := dplyr::case_when(
              !!varN %in% stlcsb::cat_admin ~ "Admin",
@@ -60,9 +61,9 @@ csb_categorize <- function(.data, var, newVar){
              !!varN %in% stlcsb::cat_road ~ "Road",
              !!varN %in% stlcsb::cat_sewer ~ "Sewer",
              !!varN %in% stlcsb::cat_traffic ~ "Traffic",
-             !!varN %in% stlcsb::cat_waste ~ "Waste")) -> pm
+             !!varN %in% stlcsb::cat_waste ~ "Waste")) -> out
 
-  # return the data again with categories
-  return(pm)
+  # return output
+  return(out)
 
 }

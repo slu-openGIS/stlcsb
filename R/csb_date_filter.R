@@ -1,6 +1,6 @@
 #' Filter CSB date
 #'
-#' @description \code{csb_date_filter} Filters dates to return only the specified date elements
+#' @description \code{csb_date_filter} filters dates to return only the specified date elements
 #'
 #' @usage csb_date_filter(.data, var, day, month, year, delete = FALSE)
 #'
@@ -32,10 +32,10 @@ csb_date_filter <- function(.data, var, day = NULL, month = NULL, year = NULL, d
     stop('Please provide an argument for .data')
   }
   if (missing(var)) {
-    stop('Please provide an argument for var')
+    stop('Please provide an argument for var.')
   }
-  if (missing(day)&&missing(month)&&missing(year)){
-    stop('Please provide at least one argument for day, month or year')
+  if (missing(day) & missing(month) & missing(year)){
+    stop('Please provide at least one argument for day, month or year.')
   }
 
   # save parameters to list
@@ -58,13 +58,20 @@ csb_date_filter <- function(.data, var, day = NULL, month = NULL, year = NULL, d
 
 # Correction and checking for year
   # correct too short of a year entry
-  if(is.numeric(year)&&nchar(year) < 4){year <- 2000 + year}
+  if(is.numeric(year) && nchar(year) < 4){
+    year <- 2000 + year
+  }
 
   #check that year entry is valid for csb data, warn for entry of 2008.
-  if(!missing(year)&&!(year %in% c(2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019))){stop("The year variable is an invalid argument")}
-  if(!missing(year)&&(2008 %in% year)){message("2008 only contains traffic requests")}
+  if(!missing(year) && !(year %in% c(2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019))){
+    stop("The year given is not valid for these data.")
+  }
 
-# Correction and checking for month
+  if(!missing(year) && (2008 %in% year)){
+    message("2008 only contains traffic requests")
+  }
+
+  # Correction and checking for month
   # vectors for alternative month entry formats
   jan <- c('January', 'january', 'Jan', 'jan')
   feb <- c('February', 'february', 'Feb', 'feb')
@@ -79,45 +86,61 @@ csb_date_filter <- function(.data, var, day = NULL, month = NULL, year = NULL, d
   nov <- c('November', 'november', 'Nov', 'nov')
   dec <- c('December', 'december', 'Dec', 'dec')
 
-if(is.character(month)){
-  monthF <- c()
-  for(i in month){
-    if(i %in% jan){monthF <- append(monthF, 1)}
-    else if(i %in% feb){monthF <- append(monthF, 2)}
-    else if(i %in% mar){monthF <- append(monthF, 3)}
-    else if(i %in% apr){monthF <- append(monthF, 4)}
-    else if(i %in% may){monthF <- append(monthF, 5)}
-    else if(i %in% jun){monthF <- append(monthF, 6)}
-    else if(i %in% jul){monthF <- append(monthF, 7)}
-    else if(i %in% aug){monthF <- append(monthF, 8)}
-    else if(i %in% sep){monthF <- append(monthF, 9)}
-    else if(i %in% oct){monthF <- append(monthF, 10)}
-    else if(i %in% nov){monthF <- append(monthF, 11)}
-    else if(i %in% dec){monthF <- append(monthF, 12)}
-  }
-}
-else if(is.numeric(month)){monthF <- month}
+  if(is.character(month)){
+    monthF <- c()
+    for(i in month){
 
-#-----------------------------------------------------------------------------------------------------------------------------
-  ##Filter is conducted in the most efficient order for large data
-  # filter for year
-  if(!missing(year)){.data %>%
-      dplyr::filter(lubridate::year(!!varN) %in% year) -> .data
+      if(i %in% jan){
+        monthF <- append(monthF, 1)
+      } else if(i %in% feb){
+        monthF <- append(monthF, 2)
+      } else if(i %in% mar){
+        monthF <- append(monthF, 3)
+      } else if(i %in% apr){
+        monthF <- append(monthF, 4)
+      } else if(i %in% may){
+        monthF <- append(monthF, 5)
+      } else if(i %in% jun){
+        monthF <- append(monthF, 6)
+      } else if(i %in% jul){
+        monthF <- append(monthF, 7)
+      } else if(i %in% aug){
+        monthF <- append(monthF, 8)
+      } else if(i %in% sep){
+        monthF <- append(monthF, 9)
+      } else if(i %in% oct){
+        monthF <- append(monthF, 10)
+      } else if(i %in% nov){
+        monthF <- append(monthF, 11)
+      } else if(i %in% dec){
+        monthF <- append(monthF, 12)
+      }
+    }
+  } else if(is.numeric(month)){
+    monthF <- month
   }
+
+    # filter for year
+  if(!missing(year)){
+    .data <- dplyr::filter(.data, lubridate::year(!!varN) %in% year)
+  }
+
   # filter for month
-  if(!missing(month)){.data %>%
-      dplyr::filter(lubridate::month(!!varN) %in% monthF) -> .data
+  if(!missing(month)){
+    .data <- dplyr::filter(.data, lubridate::month(!!varN) %in% monthF)
   }
+
   # filter for day
-  if(!missing(day)){.data %>%
-      dplyr::filter(lubridate::day(!!varN) %in% day) -> .data
+  if(!missing(day)){
+    .data <- dplyr::filter(.data, lubridate::day(!!varN) %in% day)
   }
 
   ## Delete the original var
   if (delete == TRUE){
-    dplyr::select(.data, -!!varN) -> .data
+    .data <- dplyr::select(.data, -!!varN)
   }
 
   # return processed data
   return(.data)
+
 }
