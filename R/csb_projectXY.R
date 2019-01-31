@@ -1,4 +1,4 @@
-#' Clean CSB geo to SF object
+#' Project Calls for Service Data Using Coordinates
 #'
 #' @description \code{csb_projectXY} converts SRX and SRY data into a simple features object.
 #'     You can write a shapefile directly from the output of this function using \code{sf::st_write}.

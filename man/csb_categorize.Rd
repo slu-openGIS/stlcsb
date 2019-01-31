@@ -2,7 +2,7 @@
 % Please edit documentation in R/csb_categorize.R
 \name{csb_categorize}
 \alias{csb_categorize}
-\title{Categorize Raw CSB Data}
+\title{Categorize CSB Call Types}
 \usage{
 csb_categorize(.data, var, newVar)
 }
@@ -14,10 +14,13 @@ csb_categorize(.data, var, newVar)
 \item{newVar}{Name of output variable to be created with category name}
 }
 \value{
-\code{csb_categorize} returns data with an additional variable for an intelligible category for CSB requests.
+\code{csb_categorize} returns data with an additional variable for an
+    simplified category for CSB requests.
 }
 \description{
-\code{csb_categorize} provides general categories for the CSB data based on problem code.
+\code{csb_categorize} provides general categories for the
+    CSB data based on problem code. These were created based on a review
+    of the call data in mid-2018.
 }
 \examples{
 csb_categorize(january_2018, PROBLEMCODE, Category)

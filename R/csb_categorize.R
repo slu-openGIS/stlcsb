@@ -1,6 +1,8 @@
-#' Categorize Raw CSB Data
+#' Categorize CSB Call Types
 #'
-#' @description \code{csb_categorize} provides general categories for the CSB data based on problem code.
+#' @description \code{csb_categorize} provides general categories for the
+#'     CSB data based on problem code. These were created based on a review
+#'     of the call data in mid-2018.
 #'
 #' @usage csb_categorize(.data, var, newVar)
 #'
@@ -8,7 +10,8 @@
 #' @param var Name of orginal variable containing problem code
 #' @param newVar Name of output variable to be created with category name
 #'
-#' @return \code{csb_categorize} returns data with an additional variable for an intelligible category for CSB requests.
+#' @return \code{csb_categorize} returns data with an additional variable for an
+#'     simplified category for CSB requests.
 #'
 #' @importFrom dplyr case_when
 #' @importFrom dplyr mutate

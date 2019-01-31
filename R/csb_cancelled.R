@@ -1,4 +1,4 @@
-#' Remove Cancelled Observations
+#' Remove Cancelled Calls for Service
 #'
 #' @description Subsets data to remove any call with a date and time cancelled.
 #'

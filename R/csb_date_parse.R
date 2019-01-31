@@ -1,4 +1,4 @@
-#' Parse CSB date
+#' Parse CSB Date and Time Variables
 #'
 #' @description \code{csb_date_parse} is used to parse out dates into more intellgible formats
 #'

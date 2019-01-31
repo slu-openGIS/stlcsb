@@ -7,6 +7,9 @@
     <loc>https://slu-openGIS.github.io/areal//reference/cat.html</loc>
   </url>
   <url>
+    <loc>https://slu-openGIS.github.io/areal//reference/csb_cancelled.html</loc>
+  </url>
+  <url>
     <loc>https://slu-openGIS.github.io/areal//reference/csb_categorize.html</loc>
   </url>
   <url>
@@ -19,16 +22,16 @@
     <loc>https://slu-openGIS.github.io/areal//reference/csb_filter.html</loc>
   </url>
   <url>
-    <loc>https://slu-openGIS.github.io/areal//reference/csb_geo.html</loc>
-  </url>
-  <url>
     <loc>https://slu-openGIS.github.io/areal//reference/csb_get_data.html</loc>
   </url>
   <url>
     <loc>https://slu-openGIS.github.io/areal//reference/csb_intersection.html</loc>
   </url>
   <url>
-    <loc>https://slu-openGIS.github.io/areal//reference/csb_missing.html</loc>
+    <loc>https://slu-openGIS.github.io/areal//reference/csb_missingXY.html</loc>
+  </url>
+  <url>
+    <loc>https://slu-openGIS.github.io/areal//reference/csb_projectXY.html</loc>
   </url>
   <url>
     <loc>https://slu-openGIS.github.io/areal//reference/csb_vacant.html</loc>

@@ -2,7 +2,7 @@
 % Please edit documentation in R/csb_intersection.R
 \name{csb_intersection}
 \alias{csb_intersection}
-\title{CSB intersections}
+\title{Identify Calls for Services at Street Intersections}
 \usage{
 csb_intersection(.data, var, newVar, filter = FALSE, remove = FALSE)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/csb_get_data.R
 \name{csb_get_data}
 \alias{csb_get_data}
-\title{Download CSB Data}
+\title{Download CSB Data from the City of St. Louis}
 \usage{
 csb_get_data()
 }
@@ -11,5 +11,10 @@ csb_get_data()
     contained in our version of the CSB's data release.
 }
 \description{
-\code{csb_get_data} provides direct access to a compiled version of the CSB's data release.
+\code{csb_get_data} provides direct access to a compiled version of the CSB's
+    data release.
+}
+\examples{
+\dontrun{csb <- csb_get_data()}
+
 }

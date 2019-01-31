@@ -1,4 +1,4 @@
-#' Missing spatial CSB data
+#' Identifying Calls Missing Coordinate Data
 #'
 #' @description \code{csb_missingXY} returns a logical vector indicating if an
 #'     observation is missing in either of the coordinate columns that come

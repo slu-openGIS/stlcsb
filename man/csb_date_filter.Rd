@@ -2,7 +2,7 @@
 % Please edit documentation in R/csb_date_filter.R
 \name{csb_date_filter}
 \alias{csb_date_filter}
-\title{Filter CSB date}
+\title{Filter Calls Based on Date of Call}
 \usage{
 csb_date_filter(.data, var, day, month, year, delete = FALSE)
 }

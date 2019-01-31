@@ -2,7 +2,7 @@
 % Please edit documentation in R/csb_projectXY.R
 \name{csb_projectXY}
 \alias{csb_projectXY}
-\title{Clean CSB geo to SF object}
+\title{Project Calls for Service Data Using Coordinates}
 \usage{
 csb_projectXY(.data, varX, varY, crs)
 }

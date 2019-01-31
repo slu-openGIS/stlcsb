@@ -2,7 +2,7 @@
 % Please edit documentation in R/csb_vacant.R
 \name{csb_vacant}
 \alias{csb_vacant}
-\title{CSB vacant codes}
+\title{Identify Calls for Service Related to Vacancy}
 \usage{
 csb_vacant(.data, var, newVar, filter = FALSE)
 }

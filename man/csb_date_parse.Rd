@@ -2,7 +2,7 @@
 % Please edit documentation in R/csb_date_parse.R
 \name{csb_date_parse}
 \alias{csb_date_parse}
-\title{Parse CSB date}
+\title{Parse CSB Date and Time Variables}
 \usage{
 csb_date_parse(.data, var, day, month, year, delete = FALSE)
 }

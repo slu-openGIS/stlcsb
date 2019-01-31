@@ -1,6 +1,7 @@
-#' Filter CSB Data
+#' Subset Based on Call Categories
 #'
-#' @description \code{csb_filter} retuns observations that match any combination of 17 predefined categories.
+#' @description \code{csb_filter} retuns observations that match any combination of the predefined
+#'     categories that are created
 #'
 #' @usage csb_filter(.data, var, category)
 #'

@@ -1,6 +1,7 @@
-#' Download CSB Data
+#' Download CSB Data from the City of St. Louis
 #'
-#' \code{csb_get_data} provides direct access to a compiled version of the CSB's data release.
+#' \code{csb_get_data} provides direct access to a compiled version of the CSB's
+#'     data release.
 #'
 #' @usage csb_get_data()
 #'
@@ -18,6 +19,9 @@
 #' @importFrom rvest html_node
 #' @importFrom stringr str_extract
 #' @importFrom tibble as_tibble
+#'
+#' @examples
+#' \dontrun{csb <- csb_get_data()}
 #'
 #' @export
 csb_get_data <- function(){

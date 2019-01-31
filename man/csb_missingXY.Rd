@@ -2,7 +2,7 @@
 % Please edit documentation in R/csb_missingXY.R
 \name{csb_missingXY}
 \alias{csb_missingXY}
-\title{Missing spatial CSB data}
+\title{Identifying Calls Missing Coordinate Data}
 \usage{
 csb_missingXY(.data, varX, varY, newVar)
 }

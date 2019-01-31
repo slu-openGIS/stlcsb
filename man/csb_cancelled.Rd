@@ -2,7 +2,7 @@
 % Please edit documentation in R/csb_cancelled.R
 \name{csb_cancelled}
 \alias{csb_cancelled}
-\title{Remove Cancelled Observations}
+\title{Remove Cancelled Calls for Service}
 \usage{
 csb_cancelled(.data, var, drop = TRUE)
 }

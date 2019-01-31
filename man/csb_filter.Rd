@@ -2,7 +2,7 @@
 % Please edit documentation in R/csb_filter.R
 \name{csb_filter}
 \alias{csb_filter}
-\title{Filter CSB Data}
+\title{Subset Based on Call Categories}
 \usage{
 csb_filter(.data, var, category)
 }
@@ -20,7 +20,8 @@ road, sewer, traffic, vacant, and waste.}
 \code{csb_filter} returns data with an additional variable for an intelligible category for CSB requests.
 }
 \description{
-\code{csb_filter} retuns observations that match any combination of 17 predefined categories.
+\code{csb_filter} retuns observations that match any combination of the predefined
+    categories that are created
 }
 \examples{
 csb_filter(january_2018, var = PROBLEMCODE, category = c(cat_waste, cat_debris))

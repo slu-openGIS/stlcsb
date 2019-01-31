@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Filter CSB Data — csb_filter • stlcsb</title>
+<title>Subset Based on Call Categories — csb_filter • stlcsb</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,9 +30,10 @@
 
 
 
-<meta property="og:title" content="Filter CSB Data — csb_filter" />
+<meta property="og:title" content="Subset Based on Call Categories — csb_filter" />
 
-<meta property="og:description" content="csb_filter retuns observations that match any combination of 17 predefined categories." />
+<meta property="og:description" content="csb_filter retuns observations that match any combination of the predefined
+    categories that are created" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -100,37 +101,37 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Filter CSB Data</h1>
+    <h1>Subset Based on Call Categories</h1>
     
     <div class="hidden name"><code>csb_filter.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p><code>csb_filter</code> retuns observations that match any combination of 17 predefined categories.</p>
+    <p><code>csb_filter</code> retuns observations that match any combination of the predefined
+    categories that are created</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>csb_filter</span>(<span class='no'>.data</span>, <span class='no'>var</span>, <span class='no'>newVar</span>, <span class='no'>category</span>)</pre>
+    <pre class="usage"><span class='fu'>csb_filter</span>(<span class='no'>.data</span>, <span class='no'>var</span>, <span class='no'>category</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>.data</th>
-      <td><p>A tibble with raw CSB data</p></td>
+      <td><p>A tbl</p></td>
     </tr>
     <tr>
       <th>var</th>
       <td><p>name of the column containg original problem code data</p></td>
     </tr>
     <tr>
-      <th>newVar</th>
-      <td><p>name of column containing categories. NULL by default, but if specified will produce a new column.</p></td>
-    </tr>
-    <tr>
       <th>category</th>
-      <td><p>a vector with the unquoted name(s) of the category(s) for the function to return. You can also explicitly state quoted PROBLEMCODE(s). Valid categories are: (admin, animal, construction, debris, degrade, disturbance, event, health, landscape, law, maintenance, nature, road, sewer, traffic, vacant, waste)</p></td>
+      <td><p>a vector with the unquoted name(s) of the category(s) for the function to return.
+You can also explicitly state quoted PROBLEMCODE(s). Valid categories are: admin, animal,
+construction, debris, degrade, disturbance, event, health, landscape, law, maintenance, nature,
+road, sewer, traffic, vacant, and waste.</p></td>
     </tr>
     </table>
     
@@ -140,7 +141,7 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>csb_filter</span>(<span class='no'>january_2018</span>, <span class='no'>PROBLEMCODE</span>, <span class='no'>Category</span>, <span class='kw'>category</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='no'>cat_waste</span>, <span class='no'>cat_debris</span>))</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 521 x 20</span><span>
+    <pre class="examples"><div class='input'><span class='fu'>csb_filter</span>(<span class='no'>january_2018</span>, <span class='kw'>var</span> <span class='kw'>=</span> <span class='no'>PROBLEMCODE</span>, <span class='kw'>category</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='no'>cat_waste</span>, <span class='no'>cat_debris</span>))</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 521 x 19</span><span>
 #&gt;    CALLERTYPE DATECANCELLED       DATEINVTDONE        DATETIMECLOSED     
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>             
 #&gt; </span><span style='color: #555555;'> 1</span><span> WEB        </span><span style='color: #BB0000;'>NA</span><span>                  2018-01-02 </span><span style='color: #555555;'>12:54:41</span><span> 2018-01-12 </span><span style='color: #555555;'>10:27:12</span><span>
@@ -153,11 +154,11 @@
 #&gt; </span><span style='color: #555555;'> 8</span><span> TWITTER    </span><span style='color: #BB0000;'>NA</span><span>                  2018-01-02 </span><span style='color: #555555;'>12:32:10</span><span> 2018-01-02 </span><span style='color: #555555;'>12:32:10</span><span>
 #&gt; </span><span style='color: #555555;'> 9</span><span> TWITTER    </span><span style='color: #BB0000;'>NA</span><span>                  2018-01-09 </span><span style='color: #555555;'>07:41:00</span><span> 2018-03-08 </span><span style='color: #555555;'>07:42:20</span><span>
 #&gt; </span><span style='color: #555555;'>10</span><span> PHONE      </span><span style='color: #BB0000;'>NA</span><span>                  2018-01-06 </span><span style='color: #555555;'>10:55:07</span><span> 2018-01-06 </span><span style='color: #555555;'>10:55:07</span><span>
-#&gt; </span><span style='color: #555555;'># … with 511 more rows, and 16 more variables: DATETIMEINIT </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span style='color: #555555;'>,
+#&gt; </span><span style='color: #555555;'># … with 511 more rows, and 15 more variables: DATETIMEINIT </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span style='color: #555555;'>,
 #&gt; #   DESCRIPTION </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, NEIGHBORHOOD </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, PRJCOMPLETEDATE </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span style='color: #555555;'>,
 #&gt; #   PROBADDRESS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, PROBADDTYPE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, PROBCITY </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, PROBLEMCODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
 #&gt; #   PROBZIP </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, REQUESTID </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, SRX </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, SRY </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, STATUS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   SUBMITTO </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, WARD </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, Category </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span></div><div class='input'><span class='fu'>csb_filter</span>(<span class='no'>january_2018</span>, <span class='no'>PROBLEMCODE</span>, <span class='kw'>category</span> <span class='kw'>=</span> <span class='no'>cat_vacant</span>)</div><div class='output co'>#&gt; <span class='message'>No argument set for `newVar` If you would like to append a category variable, please set an argument for `newVar`</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 98 x 19</span><span>
+#&gt; #   SUBMITTO </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, WARD </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span></div><div class='input'><span class='fu'>csb_filter</span>(<span class='no'>january_2018</span>, <span class='kw'>var</span> <span class='kw'>=</span> <span class='no'>PROBLEMCODE</span>, <span class='kw'>category</span> <span class='kw'>=</span> <span class='no'>cat_vacant</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 98 x 19</span><span>
 #&gt;    CALLERTYPE DATECANCELLED       DATEINVTDONE        DATETIMECLOSED     
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>             
 #&gt; </span><span style='color: #555555;'> 1</span><span> PHONE      </span><span style='color: #BB0000;'>NA</span><span>                  2018-01-02 </span><span style='color: #555555;'>13:59:00</span><span> 2018-04-03 </span><span style='color: #555555;'>08:36:15</span><span>

@@ -1,4 +1,4 @@
-#' CSB vacant codes
+#' Identify Calls for Service Related to Vacancy
 #'
 #' @description \code{csb_vacant}appends a logical vector indicating `TRUE` for vacancy related problem codes.
 #'

@@ -67,7 +67,7 @@
       <h1>Using The stlcsb Package</h1>
                         <h4 class="author">Branson Fox</h4>
             
-            <h4 class="date">2019-01-26</h4>
+            <h4 class="date">2019-01-31</h4>
       
       
       <div class="hidden name"><code>stlcsb.Rmd</code></div>
@@ -111,10 +111,10 @@
 <h2 class="hasAnchor">
 <a href="#spatial-features" class="anchor"></a>Spatial Features</h2>
 <p>The <code>stlcsb</code> package also provides helpful functions for dealing with spatial data.</p>
-<p><code>csb_missing</code> is used to remove observations with incomplete or invalid spatial data.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">csb_no_missing &lt;-<span class="st"> </span><span class="kw">csb_missing</span>(csb, SRX, SRY)</a></code></pre></div>
-<p><code>csb_geo</code> is used to create a simple features object, which can then be manipulated spatially. It is mandatory that <code>csb_missing</code> is used prior. The coordinate reference system can be re-projected by specifying a numeric epsg code or a proj4 character string</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">csb_sf &lt;-<span class="st"> </span><span class="kw">csb_geo</span>(csb_no_missing, SRX, SRY)</a></code></pre></div>
+<p><code>csb_missingXY</code> is used to remove observations with incomplete or invalid spatial data.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">csb_no_missing &lt;-<span class="st"> </span><span class="kw">csb_missingXY</span>(csb, SRX, SRY)</a></code></pre></div>
+<p><code>csb_projectXY</code> is used to create a simple features object, which can then be manipulated spatially. It is mandatory that <code>csb_missingXY</code> is used prior. The coordinate reference system can be re-projected by specifying a numeric epsg code or a proj4 character string</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">csb_sf &lt;-<span class="st"> </span><span class="kw">csb_projectXY</span>(csb_no_missing, SRX, SRY)</a></code></pre></div>
 <p><code>csb_intersection</code> is used to label, isolate, or remove observations that appear to occur at intersections. This is useful if you are only interested in residential properties for example.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">csb_intersection</span>(csb, PROBADDRESS, intersection)</a>
 <a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw">csb_intersection</span>(csb, PROBADDRESS, <span class="dt">filter =</span> <span class="ot">TRUE</span>)</a>
@@ -147,9 +147,9 @@
 <a class="sourceLine" id="cb11-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb11-3" data-line-number="3"><span class="kw">csb_vacant</span>(csb, PROBLEMCODE, vacant, <span class="dt">filter =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb11-4" data-line-number="4"><span class="st">  </span><span class="kw">csb_date_filter</span>(DATETIMEINIT, <span class="dt">month =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"June"</span>, <span class="st">"July"</span>, <span class="st">"Aug"</span>), <span class="dt">year =</span> <span class="dv">2017</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb11-5" data-line-number="5"><span class="st">  </span><span class="kw">csb_missing</span>(SRX, SRY, <span class="dt">filter =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb11-5" data-line-number="5"><span class="st">  </span><span class="kw">csb_missingXY</span>(SRX, SRY, <span class="dt">filter =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb11-6" data-line-number="6"><span class="st">  </span><span class="kw">csb_intersection</span>(PROBADDRESS, intersection, <span class="dt">remove =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb11-7" data-line-number="7"><span class="st">  </span><span class="kw">csb_geo</span>(SRX, SRY) -&gt;<span class="st"> </span>vacant_sf</a>
+<a class="sourceLine" id="cb11-7" data-line-number="7"><span class="st">  </span><span class="kw">csb_projectXY</span>(SRX, SRY) -&gt;<span class="st"> </span>vacant_sf</a>
 <a class="sourceLine" id="cb11-8" data-line-number="8"></a>
 <a class="sourceLine" id="cb11-9" data-line-number="9"><span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/plot">plot</a></span>(vacant_sf)</a></code></pre></div>
 </div>

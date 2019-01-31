@@ -13,6 +13,7 @@ reference:
   - title: "Tidy"
     desc: "Access CSB data"
     contents:
+    - csb_cancelled
     - csb_categorize
     - csb_vacant
     - csb_filter
@@ -20,11 +21,11 @@ reference:
     - csb_date_filter
     - csb_intersection
 
-  - title: "Visualize"
+  - title: "Map"
     desc: "Map CSB data"
     contents:
-    - csb_missing
-    - csb_geo
+    - csb_missingXY
+    - csb_projectXY
 
   - title: "Data"
     desc: "Package data"

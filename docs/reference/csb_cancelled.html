@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Categorize CSB Call Types — csb_categorize • stlcsb</title>
+<title>Remove Cancelled Calls for Service — csb_cancelled • stlcsb</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,11 +30,9 @@
 
 
 
-<meta property="og:title" content="Categorize CSB Call Types — csb_categorize" />
+<meta property="og:title" content="Remove Cancelled Calls for Service — csb_cancelled" />
 
-<meta property="og:description" content="csb_categorize provides general categories for the
-    CSB data based on problem code. These were created based on a review
-    of the call data in mid-2018." />
+<meta property="og:description" content="Subsets data to remove any call with a date and time cancelled." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -102,20 +100,18 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Categorize CSB Call Types</h1>
+    <h1>Remove Cancelled Calls for Service</h1>
     
-    <div class="hidden name"><code>csb_categorize.Rd</code></div>
+    <div class="hidden name"><code>csb_cancelled.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p><code>csb_categorize</code> provides general categories for the
-    CSB data based on problem code. These were created based on a review
-    of the call data in mid-2018.</p>
+    <p>Subsets data to remove any call with a date and time cancelled.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>csb_categorize</span>(<span class='no'>.data</span>, <span class='no'>var</span>, <span class='no'>newVar</span>)</pre>
+    <pre class="usage"><span class='fu'>csb_cancelled</span>(<span class='no'>.data</span>, <span class='no'>var</span>, <span class='kw'>drop</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -126,22 +122,41 @@
     </tr>
     <tr>
       <th>var</th>
-      <td><p>Name of orginal variable containing problem code</p></td>
+      <td><p>Name of the column containing cancellation timestamps; by default
+this should be <code>DATECANCELLED</code></p></td>
     </tr>
     <tr>
-      <th>newVar</th>
-      <td><p>Name of output variable to be created with category name</p></td>
+      <th>drop</th>
+      <td><p>Optionally remove the now empty column that had contained cancellation
+date and time if <code>TRUE</code></p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>csb_categorize</code> returns data with an additional variable for an
-    simplified category for CSB requests.</p>
+    <p>Returns a tibble with the rows containing dates and times for the
+    given variable removed.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>csb_categorize</span>(<span class='no'>january_2018</span>, <span class='no'>PROBLEMCODE</span>, <span class='no'>Category</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1,688 x 20</span><span>
+    <pre class="examples"><div class='input'><span class='fu'>csb_cancelled</span>(<span class='no'>january_2018</span>, <span class='kw'>var</span> <span class='kw'>=</span> <span class='st'>"DATECANCELLED"</span>)</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1,647 x 18</span><span>
+#&gt;    CALLERTYPE DATEINVTDONE        DATETIMECLOSED      DATETIMEINIT       
+#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>             
+#&gt; </span><span style='color: #555555;'> 1</span><span> WEB        2018-01-05 </span><span style='color: #555555;'>16:22:19</span><span> 2018-01-05 </span><span style='color: #555555;'>16:22:21</span><span> 2018-01-01 </span><span style='color: #555555;'>00:48:30</span><span>
+#&gt; </span><span style='color: #555555;'> 2</span><span> WEB        2018-01-05 </span><span style='color: #555555;'>16:22:19</span><span> 2018-01-05 </span><span style='color: #555555;'>16:22:21</span><span> 2018-01-01 </span><span style='color: #555555;'>00:48:30</span><span>
+#&gt; </span><span style='color: #555555;'> 3</span><span> WEB        </span><span style='color: #BB0000;'>NA</span><span>                  </span><span style='color: #BB0000;'>NA</span><span>                  2018-01-01 </span><span style='color: #555555;'>05:29:06</span><span>
+#&gt; </span><span style='color: #555555;'> 4</span><span> WEB        2018-01-05 </span><span style='color: #555555;'>16:17:41</span><span> 2018-01-05 </span><span style='color: #555555;'>16:18:08</span><span> 2018-01-01 </span><span style='color: #555555;'>08:53:07</span><span>
+#&gt; </span><span style='color: #555555;'> 5</span><span> PHONE      2018-01-01 </span><span style='color: #555555;'>10:40:14</span><span> 2018-01-01 </span><span style='color: #555555;'>10:40:54</span><span> 2018-01-01 </span><span style='color: #555555;'>09:13:22</span><span>
+#&gt; </span><span style='color: #555555;'> 6</span><span> WEB        2018-01-02 </span><span style='color: #555555;'>12:54:41</span><span> 2018-01-12 </span><span style='color: #555555;'>10:27:12</span><span> 2018-01-01 </span><span style='color: #555555;'>10:12:26</span><span>
+#&gt; </span><span style='color: #555555;'> 7</span><span> PHONE      2018-01-03 </span><span style='color: #555555;'>11:22:29</span><span> 2018-01-03 </span><span style='color: #555555;'>11:22:29</span><span> 2018-01-01 </span><span style='color: #555555;'>10:52:32</span><span>
+#&gt; </span><span style='color: #555555;'> 8</span><span> PHONE      2018-01-03 </span><span style='color: #555555;'>11:19:13</span><span> 2018-01-03 </span><span style='color: #555555;'>11:19:13</span><span> 2018-01-01 </span><span style='color: #555555;'>10:54:43</span><span>
+#&gt; </span><span style='color: #555555;'> 9</span><span> WEB        2018-01-05 </span><span style='color: #555555;'>16:16:55</span><span> 2018-01-05 </span><span style='color: #555555;'>16:17:28</span><span> 2018-01-01 </span><span style='color: #555555;'>11:07:02</span><span>
+#&gt; </span><span style='color: #555555;'>10</span><span> PHONE      2017-12-29 </span><span style='color: #555555;'>20:00:00</span><span> 2018-01-01 </span><span style='color: #555555;'>15:01:19</span><span> 2018-01-01 </span><span style='color: #555555;'>12:05:40</span><span>
+#&gt; </span><span style='color: #555555;'># … with 1,637 more rows, and 14 more variables: DESCRIPTION </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
+#&gt; #   NEIGHBORHOOD </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, PRJCOMPLETEDATE </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span style='color: #555555;'>, PROBADDRESS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
+#&gt; #   PROBADDTYPE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, PROBCITY </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, PROBLEMCODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, PROBZIP </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,
+#&gt; #   REQUESTID </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, SRX </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, SRY </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, STATUS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, SUBMITTO </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
+#&gt; #   WARD </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span></div><div class='input'><span class='fu'>csb_cancelled</span>(<span class='no'>january_2018</span>, <span class='kw'>var</span> <span class='kw'>=</span> <span class='st'>"DATECANCELLED"</span>, <span class='kw'>drop</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 1,647 x 19</span><span>
 #&gt;    CALLERTYPE DATECANCELLED       DATEINVTDONE        DATETIMECLOSED     
 #&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>             
 #&gt; </span><span style='color: #555555;'> 1</span><span> WEB        </span><span style='color: #BB0000;'>NA</span><span>                  2018-01-05 </span><span style='color: #555555;'>16:22:19</span><span> 2018-01-05 </span><span style='color: #555555;'>16:22:21</span><span>
@@ -154,11 +169,11 @@
 #&gt; </span><span style='color: #555555;'> 8</span><span> PHONE      </span><span style='color: #BB0000;'>NA</span><span>                  2018-01-03 </span><span style='color: #555555;'>11:19:13</span><span> 2018-01-03 </span><span style='color: #555555;'>11:19:13</span><span>
 #&gt; </span><span style='color: #555555;'> 9</span><span> WEB        </span><span style='color: #BB0000;'>NA</span><span>                  2018-01-05 </span><span style='color: #555555;'>16:16:55</span><span> 2018-01-05 </span><span style='color: #555555;'>16:17:28</span><span>
 #&gt; </span><span style='color: #555555;'>10</span><span> PHONE      </span><span style='color: #BB0000;'>NA</span><span>                  2017-12-29 </span><span style='color: #555555;'>20:00:00</span><span> 2018-01-01 </span><span style='color: #555555;'>15:01:19</span><span>
-#&gt; </span><span style='color: #555555;'># … with 1,678 more rows, and 16 more variables: DATETIMEINIT </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span style='color: #555555;'>,
+#&gt; </span><span style='color: #555555;'># … with 1,637 more rows, and 15 more variables: DATETIMEINIT </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span style='color: #555555;'>,
 #&gt; #   DESCRIPTION </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, NEIGHBORHOOD </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, PRJCOMPLETEDATE </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span style='color: #555555;'>,
 #&gt; #   PROBADDRESS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, PROBADDTYPE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, PROBCITY </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, PROBLEMCODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
 #&gt; #   PROBZIP </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, REQUESTID </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, SRX </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, SRY </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, STATUS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   SUBMITTO </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, WARD </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, Category </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span></div><div class='input'>
+#&gt; #   SUBMITTO </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, WARD </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span></div><div class='input'>
 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

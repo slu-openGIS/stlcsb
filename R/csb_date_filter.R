@@ -1,4 +1,4 @@
-#' Filter CSB date
+#' Filter Calls Based on Date of Call
 #'
 #' @description \code{csb_date_filter} filters dates to return only the specified date elements
 #'

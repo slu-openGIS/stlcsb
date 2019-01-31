@@ -1,4 +1,4 @@
-#' CSB intersections
+#' Identify Calls for Services at Street Intersections
 #'
 #' @description \code{csb_intersection}returns a logical vector indicating `TRUE` for addresses that are intersections. This function is also able to isolate or remove these data.
 #'
