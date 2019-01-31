@@ -14,8 +14,11 @@
 #' @return \code{csb_filter} returns data with an additional variable for an intelligible category for CSB requests.
 #'
 #' @importFrom dplyr filter
-#' @importFrom rlang quo enquo sym :=
 #' @importFrom magrittr %>%
+#' @importFrom rlang :=
+#' @importFrom rlang enquo
+#' @importFrom rlang quo
+#' @importFrom rlang sym
 #'
 #' @examples
 #' csb_filter(january_2018, var = PROBLEMCODE, category = c(cat_waste, cat_debris))

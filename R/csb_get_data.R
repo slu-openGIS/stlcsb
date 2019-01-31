@@ -8,11 +8,16 @@
 #'     contained in our version of the CSB's data release.
 #'
 #' @importFrom dplyr bind_rows
-#' @importFrom tibble as_tibble
-#' @importFrom readr read_csv cols col_integer col_character col_double
-#' @importFrom xml2 read_html xml_text
-#' @importFrom stringr str_extract
+#' @importFrom readr cols
+#' @importFrom readr col_character
+#' @importFrom readr col_double
+#' @importFrom readr col_integer
+#' @importFrom readr read_csv
+#' @importFrom xml2 read_html
+#' @importFrom xml2 xml_text
 #' @importFrom rvest html_node
+#' @importFrom stringr str_extract
+#' @importFrom tibble as_tibble
 #'
 #' @export
 csb_get_data <- function(){

@@ -14,9 +14,14 @@
 #' @return \code{csb_date_parse} returns new columns with specified names containing parsed date information
 #'
 #' @importFrom dplyr mutate
-#' @importFrom lubridate day month year
-#' @importFrom rlang quo enquo sym .data
+#' @importFrom lubridate day
+#' @importFrom lubridate month
+#' @importFrom lubridate year
 #' @importFrom magrittr %>%
+#' @importFrom rlang :=
+#' @importFrom rlang enquo
+#' @importFrom rlang quo
+#' @importFrom rlang sym
 #'
 #' @examples
 #' csb_date_parse(january_2018, DATETIMEINIT, dayInit)

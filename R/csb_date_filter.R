@@ -13,10 +13,16 @@
 #'
 #' @return \code{csb_date_filter} returns a filtered version of the input data based on specified arguments
 #'
-#' @importFrom dplyr mutate filter
-#' @importFrom lubridate day month year
-#' @importFrom rlang quo enquo sym .data
+#' @importFrom dplyr filter
+#' @importFrom dplyr mutate
+#' @importFrom lubridate day
+#' @importFrom lubridate month
+#' @importFrom lubridate year
 #' @importFrom magrittr %>%
+#' @importFrom rlang :=
+#' @importFrom rlang enquo
+#' @importFrom rlang quo
+#' @importFrom rlang sym
 #'
 #' @examples
 #' csb_date_filter(january_2018, DATETIMEINIT, day = 1)

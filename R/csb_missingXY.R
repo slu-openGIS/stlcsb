@@ -13,8 +13,13 @@
 #' @return \code{csb_missingXY} returns a logical vector indicating `TRUE` if an observation has incomplete spatial data, or a filtered version of the input data
 #'
 #'
-#' @importFrom dplyr mutate filter
-#' @importFrom rlang quo enquo sym :=
+#' @importFrom dplyr filter
+#' @importFrom dplyr mutate
+#' @importFrom magrittr %>%
+#' @importFrom rlang :=
+#' @importFrom rlang enquo
+#' @importFrom rlang quo
+#' @importFrom rlang sym
 #'
 #' @examples
 #' \dontrun{csb_missingXY(january_2018, SRX, SRY, missing_geo)}

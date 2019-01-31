@@ -13,8 +13,12 @@
 #' @return \code{csb_projectXY} returns a sf object of the input data, specifying a new crs will
 #'     reproject the data.
 #'
-#' @importFrom sf st_as_sf st_transform
-#' @importFrom rlang quo enquo sym :=
+#' @importFrom sf st_as_sf
+#' @importFrom sf st_transform
+#' @importFrom rlang :=
+#' @importFrom rlang enquo
+#' @importFrom rlang quo
+#' @importFrom rlang sym
 #'
 #' @examples
 #' #You MUST remove observations with missing coordinates before using this function

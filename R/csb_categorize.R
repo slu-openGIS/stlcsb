@@ -10,9 +10,13 @@
 #'
 #' @return \code{csb_categorize} returns data with an additional variable for an intelligible category for CSB requests.
 #'
-#' @importFrom dplyr case_when mutate
-#' @importFrom rlang quo enquo sym .data
+#' @importFrom dplyr case_when
+#' @importFrom dplyr mutate
 #' @importFrom magrittr %>%
+#' @importFrom rlang :=
+#' @importFrom rlang enquo
+#' @importFrom rlang quo
+#' @importFrom rlang sym
 #'
 #' @examples
 #' csb_categorize(january_2018, PROBLEMCODE, Category)

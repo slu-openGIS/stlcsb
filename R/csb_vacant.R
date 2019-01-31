@@ -11,9 +11,13 @@
 #'
 #' @return \code{csb_vacant}returns a logical vector with TRUE for vacancy related problem codes, or a filtered version of the input data
 #'
-#' @importFrom dplyr mutate filter
-#' @importFrom rlang quo quo_name enquo sym .data
+#' @importFrom dplyr filter
+#' @importFrom dplyr mutate
 #' @importFrom magrittr %>%
+#' @importFrom rlang :=
+#' @importFrom rlang enquo
+#' @importFrom rlang quo
+#' @importFrom rlang sym
 #'
 #' @examples
 #' csb_vacant(january_2018, PROBLEMCODE, vacant)
