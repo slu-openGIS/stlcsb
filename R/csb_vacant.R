@@ -21,36 +21,41 @@
 #'
 #' @export
 csb_vacant <- function(.data, var, newVar, filter = FALSE){
-  #Check for missing parameters
+
+  # check for missing parameters
   if (missing(.data)) {
     stop('Please provide an argument for .data')
   }
+
   if (missing(var)) {
     stop('Please provide an argument for var')
   }
+
   if (missing(newVar)){
     stop('Please provide an argument for newVar')
   }
-  #NSE Setup
+
+  # save parameters to list
   paramList <- as.list(match.call())
 
-  # and quote input variables
+  # quote input variables
   if (!is.character(paramList$var)) {
     varN <- rlang::enquo(var)
-  }
-  else if (is.character(paramList$var)) {
+  } else if (is.character(paramList$var)) {
     varN <- rlang::quo(!! rlang::sym(var))
   }
+
   newVarN <- rlang::quo_name(rlang::enquo(newVar))
 
-  #Append logical for vacant codes
-  .data %>% dplyr::mutate(!!newVarN := ifelse(!!varN %in% stlcsb::cat_vacant, TRUE, FALSE)) -> .data
+  # append logical for vacant codes
+  .data <- dplyr::mutate(.data, !!newVarN := ifelse(!!varN %in% stlcsb::cat_vacant, TRUE, FALSE))
 
-  #Filter if neccessary
+  # optionally filter
   if(filter==TRUE){
-    .data %>% dplyr::filter(!!varN %in% stlcsb::cat_vacant) -> .data
+    .data <- dplyr::filter(.data, !!varN %in% stlcsb::cat_vacant)
   }
 
-  #Return the data
+  # return output
   return(.data)
+
 }
