@@ -27,7 +27,8 @@
 #'
 #' @export
 csb_date_parse <- function(.data, var, day, month, year, delete = FALSE){
-#MISSING AND NSE SETUP
+
+  # check for missing parameters
   if (missing(.data)) {
     stop('Please provide an argument for .data')
   }
@@ -41,7 +42,7 @@ csb_date_parse <- function(.data, var, day, month, year, delete = FALSE){
   # save parameters to list
   paramList <- as.list(match.call())
 
-  # and quote input variables
+  # quote input variables
   if (!is.character(paramList$var)) {
     varN <- rlang::enquo(var)
   }
@@ -49,29 +50,35 @@ csb_date_parse <- function(.data, var, day, month, year, delete = FALSE){
   else if (is.character(paramList$var)) {
     varN <- rlang::quo(!! rlang::sym(var))
   }
-  # quote names
+
   dayN <- rlang::quo_name(rlang::enquo(day))
 
   monthN <- rlang::quo_name(rlang::enquo(month))
 
   yearN <- rlang::quo_name(rlang::enquo(year))
 
-#PARSING FUNCTION
-  # Mutate for day
-    if(dayN != ""){.data %>%
-        dplyr::mutate(!!dayN := lubridate::day(!!varN))} -> .data
-  # Mutate for month
-    if(monthN != ""){.data %>%
-        dplyr::mutate(!!monthN := lubridate::month(!!varN))} -> .data
-  # Mutate for year
-    if(yearN != ""){.data %>%
-        dplyr::mutate(!!yearN := lubridate::year(!!varN))} -> .data
-
-
-#Delete the original var
-   if (delete == TRUE){
-      dplyr::select(.data, -!!varN) -> .data
+  # parse data
+  # day
+  if(dayN != ""){
+    .data <- dplyr::mutate(.data, !!dayN := lubridate::day(!!varN))
   }
-  # return the data
+
+  # month
+  if(monthN != ""){
+    .data <- dplyr::mutate(.data, !!monthN := lubridate::month(!!varN))
+  }
+
+  # year
+  if(yearN != ""){
+    .data <- dplyr::mutate(.data, !!yearN := lubridate::year(!!varN))
+  }
+
+  # remove original variable
+  if (delete == TRUE){
+    .data <- dplyr::select(.data, -!!varN)
+  }
+
+  # return output
   return(.data)
+
 }
