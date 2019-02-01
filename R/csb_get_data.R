@@ -240,3 +240,42 @@ csb_get_data <- function(){
   return(STL_CSB_RawRequests)
 
 }
+
+csb_get_data2 <- function(...){
+
+  #Function for returning date data last modified as message
+  website <- xml2::read_html("https://www.stlouis-mo.gov/data/service-requests.cfm")
+  message <- rvest::html_node(website, xpath = '//*[@id="CS_CCF_627407_632762"]/ul/li[1]/span[1]')
+  messageRegex <- stringr::str_extract(xml2::xml_text(message), "\\d{1,2}/\\d{1,2}/\\d{2}")
+
+  # no visible binding for global variable note
+  STL_CSB_RawRequests = NULL
+
+  # set source variable
+  url <- "https://www.stlouis-mo.gov/data/upload/data-files/csb.zip"
+
+  # create temporary directory, download and unzip data
+  tmpdir <- tempdir()
+  utils::download.file(url, paste0(tmpdir,"csb.zip"))
+  utils::unzip(paste0(tmpdir,"csb.zip"), exdir = tmpdir)
+
+  # create list of all files at path that are csv
+  files <- dir(path = tmpdir, pattern = "*.csv")
+
+  # read in files
+  files %>%
+    purrr::map(~ suppressWarnings(readr::read_csv(file = file.path(tmpdir, .),
+                                                  col_types = cols(
+                                                    PROBZIP = col_integer(),
+                                                    DATETIMEINIT = col_character(),
+                                                    DATETIMECLOSED = col_character(),
+                                                    SRX = col_double(),
+                                                    SRY = col_double(),
+                                                    PRJCOMPLETEDATE = col_character(),
+                                                    DATECANCELLED = col_character(),
+                                                    DATEINVTDONE = col_character(),
+                                                    NEIGHBORHOOD = col_integer(),
+                                                    WARD = col_integer())
+                                                  ))) -> data
+
+}
