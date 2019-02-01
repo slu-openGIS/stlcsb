@@ -10,7 +10,8 @@
 #' @param category a vector with the unquoted name(s) of the category(s) for the function to return.
 #'     You can also explicitly state quoted PROBLEMCODE(s). Valid categories are: admin, animal,
 #'     construction, debris, degrade, disturbance, event, health, landscape, law, maintenance, nature,
-#'     road, sewer, traffic, vacant, and waste.
+#'     road, sewer, traffic, vacant, and waste. If categories are listed, each should be preceeded by
+#'     'cat_'.
 #'
 #' @return \code{csb_filter} returns data with an additional variable for an intelligible category for CSB requests.
 #'
@@ -22,8 +23,9 @@
 #' @importFrom rlang sym
 #'
 #' @examples
-#' csb_filter(january_2018, var = PROBLEMCODE, category = c(cat_waste, cat_debris))
 #' csb_filter(january_2018, var = PROBLEMCODE, category = cat_vacant)
+#' csb_filter(january_2018, var = PROBLEMCODE, category = c(cat_waste, cat_debris))
+#' csb_filter(january_2018, var = PROBLEMCODE, category = "WTR-COMING-UP")
 #'
 #' @export
 csb_filter <- function(.data, var, category){
@@ -80,9 +82,14 @@ csb_filter <- function(.data, var, category){
 
   # filter function
   .data %>%
-    filter(!!varN %in% category) -> .data
+    filter(!!varN %in% category) -> out
+
+  # check class of output
+  if ("tbl_df" %in% class(out) == FALSE){
+    out <- dplyr::as_tibble(out)
+  }
 
   # return the final data
-  return(.data)
+  return(out)
 
 }
