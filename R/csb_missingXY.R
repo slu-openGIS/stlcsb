@@ -70,8 +70,7 @@ csb_missingXY <- function(.data, varX, varY, newVar){
   .data %>%
     dplyr::mutate(...missingXY := case_when(
       is.na(!!varXN) | is.na(!!varYN) ~ TRUE,
-      !!varXN == 0 | !!varYN == 0 ~ TRUE,
-      !!varXN == 1 | !!varYN == 1 ~ TRUE
+      !!varXN < 800000 | !!varYN < 980000 ~ TRUE
     )) %>%
     dplyr::mutate(...missingXY := ifelse(is.na(...missingXY) == TRUE, FALSE, ...missingXY)) %>%
     dplyr::rename(!!newVarNQ := ...missingXY) -> out

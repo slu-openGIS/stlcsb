@@ -51,8 +51,10 @@ csb_get_data <- function(tidy = TRUE, years, ...){
     stop("Input for the 'tidy' argument is invalid - it must be either 'TRUE' or 'FALSE'.")
   }
 
-  if (is.numeric(years) == FALSE){
-    stop("Input for the 'years' argument is invalid - it must be a numeric scalar or vector.")
+  if (missing(years) == FALSE){
+    if (is.numeric(years) == FALSE){
+      stop("Input for the 'years' argument is invalid - it must be a numeric scalar or vector.")
+    }
   }
 
   # set source variable
