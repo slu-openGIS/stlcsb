@@ -5,7 +5,7 @@
 #'
 #' @usage csb_filter(.data, var, category)
 #'
-#' @param .data A tbl
+#' @param .data A tbl or data frame
 #' @param var name of the column containg original problem code data
 #' @param category a vector with the unquoted name(s) of the category(s) for the function to return.
 #'     You can also explicitly state quoted PROBLEMCODE(s). Valid categories are: admin, animal,

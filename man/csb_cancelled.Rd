@@ -7,7 +7,7 @@
 csb_cancelled(.data, var, drop = TRUE)
 }
 \arguments{
-\item{.data}{A tbl}
+\item{.data}{A tbl or data frame}
 
 \item{var}{Name of the column containing cancellation timestamps}
 

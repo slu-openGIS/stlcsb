@@ -4,7 +4,7 @@
 #'
 #' @usage csb_cancelled(.data, var, drop = TRUE)
 #'
-#' @param .data A tbl
+#' @param .data A tbl or data frame
 #' @param var Name of the column containing cancellation timestamps
 #' @param drop A logical sclar; if \code{TRUE}, removes the now empty column
 #'     that had contained cancellation date and time, otherwise if \code{FALSE}

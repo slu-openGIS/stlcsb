@@ -7,7 +7,7 @@
 csb_filter(.data, var, category)
 }
 \arguments{
-\item{.data}{A tbl}
+\item{.data}{A tbl or data frame}
 
 \item{var}{name of the column containg original problem code data}
 
