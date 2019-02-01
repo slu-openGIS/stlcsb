@@ -241,6 +241,10 @@ csb_get_data <- function(){
 
 }
 
+#' New import function
+#'
+#' @importFrom purrr map
+#'
 csb_get_data2 <- function(...){
 
   #Function for returning date data last modified as message
