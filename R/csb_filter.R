@@ -14,8 +14,8 @@
 #'
 #' @return \code{csb_filter} returns data with an additional variable for an intelligible category for CSB requests.
 #'
+#' @importFrom dplyr %>%
 #' @importFrom dplyr filter
-#' @importFrom magrittr %>%
 #' @importFrom rlang :=
 #' @importFrom rlang enquo
 #' @importFrom rlang quo

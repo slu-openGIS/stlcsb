@@ -14,9 +14,9 @@
 #'
 #' @return \code{csb_missingXY} A tbl with a logical vector appended to it.
 #'
+#' @importFrom dplyr %>%
 #' @importFrom dplyr filter
 #' @importFrom dplyr mutate
-#' @importFrom magrittr %>%
 #' @importFrom rlang :=
 #' @importFrom rlang enquo
 #' @importFrom rlang quo

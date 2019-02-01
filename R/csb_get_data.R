@@ -17,6 +17,7 @@
 #'
 #' @return Returns a tibble with all CSB calls for service.
 #'
+#' @importFrom dplyr %>%
 #' @importFrom dplyr arrange
 #' @importFrom dplyr bind_rows
 #' @importFrom dplyr select

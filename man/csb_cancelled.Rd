@@ -9,11 +9,11 @@ csb_cancelled(.data, var, drop = TRUE)
 \arguments{
 \item{.data}{A tbl}
 
-\item{var}{Name of the column containing cancellation timestamps; by default
-this should be \code{DATECANCELLED}}
+\item{var}{Name of the column containing cancellation timestamps}
 
-\item{drop}{Optionally remove the now empty column that had contained cancellation
-date and time if \code{TRUE}}
+\item{drop}{A logical sclar; if \code{TRUE}, removes the now empty column
+that had contained cancellation date and time, otherwise if \code{FALSE}
+the empty column is retained.}
 }
 \value{
 Returns a tibble with the rows containing dates and times for the

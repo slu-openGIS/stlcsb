@@ -5,14 +5,16 @@
 #' @usage csb_cancelled(.data, var, drop = TRUE)
 #'
 #' @param .data A tbl
-#' @param var Name of the column containing cancellation timestamps; by default
-#'     this should be \code{DATECANCELLED}
-#' @param drop Optionally remove the now empty column that had contained cancellation
-#'     date and time if \code{TRUE}
+#' @param var Name of the column containing cancellation timestamps
+#' @param drop A logical sclar; if \code{TRUE}, removes the now empty column
+#'     that had contained cancellation date and time, otherwise if \code{FALSE}
+#'     the empty column is retained.
 #'
 #' @return Returns a tibble with the rows containing dates and times for the
 #'     given variable removed.
 #'
+#' @importFrom dplyr %>%
+#' @importFrom dplyr as_tibble
 #' @importFrom dplyr filter
 #' @importFrom dplyr rename
 #' @importFrom dplyr select
@@ -36,6 +38,11 @@ csb_cancelled <- function(.data, var, drop = TRUE){
     stop('Please provide the name of the variable containing the cancellation timestamps.')
   }
 
+  # check inputs
+  if (is.logical(drop) == FALSE){
+    stop("Input for the 'drop' argument is invalid - it must be either 'TRUE' or 'FALSE'.")
+  }
+
   # save parameters to list for quoting
   paramList <- as.list(match.call())
 
@@ -51,6 +58,11 @@ csb_cancelled <- function(.data, var, drop = TRUE){
   # optionally remove the now empty column
   if (drop == TRUE){
     out <- dplyr::select(out, -!!varNQ)
+  }
+
+  # check class of output
+  if ("tbl_df" %in% class(out) == FALSE){
+    out <- dplyr::as_tibble(out)
   }
 
   # return output

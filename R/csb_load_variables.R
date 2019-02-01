@@ -16,6 +16,7 @@
 #' @seealso \href{https://www.stlouis-mo.gov/data/}{City of St. Louis Open Data},
 #'     \href{https://www.stlouis-mo.gov/data/service-requests.cfm}{City of St. Louis CSB Data}
 #'
+#' @importFrom dplyr %>%
 #' @importFrom dplyr filter
 #' @importFrom dplyr mutate
 #' @importFrom dplyr rename

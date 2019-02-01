@@ -18,7 +18,6 @@
 #' @importFrom lubridate day
 #' @importFrom lubridate month
 #' @importFrom lubridate year
-#' @importFrom magrittr %>%
 #' @importFrom rlang :=
 #' @importFrom rlang enquo
 #' @importFrom rlang quo

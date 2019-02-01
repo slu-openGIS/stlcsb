@@ -12,10 +12,10 @@
 #'
 #' @return \code{csb_intersection}returns a logical vector for addresses that are intersections, or it filters intersections
 #'
+#' @importFrom dplyr %>%
 #' @importFrom dplyr filter
 #' @importFrom dplyr mutate
 #' @importFrom dplyr select
-#' @importFrom magrittr %>%
 #' @importFrom rlang :=
 #' @importFrom rlang enquo
 #' @importFrom rlang quo
