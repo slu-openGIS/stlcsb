@@ -243,6 +243,8 @@ csb_get_data <- function(){
 
 #' New import function
 #'
+#' @param ... Testing options; not for production use
+#'
 #' @importFrom purrr map
 #'
 csb_get_data2 <- function(...){

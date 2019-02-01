@@ -6,6 +6,9 @@
 \usage{
 csb_get_data2(...)
 }
+\arguments{
+\item{...}{Testing options; not for production use}
+}
 \description{
 New import function
 }
