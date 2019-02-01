@@ -6,13 +6,13 @@
 #'
 #' @usage csb_missingXY(.data, varX, varY, newVar)
 #'
-#' @param .data A tbl
-#' @param varX name of column containing SRX data
-#' @param varY name of column containing SRY data
-#' @param newVar name of new column that is \code{TRUE} if coordinate data are
+#' @param .data A tbl or data frame
+#' @param varX Name of column containing x coordinate data
+#' @param varY Name of column containing y coordinate data
+#' @param newVar Name of new column that is \code{TRUE} if coordinate data are
 #'     missing and \code{FALSE} otherwise.
 #'
-#' @return \code{csb_missingXY} A tbl with a logical vector appended to it.
+#' @return A tbl with a logical vector appended to it.
 #'
 #' @importFrom dplyr %>%
 #' @importFrom dplyr filter
@@ -75,6 +75,11 @@ csb_missingXY <- function(.data, varX, varY, newVar){
     )) %>%
     dplyr::mutate(...missingXY := ifelse(is.na(...missingXY) == TRUE, FALSE, ...missingXY)) %>%
     dplyr::rename(!!newVarNQ := ...missingXY) -> out
+
+  # check class of output
+  if ("tbl_df" %in% class(out) == FALSE){
+    out <- dplyr::as_tibble(out)
+  }
 
   ## return output
   return(out)

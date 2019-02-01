@@ -5,13 +5,12 @@
 #'
 #' @usage csb_projectXY(.data, varX, varY, crs)
 #'
-#' @param .data A tbl
-#' @param varX Name of column containing SRX data
-#' @param varY Name of column containing SRY data
+#' @param .data A tbl or data frame
+#' @param varX Name of column containing x coordinate data
+#' @param varY Name of column containing y coordinate data
 #' @param crs Optional; coordinate reference system for the data to be projected into
 #'
-#' @return \code{csb_projectXY} returns a sf object of the input data, specifying a new crs will
-#'     reproject the data.
+#' @return Returns a sf object of the input data projected as point data.
 #'
 #' @importFrom sf st_as_sf
 #' @importFrom sf st_transform

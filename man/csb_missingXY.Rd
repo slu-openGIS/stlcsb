@@ -7,17 +7,17 @@
 csb_missingXY(.data, varX, varY, newVar)
 }
 \arguments{
-\item{.data}{A tbl}
+\item{.data}{A tbl or data frame}
 
-\item{varX}{name of column containing SRX data}
+\item{varX}{Name of column containing x coordinate data}
 
-\item{varY}{name of column containing SRY data}
+\item{varY}{Name of column containing y coordinate data}
 
-\item{newVar}{name of new column that is \code{TRUE} if coordinate data are
+\item{newVar}{Name of new column that is \code{TRUE} if coordinate data are
 missing and \code{FALSE} otherwise.}
 }
 \value{
-\code{csb_missingXY} A tbl with a logical vector appended to it.
+A tbl with a logical vector appended to it.
 }
 \description{
 \code{csb_missingXY} returns a logical vector indicating if an

@@ -7,7 +7,7 @@
 csb_intersection(.data, var, newVar, filter = FALSE, remove = FALSE)
 }
 \arguments{
-\item{.data}{A tbl}
+\item{.data}{A tbl or data frame}
 
 \item{var}{name of column containing address}
 

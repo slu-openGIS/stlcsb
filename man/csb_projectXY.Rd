@@ -7,17 +7,16 @@
 csb_projectXY(.data, varX, varY, crs)
 }
 \arguments{
-\item{.data}{A tbl}
+\item{.data}{A tbl or data frame}
 
-\item{varX}{Name of column containing SRX data}
+\item{varX}{Name of column containing x coordinate data}
 
-\item{varY}{Name of column containing SRY data}
+\item{varY}{Name of column containing y coordinate data}
 
 \item{crs}{Optional; coordinate reference system for the data to be projected into}
 }
 \value{
-\code{csb_projectXY} returns a sf object of the input data, specifying a new crs will
-    reproject the data.
+Returns a sf object of the input data projected as point data.
 }
 \description{
 \code{csb_projectXY} converts SRX and SRY data into a simple features object.

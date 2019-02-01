@@ -4,7 +4,7 @@
 #'
 #' @usage csb_intersection(.data, var, newVar, filter = FALSE, remove = FALSE)
 #'
-#' @param .data A tbl
+#' @param .data A tbl or data frame
 #' @param var name of column containing address
 #' @param newVar Name of output variable to be created with logical
 #' @param filter If true, returns a filtered version of the input with only observations occurring at intersections
@@ -43,12 +43,21 @@ csb_intersection <- function(.data, var, newVar, filter = FALSE, remove = FALSE)
     message('No argument specified for newVar, no logical will be appended')
   }
 
+  # check inputs
+  if (is.logical(filter) == FALSE){
+    stop("Input for the 'filter' argument is invalid - it must be either 'TRUE' or 'FALSE'.")
+  }
+
+  if (is.logical(remove) == FALSE){
+    stop("Input for the 'remove' argument is invalid - it must be either 'TRUE' or 'FALSE'.")
+  }
+
   # check for inccorectly specified parameters
   if(filter == TRUE & remove == TRUE){
     stop('Use filter to select only intersections, use remove to remove intersections from the data')
   }
 
-  if(missing(newVar)&filter == FALSE&remove == FALSE){
+  if(missing(newVar) & filter == FALSE & remove == FALSE){
     stop('Please specify at least one argument for newVar, filter or remove')
   }
 
@@ -104,6 +113,11 @@ csb_intersection <- function(.data, var, newVar, filter = FALSE, remove = FALSE)
 
     message(paste0(before-after, " observations were removed"))
 
+  }
+
+  # check class of output
+  if ("tbl_df" %in% class(.data) == FALSE){
+    .data <- dplyr::as_tibble(.data)
   }
 
   # return output
