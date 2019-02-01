@@ -32,7 +32,7 @@ test_that("Proper function of parsing", {
 })
 
 # test deleting ---------------------------------
-tstdel <- csb_date_parse(test_data, "DATETIMEINIT", day = DAYINIT, delete = TRUE)
+tstdel <- csb_date_parse(test_data, "DATETIMEINIT", day = DAYINIT, drop = TRUE)
 
 test_that("Deleting the Original Variable works", {
   expect_length(tstdel, 19)

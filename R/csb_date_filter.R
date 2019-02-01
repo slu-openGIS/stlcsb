@@ -1,17 +1,17 @@
 #' Filter Calls Based on Date of Call
 #'
-#' @description \code{csb_date_filter} filters dates to return only the specified date elements
+#' @description \code{csb_date_filter} filters dates to return only the specified date elements.
+#'     For example, data can be returned for specific months, years, or portions of months.
 #'
-#' @usage csb_date_filter(.data, var, day, month, year, delete = FALSE)
+#' @usage csb_date_filter(.data, var, day, month, year)
 #'
-#' @param .data A tbl
-#' @param var name of column containing date data
-#' @param day numeric vector of day(s) to include.
-#' @param month numeric/character vector of month(s) to include
-#' @param year numeric vector of years(s) to include (2 or 4 digit)
-#' @param delete if true, deletes the original column containing dates
+#' @param .data A tbl or data frame
+#' @param var A name of column containing date data
+#' @param day A numeric vector of day(s) to include.
+#' @param month A numeric/character vector of month(s) to include
+#' @param year A numeric vector of years(s) to include (2 or 4 digit)
 #'
-#' @return \code{csb_date_filter} returns a filtered version of the input data based on specified arguments
+#' @return Returns a filtered version of the input data based on specified date arguments.
 #'
 #' @importFrom dplyr filter
 #' @importFrom dplyr mutate
@@ -28,17 +28,20 @@
 #' csb_date_filter(january_2018, DATETIMEINIT, day = 1:15, month = 1)
 #' csb_date_filter(january_2018, DATETIMEINIT, month = "January", year = 09)
 #' csb_date_filter(january_2018, DATETIMEINIT, month = c("jan", "feb", "Mar", "Apr"), year = 2009)
-#' csb_date_filter(january_2018, DATETIMEINIT, day = 1:15, month = 1:6, year = 08:13, delete = TRUE)
+#' csb_date_filter(january_2018, DATETIMEINIT, day = 1:15, month = 1:6, year = 08:13)
 #'
 #' @export
-csb_date_filter <- function(.data, var, day = NULL, month = NULL, year = NULL, delete = FALSE){
-#MISSING AND NSE SETUP
+csb_date_filter <- function(.data, var, day = NULL, month = NULL, year = NULL){
+
+  # check for missing parameters
   if (missing(.data)) {
     stop('Please provide an argument for .data')
   }
+
   if (missing(var)) {
     stop('Please provide an argument for var.')
   }
+
   if (missing(day) & missing(month) & missing(year)){
     stop('Please provide at least one argument for day, month or year.')
   }
@@ -140,9 +143,9 @@ csb_date_filter <- function(.data, var, day = NULL, month = NULL, year = NULL, d
     .data <- dplyr::filter(.data, lubridate::day(!!varN) %in% day)
   }
 
-  ## Delete the original var
-  if (delete == TRUE){
-    .data <- dplyr::select(.data, -!!varN)
+  # check class of output
+  if ("tbl_df" %in% class(.data) == FALSE){
+    .data <- dplyr::as_tibble(.data)
   }
 
   # return processed data

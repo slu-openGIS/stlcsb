@@ -4,32 +4,31 @@
 \alias{csb_date_filter}
 \title{Filter Calls Based on Date of Call}
 \usage{
-csb_date_filter(.data, var, day, month, year, delete = FALSE)
+csb_date_filter(.data, var, day, month, year)
 }
 \arguments{
-\item{.data}{A tbl}
+\item{.data}{A tbl or data frame}
 
-\item{var}{name of column containing date data}
+\item{var}{A name of column containing date data}
 
-\item{day}{numeric vector of day(s) to include.}
+\item{day}{A numeric vector of day(s) to include.}
 
-\item{month}{numeric/character vector of month(s) to include}
+\item{month}{A numeric/character vector of month(s) to include}
 
-\item{year}{numeric vector of years(s) to include (2 or 4 digit)}
-
-\item{delete}{if true, deletes the original column containing dates}
+\item{year}{A numeric vector of years(s) to include (2 or 4 digit)}
 }
 \value{
-\code{csb_date_filter} returns a filtered version of the input data based on specified arguments
+Returns a filtered version of the input data based on specified date arguments.
 }
 \description{
-\code{csb_date_filter} filters dates to return only the specified date elements
+\code{csb_date_filter} filters dates to return only the specified date elements.
+    For example, data can be returned for specific months, years, or portions of months.
 }
 \examples{
 csb_date_filter(january_2018, DATETIMEINIT, day = 1)
 csb_date_filter(january_2018, DATETIMEINIT, day = 1:15, month = 1)
 csb_date_filter(january_2018, DATETIMEINIT, month = "January", year = 09)
 csb_date_filter(january_2018, DATETIMEINIT, month = c("jan", "feb", "Mar", "Apr"), year = 2009)
-csb_date_filter(january_2018, DATETIMEINIT, day = 1:15, month = 1:6, year = 08:13, delete = TRUE)
+csb_date_filter(january_2018, DATETIMEINIT, day = 1:15, month = 1:6, year = 08:13)
 
 }

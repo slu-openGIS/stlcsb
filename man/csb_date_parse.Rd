@@ -4,32 +4,35 @@
 \alias{csb_date_parse}
 \title{Parse CSB Date and Time Variables}
 \usage{
-csb_date_parse(.data, var, day, month, year, delete = FALSE)
+csb_date_parse(.data, var, day, month, year, drop = FALSE)
 }
 \arguments{
-\item{.data}{A tbl}
+\item{.data}{A tbl or data frame}
 
 \item{var}{name of column containing date data}
 
-\item{day}{if specified, returns a named column with parsed day}
+\item{day}{Optional; returns a named column with parsed day}
 
-\item{month}{if specified, returns a named column with parsed month}
+\item{month}{Optional; returns a named column with parsed month}
 
-\item{year}{if specified, returns a named column with parsed year}
+\item{year}{Optional; returns a named column with parsed year}
 
-\item{delete}{if true, deletes the original column with unparsed data}
+\item{drop}{A logical sclar; if \code{TRUE}, removes the original column
+that had contained date and time data, otherwise if \code{FALSE}
+the original column is retained.}
 }
 \value{
-\code{csb_date_parse} returns new columns with specified names containing parsed date information
+Returns a tibble with new columns containing parsed date information
 }
 \description{
-\code{csb_date_parse} is used to parse out dates into more intellgible formats
+\code{csb_date_parse} is used to parse out dates into
+    day, month, and year elements.
 }
 \examples{
 csb_date_parse(january_2018, DATETIMEINIT, dayInit)
 csb_date_parse(january_2018, DATETIMEINIT, dayInit, monthInit)
 csb_date_parse(january_2018, DATETIMEINIT, month = monthInit)
 csb_date_parse(january_2018, DATETIMEINIT, month = monthInit, year = yearInit)
-csb_date_parse(january_2018, DATETIMEINIT, dayInit, monthInit, yearInit, delete = TRUE)
+csb_date_parse(january_2018, DATETIMEINIT, dayInit, monthInit, yearInit, drop = TRUE)
 
 }

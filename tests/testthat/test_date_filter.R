@@ -46,10 +46,3 @@ tstaltMonth <- unlist(csb_date_filter(test_data, "DATETIMEINIT", month = c("jan"
 test_that("Month alternate entry works", {
   expect_length(tstaltMonth, 5)
 })
-
-# test deleting ---------------------------------
-tstdel <- csb_date_filter(test_data, DATETIMEINIT, day = 8, delete = TRUE)
-
-test_that("Deleting the Original Variable works", {
-  expect_length(tstdel, 18)
-})
