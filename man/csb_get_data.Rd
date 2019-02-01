@@ -4,17 +4,33 @@
 \alias{csb_get_data}
 \title{Download CSB Data from the City of St. Louis}
 \usage{
-csb_get_data()
+csb_get_data(tidy = TRUE, years, ...)
+}
+\arguments{
+\item{tidy}{A logical scalar; if \code{TRUE}, variable names will be converted to
+lower case and reordered. Two variables with incomplete data - problem city
+(\code{PROBCITY}) and problem zip code (\code{PROBZIP}) are dropped to limit
+use of memory along with a third, the problem address type (\code{PROBADDTYPE}).}
+
+\item{years}{Optional; if included, data not in the specified years will be excluded
+from the returned object.}
+
+\item{...}{Additional testing options; not for production use}
 }
 \value{
-\code{csb_get_data} returns a tibble with all of the CSB requests
-    contained in our version of the CSB's data release.
+Returns a tibble with all CSB calls for service.
 }
 \description{
 \code{csb_get_data} provides direct access to a compiled version of the CSB's
-    data release.
+    data release via the City of St. Louis website. These data are provided with
+    no warrenty from either the City of St. Louis or the package developers.
 }
 \examples{
-\dontrun{csb <- csb_get_data()}
+\dontrun{
+csb <- csb_get_data()
+csb <- csb_get_data(tidy = FALSE)
+csb <- csb_get_data(years = 2009:2018)
+csb <- csb_get_data(years = 2018)
+}
 
 }

@@ -1,14 +1,26 @@
 #' Download CSB Data from the City of St. Louis
 #'
 #' \code{csb_get_data} provides direct access to a compiled version of the CSB's
-#'     data release.
+#'     data release via the City of St. Louis website. These data are provided with
+#'     no warrenty from either the City of St. Louis or the package developers.
 #'
-#' @usage csb_get_data()
+#' @usage csb_get_data(tidy = TRUE, years, ...)
 #'
-#' @return \code{csb_get_data} returns a tibble with all of the CSB requests
-#'     contained in our version of the CSB's data release.
+#' @param tidy A logical scalar; if \code{TRUE}, variable names will be converted to
+#'     lower case and reordered. Two variables with incomplete data - problem city
+#'     (\code{PROBCITY}) and problem zip code (\code{PROBZIP}) are dropped to limit
+#'     use of memory along with a third, the problem address type (\code{PROBADDTYPE}).
+#' @param years Optional; if included, data not in the specified years will be excluded
+#'     from the returned object.
+#' @param ... Additional testing options; not for production use
 #'
+#' @return Returns a tibble with all CSB calls for service.
+#'
+#' @importFrom dplyr arrange
 #' @importFrom dplyr bind_rows
+#' @importFrom dplyr everything
+#' @importFrom dplyr select
+#' @importFrom purrr map
 #' @importFrom readr cols
 #' @importFrom readr col_character
 #' @importFrom readr col_double
@@ -17,245 +29,30 @@
 #' @importFrom xml2 read_html
 #' @importFrom xml2 xml_text
 #' @importFrom rvest html_node
+#' @importFrom stringr str_c
 #' @importFrom stringr str_extract
-#' @importFrom tibble as_tibble
 #'
 #' @examples
-#' \dontrun{csb <- csb_get_data()}
+#' \dontrun{
+#' csb <- csb_get_data()
+#' csb <- csb_get_data(tidy = FALSE)
+#' csb <- csb_get_data(years = 2009:2018)
+#' csb <- csb_get_data(years = 2018)
+#' }
 #'
 #' @export
-csb_get_data <- function(){
+csb_get_data <- function(tidy = TRUE, years, ...){
 
-  #Function for returning date data last modified as message
+  # set gobal variables
+  DATETIMEINIT = callertype = datecancelled = dateinvtdone = datetimeclosed =
+    datetimeinit = description = neighborhood = prjcompletedate = probaddress =
+    probaddtype = probcity = problemcode = probzip = requestid = status = submitto =
+    ward = NULL
+
+  # create date last modified string
   website <- xml2::read_html("https://www.stlouis-mo.gov/data/service-requests.cfm")
   message <- rvest::html_node(website, xpath = '//*[@id="CS_CCF_627407_632762"]/ul/li[1]/span[1]')
   messageRegex <- stringr::str_extract(xml2::xml_text(message), "\\d{1,2}/\\d{1,2}/\\d{2}")
-
-  # no visible binding for global variable note
-  STL_CSB_RawRequests = NULL
-
-  # set source variables
-  # This will need to be updated on an annual basis, if the city continues using the same format
-  url <- "https://www.stlouis-mo.gov/data/upload/data-files/csb.zip"
-  path1 <- "/2008.csv"
-  path2 <- "/2009.csv"
-  path3 <- "/2010.csv"
-  path4 <- "/2011.csv"
-  path5 <- "/2012.csv"
-  path6 <- "/2013.csv"
-  path7 <- "/2014.csv"
-  path8 <- "/2015.csv"
-  path9 <- "/2016.csv"
-  path10 <- "/2017.csv"
-  path11 <- "/2018.csv"
-  path12 <- "/2019.csv"
-
-  # create temporary directory, download and unzip data
-  tmpdir <- tempdir()
-  utils::download.file(url, paste0(tmpdir,"csb.zip"))
-  utils::unzip(paste0(tmpdir,"csb.zip"), exdir = tmpdir)
-
-
-  # read in data
-
-  # NOTE FOR DOCUMENTATION
-  # 2008 Data is only for traffic and street requests. (From README file of download)
-  suppressWarnings(y2008 <- readr::read_csv(
-  paste0(tmpdir,path1),
-  col_types = cols(
-  PROBZIP = col_integer(),
-  DATETIMEINIT = col_character(),
-  DATETIMECLOSED = col_character(),
-  SRX = col_double(),
-  SRY = col_double(),
-  PRJCOMPLETEDATE = col_character(),
-  DATECANCELLED = col_character(),
-  DATEINVTDONE = col_character(),
-  NEIGHBORHOOD = col_integer(),
-  WARD = col_integer()
-  )))
-  suppressWarnings(y2009 <- readr::read_csv(
-  paste0(tmpdir,path2),
-  col_types = cols(
-  PROBZIP = col_integer(),
-  DATETIMEINIT = col_character(),
-  DATETIMECLOSED = col_character(),
-  SRX = col_double(),
-  SRY = col_double(),
-  PRJCOMPLETEDATE = col_character(),
-  DATECANCELLED = col_character(),
-  DATEINVTDONE = col_character(),
-  NEIGHBORHOOD = col_integer(),
-  WARD = col_integer()
-  )))
-  suppressWarnings(y2010 <- readr::read_csv(
-  paste0(tmpdir,path3),
-  col_types = cols(
-  PROBZIP = col_integer(),
-  DATETIMEINIT = col_character(),
-  DATETIMECLOSED = col_character(),
-  SRX = col_double(),
-  SRY = col_double(),
-  PRJCOMPLETEDATE = col_character(),
-  DATECANCELLED = col_character(),
-  DATEINVTDONE = col_character(),
-  NEIGHBORHOOD = col_integer(),
-  WARD = col_integer()
-  )))
-  suppressWarnings(y2011 <- readr::read_csv(
-  paste0(tmpdir,path4),
-  col_types = cols(
-  PROBZIP = col_integer(),
-  DATETIMEINIT = col_character(),
-  DATETIMECLOSED = col_character(),
-  SRX = col_double(),
-  SRY = col_double(),
-  PRJCOMPLETEDATE = col_character(),
-  DATECANCELLED = col_character(),
-  DATEINVTDONE = col_character(),
-  NEIGHBORHOOD = col_integer(),
-  WARD = col_integer()
-  )))
-  suppressWarnings(y2012 <- readr::read_csv(
-  paste0(tmpdir,path5),
-  col_types = cols(
-  PROBZIP = col_integer(),
-  DATETIMEINIT = col_character(),
-  DATETIMECLOSED = col_character(),
-  SRX = col_double(),
-  SRY = col_double(),
-  PRJCOMPLETEDATE = col_character(),
-  DATECANCELLED = col_character(),
-  DATEINVTDONE = col_character(),
-  NEIGHBORHOOD = col_integer(),
-  WARD = col_integer()
-  )))
-  suppressWarnings(y2013 <- readr::read_csv(
-  paste0(tmpdir,path6),
-  col_types = cols(
-  PROBZIP = col_integer(),
-  DATETIMEINIT = col_character(),
-  DATETIMECLOSED = col_character(),
-  SRX = col_double(),
-  SRY = col_double(),
-  PRJCOMPLETEDATE = col_character(),
-  DATECANCELLED = col_character(),
-  DATEINVTDONE = col_character(),
-  NEIGHBORHOOD = col_integer(),
-  WARD = col_integer()
-  )))
-  suppressWarnings(y2014 <- readr::read_csv(
-  paste0(tmpdir,path7),
-  col_types = cols(
-  PROBZIP = col_integer(),
-  DATETIMEINIT = col_character(),
-  DATETIMECLOSED = col_character(),
-  SRX = col_double(),
-  SRY = col_double(),
-  PRJCOMPLETEDATE = col_character(),
-  DATECANCELLED = col_character(),
-  DATEINVTDONE = col_character(),
-  NEIGHBORHOOD = col_integer(),
-  WARD = col_integer()
-  )))
-  suppressWarnings(y2015 <- readr::read_csv(
-  paste0(tmpdir,path8),
-  col_types = cols(
-  PROBZIP = col_integer(),
-  DATETIMEINIT = col_character(),
-  DATETIMECLOSED = col_character(),
-  SRX = col_double(),
-  SRY = col_double(),
-  PRJCOMPLETEDATE = col_character(),
-  DATECANCELLED = col_character(),
-  DATEINVTDONE = col_character(),
-  NEIGHBORHOOD = col_integer(),
-  WARD = col_integer()
-  )))
-  suppressWarnings(y2016 <- readr::read_csv(
-  paste0(tmpdir,path9),
-  col_types = cols(
-  PROBZIP = col_integer(),
-  DATETIMEINIT = col_character(),
-  DATETIMECLOSED = col_character(),
-  SRX = col_double(),
-  SRY = col_double(),
-  PRJCOMPLETEDATE = col_character(),
-  DATECANCELLED = col_character(),
-  DATEINVTDONE = col_character(),
-  NEIGHBORHOOD = col_integer(),
-  WARD = col_integer()
-  )))
-  suppressWarnings(y2017 <- readr::read_csv(
-  paste0(tmpdir,path10),
-  col_types = cols(
-  PROBZIP = col_integer(),
-  DATETIMEINIT = col_character(),
-  DATETIMECLOSED = col_character(),
-  SRX = col_double(),
-  SRY = col_double(),
-  PRJCOMPLETEDATE = col_character(),
-  DATECANCELLED = col_character(),
-  DATEINVTDONE = col_character(),
-  NEIGHBORHOOD = col_integer(),
-  WARD = col_integer()
-  )))
-  suppressWarnings(y2018 <- readr::read_csv(
-  paste0(tmpdir,path11),
-  col_types = cols(
-  PROBZIP = col_integer(),
-  DATETIMEINIT = col_character(),
-  DATETIMECLOSED = col_character(),
-  SRX = col_double(),
-  SRY = col_double(),
-  PRJCOMPLETEDATE = col_character(),
-  DATECANCELLED = col_character(),
-  DATEINVTDONE = col_character(),
-  NEIGHBORHOOD = col_integer(),
-  WARD = col_integer()
-  )))
-  suppressWarnings(y2019 <- readr::read_csv(
-    paste0(tmpdir,path12),
-    col_types = cols(
-      PROBZIP = col_integer(),
-      DATETIMEINIT = col_character(),
-      DATETIMECLOSED = col_character(),
-      SRX = col_double(),
-      SRY = col_double(),
-      PRJCOMPLETEDATE = col_character(),
-      DATECANCELLED = col_character(),
-      DATEINVTDONE = col_character(),
-      NEIGHBORHOOD = col_integer(),
-      WARD = col_integer()
-    )))
-
-  # remove temp directory and objects
-  unlink(tmpdir)
-  rm(path1, path2, path3, path4, path5, path6, path7, path8, path9, path10, path11, path12, url)
-
-  # combine data frames
-  STL_CSB_RawRequests <- dplyr::as_tibble(dplyr::bind_rows(y2008, y2009, y2010, y2011, y2012, y2013, y2014, y2015, y2016, y2017, y2018, y2019))
-
-  message(paste0("Data Last Modified ", messageRegex))
-  return(STL_CSB_RawRequests)
-
-}
-
-#' New import function
-#'
-#' @param ... Testing options; not for production use
-#'
-#' @importFrom purrr map
-#'
-csb_get_data2 <- function(...){
-
-  #Function for returning date data last modified as message
-  website <- xml2::read_html("https://www.stlouis-mo.gov/data/service-requests.cfm")
-  message <- rvest::html_node(website, xpath = '//*[@id="CS_CCF_627407_632762"]/ul/li[1]/span[1]')
-  messageRegex <- stringr::str_extract(xml2::xml_text(message), "\\d{1,2}/\\d{1,2}/\\d{2}")
-
-  # no visible binding for global variable note
-  STL_CSB_RawRequests = NULL
 
   # set source variable
   url <- "https://www.stlouis-mo.gov/data/upload/data-files/csb.zip"
@@ -267,6 +64,22 @@ csb_get_data2 <- function(...){
 
   # create list of all files at path that are csv
   files <- dir(path = tmpdir, pattern = "*.csv")
+
+  # optionally create list of years to import
+  if (missing(years) == FALSE){
+
+    # create vector of year files
+    years <- stringr::str_c(as.character(years), ".csv")
+
+    # logic test
+    if (all(years %in% files) == FALSE){
+      stop("One or more of the years specified are not currently included in CSB data releases.")
+    }
+
+    # replace file list with year list
+    files <- years
+
+  }
 
   # read in files
   files %>%
@@ -282,6 +95,28 @@ csb_get_data2 <- function(...){
                                                     DATEINVTDONE = col_character(),
                                                     NEIGHBORHOOD = col_integer(),
                                                     WARD = col_integer())
-                                                  ))) -> data
+                                                  ))) %>%
+    dplyr::bind_rows() %>%
+    dplyr::arrange(DATETIMEINIT) -> out
+
+  # remove temp directory
+  unlink(tmpdir)
+
+  # optionally tidy variable names
+  if (tidy == TRUE){
+
+    names(out) <- tolower(names(out))
+
+    out %>%
+      dplyr::select(-c(probaddtype, probcity, probzip)) %>%
+      dplyr::select(requestid, datetimeinit, probaddress, callertype, neighborhood, ward, problemcode,
+                    description, submitto, status, dateinvtdone, datetimeclosed, prjcompletedate,
+                    datecancelled, dplyr::everything()) -> out
+
+  }
+
+  # return output
+  message(paste0("Data Last Modified: ", messageRegex))
+  return(out)
 
 }
