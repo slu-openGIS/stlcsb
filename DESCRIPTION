@@ -20,7 +20,6 @@ RoxygenNote: 6.1.1
 Imports: 
     dplyr,
     lubridate, 
-    magrittr, 
     purrr,
     readr,
     readxl,
