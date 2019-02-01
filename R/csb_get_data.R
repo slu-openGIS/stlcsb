@@ -62,7 +62,7 @@ csb_get_data <- function(tidy = TRUE, years, ...){
 
   # create temporary directory, download and unzip data
   tmpdir <- tempdir()
-  utils::download.file(url, paste0(tmpdir,"csb.zip"))
+  utils::download.file(url, paste0(tmpdir,"csb.zip"), mode="wb")
   utils::unzip(paste0(tmpdir,"csb.zip"), exdir = tmpdir)
 
   # create list of all files at path that are csv

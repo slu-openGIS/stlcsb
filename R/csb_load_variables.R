@@ -46,7 +46,7 @@ csb_load_variables <- function(tidy = TRUE){
   # create temporary directory and download
   tmpdir <- tempdir()
   filepath <- paste0(tmpdir,path)
-  utils::download.file(url, filepath)
+  utils::download.file(url, filepath, mode="wb")
 
   # read data
   readxl::read_excel(path = filepath) %>%
