@@ -265,7 +265,7 @@ csb_get_data2 <- function(...){
   # read in files
   files %>%
     purrr::map(~ suppressWarnings(readr::read_csv(file = file.path(tmpdir, .),
-                                                  col_types = cols(
+                                                  col_types = readr::cols(
                                                     PROBZIP = col_integer(),
                                                     DATETIMEINIT = col_character(),
                                                     DATETIMECLOSED = col_character(),
