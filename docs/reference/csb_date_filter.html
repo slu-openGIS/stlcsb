@@ -32,7 +32,8 @@
 
 <meta property="og:title" content="Filter Calls Based on Date of Call — csb_date_filter" />
 
-<meta property="og:description" content="csb_date_filter filters dates to return only the specified date elements" />
+<meta property="og:description" content="csb_date_filter filters dates to return only the specified date elements.
+    For example, data can be returned for specific months, years, or portions of months." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -107,44 +108,41 @@
 
     <div class="ref-description">
     
-    <p><code>csb_date_filter</code> filters dates to return only the specified date elements</p>
+    <p><code>csb_date_filter</code> filters dates to return only the specified date elements.
+    For example, data can be returned for specific months, years, or portions of months.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>csb_date_filter</span>(<span class='no'>.data</span>, <span class='no'>var</span>, <span class='no'>day</span>, <span class='no'>month</span>, <span class='no'>year</span>, <span class='kw'>delete</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>csb_date_filter</span>(<span class='no'>.data</span>, <span class='no'>var</span>, <span class='no'>day</span>, <span class='no'>month</span>, <span class='no'>year</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>.data</th>
-      <td><p>A tbl</p></td>
+      <td><p>A tbl or data frame</p></td>
     </tr>
     <tr>
       <th>var</th>
-      <td><p>name of column containing date data</p></td>
+      <td><p>A name of column containing date data</p></td>
     </tr>
     <tr>
       <th>day</th>
-      <td><p>numeric vector of day(s) to include.</p></td>
+      <td><p>A numeric vector of day(s) to include.</p></td>
     </tr>
     <tr>
       <th>month</th>
-      <td><p>numeric/character vector of month(s) to include</p></td>
+      <td><p>A numeric/character vector of month(s) to include</p></td>
     </tr>
     <tr>
       <th>year</th>
-      <td><p>numeric vector of years(s) to include (2 or 4 digit)</p></td>
-    </tr>
-    <tr>
-      <th>delete</th>
-      <td><p>if true, deletes the original column containing dates</p></td>
+      <td><p>A numeric vector of years(s) to include (2 or 4 digit)</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p><code>csb_date_filter</code> returns a filtered version of the input data based on specified arguments</p>
+    <p>Returns a filtered version of the input data based on specified date arguments.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -194,13 +192,13 @@
 #&gt; #   DESCRIPTION </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, NEIGHBORHOOD </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, PRJCOMPLETEDATE </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span style='color: #555555;'>,
 #&gt; #   PROBADDRESS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, PROBADDTYPE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, PROBCITY </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, PROBLEMCODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
 #&gt; #   PROBZIP </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, REQUESTID </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, SRX </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, SRY </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, STATUS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   SUBMITTO </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, WARD </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span></div><div class='input'><span class='fu'>csb_date_filter</span>(<span class='no'>january_2018</span>, <span class='no'>DATETIMEINIT</span>, <span class='kw'>day</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>15</span>, <span class='kw'>month</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>6</span>, <span class='kw'>year</span> <span class='kw'>=</span> <span class='fl'>08</span>:<span class='fl'>13</span>, <span class='kw'>delete</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='output co'>#&gt; <span class='message'>2008 only contains traffic requests</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 0 x 18</span><span>
-#&gt; </span><span style='color: #555555;'># … with 18 variables: CALLERTYPE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, DATECANCELLED </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span style='color: #555555;'>,
-#&gt; #   DATEINVTDONE </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span style='color: #555555;'>, DATETIMECLOSED </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span style='color: #555555;'>, DESCRIPTION </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   NEIGHBORHOOD </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, PRJCOMPLETEDATE </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span style='color: #555555;'>, PROBADDRESS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   PROBADDTYPE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, PROBCITY </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, PROBLEMCODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, PROBZIP </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,
-#&gt; #   REQUESTID </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, SRX </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, SRY </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, STATUS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, SUBMITTO </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   WARD </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span></div><div class='input'>
+#&gt; #   SUBMITTO </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, WARD </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span></div><div class='input'><span class='fu'>csb_date_filter</span>(<span class='no'>january_2018</span>, <span class='no'>DATETIMEINIT</span>, <span class='kw'>day</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>15</span>, <span class='kw'>month</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>6</span>, <span class='kw'>year</span> <span class='kw'>=</span> <span class='fl'>08</span>:<span class='fl'>13</span>)</div><div class='output co'>#&gt; <span class='message'>2008 only contains traffic requests</span></div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 0 x 19</span><span>
+#&gt; </span><span style='color: #555555;'># … with 19 variables: CALLERTYPE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, DATECANCELLED </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span style='color: #555555;'>,
+#&gt; #   DATEINVTDONE </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span style='color: #555555;'>, DATETIMECLOSED </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span style='color: #555555;'>, DATETIMEINIT </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span style='color: #555555;'>,
+#&gt; #   DESCRIPTION </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, NEIGHBORHOOD </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, PRJCOMPLETEDATE </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span style='color: #555555;'>,
+#&gt; #   PROBADDRESS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, PROBADDTYPE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, PROBCITY </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, PROBLEMCODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
+#&gt; #   PROBZIP </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, REQUESTID </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, SRX </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, SRY </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, STATUS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
+#&gt; #   SUBMITTO </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, WARD </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span></div><div class='input'>
 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

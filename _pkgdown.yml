@@ -9,9 +9,11 @@ reference:
     desc: "Access CSB data"
     contents:
     - csb_get_data
+    - csb_last_update
+    - csb_load_variables
 
   - title: "Tidy"
-    desc: "Access CSB data"
+    desc: "Clean CSB data"
     contents:
     - csb_cancelled
     - csb_categorize
