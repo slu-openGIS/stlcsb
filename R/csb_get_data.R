@@ -45,6 +45,15 @@ csb_get_data <- function(tidy = TRUE, years, ...){
     probaddtype = probcity = problemcode = probzip = requestid = status = submitto =
     ward = srx = sry = NULL
 
+  # check inputs
+  if (is.logical(tidy) == FALSE){
+    stop("Input for the 'tidy' argument is invalid - it must be either 'TRUE' or 'FALSE'.")
+  }
+
+  if (is.numeric(years) == FALSE){
+    stop("Input for the 'years' argument is invalid - it must be a numeric scalar or vector.")
+  }
+
   # set source variable
   url <- "https://www.stlouis-mo.gov/data/upload/data-files/csb.zip"
 

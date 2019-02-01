@@ -33,6 +33,11 @@ csb_load_variables <- function(tidy = TRUE){
   # global variables
   `Field/Attribute Name` = `Data Type` = Name = NULL
 
+  # check inputs
+  if (is.logical(tidy) == FALSE){
+    stop("Input for the 'tidy' argument is invalid - it must be either 'TRUE' or 'FALSE'.")
+  }
+
   # set source variable
   url <- "https://www.stlouis-mo.gov/data/upload/data-files/CSB-Request-Dataset-Field-Definitions.xlsx"
   path <- "/CSB-Request-Dataset-Field-Definitions.xlsx"
