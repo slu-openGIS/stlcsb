@@ -20,10 +20,14 @@
 #' @importFrom rlang sym
 #'
 #' @examples
-#' #You MUST remove observations with missing coordinates before using this function
-#' csb <- csb_missingXY(january_2018, SRX, SRX, newVar = missing)
+#' # remove missing coordinates prior to projecting
+#' csb <- csb_missingXY(january_2018, SRX, SRY, newVar = missing)
 #' csb <- dplyr::filter(csb, missing == FALSE)
+#'
+#' # project data
 #' csb_projectXY(csb, SRX, SRY)
+#'
+#' # project with a custom crs
 #' csb_projectXY(csb, SRX, SRY, crs = 4269)
 #'
 #' @export
