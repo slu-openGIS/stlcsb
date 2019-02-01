@@ -1,19 +1,18 @@
 #' Identify Calls for Service Related to Vacancy
 #'
-#' @description \code{csb_vacant}appends a logical vector indicating `TRUE` for vacancy related problem codes.
+#' @description \code{csb_vacant} appends a logical vector indicating \code{TRUE}
+#'     for vacancy related problem codes.
 #'
-#' @usage csb_vacant(.data, var, newVar, filter = FALSE)
+#' @usage csb_vacant(.data, var, newVar)
 #'
-#' @param .data A tbl
-#' @param var name of column containing problem codes
-#' @param newVar name of output variable to be created with vacant logical
-#' @param filter If true, returns a filtered version of the input with only vacancy related problem codes
+#' @param .data A tbl or data frame
+#' @param var Name of existing column containing problem codes
+#' @param newVar Name of output variable to be created with vacant logical
 #'
-#' @return \code{csb_vacant}returns a logical vector with TRUE for vacancy related problem codes, or a filtered version of the input data
+#' @return Returns a tibble with the logical vector added as a new variable.
 #'
-#' @importFrom dplyr filter
+#' @importFrom dplyr as_tibble
 #' @importFrom dplyr mutate
-#' @importFrom magrittr %>%
 #' @importFrom rlang :=
 #' @importFrom rlang enquo
 #' @importFrom rlang quo
@@ -21,10 +20,9 @@
 #'
 #' @examples
 #' csb_vacant(january_2018, PROBLEMCODE, vacant)
-#' csb_vacant(january_2018, PROBLEMCODE, vacant, filter = TRUE)
 #'
 #' @export
-csb_vacant <- function(.data, var, newVar, filter = FALSE){
+csb_vacant <- function(.data, var, newVar){
 
   # check for missing parameters
   if (missing(.data)) {
@@ -32,7 +30,7 @@ csb_vacant <- function(.data, var, newVar, filter = FALSE){
   }
 
   if (missing(var)) {
-    stop('Please provide an argument for var')
+    stop('Please provide name of ')
   }
 
   if (missing(newVar)){
@@ -52,14 +50,14 @@ csb_vacant <- function(.data, var, newVar, filter = FALSE){
   newVarN <- rlang::quo_name(rlang::enquo(newVar))
 
   # append logical for vacant codes
-  .data <- dplyr::mutate(.data, !!newVarN := ifelse(!!varN %in% stlcsb::cat_vacant, TRUE, FALSE))
+  out <- dplyr::mutate(.data, !!newVarN := ifelse(!!varN %in% stlcsb::cat_vacant, TRUE, FALSE))
 
-  # optionally filter
-  if(filter==TRUE){
-    .data <- dplyr::filter(.data, !!varN %in% stlcsb::cat_vacant)
+  # check class of output
+  if ("tbl_df" %in% class(out) == FALSE){
+    out <- dplyr::as_tibble(out)
   }
 
   # return output
-  return(.data)
+  return(out)
 
 }

@@ -4,25 +4,23 @@
 \alias{csb_vacant}
 \title{Identify Calls for Service Related to Vacancy}
 \usage{
-csb_vacant(.data, var, newVar, filter = FALSE)
+csb_vacant(.data, var, newVar)
 }
 \arguments{
-\item{.data}{A tbl}
+\item{.data}{A tbl or data frame}
 
-\item{var}{name of column containing problem codes}
+\item{var}{Name of existing column containing problem codes}
 
-\item{newVar}{name of output variable to be created with vacant logical}
-
-\item{filter}{If true, returns a filtered version of the input with only vacancy related problem codes}
+\item{newVar}{Name of output variable to be created with vacant logical}
 }
 \value{
-\code{csb_vacant}returns a logical vector with TRUE for vacancy related problem codes, or a filtered version of the input data
+Returns a tibble with the logical vector added as a new variable.
 }
 \description{
-\code{csb_vacant}appends a logical vector indicating `TRUE` for vacancy related problem codes.
+\code{csb_vacant} appends a logical vector indicating \code{TRUE}
+    for vacancy related problem codes.
 }
 \examples{
 csb_vacant(january_2018, PROBLEMCODE, vacant)
-csb_vacant(january_2018, PROBLEMCODE, vacant, filter = TRUE)
 
 }
