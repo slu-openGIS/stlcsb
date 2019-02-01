@@ -7,15 +7,14 @@
 csb_categorize(.data, var, newVar)
 }
 \arguments{
-\item{.data}{A tbl}
+\item{.data}{A tbl or data frame}
 
-\item{var}{Name of orginal variable containing problem code}
+\item{var}{Name of existing column containing problem codes}
 
-\item{newVar}{Name of output variable to be created with category name}
+\item{newVar}{Name of output variable to be created with category string}
 }
 \value{
-\code{csb_categorize} returns data with an additional variable for an
-    simplified category for CSB requests.
+Returns a tibble with the string vector added as a new variable.
 }
 \description{
 \code{csb_categorize} provides general categories for the
@@ -23,6 +22,6 @@ csb_categorize(.data, var, newVar)
     of the call data in mid-2018.
 }
 \examples{
-csb_categorize(january_2018, PROBLEMCODE, Category)
+csb_categorize(january_2018, var = PROBLEMCODE, newVar = Category)
 
 }

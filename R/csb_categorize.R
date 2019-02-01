@@ -6,36 +6,37 @@
 #'
 #' @usage csb_categorize(.data, var, newVar)
 #'
-#' @param .data A tbl
-#' @param var Name of orginal variable containing problem code
-#' @param newVar Name of output variable to be created with category name
+#' @param .data A tbl or data frame
+#' @param var Name of existing column containing problem codes
+#' @param newVar Name of output variable to be created with category string
 #'
-#' @return \code{csb_categorize} returns data with an additional variable for an
-#'     simplified category for CSB requests.
+#' @return Returns a tibble with the string vector added as a new variable.
 #'
+#' @importFrom dplyr as_tibble
 #' @importFrom dplyr case_when
 #' @importFrom dplyr mutate
-#' @importFrom magrittr %>%
 #' @importFrom rlang :=
 #' @importFrom rlang enquo
 #' @importFrom rlang quo
 #' @importFrom rlang sym
 #'
 #' @examples
-#' csb_categorize(january_2018, PROBLEMCODE, Category)
+#' csb_categorize(january_2018, var = PROBLEMCODE, newVar = Category)
 #'
 #' @export
 csb_categorize <- function(.data, var, newVar){
 
   # check for missing parameters
   if (missing(.data)) {
-    stop('Please provide an argument for .data')
+    stop('Please provide an argument for .data.')
   }
+
   if (missing(var)) {
-    stop('Please provide an argument for var')
+    stop("Please provide the name of the variable containing the problem codes for 'var'.")
   }
-  if (missing(newVar)) {
-    stop('Please provide an argument for newVar')
+
+  if (missing(newVar)){
+    stop("Please provide a new variable name for 'newVar'.")
   }
 
   # save parameters to list for quoting
@@ -51,24 +52,28 @@ csb_categorize <- function(.data, var, newVar){
   newVarN <- rlang::quo_name(rlang::enquo(newVar))
 
   # assign categories
-  .data %>%
-    dplyr::mutate(!!newVarN := dplyr::case_when(
-             !!varN %in% stlcsb::cat_admin ~ "Admin",
-             !!varN %in% stlcsb::cat_animal ~ "Animal",
-             !!varN %in% stlcsb::cat_construction ~ "Construction",
-             !!varN %in% stlcsb::cat_debris ~ "Debris",
-             !!varN %in% stlcsb::cat_degrade ~ "Degrade",
-             !!varN %in% stlcsb::cat_disturbance ~ "Disturbance",
-             !!varN %in% stlcsb::cat_event ~ "Event",
-             !!varN %in% stlcsb::cat_health ~ "Health",
-             !!varN %in% stlcsb::cat_landscape ~ "Landscape",
-             !!varN %in% stlcsb::cat_law ~ "Law",
-             !!varN %in% stlcsb::cat_maintenance ~ "Maintenance",
-             !!varN %in% stlcsb::cat_nature ~ "Nature",
-             !!varN %in% stlcsb::cat_road ~ "Road",
-             !!varN %in% stlcsb::cat_sewer ~ "Sewer",
-             !!varN %in% stlcsb::cat_traffic ~ "Traffic",
-             !!varN %in% stlcsb::cat_waste ~ "Waste")) -> out
+  out <- dplyr::mutate(.data, !!newVarN := dplyr::case_when(
+    !!varN %in% stlcsb::cat_admin ~ "Admin",
+    !!varN %in% stlcsb::cat_animal ~ "Animal",
+    !!varN %in% stlcsb::cat_construction ~ "Construction",
+    !!varN %in% stlcsb::cat_debris ~ "Debris",
+    !!varN %in% stlcsb::cat_degrade ~ "Degrade",
+    !!varN %in% stlcsb::cat_disturbance ~ "Disturbance",
+    !!varN %in% stlcsb::cat_event ~ "Event",
+    !!varN %in% stlcsb::cat_health ~ "Health",
+    !!varN %in% stlcsb::cat_landscape ~ "Landscape",
+    !!varN %in% stlcsb::cat_law ~ "Law",
+    !!varN %in% stlcsb::cat_maintenance ~ "Maintenance",
+    !!varN %in% stlcsb::cat_nature ~ "Nature",
+    !!varN %in% stlcsb::cat_road ~ "Road",
+    !!varN %in% stlcsb::cat_sewer ~ "Sewer",
+    !!varN %in% stlcsb::cat_traffic ~ "Traffic",
+    !!varN %in% stlcsb::cat_waste ~ "Waste"))
+
+  # check class of output
+  if ("tbl_df" %in% class(out) == FALSE){
+    out <- dplyr::as_tibble(out)
+  }
 
   # return output
   return(out)

@@ -1,27 +1,36 @@
 context("test csb_vacant")
 
 # load test data --------------------------------
-test_data <- read.csv(system.file("extdata", "testdata.csv", package = "stlcsb"), stringsAsFactors = F)
+
+data(january_2018, package = "stlcsb")
 
 # test errors -----------------------------------
+
 test_that("Missing input errors triggered", {
-  expect_error(csb_vacant(), "Please provide an argument for .data")
-  expect_error(csb_vacant(test_data), "Please provide an argument for var")
-  expect_error(csb_vacant(test_data, PROBLEMCODE), "Please provide an argument for newVar")
-  })
-
-# test logical appending ------------------------
-Loutput <- unlist(csb_vacant(test_data, PROBLEMCODE, newVar = vacant)["vacant"])
-names(Loutput) <- NULL
-expected <- c(F,T,F,T,F,F,F)
-
-test_that("Logical appending works", {
-  expect_equal(Loutput, expected)
+  expect_error(csb_categorize(),
+               "Please provide an argument for .data.")
+  expect_error(csb_vacant(test_data),
+               "Please provide the name of the variable containing the problem codes for 'var'.")
+  expect_error(csb_vacant(test_data, newVar = vacant),
+               "Please provide the name of the variable containing the problem codes for 'var'.")
+  expect_error(csb_vacant(test_data, PROBLEMCODE),
+               "Please provide a new variable name for 'newVar'.")
+  expect_error(csb_vacant(test_data, var = PROBLEMCODE),
+               "Please provide a new variable name for 'newVar'.")
 })
 
-# test filtering --------------------------------
-Foutput <- unlist(csb_vacant(test_data, "PROBLEMCODE", vacant, filter = T)[1])
+# test output ------------------------
 
-test_that("Filtering works", {
-  expect_length(Foutput, 2)
+test <- csb_vacant(january_2018, var = PROBLEMCODE, newVar = vacant) # tests unquoted input
+
+test_that("Logical appending works", {
+  expect_equal(table(test$vacant)[[1]], 1590) # not vacant / FALSE
+  expect_equal(table(test$vacant)[[2]], 98)   # vacant / TRUE
+})
+
+testData <- data.frame(january_2018)
+test2 <- csb_vacant(testData, var = "PROBLEMCODE", newVar = "cat") # tests quoted input
+
+test_that("Returns Tibble", {
+  expect_equal("tbl_df" %in% class(test2), TRUE)
 })

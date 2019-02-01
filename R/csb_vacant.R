@@ -19,22 +19,22 @@
 #' @importFrom rlang sym
 #'
 #' @examples
-#' csb_vacant(january_2018, PROBLEMCODE, vacant)
+#' csb_vacant(january_2018, var = PROBLEMCODE, newVar = vacant)
 #'
 #' @export
 csb_vacant <- function(.data, var, newVar){
 
   # check for missing parameters
   if (missing(.data)) {
-    stop('Please provide an argument for .data')
+    stop('Please provide an argument for .data.')
   }
 
   if (missing(var)) {
-    stop('Please provide name of ')
+    stop("Please provide the name of the variable containing the problem codes for 'var'.")
   }
 
   if (missing(newVar)){
-    stop('Please provide an argument for newVar')
+    stop("Please provide a new variable name for 'newVar'.")
   }
 
   # save parameters to list

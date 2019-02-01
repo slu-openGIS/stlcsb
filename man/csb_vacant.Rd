@@ -21,6 +21,6 @@ Returns a tibble with the logical vector added as a new variable.
     for vacancy related problem codes.
 }
 \examples{
-csb_vacant(january_2018, PROBLEMCODE, vacant)
+csb_vacant(january_2018, var = PROBLEMCODE, newVar = vacant)
 
 }
