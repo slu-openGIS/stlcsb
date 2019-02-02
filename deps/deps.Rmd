@@ -32,12 +32,18 @@ remotes::install_github("jimhester/itdepends")
 
 ```{r}
 dep_usage_pkg("stlcsb") %>%
-  count(pkg, sort = TRUE) %>%
-  filter(pkg != "stlcsb") %>%
+  count(pkg, sort = TRUE) %>% 
   kable()
 ```
 
+## Count Functions
 
+```{r}
+dep_usage_pkg("stlcsb") %>%
+  group_by(pkg) %>%
+  count(fun, sort = TRUE) %>% 
+  kable()
+```
 
 
 

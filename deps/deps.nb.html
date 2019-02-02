@@ -1774,12 +1774,25 @@ $(document).ready(function () {
 <p>This notebook requires the following packages:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyB0aWR5dmVyc2UgcGFja2FnZXNcbmxpYnJhcnkoZHBseXIpXG5cbiMgb3RoZXIgcGFja2FnZXNcbmxpYnJhcnkoaXRkZXBlbmRzKVxubGlicmFyeShrbml0cilcbmBgYCJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyB0aWR5dmVyc2UgcGFja2FnZXNcbmxpYnJhcnkoZHBseXIpXG5gYGAifQ== -->
 <pre class="r"><code># tidyverse packages
-library(dplyr)
+library(dplyr)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5BdHRhY2hpbmcgcGFja2FnZTog4oCYZHBseXLigJlcblxuVGhlIGZvbGxvd2luZyBvYmplY3RzIGFyZSBtYXNrZWQgZnJvbSDigJhwYWNrYWdlOnN0YXRz4oCZOlxuXG4gICAgZmlsdGVyLCBsYWdcblxuVGhlIGZvbGxvd2luZyBvYmplY3RzIGFyZSBtYXNrZWQgZnJvbSDigJhwYWNrYWdlOmJhc2XigJk6XG5cbiAgICBpbnRlcnNlY3QsIHNldGRpZmYsIHNldGVxdWFsLCB1bmlvblxuIn0= -->
+<pre><code>
+Attaching package: ‘dplyr’
 
-# other packages
-library(itdepends)
+The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBvdGhlciBwYWNrYWdlc1xubGlicmFyeShpdGRlcGVuZHMpICMgaW5zdGFsbCBmcm9tIEdpdEh1YlxubGlicmFyeShrbml0cilcbmBgYCJ9 -->
+<pre class="r"><code># other packages
+library(itdepends) # install from GitHub
 library(knitr)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
@@ -1791,10 +1804,9 @@ library(knitr)</code></pre>
 <h2>Count Dependencies</h2>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGVwX3VzYWdlX3BrZyhcInN0bGNzYlwiKSAlPiVcbiAgY291bnQocGtnLCBzb3J0ID0gVFJVRSkgJT4lXG4gIGZpbHRlcihwa2cgIT0gXCJzdGxjc2JcIikgJT4lXG4gIGthYmxlKClcbmBgYCJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGVwX3VzYWdlX3BrZyhcInN0bGNzYlwiKSAlPiVcbiAgY291bnQocGtnLCBzb3J0ID0gVFJVRSkgJT4lIFxuICBrYWJsZSgpXG5gYGAifQ== -->
 <pre class="r"><code>dep_usage_pkg(&quot;stlcsb&quot;) %&gt;%
-  count(pkg, sort = TRUE) %&gt;%
-  filter(pkg != &quot;stlcsb&quot;) %&gt;%
+  count(pkg, sort = TRUE) %&gt;% 
   kable()</code></pre>
 <!-- rnb-source-end -->
 
@@ -1821,39 +1833,574 @@ library(knitr)</code></pre>
 <td align="right">58</td>
 </tr>
 <tr class="even">
+<td align="left">stlcsb</td>
+<td align="right">34</td>
+</tr>
+<tr class="odd">
 <td align="left">readr</td>
 <td align="right">12</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">lubridate</td>
 <td align="right">6</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">stringr</td>
 <td align="right">5</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">utils</td>
 <td align="right">3</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">sf</td>
 <td align="right">2</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">xml2</td>
 <td align="right">2</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">purrr</td>
 <td align="right">1</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">readxl</td>
 <td align="right">1</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">rvest</td>
+<td align="right">1</td>
+</tr>
+</tbody>
+</table>
+
+
+<!-- rnb-html-end -->
+
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="count-functions" class="section level2">
+<h2>Count Functions</h2>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZGVwX3VzYWdlX3BrZyhcInN0bGNzYlwiKSAlPiVcbiAgZ3JvdXBfYnkocGtnKSAlPiVcbiAgY291bnQoZnVuLCBzb3J0ID0gVFJVRSkgJT4lIFxuICBrYWJsZSgpXG5gYGAifQ== -->
+<pre class="r"><code>dep_usage_pkg(&quot;stlcsb&quot;) %&gt;%
+  group_by(pkg) %&gt;%
+  count(fun, sort = TRUE) %&gt;% 
+  kable()</code></pre>
+<!-- rnb-source-end -->
+
+<!-- rnb-html-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImtuaXRfYXNpcyJdLCJzaXppbmdQb2xpY3kiOltdfX0= -->
+
+<table>
+<thead>
+<tr class="header">
+<th align="left">pkg</th>
+<th align="left">fun</th>
+<th align="right">n</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">base</td>
+<td align="left">!</td>
+<td align="right">118</td>
+</tr>
+<tr class="even">
+<td align="left">base</td>
+<td align="left">&lt;-</td>
+<td align="right">116</td>
+</tr>
+<tr class="odd">
+<td align="left">base</td>
+<td align="left">{</td>
+<td align="right">113</td>
+</tr>
+<tr class="even">
+<td align="left">base</td>
+<td align="left">if</td>
+<td align="right">100</td>
+</tr>
+<tr class="odd">
+<td align="left">base</td>
+<td align="left">%in%</td>
+<td align="right">45</td>
+</tr>
+<tr class="even">
+<td align="left">base</td>
+<td align="left">missing</td>
+<td align="right">42</td>
+</tr>
+<tr class="odd">
+<td align="left">base</td>
+<td align="left">stop</td>
+<td align="right">39</td>
+</tr>
+<tr class="even">
+<td align="left">base</td>
+<td align="left">==</td>
+<td align="right">32</td>
+</tr>
+<tr class="odd">
+<td align="left">base</td>
+<td align="left">=</td>
+<td align="right">26</td>
+</tr>
+<tr class="even">
+<td align="left">rlang</td>
+<td align="left">enquo</td>
+<td align="right">20</td>
+</tr>
+<tr class="odd">
+<td align="left">base</td>
+<td align="left">~</td>
+<td align="right">19</td>
+</tr>
+<tr class="even">
+<td align="left">base</td>
+<td align="left">c</td>
+<td align="right">19</td>
+</tr>
+<tr class="odd">
+<td align="left">base</td>
+<td align="left">is.character</td>
+<td align="right">19</td>
+</tr>
+<tr class="even">
+<td align="left">base</td>
+<td align="left">$</td>
+<td align="right">18</td>
+</tr>
+<tr class="odd">
+<td align="left">dplyr</td>
+<td align="left">%&gt;%</td>
+<td align="right">17</td>
+</tr>
+<tr class="even">
+<td align="left">base</td>
+<td align="left">append</td>
+<td align="right">12</td>
+</tr>
+<tr class="odd">
+<td align="left">base</td>
+<td align="left">return</td>
+<td align="right">12</td>
+</tr>
+<tr class="even">
+<td align="left">rlang</td>
+<td align="left">quo_name</td>
+<td align="right">11</td>
+</tr>
+<tr class="odd">
+<td align="left">rlang</td>
+<td align="left">:=</td>
+<td align="right">10</td>
+</tr>
+<tr class="even">
+<td align="left">dplyr</td>
+<td align="left">mutate</td>
+<td align="right">9</td>
+</tr>
+<tr class="odd">
+<td align="left">rlang</td>
+<td align="left">quo</td>
+<td align="right">9</td>
+</tr>
+<tr class="even">
+<td align="left">rlang</td>
+<td align="left">sym</td>
+<td align="right">9</td>
+</tr>
+<tr class="odd">
+<td align="left">base</td>
+<td align="left">as.list</td>
+<td align="right">8</td>
+</tr>
+<tr class="even">
+<td align="left">base</td>
+<td align="left">class</td>
+<td align="right">8</td>
+</tr>
+<tr class="odd">
+<td align="left">base</td>
+<td align="left">match.call</td>
+<td align="right">8</td>
+</tr>
+<tr class="even">
+<td align="left">dplyr</td>
+<td align="left">as_tibble</td>
+<td align="right">8</td>
+</tr>
+<tr class="odd">
+<td align="left">dplyr</td>
+<td align="left">filter</td>
+<td align="right">8</td>
+</tr>
+<tr class="even">
+<td align="left">base</td>
+<td align="left">-</td>
+<td align="right">6</td>
+</tr>
+<tr class="odd">
+<td align="left">base</td>
+<td align="left">is.logical</td>
+<td align="right">6</td>
+</tr>
+<tr class="even">
+<td align="left">dplyr</td>
+<td align="left">select</td>
+<td align="right">6</td>
+</tr>
+<tr class="odd">
+<td align="left">base</td>
+<td align="left">&amp;</td>
+<td align="right">5</td>
+</tr>
+<tr class="even">
+<td align="left">base</td>
+<td align="left">&amp;&amp;</td>
+<td align="right">5</td>
+</tr>
+<tr class="odd">
+<td align="left">base</td>
+<td align="left">paste0</td>
+<td align="right">5</td>
+</tr>
+<tr class="even">
+<td align="left">readr</td>
+<td align="left">col_character</td>
+<td align="right">5</td>
+</tr>
+<tr class="odd">
+<td align="left">base</td>
+<td align="left">!=</td>
+<td align="right">4</td>
+</tr>
+<tr class="even">
+<td align="left">base</td>
+<td align="left">is.na</td>
+<td align="right">4</td>
+</tr>
+<tr class="odd">
+<td align="left">base</td>
+<td align="left">message</td>
+<td align="right">4</td>
+</tr>
+<tr class="even">
+<td align="left">base</td>
+<td align="left">nrow</td>
+<td align="right">4</td>
+</tr>
+<tr class="odd">
+<td align="left">dplyr</td>
+<td align="left">rename</td>
+<td align="right">4</td>
+</tr>
+<tr class="even">
+<td align="left">base</td>
+<td align="left">&lt;</td>
+<td align="right">3</td>
+</tr>
+<tr class="odd">
+<td align="left">base</td>
+<td align="left">is.numeric</td>
+<td align="right">3</td>
+</tr>
+<tr class="even">
+<td align="left">readr</td>
+<td align="left">col_integer</td>
+<td align="right">3</td>
+</tr>
+<tr class="odd">
+<td align="left">stringr</td>
+<td align="left">str_detect</td>
+<td align="right">3</td>
+</tr>
+<tr class="even">
+<td align="left">base</td>
+<td align="left">(</td>
+<td align="right">2</td>
+</tr>
+<tr class="odd">
+<td align="left">base</td>
+<td align="left">|</td>
+<td align="right">2</td>
+</tr>
+<tr class="even">
+<td align="left">base</td>
+<td align="left">all</td>
+<td align="right">2</td>
+</tr>
+<tr class="odd">
+<td align="left">base</td>
+<td align="left">ifelse</td>
+<td align="right">2</td>
+</tr>
+<tr class="even">
+<td align="left">base</td>
+<td align="left">match</td>
+<td align="right">2</td>
+</tr>
+<tr class="odd">
+<td align="left">base</td>
+<td align="left">names</td>
+<td align="right">2</td>
+</tr>
+<tr class="even">
+<td align="left">base</td>
+<td align="left">tempdir</td>
+<td align="right">2</td>
+</tr>
+<tr class="odd">
+<td align="left">base</td>
+<td align="left">tolower</td>
+<td align="right">2</td>
+</tr>
+<tr class="even">
+<td align="left">dplyr</td>
+<td align="left">case_when</td>
+<td align="right">2</td>
+</tr>
+<tr class="odd">
+<td align="left">dplyr</td>
+<td align="left">slice</td>
+<td align="right">2</td>
+</tr>
+<tr class="even">
+<td align="left">lubridate</td>
+<td align="left">day</td>
+<td align="right">2</td>
+</tr>
+<tr class="odd">
+<td align="left">lubridate</td>
+<td align="left">month</td>
+<td align="right">2</td>
+</tr>
+<tr class="even">
+<td align="left">lubridate</td>
+<td align="left">year</td>
+<td align="right">2</td>
+</tr>
+<tr class="odd">
+<td align="left">readr</td>
+<td align="left">col_double</td>
+<td align="right">2</td>
+</tr>
+<tr class="even">
+<td align="left">stlcsb</td>
+<td align="left">cat_admin</td>
+<td align="right">2</td>
+</tr>
+<tr class="odd">
+<td align="left">stlcsb</td>
+<td align="left">cat_animal</td>
+<td align="right">2</td>
+</tr>
+<tr class="even">
+<td align="left">stlcsb</td>
+<td align="left">cat_construction</td>
+<td align="right">2</td>
+</tr>
+<tr class="odd">
+<td align="left">stlcsb</td>
+<td align="left">cat_debris</td>
+<td align="right">2</td>
+</tr>
+<tr class="even">
+<td align="left">stlcsb</td>
+<td align="left">cat_degrade</td>
+<td align="right">2</td>
+</tr>
+<tr class="odd">
+<td align="left">stlcsb</td>
+<td align="left">cat_disturbance</td>
+<td align="right">2</td>
+</tr>
+<tr class="even">
+<td align="left">stlcsb</td>
+<td align="left">cat_event</td>
+<td align="right">2</td>
+</tr>
+<tr class="odd">
+<td align="left">stlcsb</td>
+<td align="left">cat_health</td>
+<td align="right">2</td>
+</tr>
+<tr class="even">
+<td align="left">stlcsb</td>
+<td align="left">cat_landscape</td>
+<td align="right">2</td>
+</tr>
+<tr class="odd">
+<td align="left">stlcsb</td>
+<td align="left">cat_law</td>
+<td align="right">2</td>
+</tr>
+<tr class="even">
+<td align="left">stlcsb</td>
+<td align="left">cat_maintenance</td>
+<td align="right">2</td>
+</tr>
+<tr class="odd">
+<td align="left">stlcsb</td>
+<td align="left">cat_nature</td>
+<td align="right">2</td>
+</tr>
+<tr class="even">
+<td align="left">stlcsb</td>
+<td align="left">cat_road</td>
+<td align="right">2</td>
+</tr>
+<tr class="odd">
+<td align="left">stlcsb</td>
+<td align="left">cat_sewer</td>
+<td align="right">2</td>
+</tr>
+<tr class="even">
+<td align="left">stlcsb</td>
+<td align="left">cat_traffic</td>
+<td align="right">2</td>
+</tr>
+<tr class="odd">
+<td align="left">stlcsb</td>
+<td align="left">cat_vacant</td>
+<td align="right">2</td>
+</tr>
+<tr class="even">
+<td align="left">stlcsb</td>
+<td align="left">cat_waste</td>
+<td align="right">2</td>
+</tr>
+<tr class="odd">
+<td align="left">utils</td>
+<td align="left">download.file</td>
+<td align="right">2</td>
+</tr>
+<tr class="even">
+<td align="left">base</td>
+<td align="left">[</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="left">base</td>
+<td align="left">+</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">base</td>
+<td align="left">anyNA</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="left">base</td>
+<td align="left">as.character</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">base</td>
+<td align="left">dir</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="left">base</td>
+<td align="left">file.path</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">base</td>
+<td align="left">for</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="left">base</td>
+<td align="left">nchar</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">base</td>
+<td align="left">suppressWarnings</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="left">base</td>
+<td align="left">unlink</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">base</td>
+<td align="left">unlist</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="left">dplyr</td>
+<td align="left">arrange</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">dplyr</td>
+<td align="left">bind_rows</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="left">purrr</td>
+<td align="left">map</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">readr</td>
+<td align="left">cols</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="left">readr</td>
+<td align="left">read_csv</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">readxl</td>
+<td align="left">read_excel</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="left">rvest</td>
+<td align="left">html_node</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">sf</td>
+<td align="left">st_as_sf</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="left">sf</td>
+<td align="left">st_transform</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">stringr</td>
+<td align="left">str_c</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="left">stringr</td>
+<td align="left">str_extract</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">utils</td>
+<td align="left">unzip</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="left">xml2</td>
+<td align="left">read_html</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">xml2</td>
+<td align="left">xml_text</td>
 <td align="right">1</td>
 </tr>
 </tbody>
@@ -1867,7 +2414,7 @@ library(knitr)</code></pre>
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiRGVwZW5kZW5jeSBBbmFseXNpcyIKYXV0aG9yOiAiQ2hyaXMiCmRhdGU6ICcoYHIgZm9ybWF0KFN5cy50aW1lKCksICIlQiAlZCwgJVkiKWApJwpvdXRwdXQ6IAogIGdpdGh1Yl9kb2N1bWVudDogZGVmYXVsdAogIGh0bWxfbm90ZWJvb2s6IGRlZmF1bHQgCi0tLQoKIyMgSW50cm9kdWN0aW9uClRoaXMgbm90ZWJvb2sgZXhwbG9yZXMgdGhlIGRlcGVuZGVuY2llcyB1c2VkIGluIHRoZSBgc3RsY3NiYCBwYWNrYWdlOgoKIyMgRGVwZW5kZW5jaWVzClRoaXMgbm90ZWJvb2sgcmVxdWlyZXMgdGhlIGZvbGxvd2luZyBwYWNrYWdlczoKCmBgYHtyIGxvYWQtcGFja2FnZXN9CiMgdGlkeXZlcnNlIHBhY2thZ2VzCmxpYnJhcnkoZHBseXIpCgojIG90aGVyIHBhY2thZ2VzCmxpYnJhcnkoaXRkZXBlbmRzKSAjIGluc3RhbGwgZnJvbSBHaXRIdWIKbGlicmFyeShrbml0cikKYGBgCgpUaGUgcGFja2FnZSBgaXRkZXBlbmRzYCB3aWxsIG5lZWQgdG8gYmUgaW5zdGFsbGVkIGZyb20gR2l0SHViOgoKYGBgcgpyZW1vdGVzOjppbnN0YWxsX2dpdGh1YigiamltaGVzdGVyL2l0ZGVwZW5kcyIpCmBgYAoKIyMgQ291bnQgRGVwZW5kZW5jaWVzCgpgYGB7cn0KZGVwX3VzYWdlX3BrZygic3RsY3NiIikgJT4lCiAgY291bnQocGtnLCBzb3J0ID0gVFJVRSkgJT4lCiAgZmlsdGVyKHBrZyAhPSAic3RsY3NiIikgJT4lCiAga2FibGUoKQpgYGAKCgoKCgoKCg==</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiRGVwZW5kZW5jeSBBbmFseXNpcyIKYXV0aG9yOiAiQ2hyaXMiCmRhdGU6ICcoYHIgZm9ybWF0KFN5cy50aW1lKCksICIlQiAlZCwgJVkiKWApJwpvdXRwdXQ6IAogIGdpdGh1Yl9kb2N1bWVudDogZGVmYXVsdAogIGh0bWxfbm90ZWJvb2s6IGRlZmF1bHQgCi0tLQoKIyMgSW50cm9kdWN0aW9uClRoaXMgbm90ZWJvb2sgZXhwbG9yZXMgdGhlIGRlcGVuZGVuY2llcyB1c2VkIGluIHRoZSBgc3RsY3NiYCBwYWNrYWdlOgoKIyMgRGVwZW5kZW5jaWVzClRoaXMgbm90ZWJvb2sgcmVxdWlyZXMgdGhlIGZvbGxvd2luZyBwYWNrYWdlczoKCmBgYHtyIGxvYWQtcGFja2FnZXN9CiMgdGlkeXZlcnNlIHBhY2thZ2VzCmxpYnJhcnkoZHBseXIpCgojIG90aGVyIHBhY2thZ2VzCmxpYnJhcnkoaXRkZXBlbmRzKSAjIGluc3RhbGwgZnJvbSBHaXRIdWIKbGlicmFyeShrbml0cikKYGBgCgpUaGUgcGFja2FnZSBgaXRkZXBlbmRzYCB3aWxsIG5lZWQgdG8gYmUgaW5zdGFsbGVkIGZyb20gR2l0SHViOgoKYGBgcgpyZW1vdGVzOjppbnN0YWxsX2dpdGh1YigiamltaGVzdGVyL2l0ZGVwZW5kcyIpCmBgYAoKIyMgQ291bnQgRGVwZW5kZW5jaWVzCgpgYGB7cn0KZGVwX3VzYWdlX3BrZygic3RsY3NiIikgJT4lCiAgY291bnQocGtnLCBzb3J0ID0gVFJVRSkgJT4lIAogIGthYmxlKCkKYGBgCgojIyBDb3VudCBGdW5jdGlvbnMKCmBgYHtyfQpkZXBfdXNhZ2VfcGtnKCJzdGxjc2IiKSAlPiUKICBncm91cF9ieShwa2cpICU+JQogIGNvdW50KGZ1biwgc29ydCA9IFRSVUUpICU+JSAKICBrYWJsZSgpCmBgYAoKCgoKCg==</div>
 
 
 
