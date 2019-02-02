@@ -2,9 +2,7 @@
 title: "Dependency Analysis"
 author: "Chris"
 date: '(`r format(Sys.time(), "%B %d, %Y")`)'
-output: 
-  github_document: default
-  html_notebook: default 
+output: github_document
 ---
 
 ## Introduction
