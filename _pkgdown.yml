@@ -21,7 +21,6 @@ reference:
     - csb_filter
     - csb_date_parse
     - csb_date_filter
-    - csb_intersection
 
   - title: "Map"
     desc: "Map CSB data"
