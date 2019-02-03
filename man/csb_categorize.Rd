@@ -22,6 +22,6 @@ Returns a tibble with the string vector added as a new variable.
     of the call data in mid-2018.
 }
 \examples{
-csb_categorize(january_2018, var = PROBLEMCODE, newVar = Category)
+csb_categorize(january_2018, var = problemcode, newVar = Category)
 
 }

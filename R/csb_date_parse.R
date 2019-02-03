@@ -26,11 +26,11 @@
 #' @importFrom rlang sym
 #'
 #' @examples
-#' csb_date_parse(january_2018, DATETIMEINIT, dayInit)
-#' csb_date_parse(january_2018, DATETIMEINIT, dayInit, monthInit)
-#' csb_date_parse(january_2018, DATETIMEINIT, month = monthInit)
-#' csb_date_parse(january_2018, DATETIMEINIT, month = monthInit, year = yearInit)
-#' csb_date_parse(january_2018, DATETIMEINIT, dayInit, monthInit, yearInit, drop = TRUE)
+#' csb_date_parse(january_2018, datetimeinit, dayInit)
+#' csb_date_parse(january_2018, datetimeinit, dayInit, monthInit)
+#' csb_date_parse(january_2018, datetimeinit, month = monthInit)
+#' csb_date_parse(january_2018, datetimeinit, month = monthInit, year = yearInit)
+#' csb_date_parse(january_2018, datetimeinit, dayInit, monthInit, yearInit, drop = TRUE)
 #'
 #' @export
 csb_date_parse <- function(.data, var, day, month, year, drop = FALSE){
@@ -41,7 +41,7 @@ csb_date_parse <- function(.data, var, day, month, year, drop = FALSE){
   }
 
   if (missing(var)) {
-    stop('Please provide an argument for var')
+    stop("Please provide the name of the variable containing the date you want to parse from for 'var'.")
   }
 
   if(missing(day)&&missing(month)&&missing(year)){

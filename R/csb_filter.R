@@ -23,9 +23,9 @@
 #' @importFrom rlang sym
 #'
 #' @examples
-#' csb_filter(january_2018, var = PROBLEMCODE, category = cat_vacant)
-#' csb_filter(january_2018, var = PROBLEMCODE, category = c(cat_waste, cat_debris))
-#' csb_filter(january_2018, var = PROBLEMCODE, category = "WTR-COMING-UP")
+#' csb_filter(january_2018, var = problemcode, category = cat_vacant)
+#' csb_filter(january_2018, var = problemcode, category = c(cat_waste, cat_debris))
+#' csb_filter(january_2018, var = problemcode, category = "WTR-COMING-UP")
 #'
 #' @export
 csb_filter <- function(.data, var, category){
@@ -36,11 +36,11 @@ csb_filter <- function(.data, var, category){
   }
 
   if (missing(var)){
-    stop('Please provide an argument for var')
+    stop("Please provide the name of the variable containing the problem codes for 'var'.")
   }
 
   if (missing(category)){
-    stop('Please provide an argument for category')
+    stop("Please specify the categories you would like to filter for as an argument to 'category'")
   }
 
   # save parameters to list
@@ -81,8 +81,8 @@ csb_filter <- function(.data, var, category){
   }
 
   # filter function
-  .data %>%
-    filter(!!varN %in% category) -> out
+
+    out <- dplyr::filter(.data, !!varN %in% category)
 
   # check class of output
   if ("tbl_df" %in% class(out) == FALSE){

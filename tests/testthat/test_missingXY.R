@@ -1,27 +1,44 @@
 context("test csb_missingXY")
 
 # load test data --------------------------------
-test_data <- read.csv(system.file("extdata", "testdata.csv", package = "stlcsb"), stringsAsFactors = F)
+data(january_2018, package = "stlcsb")
 
 # test errors -----------------------------------
-test_data[4,15] <- NA # Implements an NA for checking of incomplete spatial data
 
 test_that("Missing input errors triggered", {
   expect_error(csb_missingXY(), "Please provide an argument for .data")
-  expect_error(csb_missingXY(test_data), "Please provide an argument for varY with the variable name for the column with x coordinate data.")
-  expect_error(csb_missingXY(test_data, SRX), "Please provide an argument for varY with the variable name for the column with y coordinate data.")
+  expect_error(csb_missingXY(january_2018), "Please provide an argument for varX with the variable name for the column with x coordinate data.")
+  expect_error(csb_missingXY(january_2018, srx), "Please provide an argument for varY with the variable name for the column with y coordinate data.")
+  expect_error(csb_missingXY(january_2018, srx, sry), "Please provide an argument for 'newVar' with a new variable name.")
 })
 
 # test logical appending ------------------------
-Loutput <- unlist(csb_missingXY(test_data, SRX, SRY, newVar = missing)["missing"])
+Loutput <- unlist(csb_missingXY(january_2018, srx, sry, newVar = missing)["missing"])
 names(Loutput) <- NULL
-expected <- c(F,F,F,T,F,F,F)
+expected <- data.frame(table(Loutput))
+
 
 test_that("Logical appending works", {
-  expect_equal(Loutput, expected)
+  expect_equal(expected$Freq[2], 48) # trues
+  expect_equal(expected$Freq[1], 1506) # falses
 })
 
 # check character input --------------------------
 test_that("Character input works", {
-  expect_length(csb_missingXY(test_data, "SRX", "SRY", newVar = missing), 20)
+  expect_length(csb_missingXY(january_2018, "srx", "sry", newVar = missing), 18)
+})
+
+# test returning tibble -------------------------
+testData <- data.frame(january_2018)
+test2 <- csb_missingXY(testData, srx, sry, newVar = missing)
+
+test_that("Returns Tibble", {
+  expect_equal("tbl_df" %in% class(test2), TRUE)
+})
+
+# test unquoted and quoted input -----------------------------
+
+test_that("Non-standard Evaluation works", {
+  expect_silent(csb_missingXY(january_2018, "srx","sry", newVar = "missing"))
+  expect_silent(csb_missingXY(january_2018, srx, sry, newVar = missing))
 })

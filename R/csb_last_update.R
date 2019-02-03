@@ -12,6 +12,10 @@
 #' @importFrom rvest html_node
 #' @importFrom stringr str_extract
 #'
+#' @examples
+#' \dontrun{
+#' last_update <- csb_last_update()
+#' }
 #' @export
 csb_last_update <- function(){
 

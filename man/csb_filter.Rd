@@ -25,8 +25,8 @@ road, sewer, traffic, vacant, and waste. If categories are listed, each should b
     categories that are created
 }
 \examples{
-csb_filter(january_2018, var = PROBLEMCODE, category = cat_vacant)
-csb_filter(january_2018, var = PROBLEMCODE, category = c(cat_waste, cat_debris))
-csb_filter(january_2018, var = PROBLEMCODE, category = "WTR-COMING-UP")
+csb_filter(january_2018, var = problemcode, category = cat_vacant)
+csb_filter(january_2018, var = problemcode, category = c(cat_waste, cat_debris))
+csb_filter(january_2018, var = problemcode, category = "WTR-COMING-UP")
 
 }

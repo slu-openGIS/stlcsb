@@ -25,6 +25,6 @@ A tbl with a logical vector appended to it.
     with the CSB data.
 }
 \examples{
-csb_missingXY(january_2018, SRX, SRY, newVar = "missingXY")
+csb_missingXY(january_2018, srx, sry, newVar = "missingXY")
 
 }

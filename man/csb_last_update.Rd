@@ -15,3 +15,8 @@ Data are updated by the City of St. Louis on their
     weekly basis. This function returns the date of the last
     update.
 }
+\examples{
+\dontrun{
+last_update <- csb_last_update()
+}
+}

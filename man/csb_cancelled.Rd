@@ -23,7 +23,7 @@ Returns a tibble with the rows containing dates and times for the
 Subsets data to remove any call with a date and time cancelled.
 }
 \examples{
-csb_cancelled(january_2018, var = "DATECANCELLED")
-csb_cancelled(january_2018, var = "DATECANCELLED", drop = FALSE)
+csb_cancelled(january_2018, var = "datecancelled")
+csb_cancelled(january_2018, var = "datecancelled", drop = FALSE)
 
 }

@@ -24,13 +24,13 @@ Returns a sf object of the input data projected as point data.
 }
 \examples{
 # remove missing coordinates prior to projecting
-csb <- csb_missingXY(january_2018, SRX, SRY, newVar = missing)
+csb <- csb_missingXY(january_2018, srx, sry, newVar = missing)
 csb <- dplyr::filter(csb, missing == FALSE)
 
 # project data
-csb_projectXY(csb, SRX, SRY)
+csb_projectXY(csb, srx, sry)
 
 # project with a custom crs
-csb_projectXY(csb, SRX, SRY, crs = 4269)
+csb_projectXY(csb, srx, sry, crs = 4269)
 
 }

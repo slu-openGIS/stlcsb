@@ -23,7 +23,7 @@
 #' @importFrom rlang sym
 #'
 #' @examples
-#' csb_missingXY(january_2018, SRX, SRY, newVar = "missingXY")
+#' csb_missingXY(january_2018, srx, sry, newVar = "missingXY")
 #'
 #' @export
 csb_missingXY <- function(.data, varX, varY, newVar){
@@ -37,7 +37,7 @@ csb_missingXY <- function(.data, varX, varY, newVar){
   }
 
   if (missing(varX)) {
-    stop('Please provide an argument for varY with the variable name for the column with x coordinate data.')
+    stop('Please provide an argument for varX with the variable name for the column with x coordinate data.')
   }
 
   if (missing(varY)) {
@@ -45,7 +45,7 @@ csb_missingXY <- function(.data, varX, varY, newVar){
   }
 
   if (missing(newVar)) {
-    stop('Please provide an argument for newVar with a new variable name.')
+    stop("Please provide an argument for 'newVar' with a new variable name.")
   }
 
   # save parameters to list

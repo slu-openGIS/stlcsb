@@ -29,10 +29,10 @@ Returns a tibble with new columns containing parsed date information
     day, month, and year elements.
 }
 \examples{
-csb_date_parse(january_2018, DATETIMEINIT, dayInit)
-csb_date_parse(january_2018, DATETIMEINIT, dayInit, monthInit)
-csb_date_parse(january_2018, DATETIMEINIT, month = monthInit)
-csb_date_parse(january_2018, DATETIMEINIT, month = monthInit, year = yearInit)
-csb_date_parse(january_2018, DATETIMEINIT, dayInit, monthInit, yearInit, drop = TRUE)
+csb_date_parse(january_2018, datetimeinit, dayInit)
+csb_date_parse(january_2018, datetimeinit, dayInit, monthInit)
+csb_date_parse(january_2018, datetimeinit, month = monthInit)
+csb_date_parse(january_2018, datetimeinit, month = monthInit, year = yearInit)
+csb_date_parse(january_2018, datetimeinit, dayInit, monthInit, yearInit, drop = TRUE)
 
 }

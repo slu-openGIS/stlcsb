@@ -19,7 +19,7 @@
 #' @importFrom rlang sym
 #'
 #' @examples
-#' csb_vacant(january_2018, var = PROBLEMCODE, newVar = vacant)
+#' csb_vacant(january_2018, var = problemcode, newVar = vacant)
 #'
 #' @export
 csb_vacant <- function(.data, var, newVar){

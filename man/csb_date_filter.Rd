@@ -13,7 +13,7 @@ csb_date_filter(.data, var, day, month, year)
 
 \item{day}{A numeric vector of day(s) to include.}
 
-\item{month}{A numeric/character vector of month(s) to include}
+\item{month}{A numeric/character vector of month(s) to include. See description for more information on alternate entry formats.}
 
 \item{year}{A numeric vector of years(s) to include (2 or 4 digit)}
 }
@@ -22,13 +22,15 @@ Returns a filtered version of the input data based on specified date arguments.
 }
 \description{
 \code{csb_date_filter} filters dates to return only the specified date elements.
-    For example, data can be returned for specific months, years, or portions of months.
+    For example, data can be returned for specific months, years, or portions of months
+
+    The month argument can be one of several types. Types cannot be mixed. A numeric argument specifying month is acceptable. Character entry can be one of either 3 letter abreviations or full month name. Capitalization does not matter.
 }
 \examples{
-csb_date_filter(january_2018, DATETIMEINIT, day = 1)
-csb_date_filter(january_2018, DATETIMEINIT, day = 1:15, month = 1)
-csb_date_filter(january_2018, DATETIMEINIT, month = "January", year = 09)
-csb_date_filter(january_2018, DATETIMEINIT, month = c("jan", "feb", "Mar", "Apr"), year = 2009)
-csb_date_filter(january_2018, DATETIMEINIT, day = 1:15, month = 1:6, year = 08:13)
+csb_date_filter(january_2018, datetimeinit, day = 1)
+csb_date_filter(january_2018, datetimeinit, day = 1:15, month = 1)
+csb_date_filter(january_2018, datetimeinit, month = "January", year = 09)
+csb_date_filter(january_2018, datetimeinit, month = c("jan", "feb", "Mar", "Apr"), year = 2009)
+csb_date_filter(january_2018, datetimeinit, day = 1:15, month = 1:6, year = 08:13)
 
 }

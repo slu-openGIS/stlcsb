@@ -21,7 +21,7 @@
 #' @importFrom rlang sym
 #'
 #' @examples
-#' csb_categorize(january_2018, var = PROBLEMCODE, newVar = Category)
+#' csb_categorize(january_2018, var = problemcode, newVar = Category)
 #'
 #' @export
 csb_categorize <- function(.data, var, newVar){

@@ -1,14 +1,16 @@
 #' Filter Calls Based on Date of Call
 #'
 #' @description \code{csb_date_filter} filters dates to return only the specified date elements.
-#'     For example, data can be returned for specific months, years, or portions of months.
+#'     For example, data can be returned for specific months, years, or portions of months
+#'
+#'     The month argument can be one of several types. Types cannot be mixed. A numeric argument specifying month is acceptable. Character entry can be one of either 3 letter abreviations or full month name. Capitalization does not matter.
 #'
 #' @usage csb_date_filter(.data, var, day, month, year)
 #'
 #' @param .data A tbl or data frame
 #' @param var A name of column containing date data
 #' @param day A numeric vector of day(s) to include.
-#' @param month A numeric/character vector of month(s) to include
+#' @param month A numeric/character vector of month(s) to include. See description for more information on alternate entry formats.
 #' @param year A numeric vector of years(s) to include (2 or 4 digit)
 #'
 #' @return Returns a filtered version of the input data based on specified date arguments.
@@ -22,13 +24,14 @@
 #' @importFrom rlang enquo
 #' @importFrom rlang quo
 #' @importFrom rlang sym
+#' @importFrom tools toTitleCase
 #'
 #' @examples
-#' csb_date_filter(january_2018, DATETIMEINIT, day = 1)
-#' csb_date_filter(january_2018, DATETIMEINIT, day = 1:15, month = 1)
-#' csb_date_filter(january_2018, DATETIMEINIT, month = "January", year = 09)
-#' csb_date_filter(january_2018, DATETIMEINIT, month = c("jan", "feb", "Mar", "Apr"), year = 2009)
-#' csb_date_filter(january_2018, DATETIMEINIT, day = 1:15, month = 1:6, year = 08:13)
+#' csb_date_filter(january_2018, datetimeinit, day = 1)
+#' csb_date_filter(january_2018, datetimeinit, day = 1:15, month = 1)
+#' csb_date_filter(january_2018, datetimeinit, month = "January", year = 09)
+#' csb_date_filter(january_2018, datetimeinit, month = c("jan", "feb", "Mar", "Apr"), year = 2009)
+#' csb_date_filter(january_2018, datetimeinit, day = 1:15, month = 1:6, year = 08:13)
 #'
 #' @export
 csb_date_filter <- function(.data, var, day = NULL, month = NULL, year = NULL){
@@ -39,7 +42,7 @@ csb_date_filter <- function(.data, var, day = NULL, month = NULL, year = NULL){
   }
 
   if (missing(var)) {
-    stop('Please provide an argument for var.')
+    stop("Please provide the name of the variable containing the date you want to filter from for 'var'.")
   }
 
   if (missing(day) & missing(month) & missing(year)){
@@ -57,13 +60,6 @@ csb_date_filter <- function(.data, var, day = NULL, month = NULL, year = NULL){
     varN <- rlang::quo(!! rlang::sym(var))
   }
 
-  if (!is.character(paramList$month)) {
-    monthN <- rlang::enquo(month)
-  }
-  else if (is.character(paramList$month)) {
-    monthN <- rlang::quo(!! rlang::sym(month))
-  }
-
 # Correction and checking for year
   # correct too short of a year entry
   if(is.numeric(year) && nchar(year) < 4){
@@ -71,71 +67,61 @@ csb_date_filter <- function(.data, var, day = NULL, month = NULL, year = NULL){
   }
 
   #check that year entry is valid for csb data, warn for entry of 2008.
-  if(!missing(year) && !(year %in% c(2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019))){
-    stop("The year given is not valid for these data.")
-  }
+  if(!missing(year)){
 
-  if(!missing(year) && (2008 %in% year)){
-    message("2008 only contains traffic requests")
+    if(!(year %in% 2008:2019)){
+      stop("The year given is not valid for these data.")
+    }
+
+    if(2008 %in% year){
+      message("2008 only contains traffic requests")
+    }
+
   }
 
   # Correction and checking for month
-  # vectors for alternative month entry formats
-  jan <- c('January', 'january', 'Jan', 'jan')
-  feb <- c('February', 'february', 'Feb', 'feb')
-  mar <- c('March', 'march', 'Mar', 'mar')
-  apr <- c('April', 'april', 'Apr', 'apr')
-  may <- c('May', 'may')
-  jun <- c('June', 'june', 'Jun', 'jun')
-  jul <- c('July', 'july', 'Jul', 'jul')
-  aug <- c('August', 'august', 'Aug', 'aug')
-  sep <- c('September', 'september', 'Sep', 'sep')
-  oct <- c('October', 'october', 'Oct', 'oct')
-  nov <- c('November', 'november', 'Nov', 'nov')
-  dec <- c('December', 'december', 'Dec', 'dec')
+  if(!missing(month)){
+    if(is.character(month)){
 
-  if(is.character(month)){
-    monthF <- c()
-    for(i in month){
+      month <- tools::toTitleCase(month)
 
-      if(i %in% jan){
-        monthF <- append(monthF, 1)
-      } else if(i %in% feb){
-        monthF <- append(monthF, 2)
-      } else if(i %in% mar){
-        monthF <- append(monthF, 3)
-      } else if(i %in% apr){
-        monthF <- append(monthF, 4)
-      } else if(i %in% may){
-        monthF <- append(monthF, 5)
-      } else if(i %in% jun){
-        monthF <- append(monthF, 6)
-      } else if(i %in% jul){
-        monthF <- append(monthF, 7)
-      } else if(i %in% aug){
-        monthF <- append(monthF, 8)
-      } else if(i %in% sep){
-        monthF <- append(monthF, 9)
-      } else if(i %in% oct){
-        monthF <- append(monthF, 10)
-      } else if(i %in% nov){
-        monthF <- append(monthF, 11)
-      } else if(i %in% dec){
-        monthF <- append(monthF, 12)
+      # explicitly change may, it's a forbidden word in toTitleCase
+      if("may" %in% month){
+        month[which(month == "may")] <- "May"
+        }
+
+      # month abbreviations
+      if(all(nchar(month) < 4)){
+        monthN <- which(month %in% month.abb)
+      }
+
+      # month names
+      else{
+        monthN <- which(month %in% month.name)
+      }
+      # check valid month argument
+      if(!all(month %in% c(month.abb, month.name))){
+        stop("An invalid argument for 'month' has been specified.")
       }
     }
-  } else if(is.numeric(month)){
-    monthF <- month
+    else if(is.numeric(month)){
+      monthN <- month
+
+      # check valid month argument
+      if(!all(monthN %in% 1:12)){
+        stop("An invalid argument for 'month' has been specified.")
+      }
+    }
   }
 
-    # filter for year
+# filter for year
   if(!missing(year)){
     .data <- dplyr::filter(.data, lubridate::year(!!varN) %in% year)
   }
 
   # filter for month
   if(!missing(month)){
-    .data <- dplyr::filter(.data, lubridate::month(!!varN) %in% monthF)
+    .data <- dplyr::filter(.data, lubridate::month(!!varN) %in% monthN)
   }
 
   # filter for day

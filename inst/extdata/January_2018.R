@@ -4,6 +4,6 @@ library(devtools)
 library(dplyr)
 library(readr)
 
-january_2018 <- as_tibble(read_csv("extdata/january_2018.csv"))
+january_2018 <- as_tibble(read_csv("inst/extdata/january_2018.csv"))
 
-devtools::use_data(january_2018, overwrite = TRUE)
+usethis::use_data(january_2018, overwrite = TRUE)

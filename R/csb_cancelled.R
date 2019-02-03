@@ -20,8 +20,8 @@
 #' @importFrom dplyr select
 #'
 #' @examples
-#' csb_cancelled(january_2018, var = "DATECANCELLED")
-#' csb_cancelled(january_2018, var = "DATECANCELLED", drop = FALSE)
+#' csb_cancelled(january_2018, var = "datecancelled")
+#' csb_cancelled(january_2018, var = "datecancelled", drop = FALSE)
 #'
 #' @export
 csb_cancelled <- function(.data, var, drop = TRUE){

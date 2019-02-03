@@ -21,14 +21,14 @@
 #'
 #' @examples
 #' # remove missing coordinates prior to projecting
-#' csb <- csb_missingXY(january_2018, SRX, SRY, newVar = missing)
+#' csb <- csb_missingXY(january_2018, srx, sry, newVar = missing)
 #' csb <- dplyr::filter(csb, missing == FALSE)
 #'
 #' # project data
-#' csb_projectXY(csb, SRX, SRY)
+#' csb_projectXY(csb, srx, sry)
 #'
 #' # project with a custom crs
-#' csb_projectXY(csb, SRX, SRY, crs = 4269)
+#' csb_projectXY(csb, srx, sry, crs = 4269)
 #'
 #' @export
 csb_projectXY <- function(.data, varX, varY, crs){
@@ -39,11 +39,11 @@ csb_projectXY <- function(.data, varX, varY, crs){
   }
 
   if (missing(varX)) {
-    stop('Please provide an argument for varX')
+    stop('Please provide an argument for varX with the variable name for the column with x coordinate data.')
   }
 
   if (missing(varY)) {
-    stop('Please provide an argument for varY')
+    stop('Please provide an argument for varY with the variable name for the column with y coordinate data.')
   }
 
   # quote inputs
