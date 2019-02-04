@@ -2,7 +2,7 @@
 output: github_document
 ---
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
+<!-- index.md is generated from index.Rmd. Please edit that file -->
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
@@ -12,6 +12,7 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 ```
+
 # stlcsb <img src="man/figures/csbLogo.png" align="right" />
 
 [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
@@ -33,25 +34,6 @@ The development version of `stlcsb` can be accessed from GitHub with `remotes`:
 # install.packages("remotes")
 remotes::install_github("slu-openGIS/stlcsb")
 ```
-
-## Example Usage 
-
-`stlcsb` is used for simplified acquisition and processing of St. Louis CSB Data. In the following example, data is downloaded, filtered, and projected to an sf object.
-
-```{r example}
-library(stlcsb)
-library(magrittr) # remove before release
-
-csb <- csb_get_data(year = 2017)
-
-csb_filter(csb, problemcode, cat_health) %>%
-  csb_missingXY(srx, sry, missing) %>%
-  dplyr::filter(missing == FALSE) %>%
-  csb_projectXY(srx, sry, crs = 4269) -> health_2017
-
-plot(health_2017)
-```
-
 
 ## Contributor Code of Conduct
 Please note that this project is released with a [Contributor Code of Conduct](.github/CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
