@@ -7,7 +7,7 @@
 csb_date_filter(.data, var, day, month, year)
 }
 \arguments{
-\item{.data}{A tbl or data frame}
+\item{.data}{A tibble or data frame}
 
 \item{var}{A name of column containing date data}
 
@@ -24,7 +24,7 @@ Returns a filtered version of the input data based on specified date arguments.
 \code{csb_date_filter} filters dates to return only the specified date elements.
     For example, data can be returned for specific months, years, or portions of months
 
-    The month argument can be one of several types. Types cannot be mixed. A numeric argument specifying month is acceptable. Character entry can be one of either 3 letter abreviations or full month name. Capitalization does not matter.
+    The month argument can be one of several types. Types cannot be mixed. A numeric argument specifying month is acceptable. Character entry can be one of either 3 letter abbreviations or full month name. Capitalization does not matter.
 }
 \examples{
 csb_date_filter(january_2018, datetimeinit, day = 1)

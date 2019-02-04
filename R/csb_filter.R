@@ -1,16 +1,16 @@
 #' Subset Based on Call Categories
 #'
-#' @description \code{csb_filter} retuns observations that match any combination of the predefined
+#' @description \code{csb_filter} returns observations that match any combination of the predefined
 #'     categories that are created
 #'
 #' @usage csb_filter(.data, var, category)
 #'
-#' @param .data A tbl or data frame
-#' @param var name of the column containg original problem code data
+#' @param .data A tibble or data frame
+#' @param var name of the column containing original problem code data
 #' @param category a vector with the unquoted name(s) of the category(s) for the function to return.
-#'     You can also explicitly state quoted PROBLEMCODE(s). Valid categories are: admin, animal,
+#'     You can also explicitly state quoted problemcode(s). Valid categories are: admin, animal,
 #'     construction, debris, degrade, disturbance, event, health, landscape, law, maintenance, nature,
-#'     road, sewer, traffic, vacant, and waste. If categories are listed, each should be preceeded by
+#'     road, sewer, traffic, vacant, and waste. If categories are listed, each should be preceded by
 #'     'cat_'.
 #'
 #' @return \code{csb_filter} returns data with an additional variable for an intelligible category for CSB requests.

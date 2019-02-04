@@ -5,12 +5,12 @@
 #'
 #' @usage csb_date_parse(.data, var, day, month, year, drop = FALSE)
 #'
-#' @param .data A tbl or data frame
+#' @param .data A tibble or data frame
 #' @param var name of column containing date data
 #' @param day Optional; returns a named column with parsed day
 #' @param month Optional; returns a named column with parsed month
 #' @param year Optional; returns a named column with parsed year
-#' @param drop A logical sclar; if \code{TRUE}, removes the original column
+#' @param drop A logical scalar; if \code{TRUE}, removes the original column
 #'     that had contained date and time data, otherwise if \code{FALSE}
 #'     the original column is retained.
 #'

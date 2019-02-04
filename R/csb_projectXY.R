@@ -1,11 +1,11 @@
 #' Project Calls for Service Data Using Coordinates
 #'
-#' @description \code{csb_projectXY} converts SRX and SRY data into a simple features object.
+#' @description \code{csb_projectXY} converts srx and sry data into a simple features object.
 #'     You can write a shapefile directly from the output of this function using \code{sf::st_write}.
 #'
 #' @usage csb_projectXY(.data, varX, varY, crs)
 #'
-#' @param .data A tbl or data frame
+#' @param .data A tibble or data frame
 #' @param varX Name of column containing x coordinate data
 #' @param varY Name of column containing y coordinate data
 #' @param crs Optional; coordinate reference system for the data to be projected into

@@ -6,7 +6,7 @@
 #'
 #' @usage csb_missingXY(.data, varX, varY, newVar)
 #'
-#' @param .data A tbl or data frame
+#' @param .data A tibble or data frame
 #' @param varX Name of column containing x coordinate data
 #' @param varY Name of column containing y coordinate data
 #' @param newVar Name of new column that is \code{TRUE} if coordinate data are

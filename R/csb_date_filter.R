@@ -3,11 +3,11 @@
 #' @description \code{csb_date_filter} filters dates to return only the specified date elements.
 #'     For example, data can be returned for specific months, years, or portions of months
 #'
-#'     The month argument can be one of several types. Types cannot be mixed. A numeric argument specifying month is acceptable. Character entry can be one of either 3 letter abreviations or full month name. Capitalization does not matter.
+#'     The month argument can be one of several types. Types cannot be mixed. A numeric argument specifying month is acceptable. Character entry can be one of either 3 letter abbreviations or full month name. Capitalization does not matter.
 #'
 #' @usage csb_date_filter(.data, var, day, month, year)
 #'
-#' @param .data A tbl or data frame
+#' @param .data A tibble or data frame
 #' @param var A name of column containing date data
 #' @param day A numeric vector of day(s) to include.
 #' @param month A numeric/character vector of month(s) to include. See description for more information on alternate entry formats.

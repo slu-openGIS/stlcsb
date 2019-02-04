@@ -2,7 +2,7 @@
 #'
 #' @description \code{csb_get_data} provides direct access to a compiled version
 #'     of the CSB's data release via the City of St. Louis website. These data are
-#'     provided with no warrenty from either the City of St. Louis or the package
+#'     provided with no warranty from either the City of St. Louis or the package
 #'     developers.
 #'
 #' @usage csb_get_data(tidy = TRUE, years, ...)

@@ -7,21 +7,21 @@
 csb_filter(.data, var, category)
 }
 \arguments{
-\item{.data}{A tbl or data frame}
+\item{.data}{A tibble or data frame}
 
-\item{var}{name of the column containg original problem code data}
+\item{var}{name of the column containing original problem code data}
 
 \item{category}{a vector with the unquoted name(s) of the category(s) for the function to return.
-You can also explicitly state quoted PROBLEMCODE(s). Valid categories are: admin, animal,
+You can also explicitly state quoted problemcode(s). Valid categories are: admin, animal,
 construction, debris, degrade, disturbance, event, health, landscape, law, maintenance, nature,
-road, sewer, traffic, vacant, and waste. If categories are listed, each should be preceeded by
+road, sewer, traffic, vacant, and waste. If categories are listed, each should be preceded by
 'cat_'.}
 }
 \value{
 \code{csb_filter} returns data with an additional variable for an intelligible category for CSB requests.
 }
 \description{
-\code{csb_filter} retuns observations that match any combination of the predefined
+\code{csb_filter} returns observations that match any combination of the predefined
     categories that are created
 }
 \examples{

@@ -7,7 +7,7 @@
 csb_missingXY(.data, varX, varY, newVar)
 }
 \arguments{
-\item{.data}{A tbl or data frame}
+\item{.data}{A tibble or data frame}
 
 \item{varX}{Name of column containing x coordinate data}
 

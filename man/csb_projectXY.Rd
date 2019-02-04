@@ -7,7 +7,7 @@
 csb_projectXY(.data, varX, varY, crs)
 }
 \arguments{
-\item{.data}{A tbl or data frame}
+\item{.data}{A tibble or data frame}
 
 \item{varX}{Name of column containing x coordinate data}
 
@@ -19,7 +19,7 @@ csb_projectXY(.data, varX, varY, crs)
 Returns a sf object of the input data projected as point data.
 }
 \description{
-\code{csb_projectXY} converts SRX and SRY data into a simple features object.
+\code{csb_projectXY} converts srx and sry data into a simple features object.
     You can write a shapefile directly from the output of this function using \code{sf::st_write}.
 }
 \examples{

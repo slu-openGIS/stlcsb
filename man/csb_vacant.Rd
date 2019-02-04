@@ -7,7 +7,7 @@
 csb_vacant(.data, var, newVar)
 }
 \arguments{
-\item{.data}{A tbl or data frame}
+\item{.data}{A tibble or data frame}
 
 \item{var}{Name of existing column containing problem codes}
 

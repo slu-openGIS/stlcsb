@@ -6,7 +6,7 @@
 #'
 #' @usage csb_categorize(.data, var, newVar)
 #'
-#' @param .data A tbl or data frame
+#' @param .data A tibble or data frame
 #' @param var Name of existing column containing problem codes
 #' @param newVar Name of output variable to be created with category string
 #'

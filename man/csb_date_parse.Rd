@@ -7,7 +7,7 @@
 csb_date_parse(.data, var, day, month, year, drop = FALSE)
 }
 \arguments{
-\item{.data}{A tbl or data frame}
+\item{.data}{A tibble or data frame}
 
 \item{var}{name of column containing date data}
 
@@ -17,7 +17,7 @@ csb_date_parse(.data, var, day, month, year, drop = FALSE)
 
 \item{year}{Optional; returns a named column with parsed year}
 
-\item{drop}{A logical sclar; if \code{TRUE}, removes the original column
+\item{drop}{A logical scalar; if \code{TRUE}, removes the original column
 that had contained date and time data, otherwise if \code{FALSE}
 the original column is retained.}
 }
