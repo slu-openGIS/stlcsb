@@ -10,7 +10,7 @@ Authors@R: c(
     )
 Description: The Citizens' Service Bureau of the City of St. Louis is a clearing house for 
     non-emergency service requests. This package provides functions for downloading, 
-    categorizating problem requests, cleaning and subsetting CSB data, and projecting the data
+    categorizing problem requests, cleaning and subsetting CSB data, and projecting the data
     using the x and y coordinates included with CSB data releases.
 Depends: R (>= 3.3)
 License: GPL-3
@@ -19,7 +19,7 @@ LazyData: true
 RoxygenNote: 6.1.1
 Imports: 
     dplyr,
-    lubridate, 
+    lubridate,
     purrr,
     readr,
     readxl,

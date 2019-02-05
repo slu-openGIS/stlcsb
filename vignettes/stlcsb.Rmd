@@ -15,16 +15,30 @@ The stlcsb package is meant to provide easy access to the City of Saint Louis Ci
 
 ### Pro-tips
 
-* All functions support Non-standard evaluation, which allows you to type unquoted inputs for arguments.
+* Functions support Non-standard evaluation, which allows you to type unquoted inputs for arguments.
 * Use RStudio for its helpful auto completion ability. Type "csb_" to see all of the functions available in this package, or "cat_" to see all of the categories.
+* All functions return data as a tibble, which is essentially identical to a data.frame, except for its print behavior in the console and in notebooks.
 
 ## Data Acquisition
 
-Before using any of the other functions, you will need to acquire the CSB data.
-The `csb_get_data` function will download the most recent version of the data, and return a tibble. It will also return a message with the date the data were last modified.
+Before using the other functions, you will need to acquire the CSB data.
+The `csb_get_data` function will download the most recent version of the data, and return a tibble. This function will return a tidy version of the data for all years by default.
 
 ```{r get data, eval=FALSE}
 csb <- csb_get_data()
+csb <- csb_get_data(tidy = FALSE)
+```
+These data are updated on a weekly basis, so it may be useful to know what version you are working with. `The csb_last_update` function will return the date that the data were last modified.
+
+```{r last update, eval=FALSE}
+csb_last_update()
+```
+
+Additionally, the `csb_load_variables` function is available to describe the variables. Again, this function returns the tidy version by default, but can be set to return the regular version as well.
+
+```{r load vars, eval=FALSE}
+csb_load_variables()
+csb_load_variables(tidy = FALSE)
 ```
 
 ## Categorization
@@ -33,66 +47,65 @@ The most important problem identified initially was the lack of intelligible cat
 
 `csb_categorize()` can be used to categorize data based on its Problem code.
 ```{r categorize, eval=FALSE}
-csb_categorize(csb, PROBLEMCODE, Category)
+csb_categorize(csb, problemcode, Category)
 ```
 
 `csb_filter()` can be used to filter the data based on these same categories. These categories will automatically populate by typing "cat_" if using RStudio. Category takes single or vector arguments.
 
 ```{r filter, eval=FALSE}
-csb_filter(csb, PROBLEMCODE, category = c(cat_construction, cat_debris))
+csb_filter(csb, problemcode, category = c(cat_construction, cat_debris))
 ```
 
-`csb_vacant()` is a special function used for appending a logical vector or a filtered version of the data. It is important to know that vacant exists inclusive of other categories, or in other words, a problem code may be vacancy related in addition to its core category.
+`csb_vacant()` is used for appending a logical vector indicating vacancy related problemcodes. It is important to know that vacant exists inclusive of other categories, or in other words, a problem code may be vacancy related in addition to its core category.
 ```{r vacant, eval=FALSE}
-csb_vacant(csb, PROBLEMCODE, vacant)
-csb_vacant(csb, PROBLEMCODE, vacant, filter = TRUE)
+csb_vacant(csb, problemcode, vacant)
+```
+
+`csb_cancelled` is used for the removal of csb requests that were cancelled. By default it deletes the column specified.
+```{r cancelled, eval=FALSE}
+csb_cancelled(csb, datecancelled)
+csb_cancelled(csb, datecancelled, drop = FALSE)
 ```
 
 ## Spatial Features
 
 The `stlcsb` package also provides helpful functions for dealing with spatial data.
 
-`csb_missingXY` is used to remove observations with incomplete or invalid spatial data.
+`csb_missingXY` is used to identify observations with incomplete or invalid spatial data.
 ```{r missing, eval=FALSE}
-csb_no_missing <- csb_missingXY(csb, SRX, SRY)
+csb_missing <- csb_missingXY(csb, srx, sry, missing)
 ```
 
-`csb_projectXY` is used to create a simple features object, which can then be manipulated spatially. It is mandatory that `csb_missingXY` is used prior. The coordinate reference system can be re-projected by specifying a numeric epsg code or a proj4 character string 
+`csb_projectXY` is used to create a simple features object, which can then be manipulated spatially. It is mandatory that missing spatial data be removed first. The coordinate reference system can be re-projected by specifying a numeric epsg code or a proj4 character string 
 ```{r geo, eval=FALSE}
-csb_sf <- csb_projectXY(csb_no_missing, SRX, SRY)
-```
-
-`csb_intersection` is used to label, isolate, or remove observations that appear to occur at intersections. This is useful if you are only interested in residential properties for example.
-```{r intersection, eval=FALSE}
-csb_intersection(csb, PROBADDRESS, intersection)
-csb_intersection(csb, PROBADDRESS, filter = TRUE)
-csb_intersection(csb, PROBADDRESS, remove = TRUE)
+csb_no_missing <- dplyr::filter(csb_missing, missing == FALSE)
+csb_sf <- csb_projectXY(csb_no_missing, srx, sry)
 ```
 
 If you prefer to work with these data in a traditional GIS program (QGIS, ArcGIS, etc.) the best way to export the data is using the `st_write()` function of the `sf` package.
 ```{r shape, eval=FALSE}
-st_write(csb_sf, "users/data/csb_calls.shp")
+sf::st_write(csb_sf, "users/data/csb_calls.shp")
 ```
 
 ## Time and Date
 The package offers two functions for handling time and date.
 
-`csb_date_filter` is used to filter observation for a specified time period. It is flexible in syntax and offers an argument to delete the original date variable.
+`csb_date_filter` is used to filter observation for a specified time period. It is flexible in syntax, accepting 3 letter abbreviations, full month names, or a numeric argument.
 ```{r date filter, eval=FALSE}
-csb_date_filter(csb, DATETIMEINIT, day = 1)
-csb_date_filter(csb, DATETIMEINIT, day = 1:15, month = 1)
-csb_date_filter(csb, DATETIMEINIT, month = "January", year = 09)
-csb_date_filter(csb, DATETIMEINIT, month = c("jan", "feb", "Mar", "Apr"), year = 2009)
-csb_date_filter(csb, DATETIMEINIT, day = 1:15, month = 1:6, year = 08:13, delete = TRUE)
+csb_date_filter(csb, datetimeinit, day = 1)
+csb_date_filter(csb, datetimeinit, day = 1:15, month = 1)
+csb_date_filter(csb, datetimeinit, month = "January", year = 09)
+csb_date_filter(csb, datetimeinit, month = c("jan", "feb", "Mar", "Apr"), year = 2009)
+csb_date_filter(csb, datetimeinit, day = 1:15, month = 1:6, year = 08:13)
 ```
 
 `csb_date_parse` is used to parse part of, or whole dates from observations. It too can delete the original date variable. Arguments are the names of the variables to be appended to the data.
 ```{r date parse, eval=FALSE}
-csb_date_parse(csb, DATETIMEINIT, dayInit)
-csb_date_parse(csb, DATETIMEINIT, dayInit, monthInit)
-csb_date_parse(csb, DATETIMEINIT, month = monthInit)
-csb_date_parse(csb, DATETIMEINIT, month = monthInit, year = yearInit)
-csb_date_parse(csb, DATETIMEINIT, dayInit, monthInit, yearInit, delete = TRUE)
+csb_date_parse(csb, datetimeinit, day = dayInit)
+csb_date_parse(csb, datetimeinit, day = dayInit, month = monthInit)
+csb_date_parse(csb, datetimeinit, month = monthInit)
+csb_date_parse(csb, datetimeinit, month = monthInit, year = yearInit)
+csb_date_parse(csb, datetimeinit, dayInit, monthInit, yearInit, drop = TRUE)
 ```
 
 ## Full Example: Mapping Potential Vacant Properties in Summer 2017
@@ -101,14 +114,17 @@ The following is an example of a full workflow for importing the data, filtering
 ```{r full example, eval=FALSE}
 csb <- csb_get_data()
 
-csb_vacant(csb, PROBLEMCODE, vacant, filter = TRUE) %>%
-  csb_date_filter(DATETIMEINIT, month = c("June", "July", "Aug"), year = 2017) %>%
-  csb_missingXY(SRX, SRY, filter = TRUE) %>%
-  csb_intersection(PROBADDRESS, intersection, remove = TRUE) %>%
-  csb_projectXY(SRX, SRY) -> vacant_sf
+csb_vacant(csb, problemcode, vacant) %>%
+  dplyr::filter(vacant == TRUE) %>%
+  csb_date_filter(datetimeinit, month = c("Jun", "Jul", "Aug"), year = 2017) %>%
+  csb_missingXY(srx, sry, missing) %>%
+  dplyr::filter(missing == FALSE) %>%
+  csb_projectXY(srx, sry) -> vacant_sf
 
 plot(vacant_sf)
 ```
 ## Questions, Recommendations, Requests
 
-This package is maintained by Christopher Prener, PhD. Please direct any correspondence to his email. (chris.prener@slu.edu)
+This package is maintained by Christopher Prener, PhD. Please direct any correspondence to his email. (chris.prener@slu.edu) 
+
+Or, open an issue at https://github.com/slu-openGIS/stlcsb/issues/
