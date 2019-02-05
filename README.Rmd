@@ -24,7 +24,7 @@ The goal of `stlcsb` is to provide access to data from the City of St. Louis [Ci
 
 ## Installation
 ### Installing Dependencies
-You should check the [`sf` package website](https://r-spatial.github.io/sf/) and the [`areal` package website](https://slu-openGIS.github.io/areal/) for the latest details on installing dependencies for that package. Instructions vary significantly by operating system. For best results, have `sf` installed before you install `areal`. Other dependencies, like `dplyr`, will be installed automatically with `areal` if they are not already present.
+You should check the [`sf` package website](https://r-spatial.github.io/sf/) and the [`stlcsb` package website](https://slu-openGIS.github.io/stlcsb/) for the latest details on installing dependencies for that package. Instructions vary significantly by operating system. For best results, have `sf` installed before you install `stlcsb`. Other dependencies, like `dplyr`, will be installed automatically with `stlcsb` if they are not already present.
 
 ### Installing stlcsb
 The development version of `stlcsb` can be accessed from GitHub with `remotes`:
@@ -36,22 +36,22 @@ remotes::install_github("slu-openGIS/stlcsb")
 
 ## Example Usage 
 
-`stlcsb` is used for simplified acquisition and processing of St. Louis CSB Data. In the following example, data is downloaded, filtered, and projected to an sf object.
+`stlcsb` is used for simplified acquisition and processing of St. Louis CSB Data. In the following example, data is downloaded, filtered, projected to an sf object, and mapped using `ggplot2`.
 
-```{r example}
-library(stlcsb)
-library(magrittr) # remove before release
+```{r example, eval=FALSE}
 
 csb <- csb_get_data(year = 2017)
 
-csb_filter(csb, problemcode, cat_health) %>%
+csb_filter(csb, problemcode, cat_waste) %>%
   csb_missingXY(srx, sry, missing) %>%
   dplyr::filter(missing == FALSE) %>%
-  csb_projectXY(srx, sry, crs = 4269) -> health_2017
+  csb_projectXY(srx, sry, crs = 4269) -> waste_2017
 
-plot(health_2017)
+ggplot() +
+  geom_sf(data = stlBoundary) +
+  geom_sf(data = waste_2017)
 ```
-
+<img src="man/figures/waste_example.png" align="center" />
 
 ## Contributor Code of Conduct
 Please note that this project is released with a [Contributor Code of Conduct](.github/CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.

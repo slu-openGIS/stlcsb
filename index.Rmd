@@ -12,7 +12,6 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 ```
-
 # stlcsb <img src="man/figures/csbLogo.png" align="right" />
 
 [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
@@ -23,17 +22,24 @@ knitr::opts_chunk$set(
 
 The goal of `stlcsb` is to provide access to data from the City of St. Louis [Citizens’ Service Bureau](https://www.stlouis-mo.gov/government/departments/public-safety/neighborhood-stabilization-office/citizens-service-bureau/index.cfm) (CSB), the [3-1-1 service](https://en.wikipedia.org/wiki/3-1-1) for the City of Saint Louis. Residents can contact the number with non-emergency service requests, and the CSB will dispatch these requests to the appropriate City agency. `stlcsb` also includes functions for cleaning and manipulating these data.
 
-## Installation
-### Installing Dependencies
-You should check the [`sf` package website](https://r-spatial.github.io/sf/) and the [`areal` package website](https://slu-openGIS.github.io/areal/) for the latest details on installing dependencies for that package. Instructions vary significantly by operating system. For best results, have `sf` installed before you install `areal`. Other dependencies, like `dplyr`, will be installed automatically with `areal` if they are not already present.
+## Quick Start
+If the `sf` package is already installed, the easiest way to get `stlcsb` is to install it from CRAN:
 
-### Installing stlcsb
-The development version of `stlcsb` can be accessed from GitHub with `remotes`:
+``` r
+install.packages("stlcsb")
+```
+
+Alternatively, the development version of `stlcsb` can be accessed from GitHub with `remotes`:
 
 ```r
 # install.packages("remotes")
 remotes::install_github("slu-openGIS/stlcsb")
 ```
 
-## Contributor Code of Conduct
-Please note that this project is released with a [Contributor Code of Conduct](.github/CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
+
+## Resources
+In addition to instructions for installation, the main [Get started](articles/stlcsb.html) article has:
+
+  * a quick overview of data acquisition,
+  * an overview of the functions available in `stlcsb`,
+  * examples of both
