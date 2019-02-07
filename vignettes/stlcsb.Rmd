@@ -13,6 +13,18 @@ vignette: >
 
 The `stlcsb` package is meant to provide easy access to the [City of St. Louis](https://www.stlouis-mo.gov) [Citizen's Service Bureau](https://www.stlouis-mo.gov/government/departments/public-safety/neighborhood-stabilization-office/citizens-service-bureau/) [data](https://www.stlouis-mo.gov/data/service-requests.cfm) in `R`
 
+### Installation
+We recommend that users install `sf` before proceeding with the installation of `stlcsb`. Windows users should be able to install `sf` without significant issues, but macOS and Linux users will need to install several open source spatial libraries to get `sf` itself up and running. The easiest approach for macOS users is to install the GDAL 2.0 Complete framework from [Kyng Chaos](https://www.kyngchaos.com/software/frameworks/). 
+
+For Linux users, steps will vary based on the flavor being used. Our [configuration file](https://github.com/slu-openGIS/areal/blob/master/.travis.yml) for Travis CI and its associated [bash script](https://github.com/slu-openGIS/areal/blob/master/.travis/install.sh) should be useful in determining the necessary components to install. Linux users will need to make sure the dependency [`lwgeom`](https://github.com/r-spatial/lwgeom) is also installed correctly.
+
+Once `sf` is installed, the easiest way to get `stlcsb` is to install the development version from GitHub with `remotes`:
+
+```r
+# install.packages("remotes")
+remotes::install_github("slu-openGIS/stlcsb")
+```
+
 ### Tips
 
 * All functions support non-standard evaluation, meaning you can use either quoted or unquoted inputs for arguments.

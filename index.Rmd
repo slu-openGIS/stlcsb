@@ -35,7 +35,8 @@ In addition to instructions for installation, the main [Get started](articles/st
 
   * some tips on installing `stlcsb` and its dependencies,
   * a quick overview of data acquisition,
-  * and an overview of the functions available in `stlcsb`.
+  * an overview of the functions available in `stlcsb`,
+  * and a full example of the `stlcsb` workflow along with some basic mapping of these data.
 
 ## Contributor Code of Conduct
 Please note that this project is released with a [Contributor Code of Conduct](.github/CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
