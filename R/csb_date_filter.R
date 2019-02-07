@@ -69,7 +69,7 @@ csb_date_filter <- function(.data, var, day = NULL, month = NULL, year = NULL){
   #check that year entry is valid for csb data, warn for entry of 2008.
   if(!missing(year)){
 
-    if(!(year %in% 2008:2019)){
+    if(!all(year %in% 2008:2019)){
       stop("The year given is not valid for these data.")
     }
 
