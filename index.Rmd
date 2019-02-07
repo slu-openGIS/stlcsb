@@ -18,17 +18,26 @@ knitr::opts_chunk$set(
 [![Travis-CI Build Status](https://travis-ci.org/slu-openGIS/stlcsb.svg?branch=master)](https://travis-ci.org/slu-openGIS/stlcsb)
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/slu-openGIS/stlcsb?branch=master&svg=true)](https://ci.appveyor.com/project/chris-prener/stlcsb)
 [![Coverage status](https://codecov.io/gh/slu-openGIS/stlcsb/branch/master/graph/badge.svg)](https://codecov.io/github/slu-openGIS/stlcsb?branch=master)
+[![DOI](https://zenodo.org/badge/120821460.svg)](https://zenodo.org/badge/latestdoi/120821460)
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/stlcsb)](https://cran.r-project.org/package=stlcsb)
 
 The goal of `stlcsb` is to provide access to data from the City of St. Louis [Citizens’ Service Bureau](https://www.stlouis-mo.gov/government/departments/public-safety/neighborhood-stabilization-office/citizens-service-bureau/index.cfm) (CSB), the [3-1-1 service](https://en.wikipedia.org/wiki/3-1-1) for the City of Saint Louis. Residents can contact the number with non-emergency service requests, and the CSB will dispatch these requests to the appropriate City agency. `stlcsb` also includes functions for cleaning and manipulating these data.
 
 ## Quick Start
-If the `sf` package is already installed, the development version of `stlcsb` can be accessed from GitHub with `remotes`:
+If the `sf` package is already installed, the easiest way to get `stlcsb` is to install it from CRAN:
+
+``` r
+install.packages("stlcsb")
+```
+
+Alternatively, the development version of `stlcsb` can be accessed from GitHub with `remotes`:
 
 ```r
 # install.packages("remotes")
 remotes::install_github("slu-openGIS/stlcsb")
 ```
+
+Additional details, including some tips for installing `sf`, can be found in the [Get started article](articles/stlcsb.html#installation).
 
 ## Resources
 In addition to instructions for installation, the main [Get started](articles/stlcsb.html) article has:
