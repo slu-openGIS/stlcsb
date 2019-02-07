@@ -10,6 +10,7 @@ Status](https://travis-ci.org/slu-openGIS/stlcsb.svg?branch=master)](https://tra
 Status](https://ci.appveyor.com/api/projects/status/github/slu-openGIS/stlcsb?branch=master&svg=true)](https://ci.appveyor.com/project/chris-prener/stlcsb)
 [![Coverage
 status](https://codecov.io/gh/slu-openGIS/stlcsb/branch/master/graph/badge.svg)](https://codecov.io/github/slu-openGIS/stlcsb?branch=master)
+[![DOI](https://zenodo.org/badge/120821460.svg)](https://zenodo.org/badge/latestdoi/120821460)
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/stlcsb)](https://cran.r-project.org/package=stlcsb)
 
 The goal of `stlcsb` is to provide access to data from the City of
@@ -34,6 +35,12 @@ before you install `stlcsb`. Other dependencies, like `dplyr`, will be
 installed automatically with `stlcsb` if they are not already present.
 
 ### Installing stlcsb
+
+The easiest way to get `stlcsb` is to install it from CRAN:
+
+``` r
+install.packages("stlcsb")
+```
 
 The development version of `stlcsb` can be accessed from GitHub with
 `remotes`:
