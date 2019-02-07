@@ -62,7 +62,7 @@ csb_date_filter <- function(.data, var, day = NULL, month = NULL, year = NULL){
 
 # Correction and checking for year
   # correct too short of a year entry
-  if(is.numeric(year) && nchar(year) < 4){
+  if(is.numeric(year) && all(nchar(year) < 4)){
     year <- 2000 + year
   }
 
