@@ -32,8 +32,10 @@
 
 <meta property="og:title" content="Project Calls for Service Data Using Coordinates — csb_projectXY" />
 
-<meta property="og:description" content="csb_projectXY converts SRX and SRY data into a simple features object.
+<meta property="og:description" content="csb_projectXY converts srx and sry data into a simple features object.
     You can write a shapefile directly from the output of this function using sf::st_write." />
+
+<meta property="og:image" content="https://slu-openGIS.github.io/areal/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -64,7 +66,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">stlcsb</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -88,7 +90,12 @@
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/slu-openGIS/stlcsb">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -102,13 +109,13 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Project Calls for Service Data Using Coordinates</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/slu-openGIS/stlcsb/blob/master/R/csb_projectXY.R'><code>R/csb_projectXY.R</code></a></small>
     <div class="hidden name"><code>csb_projectXY.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p><code>csb_projectXY</code> converts SRX and SRY data into a simple features object.
+    <p><code>csb_projectXY</code> converts srx and sry data into a simple features object.
     You can write a shapefile directly from the output of this function using <code><a href='https://www.rdocumentation.org/packages/sf/topics/st_write'>sf::st_write</a></code>.</p>
     
     </div>
@@ -120,7 +127,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>.data</th>
-      <td><p>A tbl or data frame</p></td>
+      <td><p>A tibble or data frame</p></td>
     </tr>
     <tr>
       <th>varX</th>
@@ -143,58 +150,56 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># remove missing coordinates prior to projecting</span>
-<span class='no'>csb</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='csb_missingXY.html'>csb_missingXY</a></span>(<span class='no'>january_2018</span>, <span class='no'>SRX</span>, <span class='no'>SRY</span>, <span class='kw'>newVar</span> <span class='kw'>=</span> <span class='no'>missing</span>)
+<span class='no'>csb</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='csb_missingXY.html'>csb_missingXY</a></span>(<span class='no'>january_2018</span>, <span class='no'>srx</span>, <span class='no'>sry</span>, <span class='kw'>newVar</span> <span class='kw'>=</span> <span class='no'>missing</span>)
 <span class='no'>csb</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>dplyr</span><span class='kw ns'>::</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>csb</span>, <span class='no'>missing</span> <span class='kw'>==</span> <span class='fl'>FALSE</span>)
 
 <span class='co'># project data</span>
-<span class='fu'>csb_projectXY</span>(<span class='no'>csb</span>, <span class='no'>SRX</span>, <span class='no'>SRY</span>)</div><div class='output co'>#&gt; Simple feature collection with 1506 features and 18 fields
+<span class='fu'>csb_projectXY</span>(<span class='no'>csb</span>, <span class='no'>srx</span>, <span class='no'>sry</span>)</div><div class='output co'>#&gt; Simple feature collection with 1506 features and 16 fields
 #&gt; geometry type:  POINT
 #&gt; dimension:      XY
 #&gt; bbox:           xmin: 872868.1 ymin: 985130.7 xmax: 910286.8 ymax: 1061922
 #&gt; epsg (SRID):    NA
 #&gt; proj4string:    +proj=tmerc +lat_0=35.83333333333334 +lon_0=-90.5 +k=0.9999333333333333 +x_0=250000 +y_0=0 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=us-ft +no_defs
-#&gt; <span style='color: #555555;'># A tibble: 1,506 x 19</span><span>
-#&gt;    CALLERTYPE DATECANCELLED       DATEINVTDONE        DATETIMECLOSED     
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>             
-#&gt; </span><span style='color: #555555;'> 1</span><span> WEB        </span><span style='color: #BB0000;'>NA</span><span>                  2018-01-05 </span><span style='color: #555555;'>16:22:19</span><span> 2018-01-05 </span><span style='color: #555555;'>16:22:21</span><span>
-#&gt; </span><span style='color: #555555;'> 2</span><span> WEB        </span><span style='color: #BB0000;'>NA</span><span>                  2018-01-05 </span><span style='color: #555555;'>16:22:19</span><span> 2018-01-05 </span><span style='color: #555555;'>16:22:21</span><span>
-#&gt; </span><span style='color: #555555;'> 3</span><span> WEB        </span><span style='color: #BB0000;'>NA</span><span>                  </span><span style='color: #BB0000;'>NA</span><span>                  </span><span style='color: #BB0000;'>NA</span><span>                 
-#&gt; </span><span style='color: #555555;'> 4</span><span> WEB        </span><span style='color: #BB0000;'>NA</span><span>                  2018-01-05 </span><span style='color: #555555;'>16:17:41</span><span> 2018-01-05 </span><span style='color: #555555;'>16:18:08</span><span>
-#&gt; </span><span style='color: #555555;'> 5</span><span> PHONE      </span><span style='color: #BB0000;'>NA</span><span>                  2018-01-01 </span><span style='color: #555555;'>10:40:14</span><span> 2018-01-01 </span><span style='color: #555555;'>10:40:54</span><span>
-#&gt; </span><span style='color: #555555;'> 6</span><span> WEB        </span><span style='color: #BB0000;'>NA</span><span>                  2018-01-02 </span><span style='color: #555555;'>12:54:41</span><span> 2018-01-12 </span><span style='color: #555555;'>10:27:12</span><span>
-#&gt; </span><span style='color: #555555;'> 7</span><span> PHONE      </span><span style='color: #BB0000;'>NA</span><span>                  2018-01-03 </span><span style='color: #555555;'>11:22:29</span><span> 2018-01-03 </span><span style='color: #555555;'>11:22:29</span><span>
-#&gt; </span><span style='color: #555555;'> 8</span><span> PHONE      </span><span style='color: #BB0000;'>NA</span><span>                  2018-01-03 </span><span style='color: #555555;'>11:19:13</span><span> 2018-01-03 </span><span style='color: #555555;'>11:19:13</span><span>
-#&gt; </span><span style='color: #555555;'> 9</span><span> WEB        </span><span style='color: #BB0000;'>NA</span><span>                  2018-01-05 </span><span style='color: #555555;'>16:16:55</span><span> 2018-01-05 </span><span style='color: #555555;'>16:17:28</span><span>
-#&gt; </span><span style='color: #555555;'>10</span><span> PHONE      </span><span style='color: #BB0000;'>NA</span><span>                  2017-12-29 </span><span style='color: #555555;'>20:00:00</span><span> 2018-01-01 </span><span style='color: #555555;'>15:01:19</span><span>
-#&gt; </span><span style='color: #555555;'># … with 1,496 more rows, and 15 more variables: DATETIMEINIT </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span style='color: #555555;'>,
-#&gt; #   DESCRIPTION </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, NEIGHBORHOOD </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, PRJCOMPLETEDATE </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span style='color: #555555;'>,
-#&gt; #   PROBADDRESS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, PROBADDTYPE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, PROBCITY </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, PROBLEMCODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   PROBZIP </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, REQUESTID </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, STATUS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, SUBMITTO </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, WARD </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,
+#&gt; <span style='color: #555555;'># A tibble: 1,506 x 17</span><span>
+#&gt;    requestid datetimeinit        probaddress probaddtype callertype neighborhood
+#&gt;        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>             </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span>   1</span><span style='text-decoration: underline;'>049</span><span>265 2018-01-01 </span><span style='color: #555555;'>00:48:30</span><span> 75 WILLMOR… A           WEB                   8
+#&gt; </span><span style='color: #555555;'> 2</span><span>   1</span><span style='text-decoration: underline;'>049</span><span>265 2018-01-01 </span><span style='color: #555555;'>00:48:30</span><span> 75 WILLMOR… A           WEB                   8
+#&gt; </span><span style='color: #555555;'> 3</span><span>   1</span><span style='text-decoration: underline;'>049</span><span>266 2018-01-01 </span><span style='color: #555555;'>05:29:06</span><span> 6739 VERMO… A           WEB                   1
+#&gt; </span><span style='color: #555555;'> 4</span><span>   1</span><span style='text-decoration: underline;'>049</span><span>267 2018-01-01 </span><span style='color: #555555;'>08:53:07</span><span> 5444 ITASK… A           WEB                   7
+#&gt; </span><span style='color: #555555;'> 5</span><span>   1</span><span style='text-decoration: underline;'>049</span><span>268 2018-01-01 </span><span style='color: #555555;'>09:13:22</span><span> CASS AVE &amp;… B           PHONE                60
+#&gt; </span><span style='color: #555555;'> 6</span><span>   1</span><span style='text-decoration: underline;'>049</span><span>269 2018-01-01 </span><span style='color: #555555;'>10:12:26</span><span> 6441 LLOYD… A           WEB                  42
+#&gt; </span><span style='color: #555555;'> 7</span><span>   1</span><span style='text-decoration: underline;'>049</span><span>270 2018-01-01 </span><span style='color: #555555;'>10:52:32</span><span> 3100 WINNE… B           PHONE                19
+#&gt; </span><span style='color: #555555;'> 8</span><span>   1</span><span style='text-decoration: underline;'>049</span><span>271 2018-01-01 </span><span style='color: #555555;'>10:54:43</span><span> S GRAND AV… B           PHONE                25
+#&gt; </span><span style='color: #555555;'> 9</span><span>   1</span><span style='text-decoration: underline;'>049</span><span>272 2018-01-01 </span><span style='color: #555555;'>11:07:02</span><span> SIDNEY ST … B           WEB                  25
+#&gt; </span><span style='color: #555555;'>10</span><span>   1</span><span style='text-decoration: underline;'>049</span><span>273 2018-01-01 </span><span style='color: #555555;'>12:05:40</span><span> 5400 N BRO… B           PHONE                79
+#&gt; </span><span style='color: #555555;'># … with 1,496 more rows, and 11 more variables: ward </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, problemcode </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
+#&gt; #   description </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, submitto </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, status </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, dateinvtdone </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span style='color: #555555;'>,
+#&gt; #   datetimeclosed </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span style='color: #555555;'>, prjcompletedate </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span style='color: #555555;'>, datecancelled </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span style='color: #555555;'>,
 #&gt; #   missing </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span style='color: #555555;'>, geometry </span><span style='color: #555555;font-style: italic;'>&lt;POINT [US_survey_foot]&gt;</span><span></div><div class='input'>
 <span class='co'># project with a custom crs</span>
-<span class='fu'>csb_projectXY</span>(<span class='no'>csb</span>, <span class='no'>SRX</span>, <span class='no'>SRY</span>, <span class='kw'>crs</span> <span class='kw'>=</span> <span class='fl'>4269</span>)</div><div class='output co'>#&gt; Simple feature collection with 1506 features and 18 fields
+<span class='fu'>csb_projectXY</span>(<span class='no'>csb</span>, <span class='no'>srx</span>, <span class='no'>sry</span>, <span class='kw'>crs</span> <span class='kw'>=</span> <span class='fl'>4269</span>)</div><div class='output co'>#&gt; Simple feature collection with 1506 features and 16 fields
 #&gt; geometry type:  POINT
 #&gt; dimension:      XY
 #&gt; bbox:           xmin: -90.31572 ymin: 38.53886 xmax: -90.1846 ymax: 38.74956
 #&gt; epsg (SRID):    4269
 #&gt; proj4string:    +proj=longlat +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +no_defs
-#&gt; </span><span style='color: #555555;'># A tibble: 1,506 x 19</span><span>
-#&gt;    CALLERTYPE DATECANCELLED       DATEINVTDONE        DATETIMECLOSED     
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>             
-#&gt; </span><span style='color: #555555;'> 1</span><span> WEB        </span><span style='color: #BB0000;'>NA</span><span>                  2018-01-05 </span><span style='color: #555555;'>16:22:19</span><span> 2018-01-05 </span><span style='color: #555555;'>16:22:21</span><span>
-#&gt; </span><span style='color: #555555;'> 2</span><span> WEB        </span><span style='color: #BB0000;'>NA</span><span>                  2018-01-05 </span><span style='color: #555555;'>16:22:19</span><span> 2018-01-05 </span><span style='color: #555555;'>16:22:21</span><span>
-#&gt; </span><span style='color: #555555;'> 3</span><span> WEB        </span><span style='color: #BB0000;'>NA</span><span>                  </span><span style='color: #BB0000;'>NA</span><span>                  </span><span style='color: #BB0000;'>NA</span><span>                 
-#&gt; </span><span style='color: #555555;'> 4</span><span> WEB        </span><span style='color: #BB0000;'>NA</span><span>                  2018-01-05 </span><span style='color: #555555;'>16:17:41</span><span> 2018-01-05 </span><span style='color: #555555;'>16:18:08</span><span>
-#&gt; </span><span style='color: #555555;'> 5</span><span> PHONE      </span><span style='color: #BB0000;'>NA</span><span>                  2018-01-01 </span><span style='color: #555555;'>10:40:14</span><span> 2018-01-01 </span><span style='color: #555555;'>10:40:54</span><span>
-#&gt; </span><span style='color: #555555;'> 6</span><span> WEB        </span><span style='color: #BB0000;'>NA</span><span>                  2018-01-02 </span><span style='color: #555555;'>12:54:41</span><span> 2018-01-12 </span><span style='color: #555555;'>10:27:12</span><span>
-#&gt; </span><span style='color: #555555;'> 7</span><span> PHONE      </span><span style='color: #BB0000;'>NA</span><span>                  2018-01-03 </span><span style='color: #555555;'>11:22:29</span><span> 2018-01-03 </span><span style='color: #555555;'>11:22:29</span><span>
-#&gt; </span><span style='color: #555555;'> 8</span><span> PHONE      </span><span style='color: #BB0000;'>NA</span><span>                  2018-01-03 </span><span style='color: #555555;'>11:19:13</span><span> 2018-01-03 </span><span style='color: #555555;'>11:19:13</span><span>
-#&gt; </span><span style='color: #555555;'> 9</span><span> WEB        </span><span style='color: #BB0000;'>NA</span><span>                  2018-01-05 </span><span style='color: #555555;'>16:16:55</span><span> 2018-01-05 </span><span style='color: #555555;'>16:17:28</span><span>
-#&gt; </span><span style='color: #555555;'>10</span><span> PHONE      </span><span style='color: #BB0000;'>NA</span><span>                  2017-12-29 </span><span style='color: #555555;'>20:00:00</span><span> 2018-01-01 </span><span style='color: #555555;'>15:01:19</span><span>
-#&gt; </span><span style='color: #555555;'># … with 1,496 more rows, and 15 more variables: DATETIMEINIT </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span style='color: #555555;'>,
-#&gt; #   DESCRIPTION </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, NEIGHBORHOOD </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, PRJCOMPLETEDATE </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span style='color: #555555;'>,
-#&gt; #   PROBADDRESS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, PROBADDTYPE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, PROBCITY </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, PROBLEMCODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   PROBZIP </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, REQUESTID </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, STATUS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, SUBMITTO </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, WARD </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,
+#&gt; </span><span style='color: #555555;'># A tibble: 1,506 x 17</span><span>
+#&gt;    requestid datetimeinit        probaddress probaddtype callertype neighborhood
+#&gt;        </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>             </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'> 1</span><span>   1</span><span style='text-decoration: underline;'>049</span><span>265 2018-01-01 </span><span style='color: #555555;'>00:48:30</span><span> 75 WILLMOR… A           WEB                   8
+#&gt; </span><span style='color: #555555;'> 2</span><span>   1</span><span style='text-decoration: underline;'>049</span><span>265 2018-01-01 </span><span style='color: #555555;'>00:48:30</span><span> 75 WILLMOR… A           WEB                   8
+#&gt; </span><span style='color: #555555;'> 3</span><span>   1</span><span style='text-decoration: underline;'>049</span><span>266 2018-01-01 </span><span style='color: #555555;'>05:29:06</span><span> 6739 VERMO… A           WEB                   1
+#&gt; </span><span style='color: #555555;'> 4</span><span>   1</span><span style='text-decoration: underline;'>049</span><span>267 2018-01-01 </span><span style='color: #555555;'>08:53:07</span><span> 5444 ITASK… A           WEB                   7
+#&gt; </span><span style='color: #555555;'> 5</span><span>   1</span><span style='text-decoration: underline;'>049</span><span>268 2018-01-01 </span><span style='color: #555555;'>09:13:22</span><span> CASS AVE &amp;… B           PHONE                60
+#&gt; </span><span style='color: #555555;'> 6</span><span>   1</span><span style='text-decoration: underline;'>049</span><span>269 2018-01-01 </span><span style='color: #555555;'>10:12:26</span><span> 6441 LLOYD… A           WEB                  42
+#&gt; </span><span style='color: #555555;'> 7</span><span>   1</span><span style='text-decoration: underline;'>049</span><span>270 2018-01-01 </span><span style='color: #555555;'>10:52:32</span><span> 3100 WINNE… B           PHONE                19
+#&gt; </span><span style='color: #555555;'> 8</span><span>   1</span><span style='text-decoration: underline;'>049</span><span>271 2018-01-01 </span><span style='color: #555555;'>10:54:43</span><span> S GRAND AV… B           PHONE                25
+#&gt; </span><span style='color: #555555;'> 9</span><span>   1</span><span style='text-decoration: underline;'>049</span><span>272 2018-01-01 </span><span style='color: #555555;'>11:07:02</span><span> SIDNEY ST … B           WEB                  25
+#&gt; </span><span style='color: #555555;'>10</span><span>   1</span><span style='text-decoration: underline;'>049</span><span>273 2018-01-01 </span><span style='color: #555555;'>12:05:40</span><span> 5400 N BRO… B           PHONE                79
+#&gt; </span><span style='color: #555555;'># … with 1,496 more rows, and 11 more variables: ward </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, problemcode </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
+#&gt; #   description </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, submitto </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, status </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, dateinvtdone </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span style='color: #555555;'>,
+#&gt; #   datetimeclosed </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span style='color: #555555;'>, prjcompletedate </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span style='color: #555555;'>, datecancelled </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span style='color: #555555;'>,
 #&gt; #   missing </span><span style='color: #555555;font-style: italic;'>&lt;lgl&gt;</span><span style='color: #555555;'>, geometry </span><span style='color: #555555;font-style: italic;'>&lt;POINT [°]&gt;</span><span></div><div class='input'>
 </div></span></pre>
   </div>

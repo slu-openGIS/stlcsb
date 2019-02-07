@@ -33,6 +33,8 @@
 <meta property="og:title" content="CSB Calls in St. Louis, January 2018 — january_2018" />
 
 <meta property="og:description" content="An example data set containing CSB calls in St. Louis, Missouri during the first week of January, 2018." />
+
+<meta property="og:image" content="https://slu-openGIS.github.io/areal/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -63,7 +65,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">stlcsb</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -87,7 +89,12 @@
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/slu-openGIS/stlcsb">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -101,7 +108,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>CSB Calls in St. Louis, January 2018</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/slu-openGIS/stlcsb/blob/master/R/january_2018.R'><code>R/january_2018.R</code></a></small>
     <div class="hidden name"><code>january_2018.Rd</code></div>
     </div>
 
@@ -115,26 +122,24 @@
         
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>A tibble with 1688 rows and 19 variables:</p><dl class='dl-horizontal'>
-  <dt>REQUESTID</dt><dd><p>system generated unique request identifier</p></dd>
-  <dt>PROBLEMCODE</dt><dd><p>type of report</p></dd>
-  <dt>DESCRIPTION</dt><dd><p>same as problemcode OR slightly more specific</p></dd>
-  <dt>PROBADDRESS</dt><dd><p>address of the request</p></dd>
-  <dt>PROBCITY</dt><dd><p>city of the request, note that all these data are for the City of St. Louis</p></dd>
-  <dt>PROBZIP</dt><dd><p>zip code of the request, often blank</p></dd>
-  <dt>PROBADDTYPE</dt><dd><p>A = Parcel, B = Intersection</p></dd>
-  <dt>SUBMITTO</dt><dd><p>city division responsible for completing the request</p></dd>
-  <dt>DATETIMEINIT</dt><dd><p>date and time the request was initiated</p></dd>
-  <dt>DATETIMECLOSED</dt><dd><p>date and time the request was closed</p></dd>
-  <dt>SRX</dt><dd><p>map coordinate, X-coordinate</p></dd>
-  <dt>SRY</dt><dd><p>map coordinate, Y-coordinate</p></dd>
-  <dt>STATUS</dt><dd><p>status of the request</p></dd>
-  <dt>PRJCOMPLETEDATE</dt><dd><p>date by which city division should have initial inspection complete, auto-populated based on service level agreements</p></dd>
-  <dt>DATECANCELLED</dt><dd><p>indicates a duplicate, cancelled or entered in error request</p></dd>
-  <dt>CALLERTYPE</dt><dd><p>method used by citizen to report issue (Phone, Web, Twitter, etc)</p></dd>
-  <dt>DATEINVTDONE</dt><dd><p>date of investigation-date that work was done, may differ from closing date because of crews using paper copies of requests</p></dd>
-  <dt>NEIGHBORHOOD</dt><dd><p>City of St. Louis Neighborhood number (1-79)</p></dd>
-  <dt>WARD</dt><dd><p>City of St. Louis Ward number (1-28)</p></dd>
+    <p>A tibble with 1554 rows and 17 variables:</p><dl class='dl-horizontal'>
+  <dt>requestid</dt><dd><p>system generated unique request identifier</p></dd>
+  <dt>datetimeinit</dt><dd><p>date and time the request was initiated</p></dd>
+  <dt>probaddress</dt><dd><p>address of the request</p></dd>
+  <dt>probaddtype</dt><dd><p>A = Parcel, B = Intersection</p></dd>
+  <dt>callertype</dt><dd><p>method used by citizen to report issue (Phone, Web, Twitter, etc)</p></dd>
+  <dt>neighborhood</dt><dd><p>City of St. Louis Neighborhood number (1-79)</p></dd>
+  <dt>ward</dt><dd><p>City of St. Louis Ward number (1-28)</p></dd>
+  <dt>problemcode</dt><dd><p>type of report</p></dd>
+  <dt>description</dt><dd><p>same as problemcode OR slightly more specific</p></dd>
+  <dt>submitto</dt><dd><p>city division responsible for completing the request</p></dd>
+  <dt>status</dt><dd><p>status of the request</p></dd>
+  <dt>dateinvtdone</dt><dd><p>date of investigation-date that work was done, may differ from closing date because of crews using paper copies of requests</p></dd>
+  <dt>datetimeclosed</dt><dd><p>date and time the request was closed</p></dd>
+  <dt>projcompletedate</dt><dd><p>date by which city division should have initial inspection complete, auto-populated based on service level agreements</p></dd>
+  <dt>datecancelled</dt><dd><p>indicates a duplicate, cancelled or entered in error request</p></dd>
+  <dt>srx</dt><dd><p>map coordinate, X-coordinate</p></dd>
+  <dt>sry</dt><dd><p>map coordinate, Y-coordinate</p></dd>
   </dl>
     
     <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
@@ -143,61 +148,55 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/str'>str</a></span>(<span class='no'>january_2018</span>)</div><div class='output co'>#&gt; Classes ‘tbl_df’, ‘tbl’ and 'data.frame':	1688 obs. of  19 variables:
-#&gt;  $ CALLERTYPE     : chr  "WEB" "WEB" "WEB" "WEB" ...
-#&gt;  $ DATECANCELLED  : POSIXct, format: NA NA ...
-#&gt;  $ DATEINVTDONE   : POSIXct, format: "2018-01-05 16:22:19" "2018-01-05 16:22:19" ...
-#&gt;  $ DATETIMECLOSED : POSIXct, format: "2018-01-05 16:22:21" "2018-01-05 16:22:21" ...
-#&gt;  $ DATETIMEINIT   : POSIXct, format: "2018-01-01 00:48:30" "2018-01-01 00:48:30" ...
-#&gt;  $ DESCRIPTION    : chr  "WTR-COMING-UP" "WTR-COMING-UP" "NOWATER (due to main break, etc.)" "NOWATER (due to main break, etc.)" ...
-#&gt;  $ NEIGHBORHOOD   : int  8 8 1 7 60 42 19 25 25 79 ...
-#&gt;  $ PRJCOMPLETEDATE: POSIXct, format: "2018-01-15" "2018-01-15" ...
-#&gt;  $ PROBADDRESS    : chr  "75 WILLMORE RD" "75 WILLMORE RD" "6739 VERMONT AVE" "5444 ITASKA ST" ...
-#&gt;  $ PROBADDTYPE    : chr  "A" "A" "A" "A" ...
-#&gt;  $ PROBCITY       : chr  NA NA NA NA ...
-#&gt;  $ PROBLEMCODE    : chr  "WTR-COMING-UP" "WTR-COMING-UP" "NOWATER" "NOWATER" ...
-#&gt;  $ PROBZIP        : int  NA NA NA NA NA NA NA NA NA NA ...
-#&gt;  $ REQUESTID      : int  1049265 1049265 1049266 1049267 1049268 1049269 1049270 1049271 1049272 1049273 ...
-#&gt;  $ SRX            : num  875855 875855 889805 881255 904418 ...
-#&gt;  $ SRY            : num  998435 998435 991410 1001625 1023278 ...
-#&gt;  $ STATUS         : chr  "CLOSED" "CLOSED" "Disptch" "CLOSED" ...
-#&gt;  $ SUBMITTO       : chr  "WATER DIV," "WATER DIV," "WATER DIV," "WATER DIV," ...
-#&gt;  $ WARD           : int  16 16 11 16 5 24 20 8 6 2 ...
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/str'>str</a></span>(<span class='no'>january_2018</span>)</div><div class='output co'>#&gt; Classes ‘tbl_df’, ‘tbl’ and 'data.frame':	1554 obs. of  17 variables:
+#&gt;  $ requestid      : num  1049265 1049265 1049266 1049267 1049268 ...
+#&gt;  $ datetimeinit   : POSIXct, format: "2018-01-01 00:48:30" "2018-01-01 00:48:30" ...
+#&gt;  $ probaddress    : chr  "75 WILLMORE RD" "75 WILLMORE RD" "6739 VERMONT AVE" "5444 ITASKA ST" ...
+#&gt;  $ probaddtype    : chr  "A" "A" "A" "A" ...
+#&gt;  $ callertype     : chr  "WEB" "WEB" "WEB" "WEB" ...
+#&gt;  $ neighborhood   : num  8 8 1 7 60 42 19 25 25 79 ...
+#&gt;  $ ward           : num  16 16 11 16 5 24 20 8 6 2 ...
+#&gt;  $ problemcode    : chr  "WTR-COMING-UP" "WTR-COMING-UP" "NOWATER" "NOWATER" ...
+#&gt;  $ description    : chr  "WTR-COMING-UP" "WTR-COMING-UP" "NOWATER (due to main break, etc.)" "NOWATER (due to main break, etc.)" ...
+#&gt;  $ submitto       : chr  "WATER DIV," "WATER DIV," "WATER DIV," "WATER DIV," ...
+#&gt;  $ status         : chr  "CLOSED" "CLOSED" "Disptch" "CLOSED" ...
+#&gt;  $ dateinvtdone   : POSIXct, format: "2018-01-05 16:22:19" "2018-01-05 16:22:19" ...
+#&gt;  $ datetimeclosed : POSIXct, format: "2018-01-05 16:22:21" "2018-01-05 16:22:21" ...
+#&gt;  $ prjcompletedate: POSIXct, format: "2018-01-15" "2018-01-15" ...
+#&gt;  $ datecancelled  : POSIXct, format: NA NA ...
+#&gt;  $ srx            : num  875855 875855 889805 881255 904418 ...
+#&gt;  $ sry            : num  998435 998435 991410 1001625 1023278 ...
 #&gt;  - attr(*, "spec")=
 #&gt;   .. cols(
-#&gt;   ..   CALLERTYPE = <span style='color: #BB0000;'>col_character()</span><span>,
-#&gt;   ..   DATECANCELLED = </span><span style='color: #0000BB;'>col_datetime(format = "")</span><span>,
-#&gt;   ..   DATEINVTDONE = </span><span style='color: #0000BB;'>col_datetime(format = "")</span><span>,
-#&gt;   ..   DATETIMECLOSED = </span><span style='color: #0000BB;'>col_datetime(format = "")</span><span>,
-#&gt;   ..   DATETIMEINIT = </span><span style='color: #0000BB;'>col_datetime(format = "")</span><span>,
-#&gt;   ..   DESCRIPTION = </span><span style='color: #BB0000;'>col_character()</span><span>,
-#&gt;   ..   NEIGHBORHOOD = </span><span style='color: #00BB00;'>col_integer()</span><span>,
-#&gt;   ..   PRJCOMPLETEDATE = </span><span style='color: #0000BB;'>col_datetime(format = "")</span><span>,
-#&gt;   ..   PROBADDRESS = </span><span style='color: #BB0000;'>col_character()</span><span>,
-#&gt;   ..   PROBADDTYPE = </span><span style='color: #BB0000;'>col_character()</span><span>,
-#&gt;   ..   PROBCITY = </span><span style='color: #BB0000;'>col_character()</span><span>,
-#&gt;   ..   PROBLEMCODE = </span><span style='color: #BB0000;'>col_character()</span><span>,
-#&gt;   ..   PROBZIP = </span><span style='color: #00BB00;'>col_integer()</span><span>,
-#&gt;   ..   REQUESTID = </span><span style='color: #00BB00;'>col_integer()</span><span>,
-#&gt;   ..   SRX = </span><span style='color: #00BB00;'>col_double()</span><span>,
-#&gt;   ..   SRY = </span><span style='color: #00BB00;'>col_double()</span><span>,
-#&gt;   ..   STATUS = </span><span style='color: #BB0000;'>col_character()</span><span>,
-#&gt;   ..   SUBMITTO = </span><span style='color: #BB0000;'>col_character()</span><span>,
-#&gt;   ..   WARD = </span><span style='color: #00BB00;'>col_integer()</span><span>
-#&gt;   .. )</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/head'>head</a></span>(<span class='no'>january_2018</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 6 x 19</span><span>
-#&gt;   CALLERTYPE DATECANCELLED       DATEINVTDONE        DATETIMECLOSED     
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>             
-#&gt; </span><span style='color: #555555;'>1</span><span> WEB        </span><span style='color: #BB0000;'>NA</span><span>                  2018-01-05 </span><span style='color: #555555;'>16:22:19</span><span> 2018-01-05 </span><span style='color: #555555;'>16:22:21</span><span>
-#&gt; </span><span style='color: #555555;'>2</span><span> WEB        </span><span style='color: #BB0000;'>NA</span><span>                  2018-01-05 </span><span style='color: #555555;'>16:22:19</span><span> 2018-01-05 </span><span style='color: #555555;'>16:22:21</span><span>
-#&gt; </span><span style='color: #555555;'>3</span><span> WEB        </span><span style='color: #BB0000;'>NA</span><span>                  </span><span style='color: #BB0000;'>NA</span><span>                  </span><span style='color: #BB0000;'>NA</span><span>                 
-#&gt; </span><span style='color: #555555;'>4</span><span> WEB        </span><span style='color: #BB0000;'>NA</span><span>                  2018-01-05 </span><span style='color: #555555;'>16:17:41</span><span> 2018-01-05 </span><span style='color: #555555;'>16:18:08</span><span>
-#&gt; </span><span style='color: #555555;'>5</span><span> PHONE      </span><span style='color: #BB0000;'>NA</span><span>                  2018-01-01 </span><span style='color: #555555;'>10:40:14</span><span> 2018-01-01 </span><span style='color: #555555;'>10:40:54</span><span>
-#&gt; </span><span style='color: #555555;'>6</span><span> WEB        </span><span style='color: #BB0000;'>NA</span><span>                  2018-01-02 </span><span style='color: #555555;'>12:54:41</span><span> 2018-01-12 </span><span style='color: #555555;'>10:27:12</span><span>
-#&gt; </span><span style='color: #555555;'># … with 15 more variables: DATETIMEINIT </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span style='color: #555555;'>, DESCRIPTION </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   NEIGHBORHOOD </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, PRJCOMPLETEDATE </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span style='color: #555555;'>, PROBADDRESS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   PROBADDTYPE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, PROBCITY </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, PROBLEMCODE </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, PROBZIP </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>,
-#&gt; #   REQUESTID </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span style='color: #555555;'>, SRX </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, SRY </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, STATUS </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, SUBMITTO </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   WARD </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span></div><div class='input'>
+#&gt;   ..   requestid = <span style='color: #00BB00;'>col_double()</span><span>,
+#&gt;   ..   datetimeinit = </span><span style='color: #0000BB;'>col_datetime(format = "")</span><span>,
+#&gt;   ..   probaddress = </span><span style='color: #BB0000;'>col_character()</span><span>,
+#&gt;   ..   probaddtype = </span><span style='color: #BB0000;'>col_character()</span><span>,
+#&gt;   ..   callertype = </span><span style='color: #BB0000;'>col_character()</span><span>,
+#&gt;   ..   neighborhood = </span><span style='color: #00BB00;'>col_double()</span><span>,
+#&gt;   ..   ward = </span><span style='color: #00BB00;'>col_double()</span><span>,
+#&gt;   ..   problemcode = </span><span style='color: #BB0000;'>col_character()</span><span>,
+#&gt;   ..   description = </span><span style='color: #BB0000;'>col_character()</span><span>,
+#&gt;   ..   submitto = </span><span style='color: #BB0000;'>col_character()</span><span>,
+#&gt;   ..   status = </span><span style='color: #BB0000;'>col_character()</span><span>,
+#&gt;   ..   dateinvtdone = </span><span style='color: #0000BB;'>col_datetime(format = "")</span><span>,
+#&gt;   ..   datetimeclosed = </span><span style='color: #0000BB;'>col_datetime(format = "")</span><span>,
+#&gt;   ..   prjcompletedate = </span><span style='color: #0000BB;'>col_datetime(format = "")</span><span>,
+#&gt;   ..   datecancelled = </span><span style='color: #0000BB;'>col_datetime(format = "")</span><span>,
+#&gt;   ..   srx = </span><span style='color: #00BB00;'>col_double()</span><span>,
+#&gt;   ..   sry = </span><span style='color: #00BB00;'>col_double()</span><span>
+#&gt;   .. )</div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/head'>head</a></span>(<span class='no'>january_2018</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 6 x 17</span><span>
+#&gt;   requestid datetimeinit        probaddress probaddtype callertype neighborhood
+#&gt;       </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span>              </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>       </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>             </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
+#&gt; </span><span style='color: #555555;'>1</span><span>   1</span><span style='text-decoration: underline;'>049</span><span>265 2018-01-01 </span><span style='color: #555555;'>00:48:30</span><span> 75 WILLMOR… A           WEB                   8
+#&gt; </span><span style='color: #555555;'>2</span><span>   1</span><span style='text-decoration: underline;'>049</span><span>265 2018-01-01 </span><span style='color: #555555;'>00:48:30</span><span> 75 WILLMOR… A           WEB                   8
+#&gt; </span><span style='color: #555555;'>3</span><span>   1</span><span style='text-decoration: underline;'>049</span><span>266 2018-01-01 </span><span style='color: #555555;'>05:29:06</span><span> 6739 VERMO… A           WEB                   1
+#&gt; </span><span style='color: #555555;'>4</span><span>   1</span><span style='text-decoration: underline;'>049</span><span>267 2018-01-01 </span><span style='color: #555555;'>08:53:07</span><span> 5444 ITASK… A           WEB                   7
+#&gt; </span><span style='color: #555555;'>5</span><span>   1</span><span style='text-decoration: underline;'>049</span><span>268 2018-01-01 </span><span style='color: #555555;'>09:13:22</span><span> CASS AVE &amp;… B           PHONE                60
+#&gt; </span><span style='color: #555555;'>6</span><span>   1</span><span style='text-decoration: underline;'>049</span><span>269 2018-01-01 </span><span style='color: #555555;'>10:12:26</span><span> 6441 LLOYD… A           WEB                  42
+#&gt; </span><span style='color: #555555;'># … with 11 more variables: ward </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, problemcode </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, description </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
+#&gt; #   submitto </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, status </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, dateinvtdone </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span style='color: #555555;'>, datetimeclosed </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span style='color: #555555;'>,
+#&gt; #   prjcompletedate </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span style='color: #555555;'>, datecancelled </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span style='color: #555555;'>, srx </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, sry </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span></div><div class='input'>
 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

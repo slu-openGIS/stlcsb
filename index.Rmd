@@ -12,7 +12,7 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 ```
-# stlcsb <img src="man/figures/csbLogo.png" align="right" />
+# stlcsb <img src="man/figures/logo.png" align="right" />
 
 [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![Travis-CI Build Status](https://travis-ci.org/slu-openGIS/stlcsb.svg?branch=master)](https://travis-ci.org/slu-openGIS/stlcsb)
@@ -36,10 +36,12 @@ Alternatively, the development version of `stlcsb` can be accessed from GitHub w
 remotes::install_github("slu-openGIS/stlcsb")
 ```
 
-
 ## Resources
 In addition to instructions for installation, the main [Get started](articles/stlcsb.html) article has:
 
   * a quick overview of data acquisition,
   * an overview of the functions available in `stlcsb`,
-  * examples of both
+  * and examples of both.
+
+## Contributor Code of Conduct
+Please note that this project is released with a [Contributor Code of Conduct](.github/CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.

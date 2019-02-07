@@ -36,6 +36,8 @@
     open data site on a
     weekly basis. This function returns the date of the last
     update." />
+
+<meta property="og:image" content="https://slu-openGIS.github.io/areal/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -66,7 +68,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">stlcsb</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -90,7 +92,12 @@
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/slu-openGIS/stlcsb">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -104,7 +111,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Date of Last CSB Data Update from the City of St. Louis</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/slu-openGIS/stlcsb/blob/master/R/csb_last_update.R'><code>R/csb_last_update.R</code></a></small>
     <div class="hidden name"><code>csb_last_update.Rd</code></div>
     </div>
 
@@ -124,13 +131,19 @@
     <p>A string scalar containing the date of last update.</p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='no'>last_update</span> <span class='kw'>&lt;-</span> <span class='fu'>csb_last_update</span>()
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       
       <li><a href="#value">Value</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>
