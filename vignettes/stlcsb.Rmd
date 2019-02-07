@@ -16,12 +16,12 @@ The `stlcsb` package is meant to provide easy access to the [City of St. Louis](
 ### Tips
 
 * All functions support non-standard evaluation, meaning you can use either quoted or unquoted inputs for arguments.
-* Use RStudio for its helpful auto completion ability. Type "csb_" to see all of the functions available in this package, or "cat_" to see all of the category data objects.
+* Use RStudio for its helpful auto completion ability. Type `csb_` to see all of the functions available in this package, or `cat_` to see all of the category data objects.
 * All functions return data as a tibble, which is essentially identical to a data.frame, except for its print behavior in the console and in notebooks.
 
 ## Downloading CSB Data
 
-Before using the other functions, you will need to acquire the CSB data. The `csb_get_data` function will download the most recent version of the data, and return it as a single tibble. By default, variable names are clean-up automatically and two variables that largely containin `NA` values are removed (`PROBCITY` and `PROBZIP`). Variables are also reordered in a more logical fashion.
+Before using the other functions, you will need to acquire the CSB data. The `csb_get_data` function will download the most recent version of the data, and return it as a single tibble. By default, variable names are clean-up automatically and two variables that largely containing `NA` values are removed (`PROBCITY` and `PROBZIP`). Variables are also reordered in a more logical fashion.
 
 ```r
 > csb <- csb_get_data()
@@ -168,7 +168,7 @@ The `csb_projectXY` is used to create a simple features object, which can then b
 ```
 
 ## Time and Date
-The package offers two functions for handling time and date. The `csb_date_filter()`function is used to sbuset observations for a specified time period. It is flexible in syntax, accepting 3 letter abbreviations, full month names, or a numeric argument:
+The package offers two functions for handling time and date. The `csb_date_filter()`function is used to subset observations for a specified time period. It is flexible in syntax, accepting 3 letter abbreviations, full month names, or a numeric argument:
 
 ```r
 csb_date_filter(csb, datetimeinit, day = 1)

@@ -93,7 +93,7 @@
 <a href="#tips" class="anchor"></a>Tips</h3>
 <ul>
 <li>All functions support non-standard evaluation, meaning you can use either quoted or unquoted inputs for arguments.</li>
-<li>Use RStudio for its helpful auto completion ability. Type “csb_” to see all of the functions available in this package, or “cat_” to see all of the category data objects.</li>
+<li>Use RStudio for its helpful auto completion ability. Type <code>csb_</code> to see all of the functions available in this package, or <code>cat_</code> to see all of the category data objects.</li>
 <li>All functions return data as a tibble, which is essentially identical to a data.frame, except for its print behavior in the console and in notebooks.</li>
 </ul>
 </div>
@@ -101,7 +101,7 @@
 <div id="downloading-csb-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#downloading-csb-data" class="anchor"></a>Downloading CSB Data</h2>
-<p>Before using the other functions, you will need to acquire the CSB data. The <code>csb_get_data</code> function will download the most recent version of the data, and return it as a single tibble. By default, variable names are clean-up automatically and two variables that largely containin <code>NA</code> values are removed (<code>PROBCITY</code> and <code>PROBZIP</code>). Variables are also reordered in a more logical fashion.</p>
+<p>Before using the other functions, you will need to acquire the CSB data. The <code>csb_get_data</code> function will download the most recent version of the data, and return it as a single tibble. By default, variable names are clean-up automatically and two variables that largely containing <code>NA</code> values are removed (<code>PROBCITY</code> and <code>PROBZIP</code>). Variables are also reordered in a more logical fashion.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span>csb &lt;-<span class="st"> </span><span class="kw"><a href="../reference/csb_get_data.html">csb_get_data</a></span>()</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2">trying URL <span class="st">'https://www.stlouis-mo.gov/data/upload/data-files/csb.zip'</span></a>
 <a class="sourceLine" id="cb1-3" data-line-number="3">Content type <span class="st">'application/x-zip-compressed'</span> length <span class="dv">60999726</span> <span class="kw">bytes</span> (<span class="fl">58.2</span> MB)</a>
@@ -221,7 +221,7 @@
 <div id="time-and-date" class="section level2">
 <h2 class="hasAnchor">
 <a href="#time-and-date" class="anchor"></a>Time and Date</h2>
-<p>The package offers two functions for handling time and date. The <code><a href="../reference/csb_date_filter.html">csb_date_filter()</a></code>function is used to sbuset observations for a specified time period. It is flexible in syntax, accepting 3 letter abbreviations, full month names, or a numeric argument:</p>
+<p>The package offers two functions for handling time and date. The <code><a href="../reference/csb_date_filter.html">csb_date_filter()</a></code>function is used to subset observations for a specified time period. It is flexible in syntax, accepting 3 letter abbreviations, full month names, or a numeric argument:</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw"><a href="../reference/csb_date_filter.html">csb_date_filter</a></span>(csb, datetimeinit, <span class="dt">day =</span> <span class="dv">1</span>)</a>
 <a class="sourceLine" id="cb13-2" data-line-number="2"><span class="kw"><a href="../reference/csb_date_filter.html">csb_date_filter</a></span>(csb, datetimeinit, <span class="dt">day =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">15</span>, <span class="dt">month =</span> <span class="dv">1</span>)</a>
 <a class="sourceLine" id="cb13-3" data-line-number="3"><span class="kw"><a href="../reference/csb_date_filter.html">csb_date_filter</a></span>(csb, datetimeinit, <span class="dt">month =</span> <span class="st">"January"</span>, <span class="dt">year =</span> <span class="dv">09</span>)</a>
