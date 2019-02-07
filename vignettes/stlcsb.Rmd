@@ -98,7 +98,7 @@ The most important challenge with these data are the lack of intelligible catego
 Each category is available in a named character vector that begins with `cat_`. They are used internally and are also exported for reference and extension:
 
 ```r
-> unname(cat_vacant)
+> cat_vacant
  [1] "Vacant Unit Appeal"   "Vacant Unit Appeal t" "Debris-Vacant Bldg"  
  [4] "Debris-Vacant Lot"    "Missed Cut - V Lot"   "Missed Cut - VBldg"  
  [7] "Unsatisfy Cut - VLot" "Unsatisfy Cut -VBldg" "Weeds-Vacant Bldg"   
@@ -138,6 +138,7 @@ Finally, `csb_vacant()` is used for appending a logical vector indicating vacanc
 
 ### Removing Cancelled Calls
 `csb_cancelled()` is used for the removal of CSB requests that were cancelled. By default it deletes the column specified (in this case `datecancelled`) since it will contain only `NA` values after the data are subset.
+
 ```r
 > csbValid <- csb_cancelled(csb, var = datecancelled)
 >
