@@ -23,13 +23,7 @@ knitr::opts_chunk$set(
 The goal of `stlcsb` is to provide access to data from the City of St. Louis [Citizens’ Service Bureau](https://www.stlouis-mo.gov/government/departments/public-safety/neighborhood-stabilization-office/citizens-service-bureau/index.cfm) (CSB), the [3-1-1 service](https://en.wikipedia.org/wiki/3-1-1) for the City of Saint Louis. Residents can contact the number with non-emergency service requests, and the CSB will dispatch these requests to the appropriate City agency. `stlcsb` also includes functions for cleaning and manipulating these data.
 
 ## Quick Start
-If the `sf` package is already installed, the easiest way to get `stlcsb` is to install it from CRAN:
-
-``` r
-install.packages("stlcsb")
-```
-
-Alternatively, the development version of `stlcsb` can be accessed from GitHub with `remotes`:
+If the `sf` package is already installed, the development version of `stlcsb` can be accessed from GitHub with `remotes`:
 
 ```r
 # install.packages("remotes")
@@ -39,9 +33,9 @@ remotes::install_github("slu-openGIS/stlcsb")
 ## Resources
 In addition to instructions for installation, the main [Get started](articles/stlcsb.html) article has:
 
+  * some tips on installing `stlcsb` and its dependencies,
   * a quick overview of data acquisition,
-  * an overview of the functions available in `stlcsb`,
-  * and examples of both.
+  * and an overview of the functions available in `stlcsb`.
 
 ## Contributor Code of Conduct
 Please note that this project is released with a [Contributor Code of Conduct](.github/CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
