@@ -93,8 +93,29 @@ These data are updated on a weekly basis, so it may be useful to know what versi
 ```
 
 ## Categorization
+The most important challenge with these data are the lack of intelligible categorization of Problem codes. These categories were created by hand - we selected like problem codes and created meta-categories that represented an overarching concept.
 
-The most important problem identified initially was the lack of intelligible categorization of Problem codes. These categories were created by personal observation. There are several functions available to represent data categorically.
+Each category is available in a named character vector that begins with `cat_`. They are used internally and are also exported for reference and extension:
+
+```r
+> cat_vacant
+                   X11                    X12                    X13 
+  "Vacant Unit Appeal" "Vacant Unit Appeal t"   "Debris-Vacant Bldg" 
+                   X14                    X15                    X16 
+   "Debris-Vacant Lot"   "Missed Cut - V Lot"   "Missed Cut - VBldg" 
+                   X17                    X18                    X19 
+"Unsatisfy Cut - VLot" "Unsatisfy Cut -VBldg"    "Weeds-Vacant Bldg" 
+                  X110                   X111                   X112 
+    "Weeds-Vacant Lot"      "WTR-VACANT-BLDG"   "VACANT BLDG INITIV" 
+                  X113                   X114                   X115 
+"Vacnt Bldg Unsecured"  "Vcnt weed check-web"         "LRA Board up" 
+                  X116                   X117                   X118 
+            "Misc-LRA"   "Misc-Op Brightside"    "Building Collapse" 
+                  X119 
+ "Property Damage-LRA" 
+```
+
+There are several functions available to represent data categorically.
 
 `csb_categorize()` can be used to categorize data based on its Problem code.
 ```{r categorize, eval=FALSE}

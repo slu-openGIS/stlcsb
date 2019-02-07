@@ -57,7 +57,15 @@ cat_vacant
 
 cat_waste
 }
+\value{
+A named character vector listing the specific problem codes associated with
+    each category.
+}
 \description{
-Any data object from the stlcsb package that starts with `cat_` is a lookup table. These tables were hand-made,contact (foxbl@slu.edu) with questions or concerns. It is used internally in any function that categorizes by problem code. It is available to the user as a matter of convenience and transparency.
+Any data object from the \code{stlcsb} package that starts with \code{cat_}
+    is a lookup table. These tables were hand-made - contact the package
+    maintainers with questions or concerns. These tables are used internally
+    in any function that categorizes by problem code. They are available to the user
+    as a matter of convenience and transparency.
 }
 \keyword{datasets}
