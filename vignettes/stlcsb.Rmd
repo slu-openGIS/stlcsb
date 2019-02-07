@@ -98,72 +98,79 @@ The most important challenge with these data are the lack of intelligible catego
 Each category is available in a named character vector that begins with `cat_`. They are used internally and are also exported for reference and extension:
 
 ```r
-> cat_vacant
-                   X11                    X12                    X13 
-  "Vacant Unit Appeal" "Vacant Unit Appeal t"   "Debris-Vacant Bldg" 
-                   X14                    X15                    X16 
-   "Debris-Vacant Lot"   "Missed Cut - V Lot"   "Missed Cut - VBldg" 
-                   X17                    X18                    X19 
-"Unsatisfy Cut - VLot" "Unsatisfy Cut -VBldg"    "Weeds-Vacant Bldg" 
-                  X110                   X111                   X112 
-    "Weeds-Vacant Lot"      "WTR-VACANT-BLDG"   "VACANT BLDG INITIV" 
-                  X113                   X114                   X115 
-"Vacnt Bldg Unsecured"  "Vcnt weed check-web"         "LRA Board up" 
-                  X116                   X117                   X118 
-            "Misc-LRA"   "Misc-Op Brightside"    "Building Collapse" 
-                  X119 
- "Property Damage-LRA" 
+> unname(cat_vacant)
+ [1] "Vacant Unit Appeal"   "Vacant Unit Appeal t" "Debris-Vacant Bldg"  
+ [4] "Debris-Vacant Lot"    "Missed Cut - V Lot"   "Missed Cut - VBldg"  
+ [7] "Unsatisfy Cut - VLot" "Unsatisfy Cut -VBldg" "Weeds-Vacant Bldg"   
+[10] "Weeds-Vacant Lot"     "WTR-VACANT-BLDG"      "VACANT BLDG INITIV"  
+[13] "Vacnt Bldg Unsecured" "Vcnt weed check-web"  "LRA Board up"        
+[16] "Misc-LRA"             "Misc-Op Brightside"   "Building Collapse"   
+[19] "Property Damage-LRA" 
 ```
 
-There are several functions available to represent data categorically.
+### Applying Categories
+There are several functions available to represent data categorically. `csb_categorize()` can be used to categorize data based on its problem code:
 
-`csb_categorize()` can be used to categorize data based on its Problem code.
-```{r categorize, eval=FALSE}
-csb_categorize(csb, problemcode, Category)
+```r
+> csb <- csb_categorize(csb, var = problemcode, newVar = cat)
+> head(csb$cat)
+[1] "Traffic"     "Maintenance" "Maintenance" "Maintenance" "Road"        "Maintenance"
 ```
 
-`csb_filter()` can be used to filter the data based on these same categories. These categories will automatically populate by typing "cat_" if using RStudio. Category takes single or vector arguments.
+`csb_filter()` can be used to filter the data based on these same categories. Category takes single or vector arguments:
 
-```{r filter, eval=FALSE}
-csb_filter(csb, problemcode, category = c(cat_construction, cat_debris))
+```r
+> csbSub <- csb_filter(csb, var = problemcode, category = c(cat_construction, cat_debris))
+>
+> nrow(csb)
+[1] 1160418
+> nrow(csbSub)
+[1] 140920
 ```
 
-`csb_vacant()` is used for appending a logical vector indicating vacancy related problemcodes. It is important to know that vacant exists inclusive of other categories, or in other words, a problem code may be vacancy related in addition to its core category.
-```{r vacant, eval=FALSE}
-csb_vacant(csb, problemcode, vacant)
+Finally, `csb_vacant()` is used for appending a logical vector indicating vacancy related problem codes. It is important to know that vacant exists inclusive of other categories, or in other words, a problem code will vacancy related in addition to its association with a more general category.
+
+```r
+> csb <- csb_vacant(csb, var = problemcode, newVar = vacant)
+> head(csb$vacant)
+[1] FALSE FALSE FALSE FALSE FALSE FALSE
 ```
 
-`csb_cancelled` is used for the removal of csb requests that were cancelled. By default it deletes the column specified.
-```{r cancelled, eval=FALSE}
-csb_cancelled(csb, datecancelled)
-csb_cancelled(csb, datecancelled, drop = FALSE)
+### Removing Cancelled Calls
+`csb_cancelled()` is used for the removal of CSB requests that were cancelled. By default it deletes the column specified (in this case `datecancelled`) since it will contain only `NA` values after the data are subset.
+```r
+> csbValid <- csb_cancelled(csb, var = datecancelled)
+>
+> nrow(csb)
+[1] 1160418
+> nrow(csbValid)
+[1] 1129055
 ```
 
 ## Spatial Features
+The `stlcsb` package also provides helpful functions for dealing with spatial data. The `csb_missingXY()` function is used to identify observations with incomplete or invalid spatial data:
 
-The `stlcsb` package also provides helpful functions for dealing with spatial data.
-
-`csb_missingXY` is used to identify observations with incomplete or invalid spatial data.
-```{r missing, eval=FALSE}
-csb_missing <- csb_missingXY(csb, srx, sry, missing)
+```r
+> csb <- csb_missingXY(csb, varX = srx, varY = sry, newVar = missingXY)
+> head(csb$missingXY)
+[1] FALSE FALSE FALSE FALSE FALSE FALSE
 ```
 
-`csb_projectXY` is used to create a simple features object, which can then be manipulated spatially. It is mandatory that missing spatial data be removed first. The coordinate reference system can be re-projected by specifying a numeric epsg code or a proj4 character string 
-```{r geo, eval=FALSE}
-csb_no_missing <- dplyr::filter(csb_missing, missing == FALSE)
-csb_sf <- csb_projectXY(csb_no_missing, srx, sry)
-```
+The `csb_projectXY` is used to create a simple features object, which can then be manipulated using the `sf` package or plotted using any of the mapping packages for `R`. It is critical missing spatial data be removed prior to executing this function:
 
-If you prefer to work with these data in a traditional GIS program (QGIS, ArcGIS, etc.) the best way to export the data is using the `st_write()` function of the `sf` package.
-```{r shape, eval=FALSE}
-sf::st_write(csb_sf, "users/data/csb_calls.shp")
+```r
+> csb %>%
++   dplyr::filter(missingXY == FALSE) %>%
++   csb_projectXY(varX = srx, varY = sry) -> csb_sf
+>
+> class(csb_sf)
+[1] "sf"         "tbl_df"     "tbl"        "data.frame"
 ```
 
 ## Time and Date
-The package offers two functions for handling time and date.
+The package offers two functions for handling time and date. The `csb_date_filter()`function is used to sbuset observations for a specified time period. It is flexible in syntax, accepting 3 letter abbreviations, full month names, or a numeric argument:
 
-`csb_date_filter` is used to filter observation for a specified time period. It is flexible in syntax, accepting 3 letter abbreviations, full month names, or a numeric argument.
-```{r date filter, eval=FALSE}
+```r
 csb_date_filter(csb, datetimeinit, day = 1)
 csb_date_filter(csb, datetimeinit, day = 1:15, month = 1)
 csb_date_filter(csb, datetimeinit, month = "January", year = 09)
@@ -171,32 +178,54 @@ csb_date_filter(csb, datetimeinit, month = c("jan", "feb", "Mar", "Apr"), year =
 csb_date_filter(csb, datetimeinit, day = 1:15, month = 1:6, year = 08:13)
 ```
 
-`csb_date_parse` is used to parse part of, or whole dates from observations. It too can delete the original date variable. Arguments are the names of the variables to be appended to the data.
-```{r date parse, eval=FALSE}
-csb_date_parse(csb, datetimeinit, day = dayInit)
-csb_date_parse(csb, datetimeinit, day = dayInit, month = monthInit)
-csb_date_parse(csb, datetimeinit, month = monthInit)
-csb_date_parse(csb, datetimeinit, month = monthInit, year = yearInit)
-csb_date_parse(csb, datetimeinit, dayInit, monthInit, yearInit, drop = TRUE)
+The `csb_date_parse()` is used to parse part of, or whole dates from observations. It too can delete the original date variable. Arguments are the names of the variables to be appended to the data.
+
+```r
+csb_date_parse(csb, var = datetimeinit, day = dayInit)
+csb_date_parse(csb, var = datetimeinit, day = dayInit, month = monthInit)
+csb_date_parse(csb, var = atetimeinit, month = monthInit)
+csb_date_parse(csb, var = datetimeinit, month = monthInit, year = yearInit)
+csb_date_parse(csb, var = datetimeinit, day = dayInit, month = monthInit, year = yearInit, drop = TRUE)
 ```
 
 ## Full Example: Mapping Potential Vacant Properties in Summer 2017
+### Data Cleaning Workflow
+The following is an example of a full workflow for importing the data, filtering for vacancy indicating problem codes, filtering by time, removing observations with missing spatial data, and projecting it to an sf object. Notice that the pipe operator `%>%` from `magrittr` is used. This passes the output of the prior function to the first argument of the next function, reducing typing and making code easier to read.
 
-The following is an example of a full workflow for importing the data, filtering for vacancy indicating problem codes, filtering by time, removing observations with missing spatial data, projecting it to an sf object, and finally plotting it. Notice that the pipe operator `%>%` from magrittr is used. This passes the output of the prior function to the first argument of the next function, reducing typing and making code easier to read.
-```{r full example, eval=FALSE}
-csb <- csb_get_data()
+```r
+csb <- csb_get_data(year = 2017)
 
-csb_vacant(csb, problemcode, vacant) %>%
-  dplyr::filter(vacant == TRUE) %>%
-  csb_date_filter(datetimeinit, month = c("Jun", "Jul", "Aug"), year = 2017) %>%
-  csb_missingXY(srx, sry, missing) %>%
-  dplyr::filter(missing == FALSE) %>%
-  csb_projectXY(srx, sry) -> vacant_sf
-
-plot(vacant_sf)
+csb %>%
+  csb_filter(var = problemcode, category = cat_vacant) %>%
+  csb_date_filter(var = datetimeinit, month = c("Jun", "Jul", "Aug")) %>%
+  csb_missingXY(varX = srx, varY = sry, newVar = missingXY) %>%
+  dplyr::filter(missingXY == FALSE) %>%
+  csb_projectXY(varX = srx, varY = sry) -> vacant_sf
 ```
-## Questions, Recommendations, Requests
 
-This package is maintained by Christopher Prener, PhD. Please direct any correspondence to his email. (chris.prener@slu.edu) 
+## Mapping CSB Data
+Once the data have been projected, they can be previewed with a package like [`mapview`](https://cran.r-project.org/package=mapview):
+```r
+> library(mapview)
+> mapview(vacant_sf)
+```
+```{r exampleMap1, echo=FALSE, out.width = '60%'}
+knitr::include_graphics("../man/figures/vacant_mapview.png")
+```
 
-Or, open an issue at https://github.com/slu-openGIS/stlcsb/issues/
+These data can also be mapped using `ggplot2` once they have been projected:
+
+```r
+> library(ggplot2)
+> ggplot() + 
++   geom_sf(data = vacant_sf, colour = "red", fill = NA, size = .5)
+```
+```{r exampleMap2, echo=FALSE, out.width = '60%'}
+knitr::include_graphics("../man/figures/vacant_example.png")
+```
+
+## Getting Help
+* If you are new to `R` itself, welcome! Hadley Wickham's [*R for Data Science*](http://r4ds.had.co.nz) is an excellent way to get started with data manipulation in the tidyverse, which `stlcsb` is designed to integrate seamlessly with.
+* If you are new to spatial analysis in `R`, we strongly encourage you check out the excellent new [*Geocomputation in R*](https://geocompr.robinlovelace.net) by Robin Lovelace, Jakub Nowosad, and Jannes Muenchow.
+* If you have questions about using `stlcsb`, you are encouraged to use the [RStudio Community forums](https://community.rstudio.com). Please create a [`reprex`](http://reprex.tidyverse.org/) before posting. Feel free to tag Chris (`@chris.prener`) in any posts about `stlcsb`.
+* If you think you've found a bug, please create a [`reprex`](http://reprex.tidyverse.org/) and then open an issue on [GitHub](https://github.com/slu-openGIS/stlcsb/issues/new/choose).

@@ -84,6 +84,7 @@ These data can also be mapped using `ggplot2` once they have been
 projected:
 
 ``` r
+> library(ggplot2)
 > ggplot() + 
 +   geom_sf(data = waste_2017, colour = "red", fill = NA, size = .5)
 ```
