@@ -15,7 +15,7 @@ reference:
   - title: "Tidy"
     desc: "Clean CSB data"
     contents:
-    - csb_cancelled
+    - csb_canceled
     - csb_categorize
     - csb_vacant
     - csb_filter
