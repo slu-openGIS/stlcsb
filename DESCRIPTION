@@ -31,7 +31,9 @@ Imports:
     tools,
     xml2
 Suggests: 
+    ggplot2,
     knitr,
+    mapview,
     rmarkdown,
     testthat,
     covr
