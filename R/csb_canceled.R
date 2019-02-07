@@ -1,8 +1,8 @@
-#' Remove Cancelled Calls for Service
+#' Remove Canceled Calls for Service
 #'
-#' @description Subsets data to remove any call with a date and time cancelled.
+#' @description Subsets data to remove any call with a date and time canceled.
 #'
-#' @usage csb_cancelled(.data, var, drop = TRUE)
+#' @usage csb_canceled(.data, var, drop = TRUE)
 #'
 #' @param .data A tibble or data frame
 #' @param var Name of the column containing cancellation timestamps
@@ -20,11 +20,11 @@
 #' @importFrom dplyr select
 #'
 #' @examples
-#' csb_cancelled(january_2018, var = "datecancelled")
-#' csb_cancelled(january_2018, var = "datecancelled", drop = FALSE)
+#' csb_canceled(january_2018, var = "datecancelled")
+#' csb_canceled(january_2018, var = "datecancelled", drop = FALSE)
 #'
 #' @export
-csb_cancelled <- function(.data, var, drop = TRUE){
+csb_canceled <- function(.data, var, drop = TRUE){
 
   # global variables
   ...cancelled = NULL

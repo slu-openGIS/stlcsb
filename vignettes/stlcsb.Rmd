@@ -136,11 +136,11 @@ Finally, `csb_vacant()` is used for appending a logical vector indicating vacanc
 [1] FALSE FALSE FALSE FALSE FALSE FALSE
 ```
 
-### Removing Cancelled Calls
-`csb_cancelled()` is used for the removal of CSB requests that were cancelled. By default it deletes the column specified (in this case `datecancelled`) since it will contain only `NA` values after the data are subset.
+### Removing Canceled Calls
+`csb_canceled()` is used for the removal of CSB requests that were canceled. By default it deletes the column specified (in this case `datecancelled`) since it will contain only `NA` values after the data are subset.
 
 ```r
-> csbValid <- csb_cancelled(csb, var = datecancelled)
+> csbValid <- csb_canceled(csb, var = datecancelled)
 >
 > nrow(csb)
 [1] 1160418

@@ -191,11 +191,11 @@
 <a class="sourceLine" id="cb9-2" data-line-number="2"><span class="op">&gt;</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(csb<span class="op">$</span>vacant)</a>
 <a class="sourceLine" id="cb9-3" data-line-number="3">[<span class="dv">1</span>] <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span></a></code></pre></div>
 </div>
-<div id="removing-cancelled-calls" class="section level3">
+<div id="removing-canceled-calls" class="section level3">
 <h3 class="hasAnchor">
-<a href="#removing-cancelled-calls" class="anchor"></a>Removing Cancelled Calls</h3>
-<p><code><a href="../reference/csb_cancelled.html">csb_cancelled()</a></code> is used for the removal of CSB requests that were cancelled. By default it deletes the column specified (in this case <code>datecancelled</code>) since it will contain only <code>NA</code> values after the data are subset.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span>csbValid &lt;-<span class="st"> </span><span class="kw"><a href="../reference/csb_cancelled.html">csb_cancelled</a></span>(csb, <span class="dt">var =</span> datecancelled)</a>
+<a href="#removing-canceled-calls" class="anchor"></a>Removing Canceled Calls</h3>
+<p><code><a href="../reference/csb_canceled.html">csb_canceled()</a></code> is used for the removal of CSB requests that were canceled. By default it deletes the column specified (in this case <code>datecancelled</code>) since it will contain only <code>NA</code> values after the data are subset.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="op">&gt;</span><span class="st"> </span>csbValid &lt;-<span class="st"> </span><span class="kw"><a href="../reference/csb_canceled.html">csb_canceled</a></span>(csb, <span class="dt">var =</span> datecancelled)</a>
 <a class="sourceLine" id="cb10-2" data-line-number="2"><span class="op">&gt;</span></a>
 <a class="sourceLine" id="cb10-3" data-line-number="3"><span class="er">&gt;</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/nrow">nrow</a></span>(csb)</a>
 <a class="sourceLine" id="cb10-4" data-line-number="4">[<span class="dv">1</span>] <span class="dv">1160418</span></a>
