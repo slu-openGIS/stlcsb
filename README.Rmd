@@ -72,7 +72,7 @@ These data can also be mapped using `ggplot2` once they have been projected:
 ```r
 > library(ggplot2)
 > ggplot() + 
-+   geom_sf(data = waste_2017, colour = "red", fill = NA, size = .5)
++   geom_sf(data = waste_2017, color = "red", fill = NA, size = .5)
 ```
 ```{r exampleMap2, echo=FALSE, out.width = '60%'}
 knitr::include_graphics("man/figures/waste_example.png")

@@ -86,7 +86,7 @@ projected:
 ``` r
 > library(ggplot2)
 > ggplot() + 
-+   geom_sf(data = waste_2017, colour = "red", fill = NA, size = .5)
++   geom_sf(data = waste_2017, color = "red", fill = NA, size = .5)
 ```
 
 <img src="man/figures/waste_example.png" width="60%" />
