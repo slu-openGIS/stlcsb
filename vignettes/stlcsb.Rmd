@@ -1,6 +1,6 @@
 ---
-title: "Using The stlcsb Package"
-author: "Branson Fox"
+title: "Using the `stlcsb` Package"
+author: "Branson Fox and Christopher Prener"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -11,7 +11,7 @@ vignette: >
 
 ## Overview
 
-The stlcsb package is meant to provide easy access to the City of Saint Louis Citizen's Service Bureau data in R.
+The `stlcsb` package is meant to provide easy access to the [City of St. Louis]() [Citizen's Service Bureau]() [data]() in `R`
 
 ### Pro-tips
 
