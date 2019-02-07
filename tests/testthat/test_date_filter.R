@@ -69,3 +69,10 @@ test_that("Non-standard Evaluation works", {
   expect_silent(csb_date_filter(january_2018, "datetimeinit", month = 1))
   expect_silent(csb_date_filter(january_2018, datetimeinit, month = 1))
 })
+
+
+# test that logical arguments greater than length one pass --------
+
+test_that("Logical arguments of length > 1 Pass", {
+  expect_silent(csb_date_filter(january_2018, datetimeinit, day = 1:15, month = 1:6, year = 09:14))
+})
