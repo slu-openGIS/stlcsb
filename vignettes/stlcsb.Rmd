@@ -11,34 +11,85 @@ vignette: >
 
 ## Overview
 
-The `stlcsb` package is meant to provide easy access to the [City of St. Louis]() [Citizen's Service Bureau]() [data]() in `R`
+The `stlcsb` package is meant to provide easy access to the [City of St. Louis](https://www.stlouis-mo.gov) [Citizen's Service Bureau](https://www.stlouis-mo.gov/government/departments/public-safety/neighborhood-stabilization-office/citizens-service-bureau/) [data](https://www.stlouis-mo.gov/data/service-requests.cfm) in `R`
 
-### Pro-tips
+### Tips
 
-* Functions support Non-standard evaluation, which allows you to type unquoted inputs for arguments.
-* Use RStudio for its helpful auto completion ability. Type "csb_" to see all of the functions available in this package, or "cat_" to see all of the categories.
+* All functions support non-standard evaluation, meaning you can use either quoted or unquoted inputs for arguments.
+* Use RStudio for its helpful auto completion ability. Type "csb_" to see all of the functions available in this package, or "cat_" to see all of the category data objects.
 * All functions return data as a tibble, which is essentially identical to a data.frame, except for its print behavior in the console and in notebooks.
 
-## Data Acquisition
+## Downloading CSB Data
 
-Before using the other functions, you will need to acquire the CSB data.
-The `csb_get_data` function will download the most recent version of the data, and return a tibble. This function will return a tidy version of the data for all years by default.
+Before using the other functions, you will need to acquire the CSB data. The `csb_get_data` function will download the most recent version of the data, and return it as a single tibble. By default, variable names are clean-up automatically and two variables that largely containin `NA` values are removed (`PROBCITY` and `PROBZIP`). Variables are also reordered in a more logical fashion.
 
-```{r get data, eval=FALSE}
-csb <- csb_get_data()
-csb <- csb_get_data(tidy = FALSE)
+```r
+> csb <- csb_get_data()
+trying URL 'https://www.stlouis-mo.gov/data/upload/data-files/csb.zip'
+Content type 'application/x-zip-compressed' length 60999726 bytes (58.2 MB)
+==================================================
+downloaded 58.2 MB
+
+>
+> names(csb)
+ [1] "requestid"       "datetimeinit"    "probaddress"     "probaddtype"    
+ [5] "callertype"      "neighborhood"    "ward"            "problemcode"    
+ [9] "description"     "submitto"        "status"          "dateinvtdone"   
+[13] "datetimeclosed"  "prjcompletedate" "datecancelled"   "srx"            
+[17] "sry"            
 ```
-These data are updated on a weekly basis, so it may be useful to know what version you are working with. `The csb_last_update` function will return the date that the data were last modified.
 
-```{r last update, eval=FALSE}
-csb_last_update()
+The `tidy = FALSE` argument for `csb_get_data()` will return a tibble with both variables as well as the original variable names in the order they are disseminated by the City:
+
+```r
+> csb <- csb_get_data(tidy = FALSE)
+trying URL 'https://www.stlouis-mo.gov/data/upload/data-files/csb.zip'
+Content type 'application/x-zip-compressed' length 60999726 bytes (58.2 MB)
+==================================================
+downloaded 58.2 MB
+
+>
+> names(csb)
+ [1] "CALLERTYPE"      "DATECANCELLED"   "DATEINVTDONE"    "DATETIMECLOSED" 
+ [5] "DATETIMEINIT"    "DESCRIPTION"     "NEIGHBORHOOD"    "PRJCOMPLETEDATE"
+ [9] "PROBADDRESS"     "PROBADDTYPE"     "PROBCITY"        "PROBLEMCODE"    
+[13] "PROBZIP"         "REQUESTID"       "SRX"             "SRY"            
+[17] "STATUS"          "SUBMITTO"        "WARD"  
 ```
 
-Additionally, the `csb_load_variables` function is available to describe the variables. Again, this function returns the tidy version by default, but can be set to return the regular version as well.
+It is also possible to only import a single year or a range of years:
 
-```{r load vars, eval=FALSE}
-csb_load_variables()
-csb_load_variables(tidy = FALSE)
+```r
+csb18 <- csb_get_data(years = 2018)
+csb16_18 <- csb_get_data(years = 2016:2018)
+```
+
+### Variable Definitions
+The `csb_load_variables()` function is available to provide descriptions of each variable. Like `csb_get_data()`, this function returns the tidy version by default, but can be set to return the regular version as well (with `tidy = FALSE`):
+
+```r
+> csb_load_variables()
+trying URL 'https://www.stlouis-mo.gov/data/upload/data-files/CSB-Request-Dataset-Field-Definitions.xlsx'
+Content type 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' length 4976 bytes
+==================================================
+downloaded 4976 bytes
+
+# A tibble: 17 x 2                                                                       
+   Name           Description                                                           
+   <chr>          <chr>                                                                 
+ 1 requestid      System generated unique record number                                 
+ 2 datetimeinit   Date/Time the request was initiated...
+ 3 probaddress    The address where the problem is occurring  
+
+<OUTPUT TRUNCATED>
+```
+
+### Date of Last Update
+These data are updated on a weekly basis, so it may be useful to know what version you are working with. `The csb_last_update()` function will return the date that the data were last modified as a string:
+
+```r
+> csb_last_update()
+[1] "2/2/19"
 ```
 
 ## Categorization
