@@ -3,7 +3,7 @@
 
 # stlcsb <img src="man/figures/logo.png" align="right" />
 
-[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+[![lifecycle](https://img.shields.io/badge/lifecycle-deprecated-orange.svg)](https://www.tidyverse.org/lifecycle/#deprecated)
 [![Travis-CI Build
 Status](https://travis-ci.org/slu-openGIS/stlcsb.svg?branch=master)](https://travis-ci.org/slu-openGIS/stlcsb)
 [![AppVeyor Build
@@ -13,14 +13,15 @@ status](https://codecov.io/gh/slu-openGIS/stlcsb/branch/master/graph/badge.svg)]
 [![DOI](https://zenodo.org/badge/120821460.svg)](https://zenodo.org/badge/latestdoi/120821460)
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/stlcsb)](https://cran.r-project.org/package=stlcsb)
 
-The goal of `stlcsb` is to provide access to data from the City of
+The goal of `stlcsb` was to provide access to data from the City of
 St. Louis [Citizens’ Service
 Bureau](https://www.stlouis-mo.gov/government/departments/public-safety/neighborhood-stabilization-office/citizens-service-bureau/index.cfm)
 (CSB), the [3-1-1 service](https://en.wikipedia.org/wiki/3-1-1) for the
 City of Saint Louis. Residents can contact the number with non-emergency
 service requests, and the CSB will dispatch these requests to the
-appropriate City agency. `stlcsb` also includes functions for cleaning
-and manipulating these data.
+appropriate City agency. `stlcsb` also included functions for cleaning
+and manipulating these data, but was archived from CRAN on 2022-05-30
+after the maintainers left Saint Louis University.
 
 ## Installation
 
